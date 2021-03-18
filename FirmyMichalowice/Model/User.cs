@@ -18,7 +18,9 @@ namespace FirmyMichalowice.Model
         public byte[] PasswordSalt { get; set; }
 
         public string CompanyName { get; set; }
+        [StringLength(255)]
         public string ShortDescription { get; set; }
+        [StringLength(5000)]
         public string LongDescription { get; set; }
         public string PhoneNumber { get; set; }
         public string WebSite { get; set; }
