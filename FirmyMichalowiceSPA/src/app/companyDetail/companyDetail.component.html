@@ -1,0 +1,43 @@
+<div class="container">
+  <div class="col-12 text-center title mt-4">
+    <h2>{{company.companyName}}</h2>
+  </div>
+  <hr>
+  <div class="row mt-4">
+    <div class="col-md-3 d-flex justify-content-center align-item-center">
+      <img src="{{company.photoUrl}}" alt="">
+    </div>
+    <div class="col-md-3 text-center contact">
+      <p>Kontakt:</p>
+      <ul>
+      <li>{{company.webSite}}</li>
+      <li>tel: {{company.phoneNumber}}</li>
+      <li>{{company.emailAddress}}</li>
+    </ul>
+    </div>
+    <div class="col-md-3 text-center address">
+      <p>Adres:</p>
+      <ul>
+      
+      <li>ul. {{company.street}}</li>
+      <li>{{company.postalCode}}</li>
+      <li>{{company.city}}</li>
+    </ul>
+    </div>
+    <div class="col-md-3 text-center hours">
+      <p>Godziny otwarcia:</p>
+      <ul>
+        <li>Pn: 8:00 - 15:00</li>
+        <li>Wt: 8:00 - 15:00</li>
+        <li>Śr: 8:00 - 15:00</li>
+        <li>Czw: 8:00 - 15:00</li>
+        <li>Pt: 8:00 - 15:00</li>
+      </ul>
+    </div>
+  </div>
+  <hr>
+  <div class="description text-center">
+    <h3>Opis działalności</h3>
+    <p>{{company.longDescription}}</p>
+  </div>
+</div>

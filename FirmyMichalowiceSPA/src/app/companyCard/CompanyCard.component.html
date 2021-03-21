@@ -1,0 +1,39 @@
+<!-- <div class="container text-center"> -->
+  <!-- <hr>
+  <div class="display-3 my-3">Lista firm z północy Krakowa</div>
+  <hr class="mb-4"> -->
+
+  <div class="card mt-4 company-card" >
+    <div class="card-body">
+
+      <div class="row">
+        <div class="col-md-3">
+          <img src="{{company.photoUrl}}" alt="">
+        </div>
+        <div class="col-md-9">
+          <div class="col">
+            <h2>{{company.companyName}}</h2>
+            <p>{{company.shortDescription}}</p>
+            <div class="row d-flex justify-content-between">
+              <div class="col-md-4">
+                <p class="ml-2"><i class="fas fa-at mr-2"></i>{{company.emailAddress}}</p>
+              </div>
+              <div class="col-md-4">
+                <p><i class="fas fa-at mr-2"></i>{{company.phoneNumber}}</p>
+              </div>
+              <div class="col-md-4">
+                <p class="mr-3"><i class="fas fa-at mr-2"></i>{{company.webSite}}</p>
+
+              </div>
+            </div>
+            <div class="d-flex justify-content-end mr-3">
+              <button type="submit" class="card-detail-button ml-auto" [routerLink]="['/firma/',company.id]">Szczegóły</button>
+            </div>
+          </div>
+
+
+
+        </div>
+      </div>
+    </div>
+  

@@ -19,9 +19,8 @@ namespace FirmyMichalowice.Dto_s
         public string PhoneNumber { get; set; }
         public string WebSite { get; set; }
         public string EmailAddress { get; set; }
-               
 
-        public ICollection<Photo> Photos { get; set; }
 
+        public string PhotoUrl { get; set; }
     }
 }

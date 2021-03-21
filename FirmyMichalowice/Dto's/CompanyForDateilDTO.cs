@@ -24,10 +24,10 @@ namespace FirmyMichalowice.Dto_s
         public string Street { get; set; }
         public string PostalCode { get; set; }
        
-        public DataType Created { get; set; }
-        public DataType Modify { get; set; }
+        //public DataType Created { get; set; }
+        //public DataType Modify { get; set; }
 
-        public ICollection<Photo> Photos { get; set; }
+        public string PhotoUrl { get; set; }
 
     }
 }

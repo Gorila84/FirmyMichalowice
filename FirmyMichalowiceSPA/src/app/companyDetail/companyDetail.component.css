@@ -1,0 +1,15 @@
+ul li {
+    list-style: none;
+}
+.address{
+    border-left: 1px solid  lightgray;
+    border-right: 1px solid  lightgray;
+}
+.contact{
+    border-left: 1px solid  lightgray;
+}
+
+ul{
+    margin: 0;
+    padding: 0;
+}
