@@ -1,6 +1,7 @@
 import { Routes } from '@angular/router';
 import { CompanyCardComponent } from './companyCard/CompanyCard.component';
 import { CompanyDetailComponent } from './companyDetail/companyDetail.component';
+import { CompanyEditComponent } from './companyEdit/companyEdit.component';
 import { CompanyListComponent } from './companyList/companyList.component';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
@@ -14,6 +15,6 @@ export const appRoutes: Routes = [
         {path: '', component: CompanyListComponent, resolve:{companies: CompanyListResolver}},
         {path: 'firma/:id', component: CompanyDetailComponent, resolve:{company: CompanyDetailResolver}},
         {path: 'logowanie', component: LoginComponent},
-        {path: 'rejstracja', component: RegisterComponent}
-        // {path: 'wiadomosci', component: MessagesComponent},
+        {path: 'rejstracja', component: RegisterComponent},
+        {path: 'edycja/:id', component: CompanyEditComponent}
     ];
