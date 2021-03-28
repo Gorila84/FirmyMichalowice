@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { LoginComponent } from '../login/login.component';
+import { Company } from '../_models/company';
 import { AlertifyService } from '../_services/alertify.service';
 import { AuthService } from '../_services/auth.service';
 
@@ -13,6 +14,7 @@ import { AuthService } from '../_services/auth.service';
 export class NavComponent implements OnInit {
 
   @Input() loginInformation: any;
+  company: Company
   constructor(public authService: AuthService, 
               private alertifyService: AlertifyService,
               private router: Router) {

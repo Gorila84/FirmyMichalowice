@@ -28,5 +28,10 @@ namespace FirmyMichalowice.Repositories
             var users = await _context.Users.Include(p => p.Photos).ToListAsync();
             return users;
         }
+
+        public async Task<bool> SaveAll()
+        {
+            return await _context.SaveChangesAsync() > 0;
+        }
     }
 }

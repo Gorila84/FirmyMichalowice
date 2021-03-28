@@ -10,3 +10,11 @@ ul{
     margin: 0;
     padding: 0;
 }
+.form-control{
+    padding:0;
+    margin: 0;
+}
+
+.change-photo-btn{
+    width:128px;
+}

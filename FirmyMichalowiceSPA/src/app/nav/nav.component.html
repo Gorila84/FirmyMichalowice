@@ -1,22 +1,12 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light mb-4">
-  <div class="container-fluid">
+  <div class="container">
     <a class="navbar-brand" href="#">Navbar</a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
     <div  class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav ml-auto mb-2 mb-lg-0">
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            Dropdown
-          </a>
-          <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <li><a class="dropdown-item" href="#">Action</a></li>
-            <li><a class="dropdown-item" href="#">Another action</a></li>
-            <li><hr class="dropdown-divider"></li>
-            
-          </ul>
-        </li>
+        
         <li *ngIf="!loginCheck()" class="nav-item">
           <a class="nav-link active" aria-current="page" [routerLink]="['/logowanie/']">Zaloguj</a>
         </li>
@@ -32,18 +22,18 @@
        
       </ul>
     </div>
-      <!-- <div *ngIf="loginCheck()" class="dropdown" dropdown>
+      <div *ngIf="loginCheck()" class="dropdown" dropdown>
         <a class="dropdown-toggle text-dark" dropdownToggle>
           Witaj {{ authService.decotedToken?.unique_name | titlecase }}
         </a>
   
         <div class="dropdown-menu mt-3" *dropdownMenu>
-          <a class="dropdown-item" ><i class="fa fa-user"></i>Edytuj profil</a>
+          <a class="dropdown-item" [routerLink]="['/edycja/']"><i class="fa fa-user"></i>Edytuj profil</a>
           <div class="dropdown-divider"></div>
           <a class="dropdown-item" (click)="logOut()"><i class="fa fa-sign-out"></i>Wyloguj</a>
         </div>
-      </div> -->
-      <div class="dropdown show">
+      </div>
+      <!-- <div class="dropdown show">
         <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
           Dropdown button
         </button>
@@ -52,6 +42,7 @@
           <li><a class="dropdown-item" href="#">Another action</a></li>
           <li><a class="dropdown-item" href="#">Something else here</a></li>
         </ul>
-      </div>
+      </div> -->
+     
   </div>
 </nav>

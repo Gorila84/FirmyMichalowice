@@ -10,5 +10,6 @@ namespace FirmyMichalowice.Repositories
     {
         Task<IEnumerable<User>> GetCompanies();
         Task<User> GetCompany(int id);
+        Task<bool> SaveAll();
     }
 }

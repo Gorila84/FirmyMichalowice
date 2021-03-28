@@ -1,59 +1,89 @@
 <div class="container">
+  <div class="col">
+    <div *ngIf="editForm.dirty" class="alert alert-info" >
+      <strong>Informacja:</strong>W formularzu zostały wprowadzone zmiany. Wszelkie niezapisane zmiany zostaną utracone!
+    </div>
+  </div>
   <div class="col-12 text-center title mt-4">
-    <h2> <input type="text" placeholder="Wprowadź nazwę firmy"> </h2>
+    <h2> <input class="form-control" type="text" name="companyName" placeholder="Wprowadź nazwę firmy"
+        [(ngModel)]="company.companyName"> </h2>
   </div>
   <hr>
+  <form #editForm="ngForm" id="editForm" (ngSubmit)="updateCompany()">
   <div class="row mt-4">
     <div class="col-md-3">
-      <img src="" alt="">
+      
+        <div>
+          <img src="{{company.photoUrl}}" alt="">
+        </div>
+        <div>
+          <button class="btn-secondary change-photo-btn mt-2">Zmień logo</button>
+        </div>
+      
     </div>
-    
+
+
     <div class="col-md-3 text-center contact">
       <p>Kontakt:</p>
       <ul>
         <label for="webSite">www: </label>
-      <li> <input type="text"> </li>
-      <label for="tel">tel:</label> 
-      <li><input type="text"></li>
-      <label for="mail">e-mail:</label>
-      <li><input type="text"> </li>
-    </ul>
+        <li> <input class="form-control" type="text" name="webSite" [(ngModel)]="company.webSite"> </li>
+        <label for="tel">tel: </label>
+        <li><input class="form-control" type="text" name="phoneNumber" [(ngModel)]="company.phoneNumber"></li>
+        <label for="mail">e-mail: </label>
+        <li><input class="form-control" type="text" name="emailAddress" [(ngModel)]="company.emailAddress"></li>
+      </ul>
     </div>
     <div class="col-md-3 address ">
       <p>Adres:</p>
       <ul>
-        <label for="street">ul.</label>
-      <li><input type="text"> </li>
-      <label for="postalCode">kod pocztowy:</label>
-      <li><input type="text"> </li>
-      <label for="city">Miejscowość:</label>
-      <li><input type="text"> </li>
-    </ul>
+        <label for="street">ul. </label>
+        <li><input class="form-control" type="text" name="street" [(ngModel)]="company.street"></li>
+        <label for="postalCode">kod pocztowy:</label>
+        <li><input class="form-control" type="text" name="postalCode" [(ngModel)]="company.postalCode"></li>
+        <label for="city">Miejscowość:</label>
+        <li><input class="form-control" type="text" name="city" [(ngModel)]="company.city"></li>
+      </ul>
     </div>
     <div class="col-md-3 text-center hours">
       <p>Godziny otwarcia:</p>
       <ul>
-        <li class="pt-1">Pn: <input type="text" size="2"> - <input type="text" size="2"></li>
-        <li class="pt-1">Wt: <input type="text" size="2"> - <input type="text" size="2"></li>
-        <li class="pt-1">Śr: <input type="text" size="2"> - <input type="text" size="2"></li>
-        <li class="pt-1">Czw: <input type="text" size="2"> - <input type="text" size="2"></li>
-        <li class="pt-1">Pt: <input type="text" size="2"> - <input type="text" size="2"></li>
+        <li class="pt-1">Pn: <div class="d-flex justify-content-between">
+            <input class="form-control col-md-3 ml-4" type="text" size="2"> - <input class="form-control col-md-3 mr-4"
+              type="text" size="2">
+          </div>
+        </li>
+        <li class="pt-1">Wt:<div class="d-flex justify-content-between "> <input class="form-control col-md-3 ml-4"
+              type="text" size="2"> - <input class="form-control col-md-3 mr-4" type="text" size="2"></div>
+        </li>
+        <li class="pt-1">Śr:<div class="d-flex justify-content-between "> <input class="form-control col-md-3 ml-4"
+              type="text" size="2"> - <input class="form-control col-md-3 mr-4" type="text" size="2"></div>
+        </li>
+        <li class="pt-1">Czw:<div class="d-flex justify-content-between "> <input class="form-control col-md-3 ml-4"
+              type="text" size="2"> - <input class="form-control col-md-3 mr-4" type="text" size="2"></div>
+        </li>
+        <li class="pt-1">Pt:<div class="d-flex justify-content-between "> <input class="form-control col-md-3 ml-4"
+              type="text" size="2"> - <input class="form-control col-md-3 mr-4" type="text" size="2"></div>
+        </li>
       </ul>
     </div>
   </div>
   <hr>
   <div class="description text-center">
     <h3>Krótki opis działalności</h3>
-    <p><label for="description">Wprowadź opis działalności (max 500 znaków)</label></p>
-   <textarea name="companyDescription" id="descriptionTextArea" cols="150" rows="10"></textarea>
+    <p><label for="description">Krótki opis działalności max 200 znaków</label></p>
+    <textarea class="form-control" name="companyDescription" name="shortDescription"
+      [(ngModel)]="company.shortDescription" id="descriptionTextArea" cols="150" rows="10"></textarea>
   </div>
   <hr>
   <div class="description text-center">
     <h3>Dokładny opis działalności</h3>
-    <p><label for="description">Wprowadź opis działalności (max 5000 znaków)</label></p>
-   <textarea name="companyDescription" id="descriptionTextArea" cols="150" rows="10"></textarea>
+    <p><label for="description">Pełen opis działalności max 5000 znaków</label></p>
+    <textarea class="form-control" name="companyDescription" name="longDescription"
+      [(ngModel)]="company.longDescription" id="descriptionTextArea" cols="150" rows="10"></textarea>
   </div>
-  <div class="d-flex justify-content-end">
-    <button class="btn btn-success">Zapisz zmiany</button>
+  <div form="editForm" class="d-flex justify-content-end">
+    <button [disabled]="!editForm.dirty" class="btn btn-success mt-2">Zapisz zmiany</button>
   </div>
-</div>
+
+</form>

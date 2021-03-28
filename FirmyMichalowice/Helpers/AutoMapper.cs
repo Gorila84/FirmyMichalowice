@@ -23,6 +23,7 @@ namespace FirmyMichalowice.Helpers
                     opt.MapFrom(src => src.Photos.FirstOrDefault(p => p.IsMain).Url);
                 }); 
             CreateMap<Photo, PhotoForDetailDTO>();
+            CreateMap<CompanyForDateilDTO, User>();
         }
     }
 }

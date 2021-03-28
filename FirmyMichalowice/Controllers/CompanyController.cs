@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using AutoMapper;
 using FirmyMichalowice.Dto_s;
@@ -51,6 +52,25 @@ namespace FirmyMichalowice.Controllers
             var userToReturn = _mapper.Map<CompanyForDateilDTO>(user);
 
             return Ok(userToReturn);
+        }
+
+        [HttpPut("{id}")]
+
+        public async Task<IActionResult>UpdateCompany(int id, CompaniesForEditDTO companiesForEditDTO)
+        {
+            if(id != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
+            {
+                return Unauthorized();
+            }
+
+            var comapnyFromRepository = await _userRepository.GetCompany(id);
+
+            _mapper.Map(companiesForEditDTO, comapnyFromRepository);
+
+            if (await _userRepository.SaveAll())
+                return NoContent();
+
+            throw new Exception($"Aktualizacja użytkownika o id: {id} nie powiodła sie przy zapisywaniu do bazy");
         }
     }
 }
