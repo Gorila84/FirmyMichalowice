@@ -1,21 +1,35 @@
 
+<div class="container text-center">
+<div>
+  <h2>Zarejstruj się</h2>
+</div>
+<hr>
+</div>
+<div for="rodoCheckBox" class="container d-flex justify-content-center">
+  <div  *ngIf="registerForm.dirty" class="alert alert-info col-md-8" >
+    <strong>Informacja: </strong>W celu rejestracji zaakceptuj warunki RODO, Politykę prywatności i Regulamin!
+  </div>
+</div>
 <div class="container text-center d-flex justify-content-center mt-4">
-  <form class="col-md-4">
+
+  <form #registerForm="ngForm" class="col-md-4" (ngSubmit)="register()">
     <div class="mb-3">
       <label for="exampleInputEmail1" class="form-label">Email address</label>
-      <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+      <input #login type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" 
+        name="username" [(ngModel)]="model.username">
     
     </div>
     <div class="mb-3">
       <label for="exampleInputPassword1" class="form-label">Password</label>
-      <input type="password" class="form-control" id="exampleInputPassword1">
+      <input type="password" class="form-control" id="exampleInputPassword1" #password name="password" [(ngModel)]="model.password">
     </div>
     <div class="mb-3 form-check">
-      <input type="checkbox" class="form-check-input" id="exampleCheck1">
-      <label class="form-check-label" for="exampleCheck1">Akceptuje warunki <a href="">RODO</a>, 
+      <input #rodoCheck type="checkbox" class="form-check-input" id="rodoCheckBox" (change)="0">
+      <label  class="form-check-label" for="exampleCheck1">Akceptuje warunki <a href="">RODO</a>, 
         <a href="">Reguliamn i </a> <a href="">Zasady prywatności</a> </label>
     </div>
-    <button type="submit" class="btn btn-primary mr-2">Zaerejstruj</button>
-    <button type="submit" class="btn btn-danger">Anuluj</button>
+    <button [disabled]="!rodoCheck.checked" type="submit" class="btn btn-primary mr-2">Zarejstruj</button>
+    <button type="button" class="btn btn-danger" (click)="cancel()" (click)="password.value=''"
+            (click)="login.value=''" (click)="rodoCheck.value=false">Anuluj</button>
   </form>
 </div>
