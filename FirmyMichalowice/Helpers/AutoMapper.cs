@@ -24,6 +24,7 @@ namespace FirmyMichalowice.Helpers
                 }); 
             CreateMap<Photo, PhotoForDetailDTO>();
             CreateMap<CompanyForDateilDTO, User>();
+            CreateMap<CompaniesForEditDTO, User>();
         }
     }
 }

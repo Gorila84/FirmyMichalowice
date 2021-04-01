@@ -21,4 +21,8 @@ getUser(id: number):Observable<Company>{
   return this.http.get<Company>(this.baseUrl+'company/'+ id);
 } 
 
+updateCompany(id: number, company: Company){
+  return this.http.put(this.baseUrl + 'company/' + id, company);
+}
+
 }

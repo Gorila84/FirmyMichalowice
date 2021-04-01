@@ -5,12 +5,15 @@ using System.Security.Claims;
 using System.Threading.Tasks;
 using AutoMapper;
 using FirmyMichalowice.Dto_s;
+using FirmyMichalowice.Helpers;
 using FirmyMichalowice.Repositories;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace FirmyMichalowice.Controllers
 {
+    [ServiceFilter(typeof(LogLastActivity))]
     [Route("api/[controller]")]
     [ApiController]
     public class CompanyController : ControllerBase
@@ -54,11 +57,12 @@ namespace FirmyMichalowice.Controllers
             return Ok(userToReturn);
         }
 
+        [Authorize]
         [HttpPut("{id}")]
 
         public async Task<IActionResult>UpdateCompany(int id, CompaniesForEditDTO companiesForEditDTO)
         {
-            if(id != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
+            if (id != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
             {
                 return Unauthorized();
             }
