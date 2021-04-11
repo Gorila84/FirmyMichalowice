@@ -1,5 +1,6 @@
 using AutoMapper;
 using FirmyMichalowice.Data;
+using FirmyMichalowice.Helpers;
 using FirmyMichalowice.Repositories;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
@@ -10,8 +11,9 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
-
+using Swashbuckle.AspNetCore.Filters;
 using System.Net;
 using System.Text;
 namespace FirmyMichalowice
@@ -37,8 +39,10 @@ namespace FirmyMichalowice
             services.AddCors();
             services.AddTransient<Seed>();
             services.AddScoped<IAuthRepository, AuthRepository>();
+            
             services.AddScoped<IGenericRepository, GenericRepository>();
             services.AddScoped<ICompanyRepository, CompanyRepository>();
+            services.AddScoped<IPhotoRepository, PhotoRepository>();
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
                 .AddJwtBearer(options =>
                 {
@@ -52,6 +56,8 @@ namespace FirmyMichalowice
                     };
                 });
             services.AddSwaggerGen();
+            
+            
         }
 
        

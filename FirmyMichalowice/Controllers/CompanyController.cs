@@ -13,7 +13,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace FirmyMichalowice.Controllers
 {
-    [ServiceFilter(typeof(LogLastActivity))]
+   
     [Route("api/[controller]")]
     [ApiController]
     public class CompanyController : ControllerBase
