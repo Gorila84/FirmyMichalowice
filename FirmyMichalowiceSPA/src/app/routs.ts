@@ -18,7 +18,7 @@ export const appRoutes: Routes = [
         {path: 'firma/:id', component: CompanyDetailComponent, resolve:{company: CompanyDetailResolver}},
         {path: 'logowanie', component: LoginComponent},
         {path: 'rejstracja', component: RegisterComponent},
-        {path: 'edycja', component: CompanyEditComponent,  
+        {path: 'edycja/:id', component: CompanyEditComponent,  
                         resolve:{company: CompanyEditlResolver},
                         canDeactivate: [PreventUnsavedChanges]}
     ];
