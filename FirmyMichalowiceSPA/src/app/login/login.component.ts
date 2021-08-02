@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { Company } from '../_models/company';
 import { AlertifyService } from '../_services/alertify.service';
 import { AuthService } from '../_services/auth.service';
 
@@ -11,6 +12,7 @@ import { AuthService } from '../_services/auth.service';
 export class LoginComponent implements OnInit {
 
   model: any = {};
+  company: Company;
 
   constructor(public authService: AuthService, 
               private alertifyService: AlertifyService, 
@@ -23,7 +25,7 @@ export class LoginComponent implements OnInit {
       this.alertifyService.success('Zalogowałeś się do aplikacji');
     }, error => {
       this.alertifyService.error(error);
-    }, ()=>(this.router.navigate(['edycja/'])
+    }, ()=>(this.router.navigate(['edycja/', this.authService.decotedToken.nameid])
     ));
   }
   loggedIn(){

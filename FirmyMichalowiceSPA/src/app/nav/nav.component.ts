@@ -27,6 +27,9 @@ export class NavComponent implements OnInit {
   loginCheck(){
     return this.authService.loggedIn();
   }
+  getUserId(){
+    return this.authService.decotedToken.nameid;
+  }
   
     logOut(){
     localStorage.removeItem('token');
