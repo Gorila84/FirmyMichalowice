@@ -15,6 +15,7 @@ using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using Swashbuckle.AspNetCore.Filters;
+using System;
 using System.Net;
 using System.Text;
 namespace FirmyMichalowice
@@ -29,16 +30,28 @@ namespace FirmyMichalowice
         }
         public void ConfigureServices(IServiceCollection services)
         {
+
+            //configuration MySql
+            var connectionString = _configuration.GetConnectionString("DefaultConnection");
+            var serverVersion = new MySqlServerVersion(new Version(5, 5, 51));
+
+            services.AddDbContext<DataContext>(options => {
+                options.UseMySql(connectionString, serverVersion);
+            });
+            //
+
+
             services.AddControllers()
              .AddNewtonsoftJson(options =>
                 options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
              );
-            services.AddDbContext<DataContext>(options => {
-                options.UseSqlServer("server=localhost\\SQLEXPRESS; database = CompanyMichalowice;User Id=md; Password=PASS ");
-            });
+            //services.AddDbContext<DataContext>(options => {
+            //    options.UseSqlServer("server=localhost\\SQLEXPRESS; database = CompanyMichalowice;User Id=md; Password=PASS ");
+            //});
+
             services.AddAutoMapper(typeof(Startup));
             services.AddCors();
-            services.AddTransient<Seed>();
+            //services.AddTransient<Seed>();
             services.AddScoped<IAuthRepository, AuthRepository>();
             
             services.AddScoped<IGenericRepository, GenericRepository>();
@@ -122,7 +135,7 @@ namespace FirmyMichalowice
                 });
             }
 
-            seeder.SeedUsers();
+            //seeder.SeedUsers();
             app.UseCors(x => x.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod());
             app.UseSwagger();
 

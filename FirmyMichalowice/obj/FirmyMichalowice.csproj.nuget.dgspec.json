@@ -1,24 +1,24 @@
 {
   "format": 1,
   "restore": {
-    "C:\\C#\\FirmyMichalowice\\FirmyMichalowice\\FirmyMichalowice.csproj": {}
+    "E:\\repos\\Firmy_Michalowice\\FirmyMichalowice\\FirmyMichalowice\\FirmyMichalowice.csproj": {}
   },
   "projects": {
-    "C:\\C#\\FirmyMichalowice\\FirmyMichalowice\\FirmyMichalowice.csproj": {
+    "E:\\repos\\Firmy_Michalowice\\FirmyMichalowice\\FirmyMichalowice\\FirmyMichalowice.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\C#\\FirmyMichalowice\\FirmyMichalowice\\FirmyMichalowice.csproj",
+        "projectUniqueName": "E:\\repos\\Firmy_Michalowice\\FirmyMichalowice\\FirmyMichalowice\\FirmyMichalowice.csproj",
         "projectName": "FirmyMichalowice",
-        "projectPath": "C:\\C#\\FirmyMichalowice\\FirmyMichalowice\\FirmyMichalowice.csproj",
-        "packagesPath": "C:\\Users\\Maciek\\.nuget\\packages\\",
-        "outputPath": "C:\\C#\\FirmyMichalowice\\FirmyMichalowice\\obj\\",
+        "projectPath": "E:\\repos\\Firmy_Michalowice\\FirmyMichalowice\\FirmyMichalowice\\FirmyMichalowice.csproj",
+        "packagesPath": "C:\\Users\\Karol\\.nuget\\packages\\",
+        "outputPath": "E:\\repos\\Firmy_Michalowice\\FirmyMichalowice\\FirmyMichalowice\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
-          "C:\\Microsoft\\Xamarin\\NuGet\\",
+          "C:\\Program Files (x86)\\Microsoft\\Xamarin\\NuGet\\",
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
         ],
         "configFilePaths": [
-          "C:\\Users\\Maciek\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Karol\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
         ],
@@ -31,6 +31,7 @@
         },
         "frameworks": {
           "netcoreapp3.1": {
+            "targetAlias": "netcoreapp3.1",
             "projectReferences": {}
           }
         },
@@ -42,6 +43,7 @@
       },
       "frameworks": {
         "netcoreapp3.1": {
+          "targetAlias": "netcoreapp3.1",
           "dependencies": {
             "Abp": {
               "target": "Package",
@@ -65,7 +67,7 @@
             },
             "Microsoft.EntityFrameworkCore": {
               "target": "Package",
-              "version": "[3.1.13, )"
+              "version": "[5.0.8, )"
             },
             "Microsoft.EntityFrameworkCore.Design": {
               "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
@@ -90,6 +92,10 @@
             "Microsoft.VisualStudio.Web.CodeGeneration.Design": {
               "target": "Package",
               "version": "[3.1.5, )"
+            },
+            "Pomelo.EntityFrameworkCore.MySql": {
+              "target": "Package",
+              "version": "[5.0.1, )"
             },
             "Swashbuckle.AspNetCore": {
               "target": "Package",
@@ -122,7 +128,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.201\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.300\\RuntimeIdentifierGraph.json"
         }
       }
     }
