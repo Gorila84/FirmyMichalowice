@@ -44,3 +44,7 @@ testem.log
 # System Files
 .DS_Store
 Thumbs.db
+/.vs/FirmyMichalowice/config/applicationhost.config
+/.vs/FirmyMichalowice/v16/.suo
+/FirmyMichalowice/appsettings.json
+/FirmyMichalowice/bin/Debug/netcoreapp3.1/appsettings.json
