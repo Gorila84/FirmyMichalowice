@@ -48,3 +48,5 @@ Thumbs.db
 /.vs/FirmyMichalowice/v16/.suo
 /FirmyMichalowice/appsettings.json
 /FirmyMichalowice/bin/Debug/netcoreapp3.1/appsettings.json
+/FirmyMichalowiceSPA/node_modules/
+/FirmyMichalowice/bin/Debug/
