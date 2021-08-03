@@ -51,7 +51,7 @@ namespace FirmyMichalowice
 
             services.AddAutoMapper(typeof(Startup));
             services.AddCors();
-            //services.AddTransient<Seed>();
+            services.AddTransient<Seed>();
             services.AddScoped<IAuthRepository, AuthRepository>();
             
             services.AddScoped<IGenericRepository, GenericRepository>();
