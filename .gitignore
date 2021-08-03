@@ -50,3 +50,6 @@ Thumbs.db
 /FirmyMichalowice/bin/Debug/netcoreapp3.1/appsettings.json
 /FirmyMichalowiceSPA/node_modules/
 /FirmyMichalowice/bin/Debug/
+/.vs
+/node_modules
+/package-lock.json
