@@ -1,4 +1,5 @@
-﻿using FirmyMichalowice.Model;
+﻿using FirmyMichalowice.Helpers;
+using FirmyMichalowice.Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,7 +9,7 @@ namespace FirmyMichalowice.Repositories
 {
     public interface ICompanyRepository
     {
-        Task<IEnumerable<User>> GetCompanies();
+        Task<PageList<User>> GetCompanies(UserParams userParams);
         Task<User> GetCompany(int id);
         Task<bool> SaveAll();
     }

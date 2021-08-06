@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using AutoMapper;
 using FirmyMichalowice.Dto_s;
 using FirmyMichalowice.Helpers;
+using FirmyMichalowice.Model;
 using FirmyMichalowice.Repositories;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
@@ -28,12 +29,12 @@ namespace FirmyMichalowice.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetUsers()
+        public async Task<IActionResult> GetUsers([FromQuery] UserParams userParams)
         {
             try
             {
 
-                var users = await _userRepository.GetCompanies();
+                var users = await _userRepository.GetCompanies(userParams);
 
                 var usersToReturn = _mapper.Map<IEnumerable<CompaniesForListDTO>>(users);
 

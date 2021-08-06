@@ -20,7 +20,7 @@ export class CompanyListComponent implements OnInit {
   
   ngOnInit() {
     this.route.data.subscribe(data => {
-      this.companies = data.companies;
+      this.companies = data.companies.result;
     });
   }
  

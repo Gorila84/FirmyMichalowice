@@ -8,15 +8,11 @@ C:\C#\FirmyMichalowice\FirmyMichalowice\obj\Debug\netcoreapp3.1\FirmyMichalowice
 C:\C#\FirmyMichalowice\FirmyMichalowice\obj\Debug\netcoreapp3.1\FirmyMichalowice.RazorTargetAssemblyInfo.cache
 C:\C#\FirmyMichalowice\FirmyMichalowice\obj\Debug\netcoreapp3.1\staticwebassets\FirmyMichalowice.StaticWebAssets.Manifest.cache
 C:\C#\FirmyMichalowice\FirmyMichalowice\obj\Debug\netcoreapp3.1\staticwebassets\FirmyMichalowice.StaticWebAssets.xml
-C:\C#\FirmyMichalowice\FirmyMichalowice\bin\Debug\netcoreapp3.1\Microsoft.Bcl.AsyncInterfaces.dll
-C:\C#\FirmyMichalowice\FirmyMichalowice\bin\Debug\netcoreapp3.1\Microsoft.Bcl.HashCode.dll
 C:\C#\FirmyMichalowice\FirmyMichalowice\bin\Debug\netcoreapp3.1\Microsoft.EntityFrameworkCore.dll
 C:\C#\FirmyMichalowice\FirmyMichalowice\bin\Debug\netcoreapp3.1\Microsoft.EntityFrameworkCore.Abstractions.dll
 C:\C#\FirmyMichalowice\FirmyMichalowice\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Caching.Abstractions.dll
 C:\C#\FirmyMichalowice\FirmyMichalowice\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Caching.Memory.dll
-C:\C#\FirmyMichalowice\FirmyMichalowice\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Configuration.dll
 C:\C#\FirmyMichalowice\FirmyMichalowice\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Configuration.Abstractions.dll
-C:\C#\FirmyMichalowice\FirmyMichalowice\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Configuration.Binder.dll
 C:\C#\FirmyMichalowice\FirmyMichalowice\bin\Debug\netcoreapp3.1\Microsoft.Extensions.DependencyInjection.dll
 C:\C#\FirmyMichalowice\FirmyMichalowice\bin\Debug\netcoreapp3.1\Microsoft.Extensions.DependencyInjection.Abstractions.dll
 C:\C#\FirmyMichalowice\FirmyMichalowice\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Logging.dll
@@ -354,3 +350,5 @@ E:\repos\Firmy_Michalowice\FirmyMichalowice\FirmyMichalowice\obj\Debug\netcoreap
 E:\repos\Firmy_Michalowice\FirmyMichalowice\FirmyMichalowice\obj\Debug\netcoreapp3.1\FirmyMichalowice.dll
 E:\repos\Firmy_Michalowice\FirmyMichalowice\FirmyMichalowice\obj\Debug\netcoreapp3.1\FirmyMichalowice.pdb
 E:\repos\Firmy_Michalowice\FirmyMichalowice\FirmyMichalowice\obj\Debug\netcoreapp3.1\FirmyMichalowice.genruntimeconfig.cache
+C:\C#\FirmyMichalowice\FirmyMichalowice\bin\Debug\netcoreapp3.1\MySqlConnector.dll
+C:\C#\FirmyMichalowice\FirmyMichalowice\bin\Debug\netcoreapp3.1\Pomelo.EntityFrameworkCore.MySql.dll

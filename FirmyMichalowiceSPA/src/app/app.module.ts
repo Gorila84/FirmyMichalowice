@@ -41,6 +41,7 @@ import { FileUploadModule } from 'ng2-file-upload';
     HttpClientModule,
     FormsModule,
     BsDropdownModule.forRoot(),
+    
     BrowserAnimationsModule,
     FileUploadModule
     // FontAwesomeModule

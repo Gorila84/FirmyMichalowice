@@ -1,24 +1,24 @@
 {
   "format": 1,
   "restore": {
-    "E:\\repos\\Firmy_Michalowice\\FirmyMichalowice\\FirmyMichalowice\\FirmyMichalowice.csproj": {}
+    "C:\\C#\\FirmyMichalowice\\FirmyMichalowice\\FirmyMichalowice.csproj": {}
   },
   "projects": {
-    "E:\\repos\\Firmy_Michalowice\\FirmyMichalowice\\FirmyMichalowice\\FirmyMichalowice.csproj": {
+    "C:\\C#\\FirmyMichalowice\\FirmyMichalowice\\FirmyMichalowice.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "E:\\repos\\Firmy_Michalowice\\FirmyMichalowice\\FirmyMichalowice\\FirmyMichalowice.csproj",
+        "projectUniqueName": "C:\\C#\\FirmyMichalowice\\FirmyMichalowice\\FirmyMichalowice.csproj",
         "projectName": "FirmyMichalowice",
-        "projectPath": "E:\\repos\\Firmy_Michalowice\\FirmyMichalowice\\FirmyMichalowice\\FirmyMichalowice.csproj",
-        "packagesPath": "C:\\Users\\Karol\\.nuget\\packages\\",
-        "outputPath": "E:\\repos\\Firmy_Michalowice\\FirmyMichalowice\\FirmyMichalowice\\obj\\",
+        "projectPath": "C:\\C#\\FirmyMichalowice\\FirmyMichalowice\\FirmyMichalowice.csproj",
+        "packagesPath": "C:\\Users\\Maciek\\.nuget\\packages\\",
+        "outputPath": "C:\\C#\\FirmyMichalowice\\FirmyMichalowice\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
-          "C:\\Program Files (x86)\\Microsoft\\Xamarin\\NuGet\\",
+          "C:\\Microsoft\\Xamarin\\NuGet\\",
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
         ],
         "configFilePaths": [
-          "C:\\Users\\Karol\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Maciek\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
         ],
@@ -31,7 +31,6 @@
         },
         "frameworks": {
           "netcoreapp3.1": {
-            "targetAlias": "netcoreapp3.1",
             "projectReferences": {}
           }
         },
@@ -43,7 +42,6 @@
       },
       "frameworks": {
         "netcoreapp3.1": {
-          "targetAlias": "netcoreapp3.1",
           "dependencies": {
             "Abp": {
               "target": "Package",
@@ -128,7 +126,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.300\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.201\\RuntimeIdentifierGraph.json"
         }
       }
     }
