@@ -1,9 +1,11 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/internal/Observable';
 import { environment } from 'src/environments/environment';
 import { ApiClient } from '../helpers/apiClient';
 import { Company } from '../_models/company';
+import { PaginationResult } from '../_models/pagination';
+import { map, catchError } from 'rxjs/operators';
 
 @Injectable({
     providedIn: 'root'
@@ -14,8 +16,26 @@ export class CompanyService {
 
 constructor(private http: HttpClient, private client: ApiClient) { }
 
-getUsers(): Observable<Company[]>{
-    return this.http.get<Company[]>(this.baseUrl + 'company');
+getUsers(page?, itemsPerPage?): Observable<PaginationResult<Company[]>>{
+
+    const paginationResult: PaginationResult<Company[]> = new PaginationResult<Company[]>();
+    let params = new HttpParams();
+
+    if(page !=null && itemsPerPage != null){
+      params = params.append('pageNumber', page);
+      params = params.append('pageSize', itemsPerPage);
+    }
+    return this.http.get<Company[]>(this.baseUrl + 'company', {observe: 'response',params})
+      .pipe(
+        map(response=> {
+          paginationResult.result = response.body;
+          if(response.headers.get('Pagination') != null){
+            paginationResult.pagination = JSON.parse(response.headers.get('Pagination'))
+          }
+          return paginationResult;
+        })
+      )
+    ;
   }
 
 getUser(id: number): Observable<Company>{

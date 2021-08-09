@@ -1,5 +1,7 @@
 ﻿using FirmyMichalowice.Data;
+using FirmyMichalowice.Helpers;
 using FirmyMichalowice.Model;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -23,10 +25,10 @@ namespace FirmyMichalowice.Repositories
             return user;
         }
 
-        public async Task<IEnumerable<User>> GetCompanies()
+        public async Task<PageList<User>> GetCompanies(UserParams userParams)
         {
-            var users = await _context.Users.Include(p => p.Photos).ToListAsync();
-            return users;
+            var users =  _context.Users.Include(p => p.Photos);
+            return await PageList<User>.CreateListAsync(users, userParams.PageNumber, userParams.PageSize);
         }
 
         public async Task<bool> SaveAll()

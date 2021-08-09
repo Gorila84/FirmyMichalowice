@@ -9,12 +9,15 @@ import { catchError } from 'rxjs/operators';
 @Injectable()
 export class CompanyListResolver implements Resolve<Company[]>{
 
+    pageNumber = 1;
+    pageSize = 10;
+
     constructor(private companyService: CompanyService, 
                 private router: Router, 
                 private alertify: AlertifyService){}
 
     resolve(route: ActivatedRouteSnapshot): Observable<Company[]> {
-        return this.companyService.getUsers().pipe(
+        return this.companyService.getUsers(this.pageNumber, this.pageSize).pipe(
             catchError(error => {
                 this.alertify.error('Problem z pobraniem danych');
                 this.router.navigate(['']);

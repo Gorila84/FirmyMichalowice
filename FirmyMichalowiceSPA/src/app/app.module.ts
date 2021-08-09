@@ -44,6 +44,7 @@ import { environment } from 'src/environments/environment';
     HttpClientModule,
     FormsModule,
     BsDropdownModule.forRoot(),
+    
     BrowserAnimationsModule,
     FileUploadModule,
     // tslint:disable-next-line:max-line-length
