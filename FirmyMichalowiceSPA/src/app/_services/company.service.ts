@@ -2,6 +2,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/internal/Observable';
 import { environment } from 'src/environments/environment';
+import { ApiClient } from '../helpers/apiClient';
 import { Company } from '../_models/company';
 
 @Injectable({
@@ -11,9 +12,9 @@ export class CompanyService {
 
     baseUrl = environment.apiUrl;
 
-constructor(private http: HttpClient) { }
+constructor(private http: HttpClient, private client: ApiClient) { }
 
-getUsers() : Observable<Company[]>{
+getUsers(): Observable<Company[]>{
     return this.http.get<Company[]>(this.baseUrl + 'company');
   }
 
@@ -23,16 +24,9 @@ getUser(id: number): Observable<Company>{
 
 // tslint:disable-next-line:typedef
 updateCompany(id: number, company: Company){
-  const headers = addBearer();
+  const headers = this.client.addBearer();
   return this.http.put(this.baseUrl + 'company/' + id, company, { headers});
 }
 
-}
-function addBearer(): HttpHeaders {
-  const token =   localStorage.getItem('token');
-  return new HttpHeaders({
-    'Content-Type': 'application/json',
-    'Authorization': `Bearer ${token}`
-  });
 }
 

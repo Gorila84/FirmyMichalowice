@@ -340,7 +340,6 @@ E:\repos\Firmy_Michalowice\FirmyMichalowice\FirmyMichalowice\bin\Debug\netcoreap
 E:\repos\Firmy_Michalowice\FirmyMichalowice\FirmyMichalowice\bin\Debug\netcoreapp3.1\runtimes\unix\lib\netcoreapp2.1\System.Security.Principal.Windows.dll
 E:\repos\Firmy_Michalowice\FirmyMichalowice\FirmyMichalowice\bin\Debug\netcoreapp3.1\runtimes\win\lib\netcoreapp2.1\System.Security.Principal.Windows.dll
 E:\repos\Firmy_Michalowice\FirmyMichalowice\FirmyMichalowice\bin\Debug\netcoreapp3.1\runtimes\win\lib\netcoreapp3.0\System.Windows.Extensions.dll
-E:\repos\Firmy_Michalowice\FirmyMichalowice\FirmyMichalowice\obj\Debug\netcoreapp3.1\FirmyMichalowice.csproj.AssemblyReference.cache
 E:\repos\Firmy_Michalowice\FirmyMichalowice\FirmyMichalowice\obj\Debug\netcoreapp3.1\FirmyMichalowice.AssemblyInfoInputs.cache
 E:\repos\Firmy_Michalowice\FirmyMichalowice\FirmyMichalowice\obj\Debug\netcoreapp3.1\FirmyMichalowice.AssemblyInfo.cs
 E:\repos\Firmy_Michalowice\FirmyMichalowice\FirmyMichalowice\obj\Debug\netcoreapp3.1\FirmyMichalowice.csproj.CoreCompileInputs.cache
@@ -354,3 +353,9 @@ E:\repos\Firmy_Michalowice\FirmyMichalowice\FirmyMichalowice\obj\Debug\netcoreap
 E:\repos\Firmy_Michalowice\FirmyMichalowice\FirmyMichalowice\obj\Debug\netcoreapp3.1\FirmyMichalowice.dll
 E:\repos\Firmy_Michalowice\FirmyMichalowice\FirmyMichalowice\obj\Debug\netcoreapp3.1\FirmyMichalowice.pdb
 E:\repos\Firmy_Michalowice\FirmyMichalowice\FirmyMichalowice\obj\Debug\netcoreapp3.1\FirmyMichalowice.genruntimeconfig.cache
+E:\repos\Firmy_Michalowice\FirmyMichalowice\FirmyMichalowice\bin\Debug\netcoreapp3.1\log4net.dll
+E:\repos\Firmy_Michalowice\FirmyMichalowice\FirmyMichalowice\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Configuration.dll
+E:\repos\Firmy_Michalowice\FirmyMichalowice\FirmyMichalowice\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Configuration.Binder.dll
+E:\repos\Firmy_Michalowice\FirmyMichalowice\FirmyMichalowice\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Logging.Log4Net.AspNetCore.dll
+E:\repos\Firmy_Michalowice\FirmyMichalowice\FirmyMichalowice\bin\Debug\netcoreapp3.1\Humanizer.dll
+E:\repos\Firmy_Michalowice\FirmyMichalowice\FirmyMichalowice\obj\Debug\netcoreapp3.1\FirmyMichalowice.csproj.AssemblyReference.cache

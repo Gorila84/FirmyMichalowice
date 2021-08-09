@@ -1,5 +1,5 @@
 import { UpperCasePipe } from '@angular/common';
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
@@ -11,63 +11,100 @@ import { UploadPhotoService } from '../_services/uploadPhoto.service';
 import { FileUploader } from 'ng2-file-upload';
 import { CoreEnvironment } from '@angular/compiler/src/compiler_facade_interface';
 import { environment } from 'src/environments/environment';
+import { HttpErrorResponse, HttpEventType, HttpHeaderResponse } from '@angular/common/http';
+import { NGXLogger } from 'ngx-logger';
+import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 
 @Component({
+  // tslint:disable-next-line:component-selector
   selector: 'app-companyEdit',
   templateUrl: './companyEdit.component.html',
   styleUrls: ['./companyEdit.component.css']
 })
 export class CompanyEditComponent implements OnInit {
   theFile: any = null;
-  messages: string[] = [];
-  uploader:FileUploader;
-  hasBaseDropZoneOver:boolean;
-  hasAnotherDropZoneOver:boolean;
-  response:string;
-  company: Company
+  progress: number;
+  message: string;
+  myProgress: number;
+  imageToShow: SafeUrl | null = null;
+  noImageFound: boolean;
+  content: any;
+  // tslint:disable-next-line:no-output-on-prefix
+  @Output() public onUploadFinished = new EventEmitter();
+  company: Company;
   baseUrl = environment.apiUrl;
+  fileToUpload: File | null = null;
   @ViewChild('editForm') editForm: NgForm;
-      
-     
   constructor(private route: ActivatedRoute,
               private alertify: AlertifyService,
               private authService: AuthService,
               private companyService: CompanyService,
-              private uploadPhotoService: UploadPhotoService) { }
+              private uploadPhotoService: UploadPhotoService,
+              private logger: NGXLogger,
+              private sanitizer: DomSanitizer) { }
 
+  // tslint:disable-next-line:typedef
   ngOnInit() {
-    this.route.data.subscribe(data=>{
-      this.company = data.company
-    })
-    this.initializeUploader();
+    this.route.data.subscribe(data => {
+      this.company = data.company;
+      this.progress = 0;
+    });
+    this.getImage(this.authService.decotedToken.nameid);
   }
-  public fileOverBase(e:any):void {
-    this.hasBaseDropZoneOver = e;
+  // tslint:disable-next-line:typedef
+  getImage(userId: number) {
+    const mediaType = 'application/image';
+    this.uploadPhotoService.getImage(userId)
+      .subscribe(data => {
+        const blob = new Blob([data], { type: mediaType });
+        const unsafeImg = URL.createObjectURL(blob);
+        this.imageToShow = this.sanitizer.bypassSecurityTrustUrl(unsafeImg);
+    }, error => {
+        console.log(error);
+        this.noImageFound = true;
+    });
+
   }
 
+  // tslint:disable-next-line:typedef
+  handleFileInput(files: FileList) {
+    this.fileToUpload = files.item(0);
+}
+  // tslint:disable-next-line:typedef
   updateCompany(){
-    
     this.companyService.updateCompany(this.authService.decotedToken.nameid, this.company)
-      .subscribe(next=> {
-        this.alertify.success("Twoje dane zostały pomyślnie zaktualizowane.");
+      .subscribe(next => {
+        this.alertify.success('Twoje dane zostały pomyślnie zaktualizowane.');
         this.editForm.reset(this.company);
       }, error => {
         this.alertify.error(error);
   });
   }
-  initializeUploader() {
-    this.uploader = new FileUploader({
-        url: this.baseUrl + 'edycja/' + this.authService.decotedToken.nameid,
-        authToken: 'Bearer ' + localStorage.getItem('token'),
-        isHTML5: true,
-        allowedFileType: ['image'],
-        removeAfterUpload: true,
-        autoUpload: false,
-        maxFileSize: 10 * 1024 * 1024
-    });
+  // tslint:disable-next-line:typedef
+  uploadFile = (files) => {
+    if (files.length === 0) {
+      return;
+    }
+    const fileToUpload = files[0] as File;
+    const formData = new FormData();
+    formData.append('file', fileToUpload, fileToUpload.name);
+    this.uploadPhotoService.uploadImage(this.authService.decotedToken.nameid, fileToUpload)
+       .subscribe(event => {
+         if (event.type === HttpEventType.UploadProgress) {
+           this.progress = Math.round(100 * event.loaded / event.total);
+         }
+         else if (event.type === HttpEventType.Response) {
+           this.message = 'Dodano logo.';
+         }
+       }, err => {
+          this.progress = 99;
+          this.message = 'Błąd. Nie udało się wysłać pliku';
+          const userId = this.authService.decotedToken.nameid;
+          err.userId = userId;
+          err.componentName = this.constructor.name;
+          this.logger.error(err);
+          this.alertify.error('Błąd. Nie udało się wysłać pliku');
+         }
+       );
   }
-  
-  
-  }
-
-
+}

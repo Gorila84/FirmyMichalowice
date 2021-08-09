@@ -1,5 +1,4 @@
 import { Routes } from '@angular/router';
-import { CompanyCardComponent } from './companyCard/CompanyCard.component';
 import { CompanyDetailComponent } from './companyDetail/companyDetail.component';
 import { CompanyEditComponent } from './companyEdit/companyEdit.component';
 import { CompanyListComponent } from './companyList/companyList.component';
@@ -12,13 +11,11 @@ import { CompanyListResolver } from './_resolvers/company_list_resolver';
 
 
 export const appRoutes: Routes = [
-    
-  
-        {path: '', component: CompanyListComponent, resolve:{companies: CompanyListResolver}},
-        {path: 'firma/:id', component: CompanyDetailComponent, resolve:{company: CompanyDetailResolver}},
+        {path: '', component: CompanyListComponent, resolve: {companies: CompanyListResolver}},
+        {path: 'firma/:id', component: CompanyDetailComponent, resolve: {company: CompanyDetailResolver}},
         {path: 'logowanie', component: LoginComponent},
         {path: 'rejstracja', component: RegisterComponent},
-        {path: 'edycja/:id', component: CompanyEditComponent,  
-                        resolve:{company: CompanyEditlResolver},
+        {path: 'edycja/:id', component: CompanyEditComponent,
+                        resolve: {company: CompanyEditlResolver},
                         canDeactivate: [PreventUnsavedChanges]}
     ];

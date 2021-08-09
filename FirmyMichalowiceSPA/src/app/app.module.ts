@@ -21,11 +21,14 @@ import { CompanyEditComponent } from './companyEdit/companyEdit.component';
 import { CompanyEditlResolver } from './_resolvers/company_edit_resolver';
 import { PreventUnsavedChanges } from './_guard/prevent-unsaved-changes.guard';
 import { FileUploadModule } from 'ng2-file-upload';
+import { LoggerModule, NgxLoggerLevel } from 'ngx-logger';
+import { environment } from 'src/environments/environment';
+
 
 
 
 @NgModule({
-  declarations: [							
+  declarations: [
     AppComponent,
       NavComponent,
       LoginComponent,
@@ -33,7 +36,7 @@ import { FileUploadModule } from 'ng2-file-upload';
       CompanyCardComponent,
       CompanyListComponent,
       CompanyDetailComponent,
-      CompanyEditComponent
+      CompanyEditComponent,
    ],
   imports: [
     BrowserModule,
@@ -42,14 +45,16 @@ import { FileUploadModule } from 'ng2-file-upload';
     FormsModule,
     BsDropdownModule.forRoot(),
     BrowserAnimationsModule,
-    FileUploadModule
+    FileUploadModule,
+    // tslint:disable-next-line:max-line-length
+    LoggerModule.forRoot({serverLoggingUrl: environment.apiUrl + 'logs/post', level: NgxLoggerLevel.DEBUG, serverLogLevel: NgxLoggerLevel.ERROR})
     // FontAwesomeModule
   ],
   providers: [
     CompanyListResolver,
     CompanyDetailResolver,
     CompanyEditlResolver,
-    PreventUnsavedChanges
+    PreventUnsavedChanges,
   ],
   bootstrap: [AppComponent]
 })
