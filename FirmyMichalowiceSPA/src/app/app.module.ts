@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { RouterModule, Routes  } from '@angular/router';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
+import { PaginationModule } from 'ngx-bootstrap/pagination';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 
@@ -28,7 +29,7 @@ import { environment } from 'src/environments/environment';
 
 
 @NgModule({
-  declarations: [
+  declarations: [	
     AppComponent,
       NavComponent,
       LoginComponent,
@@ -36,7 +37,7 @@ import { environment } from 'src/environments/environment';
       CompanyCardComponent,
       CompanyListComponent,
       CompanyDetailComponent,
-      CompanyEditComponent,
+      CompanyEditComponent
    ],
   imports: [
     BrowserModule,
@@ -44,7 +45,7 @@ import { environment } from 'src/environments/environment';
     HttpClientModule,
     FormsModule,
     BsDropdownModule.forRoot(),
-    
+    PaginationModule.forRoot(),
     BrowserAnimationsModule,
     FileUploadModule,
     // tslint:disable-next-line:max-line-length

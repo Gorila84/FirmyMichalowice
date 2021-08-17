@@ -15,12 +15,12 @@ namespace FirmyMichalowice.Helpers
         public int TotalCount { get; set; }
         public int TotalPages { get; set; }
 
-        public PageList(List<T> items, int pageNumber, int pageSize, int totalCount)
+        public PageList(int pageNumber, int pageSize, List<T> items, int totalCount)
         {
             CurrentPage = pageNumber;
             PageSize = pageSize;
             TotalCount = totalCount;
-            TotalPages = (int)Math.Ceiling(totalCount/(double)pageSize);
+            TotalPages = (int)Math.Ceiling(totalCount / (double)pageSize);
             this.AddRange(items);
         }
 
@@ -29,7 +29,7 @@ namespace FirmyMichalowice.Helpers
             var totalCount = await source.CountAsync();
             var items = await source.Skip((pageNumber - 1) * pageSize).Take(pageSize).ToListAsync();
 
-            return new PageList<T>(items, totalCount, pageNumber, pageSize);
+            return new PageList<T>(pageNumber, pageSize, items, totalCount);
         }
 
     }
