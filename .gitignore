@@ -54,3 +54,7 @@ Thumbs.db
 /node_modules
 /package-lock.json
 /FirmyMichalowice/appsettings.json
+/FirmyMichalowice/obj/Debug/netcoreapp3.1/FirmyMichalowice.csproj.AssemblyReference.cache
+/FirmyMichalowice/bin/Debug/netcoreapp3.1/appsettings.json
+/FirmyMichalowice/appsettings.json
+/.vs/FirmyMichalowice/v16/.suo
