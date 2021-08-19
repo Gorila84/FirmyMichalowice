@@ -38,6 +38,8 @@ namespace FirmyMichalowice.Controllers
 
                 var users = await _userRepository.GetCompanies(userParams);
                 var usersToReturn = _mapper.Map<IEnumerable<CompaniesForListDTO>>(users);
+                Response.AddPagination(users.CurrentPage, users.PageSize, users.TotalCount, users.TotalPages);
+
                 return Ok(usersToReturn);
             }
             catch (Exception)

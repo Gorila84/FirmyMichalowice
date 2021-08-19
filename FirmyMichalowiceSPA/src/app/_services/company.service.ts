@@ -17,9 +17,7 @@ export class CompanyService {
 
 constructor(private http: HttpClient, private client: ApiClient) { }
 
-
-
-getUsers(page?, itemsPerPage?): Observable<PaginationResult<Company[]>>{
+getUsers(page?, itemsPerPage?, userParams?, likesParam?): Observable<PaginationResult<Company[]>>{
 
     const paginationResult: PaginationResult<Company[]> = new PaginationResult<Company[]>();
     let params = new HttpParams();

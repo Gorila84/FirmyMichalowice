@@ -4,6 +4,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule, Routes  } from '@angular/router';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
+import { PaginationModule } from 'ngx-bootstrap/pagination';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 
@@ -38,7 +39,7 @@ import { MatAutocompleteModule } from '@angular/material/autocomplete';
       CompanyCardComponent,
       CompanyListComponent,
       CompanyDetailComponent,
-      CompanyEditComponent,
+      CompanyEditComponent
    ],
   imports: [
     BrowserModule,
@@ -50,6 +51,7 @@ import { MatAutocompleteModule } from '@angular/material/autocomplete';
     MatAutocompleteModule,
     MatFormFieldModule,
     MatInputModule,
+    PaginationModule.forRoot(),
     BrowserAnimationsModule,
     FileUploadModule,
     // tslint:disable-next-line:max-line-length

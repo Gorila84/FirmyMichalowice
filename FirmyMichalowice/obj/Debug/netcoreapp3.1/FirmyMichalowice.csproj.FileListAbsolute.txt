@@ -355,3 +355,10 @@ E:\repos\Firmy_Michalowice\FirmyMichalowice\FirmyMichalowice\bin\Debug\netcoreap
 E:\repos\Firmy_Michalowice\FirmyMichalowice\FirmyMichalowice\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Logging.Log4Net.AspNetCore.dll
 E:\repos\Firmy_Michalowice\FirmyMichalowice\FirmyMichalowice\bin\Debug\netcoreapp3.1\Humanizer.dll
 E:\repos\Firmy_Michalowice\FirmyMichalowice\FirmyMichalowice\obj\Debug\netcoreapp3.1\FirmyMichalowice.csproj.AssemblyReference.cache
+C:\C#\FirmyMichalowice\FirmyMichalowice\bin\Debug\netcoreapp3.1\Humanizer.dll
+C:\C#\FirmyMichalowice\FirmyMichalowice\bin\Debug\netcoreapp3.1\log4net.dll
+C:\C#\FirmyMichalowice\FirmyMichalowice\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Configuration.dll
+C:\C#\FirmyMichalowice\FirmyMichalowice\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Configuration.Binder.dll
+C:\C#\FirmyMichalowice\FirmyMichalowice\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Logging.Log4Net.AspNetCore.dll
+C:\C#\FirmyMichalowice\FirmyMichalowice\bin\Debug\netcoreapp3.1\MySqlConnector.dll
+C:\C#\FirmyMichalowice\FirmyMichalowice\bin\Debug\netcoreapp3.1\Pomelo.EntityFrameworkCore.MySql.dll
