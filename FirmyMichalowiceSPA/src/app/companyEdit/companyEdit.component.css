@@ -16,5 +16,15 @@ ul{
 }
 
 .change-photo-btn{
-    width:128px;
+    width: 200px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.companyName{
+    width: 400px;
+}
+
+mat-form-field{
+    width: 100%;
 }

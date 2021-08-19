@@ -27,6 +27,7 @@ import { environment } from 'src/environments/environment';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import {MatSelectModule} from '@angular/material/select';
 
 
 
@@ -39,7 +40,8 @@ import { MatAutocompleteModule } from '@angular/material/autocomplete';
       CompanyCardComponent,
       CompanyListComponent,
       CompanyDetailComponent,
-      CompanyEditComponent
+      CompanyEditComponent,
+      
    ],
   imports: [
     BrowserModule,
@@ -51,6 +53,7 @@ import { MatAutocompleteModule } from '@angular/material/autocomplete';
     MatAutocompleteModule,
     MatFormFieldModule,
     MatInputModule,
+    MatSelectModule,
     PaginationModule.forRoot(),
     BrowserAnimationsModule,
     FileUploadModule,

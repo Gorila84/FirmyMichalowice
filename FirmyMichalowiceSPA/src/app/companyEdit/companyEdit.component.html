@@ -7,148 +7,164 @@
   </div>
 
   <div class="row">
-  <div class="col-8 text-center title mt-4">
-    <h2> <input class="form-control" type="text" name="companyName" placeholder="Wprowadź nazwę firmy"
-        [(ngModel)]="company.companyName"> </h2>
-  </div>
-  <div class="col-4 text-center title">
-    <mat-form-field class="example-full-width" appearance="legacy">
-      <mat-label>Kategoria Firmy</mat-label>
-      <input type="text"
-             class="form-control"
-             placeholder="Wybierz rodzaj twojej firmy"
-             aria-label="Kategoria Firmy"
-             matInput
-             [formControl]="myControl"
-             [(ngModel)]="company.companyType"
-             [matAutocomplete]="auto"
-             >
-      <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
-        <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
-          {{option}}
-        </mat-option>
-      </mat-autocomplete>
-    </mat-form-field>
-  </div>
-  </div>
-  <hr>
-  <div class="text-center">
-    <h3>Logo</h3>
+    <div class="col-8 text-center title">
+
+      
+        <mat-form-field class="example-full-width companyName" appearance="legacy">
+          <mat-label>Nazwa firmy</mat-label>
+         
+
+          <input matInput class="form-control " name="companyName" id="companyName"
+            [(ngModel)]="company.companyName" style="width:600px;">
+        </mat-form-field>
+      
+    </div>
+    <div class="col-4 text-center title">
+
+      <mat-form-field class="example-full-width" appearance="legacy">
+        <mat-label>Kategoria Firmy</mat-label>
+        <input type="text" class="form-control" placeholder="Wybierz rodzaj twojej firmy" aria-label="Kategoria Firmy"
+          matInput [formControl]="myControl" [(ngModel)]="company.companyType" [matAutocomplete]="auto">
+        <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
+          <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+            {{option}}
+          </mat-option>
+        </mat-autocomplete>
+      </mat-form-field>
+    </div>
   </div>
   <hr>
+
   <div class="row">
 
 
-    <div class="col-3">
-   
-       <img [src]="imageToShow == null ? '/assets/LogoTemp.png' : imageToShow" alt="company logo" height="200px" width="200px">  
+    <div class="col-3 mx-2 card d-flex justify-content-center align-items-center text-center ">
+      <h3>Logo</h3>
+      <hr>
+      <img [src]="imageToShow == null ? '/assets/LogoTemp.png' : imageToShow" alt="company logo" height="200px"
+        width="200px">
+      <button type="button" class="btn btn-success change-photo-btn" (click)="file.click()">Dodaj Logo</button>
+      <input type="file" #file placeholder="Choose file" (change)="uploadFile(file.files)" style="display:none;">
     </div>
 
-    <div class="col-9">
-      <div class="row">
-        <div class="col-md-1 pb-2">
-
-          <input type="file" #file placeholder="Choose file" (change)="uploadFile(file.files)" style="display:none;">
-
-        </div>
+    <div class="col-8 card text-center">
+      <h3>Dane kontaktowe</h3>
+      <hr>
+      <div class="container">
+        <form #editForm="ngForm" id="editForm" (ngSubmit)="updateCompany()">
 
 
-        <div class="col-lg-3">
-          <p>Wybierz logo</p>
-          <button type="button" class="btn btn-success" (click)="file.click()">Dodaj Logo</button>
-        </div>
-        <div class="col-lg-4">
-          <p>Progress</p>
-          <div class="progress">
-            <div class="progress-bar" role="progressbar"
-              [ngStyle]="{'background-color':progress == 100 ? 'green' : 'red'}" [style.width]="progress +'%'"
-              aria-valuenow="1" aria-valuemin="0" aria-valuemax="100">{{progress + '%'}}</div>
+
+          <div class="row d-flex justify-content-between">
+            <div class="col-md-6 text-center contact">
+              <!-- <p>Kontakt:</p> -->
+              <ul>
+               
+                
+                <li> 
+                  <mat-form-field class="example-full-width" appearance="legacy">
+                  <mat-label>www: </mat-label>
+                  <input matInput class="form-control" type="text" name="webSite" [(ngModel)]="company.webSite"> 
+                  </mat-form-field>
+                </li>
+                  
+                
+                <li>
+                  <mat-form-field class="example-full-width" appearance="legacy">
+                    <mat-label>tel: </mat-label>
+                  <input matInput class="form-control" type="text" name="phoneNumber" [(ngModel)]="company.phoneNumber">
+                </mat-form-field>
+                </li>
+                
+                <li>
+                  <mat-form-field class="example-full-width" appearance="legacy">
+                    <mat-label>e-mail: </mat-label>
+                  <input matInput class="form-control" type="text" name="emailAddress" [(ngModel)]="company.emailAddress">
+                </mat-form-field>
+                </li>
+              </ul>
+            </div>
+            <div class="col-md-6 address ">
+              <!-- <p>Adres:</p> -->
+              <ul>
+                
+                <li><mat-form-field class="full-width" appearance="legacy">
+                  <mat-label>ul. </mat-label>
+                  <input matInput class="form-control" type="text" name="street" [(ngModel)]="company.street">
+                </mat-form-field>
+                </li>
+                
+                <li>
+                  <mat-form-field class="example-full-width" appearance="legacy">
+                
+                    <mat-label>kod pocztowy:</mat-label>
+                  <input matInput class="form-control" type="text" name="postalCode" [(ngModel)]="company.postalCode">
+                </mat-form-field>
+                </li>
+               
+                <li><mat-form-field class="example-full-width" appearance="legacy">
+                  <mat-label for="city">Miejscowość:</mat-label>
+                  <input matInput class="form-control" type="text" name="city" [(ngModel)]="company.city">
+                </mat-form-field>
+                </li>
+              </ul>
+            </div>
+
+
           </div>
-        </div>
-        <div class="col-lg-4">
-          <p>Status</p>
-          <span class="upload" *ngIf="message">
-            {{message}}
-          </span>
-        </div>
+        </form>
+
       </div>
     </div>
-  </div>
-</div>
+    <br><br>
 
-<br><br>
 
-<hr>
-<div class="text-center">
-  <h3>Dane kontaktowe</h3>
-</div>
-<hr>
-<form #editForm="ngForm" id="editForm" (ngSubmit)="updateCompany()">
+    <hr>
+    <form #editForm="ngForm" id="editForm" (ngSubmit)="updateCompany()">
 
 
 
-  <div class="row d-flex justify-content-between">
-    <div class="col-md-3 text-center contact">
-      <!-- <p>Kontakt:</p> -->
-      <ul>
-        <label for="webSite">www: </label>
-        <li> <input class="form-control" type="text" name="webSite" [(ngModel)]="company.webSite"> </li>
-        <label for="tel">tel: </label>
-        <li><input class="form-control" type="text" name="phoneNumber" [(ngModel)]="company.phoneNumber"></li>
-        <label for="mail">e-mail: </label>
-        <li><input class="form-control" type="text" name="emailAddress" [(ngModel)]="company.emailAddress"></li>
-      </ul>
-    </div>
-    <div class="col-md-3 address ">
-      <!-- <p>Adres:</p> -->
-      <ul>
-        <label for="street">ul. </label>
-        <li><input class="form-control" type="text" name="street" [(ngModel)]="company.street"></li>
-        <label for="postalCode">kod pocztowy:</label>
-        <li><input class="form-control" type="text" name="postalCode" [(ngModel)]="company.postalCode"></li>
-        <label for="city">Miejscowość:</label>
-        <li><input class="form-control" type="text" name="city" [(ngModel)]="company.city"></li>
-      </ul>
-    </div>
-    <div class="col-md-3 text-center hours">
-      <p>Godziny otwarcia:</p>
-      <ul>
-        <li class="pt-1">Pn: <div class="d-flex justify-content-between">
-            <input class="form-control col-md-3 ml-4" type="text" size="2"> - <input class="form-control col-md-3 mr-4"
-              type="text" size="2">
-          </div>
-        </li>
-        <li class="pt-1">Wt:<div class="d-flex justify-content-between "> <input class="form-control col-md-3 ml-4"
-              type="text" size="2"> - <input class="form-control col-md-3 mr-4" type="text" size="2"></div>
-        </li>
-        <li class="pt-1">Śr:<div class="d-flex justify-content-between "> <input class="form-control col-md-3 ml-4"
-              type="text" size="2"> - <input class="form-control col-md-3 mr-4" type="text" size="2"></div>
-        </li>
-        <li class="pt-1">Czw:<div class="d-flex justify-content-between "> <input class="form-control col-md-3 ml-4"
-              type="text" size="2"> - <input class="form-control col-md-3 mr-4" type="text" size="2"></div>
-        </li>
-        <li class="pt-1">Pt:<div class="d-flex justify-content-between "> <input class="form-control col-md-3 ml-4"
-              type="text" size="2"> - <input class="form-control col-md-3 mr-4" type="text" size="2"></div>
-        </li>
-      </ul>
-    </div>
-  </div>
-  <hr>
-  <div class="description text-center">
-    <h3>Krótki opis działalności</h3>
-    <p><label for="description">Krótki opis działalności max 200 znaków</label></p>
-    <textarea class="form-control" name="companyDescription" name="shortDescription"
-      [(ngModel)]="company.shortDescription" id="shortDescriptionTextArea" cols="150" rows="10"></textarea>
-  </div>
-  <hr>
-  <div class="description text-center">
-    <h3>Dokładny opis działalności</h3>
-    <p><label for="description">Pełen opis działalności max 5000 znaków</label></p>
-    <textarea class="form-control" name="companyDescription" name="longDescription"
-      [(ngModel)]="company.longDescription" id="descriptionTextArea" cols="150" rows="10"></textarea>
-  </div>
-  <div form="editForm" class="d-flex justify-content-end">
-    <button [disabled]="!editForm.dirty" class="btn btn-success mt-2">Zapisz zmiany</button>
-  </div>
+      <div class="row d-flex justify-content-between">
+     
+        <!-- <div class="col-md-3 text-center hours">
+          <p>Godziny otwarcia:</p>
+          <ul>
+            <li class="pt-1">Pn: <div class="d-flex justify-content-between">
+                <input class="form-control col-md-3 ml-4" type="text" size="2"> - <input
+                  class="form-control col-md-3 mr-4" type="text" size="2">
+              </div>
+            </li>
+            <li class="pt-1">Wt:<div class="d-flex justify-content-between "> <input class="form-control col-md-3 ml-4"
+                  type="text" size="2"> - <input class="form-control col-md-3 mr-4" type="text" size="2"></div>
+            </li>
+            <li class="pt-1">Śr:<div class="d-flex justify-content-between "> <input class="form-control col-md-3 ml-4"
+                  type="text" size="2"> - <input class="form-control col-md-3 mr-4" type="text" size="2"></div>
+            </li>
+            <li class="pt-1">Czw:<div class="d-flex justify-content-between "> <input class="form-control col-md-3 ml-4"
+                  type="text" size="2"> - <input class="form-control col-md-3 mr-4" type="text" size="2"></div>
+            </li>
+            <li class="pt-1">Pt:<div class="d-flex justify-content-between "> <input class="form-control col-md-3 ml-4"
+                  type="text" size="2"> - <input class="form-control col-md-3 mr-4" type="text" size="2"></div>
+            </li>
+          </ul>
+        </div> -->
+      </div>
+      <hr>
+      <div class="description text-center">
+        <h3>Krótki opis działalności</h3>
+        <p><label for="description">Krótki opis działalności max 200 znaków</label></p>
+        <textarea class="form-control" name="companyDescription" name="shortDescription"
+          [(ngModel)]="company.shortDescription" id="shortDescriptionTextArea" cols="150" rows="10"></textarea>
+      </div>
+      <hr>
+      <div class="description text-center">
+        <h3>Dokładny opis działalności</h3>
+        <p><label for="description">Pełen opis działalności max 5000 znaków</label></p>
+        <textarea class="form-control" name="companyDescription" name="longDescription"
+          [(ngModel)]="company.longDescription" id="descriptionTextArea" cols="150" rows="10"></textarea>
+      </div>
+      <div form="editForm" class="d-flex justify-content-end">
+        <button  class="btn btn-success mt-2">Zapisz zmiany</button>
+      </div>
 
-</form>
+    </form>

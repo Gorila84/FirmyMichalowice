@@ -16,6 +16,7 @@ import { map, startWith } from 'rxjs/operators';
 import { CompanyTypeService } from '../_services/companyType.service';
 
 
+
 @Component({
   // tslint:disable-next-line:component-selector
   selector: 'app-companyEdit',
@@ -134,6 +135,7 @@ export class CompanyEditComponent implements OnInit {
       this.options.push(item.toLocaleUpperCase());
     });
 }, error => {
+    this.alertify.error(error);
     console.log(error);
 });
 
