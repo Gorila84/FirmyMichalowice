@@ -34,6 +34,8 @@ namespace FirmyMichalowice.Model
 
         public ICollection<Photo> Photos { get; set; }
 
+        public string CompanyType { get; set; }
+
 
     }
 }

@@ -22,5 +22,6 @@ namespace FirmyMichalowice.Dto_s
 
 
         public string PhotoUrl { get; set; }
+        public string CompanyType { get; set; }
     }
 }

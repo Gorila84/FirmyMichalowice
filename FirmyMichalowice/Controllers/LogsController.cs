@@ -19,8 +19,7 @@ namespace FirmyMichalowice.Controllers
             _logger = logger;
         }
 
-        [HttpPost]
-        [Route("post")]
+        [HttpPost("post")]
         public IActionResult Post([FromBody] LogDto dto)
         {
             MessageFromLog message = JsonConvert.DeserializeObject<MessageFromLog>(dto.Message);

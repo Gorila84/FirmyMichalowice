@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule, Routes  } from '@angular/router';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
@@ -23,7 +23,9 @@ import { PreventUnsavedChanges } from './_guard/prevent-unsaved-changes.guard';
 import { FileUploadModule } from 'ng2-file-upload';
 import { LoggerModule, NgxLoggerLevel } from 'ngx-logger';
 import { environment } from 'src/environments/environment';
-
+import { MatInputModule } from '@angular/material/input';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
 
 
 
@@ -40,11 +42,14 @@ import { environment } from 'src/environments/environment';
    ],
   imports: [
     BrowserModule,
+    FormsModule,
+    ReactiveFormsModule,
     RouterModule.forRoot(appRoutes),
     HttpClientModule,
-    FormsModule,
     BsDropdownModule.forRoot(),
-    
+    MatAutocompleteModule,
+    MatFormFieldModule,
+    MatInputModule,
     BrowserAnimationsModule,
     FileUploadModule,
     // tslint:disable-next-line:max-line-length

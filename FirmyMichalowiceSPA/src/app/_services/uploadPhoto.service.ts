@@ -38,4 +38,5 @@ getImage(userId): Observable<Blob> {
     'Authorization': `Bearer ${token}`
 }, responseType: 'blob' });
 }
+
 }

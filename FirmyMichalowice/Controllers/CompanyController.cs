@@ -14,18 +14,20 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace FirmyMichalowice.Controllers
 {
-   
+
     [Route("api/[controller]")]
     [ApiController]
     public class CompanyController : ControllerBase
     {
         private readonly ICompanyRepository _userRepository;
         private readonly IMapper _mapper;
+        private readonly ILoggerManager _logger;
 
-        public CompanyController(ICompanyRepository userRepository, IMapper mapper)
+        public CompanyController(ICompanyRepository userRepository, IMapper mapper, ILoggerManager logger)
         {
             _userRepository = userRepository;
             _mapper = mapper;
+            _logger = logger;
         }
 
         [HttpGet]
@@ -35,9 +37,7 @@ namespace FirmyMichalowice.Controllers
             {
 
                 var users = await _userRepository.GetCompanies(userParams);
-
                 var usersToReturn = _mapper.Map<IEnumerable<CompaniesForListDTO>>(users);
-
                 return Ok(usersToReturn);
             }
             catch (Exception)
@@ -61,12 +61,9 @@ namespace FirmyMichalowice.Controllers
         [Authorize]
         [HttpPut("{id}")]
 
-        public async Task<IActionResult>UpdateCompany(int id, CompaniesForEditDTO companiesForEditDTO)
+        public async Task<IActionResult> UpdateCompany(int id, CompaniesForEditDTO companiesForEditDTO)
         {
-            if (id != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
-            {
-                return Unauthorized();
-            }
+         
 
             var comapnyFromRepository = await _userRepository.GetCompany(id);
 
@@ -77,5 +74,27 @@ namespace FirmyMichalowice.Controllers
 
             throw new Exception($"Aktualizacja użytkownika o id: {id} nie powiodła sie przy zapisywaniu do bazy");
         }
+
+
+       
+        [HttpGet("getcompanytypes")]
+        [Authorize]
+        public async Task<IList<string>> GetCompanyTypes()
+        {
+            try
+            {
+                var companyTypes =  await _userRepository.GetCompanyTypes();
+                return companyTypes;
+            }
+            catch (Exception ex)
+            {
+                _logger.LogInformation(ex.Message);
+                return null;
+            }
+
+
+        }
+
+  
     }
 }

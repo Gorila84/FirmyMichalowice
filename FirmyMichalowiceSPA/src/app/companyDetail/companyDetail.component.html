@@ -5,7 +5,7 @@
   <hr>
   <div class="row mt-4">
     <div class="col-md-3 d-flex justify-content-center align-item-center">
-      <img src="{{company.photoUrl}}" alt="">
+      <img [src]="imageToShow == null ? '/assets/LogoTemp.png' : imageToShow" alt="company logo" height="200px" width="200px">  
     </div>
     <div class="col-md-3 text-center contact">
       <p>Kontakt:</p>
@@ -13,6 +13,11 @@
       <li>{{company.webSite}}</li>
       <li>tel: {{company.phoneNumber}}</li>
       <li>{{company.emailAddress}}</li>
+    </ul>
+    <br>
+    <p>Rodzaj działalności:</p>
+    <ul>
+      <li>{{company.companyType}}</li>
     </ul>
     </div>
     <div class="col-md-3 text-center address">

@@ -12,4 +12,5 @@ export interface Company {
         street: string;
         postalCode: string;
         photoUrl: string;
+        companyType: string;
 }

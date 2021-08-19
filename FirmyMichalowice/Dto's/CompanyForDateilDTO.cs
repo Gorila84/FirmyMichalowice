@@ -28,6 +28,8 @@ namespace FirmyMichalowice.Dto_s
         //public DataType Modify { get; set; }
 
         public string PhotoUrl { get; set; }
+        
+        public string CompanyType { get; set; }
 
     }
 }

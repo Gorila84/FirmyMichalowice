@@ -12,5 +12,6 @@ namespace FirmyMichalowice.Repositories
         Task<PageList<User>> GetCompanies(UserParams userParams);
         Task<User> GetCompany(int id);
         Task<bool> SaveAll();
+        Task<IList<string>> GetCompanyTypes();
     }
 }

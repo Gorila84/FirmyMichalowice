@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "mVG/QAOJhCZVMUyKee2CdAO44oYaqegnZTjlhcR9abJsotmmpqbMXf27T7Hxcpj0P0OmSRgA3T2r5aS68qWhNg==",
+  "dgSpecHash": "LXeNJrXMLZs5l2rzZOE/wB/VtF+EdADZUXXnjA4X3BWJE0gxQk0eRVorj9N9mD+XTiEJMUGTRsAmVwHyqCVzcQ==",
   "success": true,
   "projectFilePath": "E:\\repos\\Firmy_Michalowice\\FirmyMichalowice\\FirmyMichalowice\\FirmyMichalowice.csproj",
   "expectedPackageFiles": [
@@ -60,7 +60,7 @@
     "C:\\Users\\Karol\\.nuget\\packages\\microsoft.extensions.caching.memory\\5.0.0\\microsoft.extensions.caching.memory.5.0.0.nupkg.sha512",
     "C:\\Users\\Karol\\.nuget\\packages\\microsoft.extensions.configuration\\3.1.13\\microsoft.extensions.configuration.3.1.13.nupkg.sha512",
     "C:\\Users\\Karol\\.nuget\\packages\\microsoft.extensions.configuration.abstractions\\5.0.0\\microsoft.extensions.configuration.abstractions.5.0.0.nupkg.sha512",
-    "C:\\Users\\Karol\\.nuget\\packages\\microsoft.extensions.configuration.binder\\3.1.13\\microsoft.extensions.configuration.binder.3.1.13.nupkg.sha512",
+    "C:\\Users\\Karol\\.nuget\\packages\\microsoft.extensions.configuration.binder\\5.0.0\\microsoft.extensions.configuration.binder.5.0.0.nupkg.sha512",
     "C:\\Users\\Karol\\.nuget\\packages\\microsoft.extensions.dependencyinjection\\5.0.2\\microsoft.extensions.dependencyinjection.5.0.2.nupkg.sha512",
     "C:\\Users\\Karol\\.nuget\\packages\\microsoft.extensions.dependencyinjection.abstractions\\5.0.0\\microsoft.extensions.dependencyinjection.abstractions.5.0.0.nupkg.sha512",
     "C:\\Users\\Karol\\.nuget\\packages\\microsoft.extensions.dependencymodel\\3.1.6\\microsoft.extensions.dependencymodel.3.1.6.nupkg.sha512",
@@ -233,12 +233,5 @@
     "C:\\Users\\Karol\\.nuget\\packages\\system.xml.xpath.xmldocument\\4.3.0\\system.xml.xpath.xmldocument.4.3.0.nupkg.sha512",
     "C:\\Users\\Karol\\.nuget\\packages\\timezoneconverter\\3.4.0\\timezoneconverter.3.4.0.nupkg.sha512"
   ],
-  "logs": [
-    {
-      "code": "Undefined",
-      "level": "Warning",
-      "warningLevel": 1,
-      "message": "Problem reading the cache file E:\\repos\\Firmy_Michalowice\\FirmyMichalowice\\FirmyMichalowice\\obj\\project.nuget.cache : Invalid property identifier character: <. Path 'version', line 3, position 0."
-    }
-  ]
+  "logs": []
 }

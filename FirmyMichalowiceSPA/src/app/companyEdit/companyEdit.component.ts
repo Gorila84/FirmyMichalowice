@@ -1,6 +1,6 @@
 import { UpperCasePipe } from '@angular/common';
 import { Component, EventEmitter, OnInit, Output, ViewChild } from '@angular/core';
-import { NgForm } from '@angular/forms';
+import { FormControl, NgForm } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
 import { Company } from '../_models/company';
@@ -8,12 +8,13 @@ import { AlertifyService } from '../_services/alertify.service';
 import { AuthService } from '../_services/auth.service';
 import { CompanyService } from '../_services/company.service';
 import { UploadPhotoService } from '../_services/uploadPhoto.service';
-import { FileUploader } from 'ng2-file-upload';
-import { CoreEnvironment } from '@angular/compiler/src/compiler_facade_interface';
 import { environment } from 'src/environments/environment';
-import { HttpErrorResponse, HttpEventType, HttpHeaderResponse } from '@angular/common/http';
+import { HttpEventType } from '@angular/common/http';
 import { NGXLogger } from 'ngx-logger';
 import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
+import { map, startWith } from 'rxjs/operators';
+import { CompanyTypeService } from '../_services/companyType.service';
+
 
 @Component({
   // tslint:disable-next-line:component-selector
@@ -29,6 +30,9 @@ export class CompanyEditComponent implements OnInit {
   imageToShow: SafeUrl | null = null;
   noImageFound: boolean;
   content: any;
+  myControl = new FormControl();
+  options: string[] = [];
+  filteredOptions: Observable<string[]>;
   // tslint:disable-next-line:no-output-on-prefix
   @Output() public onUploadFinished = new EventEmitter();
   company: Company;
@@ -41,15 +45,23 @@ export class CompanyEditComponent implements OnInit {
               private companyService: CompanyService,
               private uploadPhotoService: UploadPhotoService,
               private logger: NGXLogger,
-              private sanitizer: DomSanitizer) { }
+              private sanitizer: DomSanitizer,
+              private companyTypeService: CompanyTypeService) { }
 
   // tslint:disable-next-line:typedef
   ngOnInit() {
+    this.getCompanyTypes();
     this.route.data.subscribe(data => {
       this.company = data.company;
-      this.progress = 0;
     });
+    this.progress = 0;
     this.getImage(this.authService.decotedToken.nameid);
+
+    this.filteredOptions = this.myControl.valueChanges
+    .pipe(
+      startWith(''),
+      map(value => this._filter(value))
+    );
   }
   // tslint:disable-next-line:typedef
   getImage(userId: number) {
@@ -95,6 +107,7 @@ export class CompanyEditComponent implements OnInit {
          }
          else if (event.type === HttpEventType.Response) {
            this.message = 'Dodano logo.';
+           this.getImage(this.authService.decotedToken.nameid);
          }
        }, err => {
           this.progress = 99;
@@ -106,5 +119,23 @@ export class CompanyEditComponent implements OnInit {
           this.alertify.error('Błąd. Nie udało się wysłać pliku');
          }
        );
+  }
+
+  private _filter(value: string): string[] {
+    const filterValue = value.toLowerCase();
+    console.log(this.options);
+    return this.options.filter(option => option.toLowerCase().includes(filterValue));
+  }
+
+  // tslint:disable-next-line:typedef
+  getCompanyTypes() {
+   this.companyTypeService.getCompanyTypes().subscribe(data => {
+    data.forEach((item) => {
+      this.options.push(item.toLocaleUpperCase());
+    });
+}, error => {
+    console.log(error);
+});
+
   }
 }

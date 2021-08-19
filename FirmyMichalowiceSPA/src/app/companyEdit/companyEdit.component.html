@@ -1,12 +1,35 @@
 <div class="container">
+
   <div class="col">
     <div *ngIf="editForm.dirty" class="alert alert-info">
       <strong>Informacja:</strong>W formularzu zostały wprowadzone zmiany. Wszelkie niezapisane zmiany zostaną utracone!
     </div>
   </div>
-  <div class="col-12 text-center title mt-4">
+
+  <div class="row">
+  <div class="col-8 text-center title mt-4">
     <h2> <input class="form-control" type="text" name="companyName" placeholder="Wprowadź nazwę firmy"
         [(ngModel)]="company.companyName"> </h2>
+  </div>
+  <div class="col-4 text-center title">
+    <mat-form-field class="example-full-width" appearance="legacy">
+      <mat-label>Kategoria Firmy</mat-label>
+      <input type="text"
+             class="form-control"
+             placeholder="Wybierz rodzaj twojej firmy"
+             aria-label="Kategoria Firmy"
+             matInput
+             [formControl]="myControl"
+             [(ngModel)]="company.companyType"
+             [matAutocomplete]="auto"
+             >
+      <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
+        <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+          {{option}}
+        </mat-option>
+      </mat-autocomplete>
+    </mat-form-field>
+  </div>
   </div>
   <hr>
   <div class="text-center">
@@ -17,12 +40,8 @@
 
 
     <div class="col-3">
-      <img [src]="imageToShow"
-     alt="Place image title" height="200" width="200">
-<ng-template #noImageFound>
-     <img src="'/assets/LogoTemp.png'" alt="Logo klienta">
-</ng-template>
-       <!-- <img [src]="imageToShow == null ? '/assets/LogoTemp.png' : imageToShow" alt="company logo" height="200px" width="200px">  -->
+   
+       <img [src]="imageToShow == null ? '/assets/LogoTemp.png' : imageToShow" alt="company logo" height="200px" width="200px">  
     </div>
 
     <div class="col-9">

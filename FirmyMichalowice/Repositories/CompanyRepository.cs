@@ -35,5 +35,10 @@ namespace FirmyMichalowice.Repositories
         {
             return await _context.SaveChangesAsync() > 0;
         }
+
+        public async Task<IList<string>> GetCompanyTypes()
+        {
+            return _context.CompanyTypes.OrderBy(x => x.Name).Select(x=>x.Name).ToList();
+        }
     }
 }

@@ -1,6 +1,8 @@
 ﻿
 
+using FirmyMichalowice.Helpers;
 using FirmyMichalowice.Repositories;
+using log4net;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -27,16 +29,19 @@ namespace FirmyMichalowice.Controllers
         private readonly ICompanyRepository _companyRepository;
         private readonly IHostingEnvironment _hostingEnvironment;
         private readonly IConfiguration _configuration;
+        private readonly ILoggerManager _logger;
 
         public PhotosController(IPhotoRepository photoRepository, 
                                 ICompanyRepository companyRepository,
                                 IHostingEnvironment environment,
-                                 IConfiguration config)
+                                 IConfiguration config,
+                                 ILoggerManager logger)
         {
             _photoRepository = photoRepository;
             _companyRepository = companyRepository;
             _hostingEnvironment = environment;
             _configuration = config;
+            _logger = logger;
         }
 
         [HttpPost("upload/{userId}")]
@@ -154,6 +159,22 @@ namespace FirmyMichalowice.Controllers
                 string userFolderId = string.Format("{0}/{1}", ftpUri, "Images/" + userId);
                 var imagesNames = GetFilesArray(userFolderId);
 
+                if (imagesNames == null)
+                {
+                    var folderName = Path.Combine(Directory.GetCurrentDirectory(), "Resources", "Images");
+                    var filePath = Path.Combine(folderName, "Default/LogoTemp.png");
+                    if (!System.IO.File.Exists(filePath))
+                        return NotFound();
+
+                    var memory = new MemoryStream();
+                    using (var stream = new FileStream(filePath, FileMode.Open))
+                    {
+                        await stream.CopyToAsync(memory);
+                    }
+                    memory.Position = 0;
+
+                    return File(memory, GetContentType(filePath));
+                }
                 string ftpUserName = _configuration.GetSection("FtpAccount:UserAccount").Value;
                 string ftpUserPass = _configuration.GetSection("FtpAccount:UserPass").Value;
 
@@ -264,20 +285,29 @@ namespace FirmyMichalowice.Controllers
 
         private string[] GetFilesArray(string userFolderId)
         {
-            FtpWebRequest request = (FtpWebRequest)WebRequest.Create(userFolderId);
-            request.Method = WebRequestMethods.Ftp.ListDirectory;
+            try
+            {
+                FtpWebRequest request = (FtpWebRequest)WebRequest.Create(userFolderId);
+                request.Method = WebRequestMethods.Ftp.ListDirectory;
 
-            AuthorizeRequest(ref request);
-            FtpWebResponse response = (FtpWebResponse)request.GetResponse();
-            Stream responseStream = response.GetResponseStream();
-            StreamReader reader = new StreamReader(responseStream);
-            string names = reader.ReadToEnd();
+                AuthorizeRequest(ref request);
+                FtpWebResponse response = (FtpWebResponse)request.GetResponse();
+                Stream responseStream = response.GetResponseStream();
+                StreamReader reader = new StreamReader(responseStream);
+                string names = reader.ReadToEnd();
 
-            reader.Close();
-            response.Close();
+                reader.Close();
+                response.Close();
 
-            var result = names.Split(new string[] { "\r\n" }, StringSplitOptions.RemoveEmptyEntries);
-            return result;
+                var result = names.Split(new string[] { "\r\n" }, StringSplitOptions.RemoveEmptyEntries);
+                return result;
+            }
+            catch(WebException ex)
+            {
+                String status = ((FtpWebResponse)ex.Response).StatusDescription;
+                _logger.LogInformation(status);
+                return null;
+            }
         }
     }
 }

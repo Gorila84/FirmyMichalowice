@@ -2,6 +2,7 @@ using AutoMapper;
 using FirmyMichalowice.Data;
 using FirmyMichalowice.Helpers;
 using FirmyMichalowice.Repositories;
+using log4net;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Diagnostics;
@@ -54,7 +55,6 @@ namespace FirmyMichalowice
             services.AddCors();
             services.AddTransient<Seed>();
             services.AddScoped<IAuthRepository, AuthRepository>();
-            
             services.AddScoped<IGenericRepository, GenericRepository>();
             services.AddScoped<ICompanyRepository, CompanyRepository>();
             services.AddScoped<IPhotoRepository, PhotoRepository>();
