@@ -22,7 +22,6 @@ namespace FirmyMichalowice.Controllers
 
     [Route("api/[controller]")]
     [ApiController]
-    [Authorize]
     public class PhotosController : ControllerBase
     {
         private readonly IPhotoRepository _photoRepository;
@@ -44,6 +43,7 @@ namespace FirmyMichalowice.Controllers
             _logger = logger;
         }
 
+        [Authorize]
         [HttpPost("upload/{userId}")]
         //[Route("upload")]
         public async Task<IActionResult> Upload([FromRoute] int userId)
@@ -212,7 +212,8 @@ namespace FirmyMichalowice.Controllers
 #endif
         }
 
-
+        
+        [Authorize]
         [HttpGet]
         [Route("files")]
         public IActionResult Files()
