@@ -1,6 +1,9 @@
 .descriptionTextArea{
     width: 100vw;
 }
+.description{
+    width: 100vw;
+}
 
 ul li {
     list-style: none;
@@ -19,6 +22,7 @@ ul{
     width: 200px;
     margin-top: 10px;
     margin-bottom: 10px;
+    cursor: pointer;
 }
 
 .companyName{
@@ -27,4 +31,12 @@ ul{
 
 mat-form-field{
     width: 100%;
+}
+.company-card{
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    
+ }
+
+ .save-button:hover{
+    background-color: lightslategrey;
 }

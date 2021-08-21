@@ -28,11 +28,13 @@ import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import {MatSelectModule} from '@angular/material/select';
-
+import {MatButtonModule} from '@angular/material/button';
+import {MatCardModule} from '@angular/material/card';
+import { FooterComponent } from './footer/footer.component';
 
 
 @NgModule({
-  declarations: [
+  declarations: [	
     AppComponent,
       NavComponent,
       LoginComponent,
@@ -41,7 +43,7 @@ import {MatSelectModule} from '@angular/material/select';
       CompanyListComponent,
       CompanyDetailComponent,
       CompanyEditComponent,
-      
+      FooterComponent
    ],
   imports: [
     BrowserModule,
@@ -57,6 +59,8 @@ import {MatSelectModule} from '@angular/material/select';
     PaginationModule.forRoot(),
     BrowserAnimationsModule,
     FileUploadModule,
+    MatButtonModule,
+    MatCardModule,
     // tslint:disable-next-line:max-line-length
     LoggerModule.forRoot({serverLoggingUrl: environment.apiUrl + 'logs/post', level: NgxLoggerLevel.DEBUG, serverLogLevel: NgxLoggerLevel.ERROR})
     // FontAwesomeModule

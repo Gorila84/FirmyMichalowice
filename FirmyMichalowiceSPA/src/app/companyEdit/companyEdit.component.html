@@ -6,8 +6,8 @@
     </div>
   </div>
 
-  <div class="row">
-    <div class="col-8 text-center title">
+  <div class="row  ">
+    <div class="col-8 text-center title d-flex justify-content-start align-items-center">
 
       
         <mat-form-field class="example-full-width companyName" appearance="legacy">
@@ -38,16 +38,16 @@
   <div class="row">
 
 
-    <div class="col-3 mx-2 card d-flex justify-content-center align-items-center text-center ">
+    <div class="col-3 mx-2 ml-3 card  text-center d-flex justify-content-center align-items-center company-card">
       <h3>Logo</h3>
       <hr>
       <img [src]="imageToShow == null ? '/assets/LogoTemp.png' : imageToShow" alt="company logo" height="200px"
         width="200px">
-      <button type="button" class="btn btn-success change-photo-btn" (click)="file.click()">Dodaj Logo</button>
+      <button mat-raised-button type="button" class="change-photo-btn" (click)="file.click()">Dodaj Logo</button>
       <input type="file" #file placeholder="Choose file" (change)="uploadFile(file.files)" style="display:none;">
     </div>
 
-    <div class="col-8 card text-center">
+    <div class="col-8 card text-center company-card">
       <h3>Dane kontaktowe</h3>
       <hr>
       <div class="container">
@@ -120,11 +120,12 @@
 
 
     <hr>
+    <div class="container">
     <form #editForm="ngForm" id="editForm" (ngSubmit)="updateCompany()">
 
 
 
-      <div class="row d-flex justify-content-between">
+      <div class="row ">
      
         <!-- <div class="col-md-3 text-center hours">
           <p>Godziny otwarcia:</p>
@@ -150,21 +151,32 @@
         </div> -->
       </div>
       <hr>
-      <div class="description text-center">
+      <div class="description text-center col-12 company-card">
         <h3>Krótki opis działalności</h3>
-        <p><label for="description">Krótki opis działalności max 200 znaków</label></p>
-        <textarea class="form-control" name="companyDescription" name="shortDescription"
+        <hr>
+
+        <mat-form-field class="example-full-width" appearance="fill">
+          <mat-label>Krótki opis działalności</mat-label>
+               <textarea matInput class="form-control" name="companyDescription" name="shortDescription"
           [(ngModel)]="company.shortDescription" id="shortDescriptionTextArea" cols="150" rows="10"></textarea>
+          
+        </mat-form-field>
       </div>
       <hr>
-      <div class="description text-center">
+      
+      <div class="description text-center col-12 card company-card">
         <h3>Dokładny opis działalności</h3>
+        <hr>
         <p><label for="description">Pełen opis działalności max 5000 znaków</label></p>
-        <textarea class="form-control" name="companyDescription" name="longDescription"
+        <mat-form-field class="example-full-width" appearance="fill">
+          <mat-label>Dokładny opis działalności</mat-label>
+        <textarea matInput class="form-control" name="companyDescription" name="longDescription"
           [(ngModel)]="company.longDescription" id="descriptionTextArea" cols="150" rows="10"></textarea>
+        </mat-form-field>
       </div>
       <div form="editForm" class="d-flex justify-content-end">
-        <button  class="btn btn-success mt-2">Zapisz zmiany</button>
+        <button mat-raised-button class="mt-4 save-button">Zapisz zmiany</button>
       </div>
-
+    
     </form>
+  </div>
