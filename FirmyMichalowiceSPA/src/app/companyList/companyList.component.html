@@ -12,7 +12,8 @@
       </div>
     </div>
   </div>
-  <pagination class="numeracja my-2"
+  
+  <pagination class=" justify-content-center py-3 text-dark"
     [boundaryLinks]="true" 
     [totalItems]="pagination.totalItems"
     [itemsPerPage]="pagination.itemsPerPage"
@@ -20,4 +21,5 @@
     (pageChanged)="pageChanged($event)"
 previousText="&lsaquo;" nextText="&rsaquo;" firstText="&laquo;" lastText="&raquo;">
 </pagination>
+
 </div>

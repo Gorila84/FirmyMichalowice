@@ -11,9 +11,9 @@
           <img [src]="imageToShow == null ? '/assets/LogoTemp.png' : imageToShow" alt="company logo" height="200px" width="200px">  
         </div>
         <div class="col-md-10">
-          <div class="col">
-            <h2>{{company.companyName}}</h2>
-            <p>{{company.shortDescription}}</p>
+          <div class="col text-center">
+            <h2 class="py-2">{{company.companyName}}</h2>
+            <p class="pl-3">{{company.shortDescription}}</p>
             <div class="row d-flex justify-content-between">
               <div class="col-md-4 text-center">
                 <p class="ml-2"><i class="fa fa-at mr-2"></i>{{company.emailAddress}}</p>
