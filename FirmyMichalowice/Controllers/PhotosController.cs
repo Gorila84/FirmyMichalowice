@@ -139,12 +139,19 @@ namespace FirmyMichalowice.Controllers
 
         private void CreateDirectory(string directory)
         {
-
-            WebRequest request = WebRequest.Create(directory);
-            request.Method = WebRequestMethods.Ftp.MakeDirectory;
-            using (var resp = (FtpWebResponse)request.GetResponse())
+            try
             {
-                Console.WriteLine(resp.StatusCode);
+                FtpWebRequest request = (FtpWebRequest)FtpWebRequest.Create(directory);
+                request.Method = WebRequestMethods.Ftp.MakeDirectory;
+                AuthorizeRequest(ref request);
+                using (var resp = (FtpWebResponse)request.GetResponse())
+                {
+                    Console.WriteLine(resp.StatusCode);
+                }
+            }
+            catch(WebException ex)
+            {
+                Console.WriteLine(ex.Message);
             }
         }
  
@@ -192,8 +199,8 @@ namespace FirmyMichalowice.Controllers
             }
             catch (Exception e)
             {
-               
-                return null;
+
+                return NotFound();
             }
 #else
             var folderName = Path.Combine(Directory.GetCurrentDirectory(), "Resources", "Images");
