@@ -1,3 +1,5 @@
+import { Photo } from './photo';
+
 export interface Company {
 
         id: number;
@@ -13,4 +15,5 @@ export interface Company {
         postalCode: string;
         photoUrl: string;
         companyType: string;
+        photo: Photo;
 }

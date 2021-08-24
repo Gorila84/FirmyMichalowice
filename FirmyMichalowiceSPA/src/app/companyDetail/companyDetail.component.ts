@@ -26,7 +26,7 @@ export class CompanyDetailComponent implements OnInit {
   ngOnInit() {
     this.route.data.subscribe(data => {
       this.company = data.company;
-      this.getImage(this.company.id);
+      // this.getImage(this.company.id);
     });
   }
   // tslint:disable-next-line:typedef

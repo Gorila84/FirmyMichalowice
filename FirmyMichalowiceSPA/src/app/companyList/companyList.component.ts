@@ -36,7 +36,7 @@ export class CompanyListComponent implements OnInit {
 
   loadCompanies() {
     this.companyService.getUsers(this.pagination.currentPage, this.pagination.itemsPerPage, this.companyParams)
-     .subscribe((res:  PaginationResult<Company[]>) => {
+     .subscribe((res: PaginationResult<Company[]>) => {
       this.companies = res.result;
       this.pagination = res.pagination;
     }, error => {

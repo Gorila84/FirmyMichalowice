@@ -1,4 +1,5 @@
-﻿using System;
+﻿using FirmyMichalowice.Model;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -26,5 +27,7 @@ namespace FirmyMichalowice.Dto_s
 
         public string PhotoUrl { get; set; }
         public string CompanyType { get; set; }
+
+        public Photo Photos { get; set; }
     }
 }

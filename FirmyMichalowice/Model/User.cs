@@ -32,10 +32,11 @@ namespace FirmyMichalowice.Model
         public DateTime Created { get; set; }
         public DateTime Modify { get; set; }
 
-        public ICollection<Photo> Photos { get; set; }
+        public Photo Photo { get; set; }
 
         public string CompanyType { get; set; }
 
+ 
 
     }
 }

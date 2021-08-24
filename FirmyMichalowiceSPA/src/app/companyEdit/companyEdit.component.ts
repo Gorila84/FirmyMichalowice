@@ -12,8 +12,9 @@ import { environment } from 'src/environments/environment';
 import { HttpEventType } from '@angular/common/http';
 import { NGXLogger } from 'ngx-logger';
 import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
-import { map, startWith } from 'rxjs/operators';
+import { buffer, map, startWith } from 'rxjs/operators';
 import { CompanyTypeService } from '../_services/companyType.service';
+import { toBase64String } from '@angular/compiler/src/output/source_map';
 
 
 
@@ -56,8 +57,9 @@ export class CompanyEditComponent implements OnInit {
       this.company = data.company;
     });
     this.progress = 0;
-    this.getImage(this.authService.decotedToken.nameid);
-
+    // this.getImage(this.authService.decotedToken.nameid);
+    // this.getImage();
+    console.log(this.company);
     this.filteredOptions = this.myControl.valueChanges
     .pipe(
       startWith(''),
@@ -65,18 +67,9 @@ export class CompanyEditComponent implements OnInit {
     );
   }
   // tslint:disable-next-line:typedef
-  getImage(userId: number) {
+  getImage(result: string) {
     const mediaType = 'application/image';
-    this.uploadPhotoService.getImage(userId)
-      .subscribe(data => {
-        const blob = new Blob([data], { type: mediaType });
-        const unsafeImg = URL.createObjectURL(blob);
-        this.imageToShow = this.sanitizer.bypassSecurityTrustUrl(unsafeImg);
-    }, error => {
-        console.log(error);
-        this.noImageFound = true;
-    });
-
+    return result.slice(22, result.length);
   }
 
   // tslint:disable-next-line:typedef
@@ -102,13 +95,21 @@ export class CompanyEditComponent implements OnInit {
     const formData = new FormData();
     formData.append('file', fileToUpload, fileToUpload.name);
     this.uploadPhotoService.uploadImage(this.authService.decotedToken.nameid, fileToUpload)
-       .subscribe(event => {
+       .subscribe(async event => {
          if (event.type === HttpEventType.UploadProgress) {
            this.progress = Math.round(100 * event.loaded / event.total);
          }
          else if (event.type === HttpEventType.Response) {
-           this.message = 'Dodano logo.';
-           this.getImage(this.authService.decotedToken.nameid);
+           this.alertify.success('Dodano logo.');
+           // this.getImage();
+           // window.location.reload();
+           const fileReader = new FileReader();
+           fileReader.onload = (e) => {
+           console.log(fileReader.result);
+           this.company.photo.fileData = this.getImage(fileReader.result.toString()) as any ;
+           };
+           fileReader.readAsDataURL(files[0]);
+
          }
        }, err => {
           this.progress = 99;
@@ -124,7 +125,6 @@ export class CompanyEditComponent implements OnInit {
 
   private _filter(value: string): string[] {
     const filterValue = value.toLowerCase();
-    console.log(this.options);
     return this.options.filter(option => option.toLowerCase().includes(filterValue));
   }
 
@@ -140,4 +140,5 @@ export class CompanyEditComponent implements OnInit {
 });
 
   }
+
 }

@@ -8,7 +8,7 @@ namespace FirmyMichalowice.Repositories
 {
     public interface IPhotoRepository
     {
-        void CreateFolderAndSaveImage(string userId);
+        bool SaveImage(Photo logo);
        
 
     }

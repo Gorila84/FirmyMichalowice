@@ -42,7 +42,7 @@ namespace FirmyMichalowice.Controllers
 
                 return Ok(usersToReturn);
             }
-            catch (Exception)
+            catch (Exception ex)
             {
 
                 return StatusCode(500, "Ręcznie wygenerowany błąd");
