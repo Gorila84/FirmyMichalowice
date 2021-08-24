@@ -16,27 +16,18 @@ export class UploadPhotoService {
 
   baseUrl = environment.apiUrl;
 
-constructor(private httpClient: HttpClient, private client: ApiClient) { }
+constructor(private httpClient: HttpClient) { }
 
 // tslint:disable-next-line:typedef
 uploadImage(userId, image) {
   const formData: FormData = new FormData();
   formData.append('Image', image, image.name);
-  const myheaders = this.client.addBearer();
   const token =   localStorage.getItem('token');
   // tslint:disable-next-line:max-line-length
   return this.httpClient.post(this.baseUrl + `photos/upload/${userId}`, formData, { headers: {
       // tslint:disable-next-line:object-literal-key-quotes
       'Authorization': `Bearer ${token}`
 }, observe: 'events', reportProgress: true});
-}
-getImage(userId): Observable<Blob> {
-  // tslint:disable-next-line:no-debugger
-  const token =   localStorage.getItem('token');
-  return this.httpClient.get(this.baseUrl + `photos/download/${userId}`, {headers: {
-    // tslint:disable-next-line:object-literal-key-quotes
-    'Authorization': `Bearer ${token}`
-}, responseType: 'blob' });
 }
 
 }

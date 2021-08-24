@@ -25,13 +25,6 @@ import { toBase64String } from '@angular/compiler/src/output/source_map';
   styleUrls: ['./companyEdit.component.css']
 })
 export class CompanyEditComponent implements OnInit {
-  theFile: any = null;
-  progress: number;
-  message: string;
-  myProgress: number;
-  imageToShow: SafeUrl | null = null;
-  noImageFound: boolean;
-  content: any;
   myControl = new FormControl();
   options: string[] = [];
   filteredOptions: Observable<string[]>;
@@ -56,7 +49,6 @@ export class CompanyEditComponent implements OnInit {
     this.route.data.subscribe(data => {
       this.company = data.company;
     });
-    this.progress = 0;
     // this.getImage(this.authService.decotedToken.nameid);
     // this.getImage();
     console.log(this.company);
@@ -97,7 +89,6 @@ export class CompanyEditComponent implements OnInit {
     this.uploadPhotoService.uploadImage(this.authService.decotedToken.nameid, fileToUpload)
        .subscribe(async event => {
          if (event.type === HttpEventType.UploadProgress) {
-           this.progress = Math.round(100 * event.loaded / event.total);
          }
          else if (event.type === HttpEventType.Response) {
            this.alertify.success('Dodano logo.');
@@ -105,15 +96,12 @@ export class CompanyEditComponent implements OnInit {
            // window.location.reload();
            const fileReader = new FileReader();
            fileReader.onload = (e) => {
-           console.log(fileReader.result);
            this.company.photo.fileData = this.getImage(fileReader.result.toString()) as any ;
            };
            fileReader.readAsDataURL(files[0]);
 
          }
        }, err => {
-          this.progress = 99;
-          this.message = 'Błąd. Nie udało się wysłać pliku';
           const userId = this.authService.decotedToken.nameid;
           err.userId = userId;
           err.componentName = this.constructor.name;
