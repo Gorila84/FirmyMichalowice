@@ -1,12 +1,51 @@
 <div class = "container mt-4">
   <div class = "row">
     <div class="text-center col-12">
-      <h2>Firmy na północy Krakowa</h2>
+      <h1>Firmy na północy Krakowa</h1>
       <hr>
     </div>
     <div class="col-12">
+    <accordion>
+    <accordion-group class="text-dark text-right accordion-text" heading="Wyszukiwarka">
+      <div class="row d-flex align-items-end">
+        <div class="col-3  d-flex justify-content-end">
+            <h2>Wyszukaj:</h2>
+        </div>
+        
+        <div class="col-3 d-flex justify-content-end">
+          <mat-form-field class="example-full-width companyName " appearance="legacy">
+            <mat-label>Nazwa firmy</mat-label>
+           
+  
+            <input matInput class="form-control " name="companyName" id="companyName"
+               style="width:600px;">
+          </mat-form-field>
+        </div>
+        <div class="col-3 d-flex justify-content-end">
+          <mat-form-field class="example-full-width companyName" appearance="legacy">
+            <mat-label>Kategoria</mat-label>
+           
+  
+            <input matInput class="form-control " name="companyName" id="companyName"
+               style="width:600px;">
+          </mat-form-field>
+        </div>
+        <div class="col-3 d-flex justify-content-end">
+          <mat-form-field class="example-full-width companyName" appearance="legacy">
+            <mat-label>Miejscowość</mat-label>
+           
+  
+            <input matInput class="form-control " name="companyName" id="companyName"
+               style="width:600px;">
+          </mat-form-field>
+        </div>
+      </div>
+    </accordion-group>
+  </accordion></div>
+    <div class="col-12">
       <div class="row">
         <div *ngFor="let company of companies" class="company-card-list">
+          
           <app-CompanyCard [company]='company'></app-CompanyCard>
         </div>
       </div>

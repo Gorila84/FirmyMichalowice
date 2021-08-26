@@ -31,7 +31,7 @@ import {MatSelectModule} from '@angular/material/select';
 import {MatButtonModule} from '@angular/material/button';
 import {MatCardModule} from '@angular/material/card';
 import { FooterComponent } from './footer/footer.component';
-
+import { AccordionModule } from 'ngx-bootstrap/accordion';
 
 @NgModule({
   declarations: [	
@@ -61,6 +61,7 @@ import { FooterComponent } from './footer/footer.component';
     FileUploadModule,
     MatButtonModule,
     MatCardModule,
+    AccordionModule.forRoot(),
     // tslint:disable-next-line:max-line-length
     LoggerModule.forRoot({serverLoggingUrl: environment.apiUrl + 'logs/post', level: NgxLoggerLevel.DEBUG, serverLogLevel: NgxLoggerLevel.ERROR})
     // FontAwesomeModule
