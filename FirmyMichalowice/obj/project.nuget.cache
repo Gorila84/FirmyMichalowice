@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "P5+3u2e616zKEygUeKA0rxD6WQmjeqYKUT+E8iINj6fOb5+toQ1d1KBKmVT8URPmNfGUBTRiyZKpDskWy3AwCQ==",
+  "dgSpecHash": "QiPc5zCHOIlPFt648bvYjZGbFWhVvr/ialOGtFwakQPGyT7tGV6L2Dvgund1XjcOiDNdpg1WwTPxkbfmUcnkcQ==",
   "success": true,
-  "projectFilePath": "C:\\C#\\FirmyMichalowice\\FirmyMichalowice\\FirmyMichalowice.csproj",
+  "projectFilePath": "C:\\C#\\FirmyMichalowice\\FirmyMichalowice\\FirmyMichalowice\\FirmyMichalowice.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Maciek\\.nuget\\packages\\abp\\6.3.0\\abp.6.3.0.nupkg.sha512",
     "C:\\Users\\Maciek\\.nuget\\packages\\automapper\\10.1.1\\automapper.10.1.1.nupkg.sha512",

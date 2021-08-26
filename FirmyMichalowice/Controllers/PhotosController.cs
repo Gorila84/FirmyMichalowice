@@ -139,8 +139,9 @@ namespace FirmyMichalowice.Controllers
 
         private void CreateDirectory(string directory)
         {
-
-            WebRequest request = WebRequest.Create(directory);
+            FtpWebRequest request = (FtpWebRequest)WebRequest.Create(directory);
+            AuthorizeRequest(ref request);
+            //WebRequest request = WebRequest.Create(directory);
             request.Method = WebRequestMethods.Ftp.MakeDirectory;
             using (var resp = (FtpWebResponse)request.GetResponse())
             {

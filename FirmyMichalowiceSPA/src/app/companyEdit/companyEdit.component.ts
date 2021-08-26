@@ -103,10 +103,7 @@ export class CompanyEditComponent implements OnInit {
     formData.append('file', fileToUpload, fileToUpload.name);
     this.uploadPhotoService.uploadImage(this.authService.decotedToken.nameid, fileToUpload)
        .subscribe(event => {
-         if (event.type === HttpEventType.UploadProgress) {
-           this.progress = Math.round(100 * event.loaded / event.total);
-         }
-         else if (event.type === HttpEventType.Response) {
+         if (event.type === HttpEventType.Response) {
            this.message = 'Dodano logo.';
            this.getImage(this.authService.decotedToken.nameid);
          }

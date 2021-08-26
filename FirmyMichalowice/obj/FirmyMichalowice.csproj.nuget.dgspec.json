@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\C#\\FirmyMichalowice\\FirmyMichalowice\\FirmyMichalowice.csproj": {}
+    "C:\\C#\\FirmyMichalowice\\FirmyMichalowice\\FirmyMichalowice\\FirmyMichalowice.csproj": {}
   },
   "projects": {
-    "C:\\C#\\FirmyMichalowice\\FirmyMichalowice\\FirmyMichalowice.csproj": {
+    "C:\\C#\\FirmyMichalowice\\FirmyMichalowice\\FirmyMichalowice\\FirmyMichalowice.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\C#\\FirmyMichalowice\\FirmyMichalowice\\FirmyMichalowice.csproj",
+        "projectUniqueName": "C:\\C#\\FirmyMichalowice\\FirmyMichalowice\\FirmyMichalowice\\FirmyMichalowice.csproj",
         "projectName": "FirmyMichalowice",
-        "projectPath": "C:\\C#\\FirmyMichalowice\\FirmyMichalowice\\FirmyMichalowice.csproj",
+        "projectPath": "C:\\C#\\FirmyMichalowice\\FirmyMichalowice\\FirmyMichalowice\\FirmyMichalowice.csproj",
         "packagesPath": "C:\\Users\\Maciek\\.nuget\\packages\\",
-        "outputPath": "C:\\C#\\FirmyMichalowice\\FirmyMichalowice\\obj\\",
+        "outputPath": "C:\\C#\\FirmyMichalowice\\FirmyMichalowice\\FirmyMichalowice\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Microsoft\\Xamarin\\NuGet\\",
