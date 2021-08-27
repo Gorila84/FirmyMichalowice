@@ -41,7 +41,7 @@
     <div class="col-3 mx-2 ml-3 card  text-center d-flex justify-content-center align-items-center company-card">
       <h3>Logo</h3>
       <hr>
-      <img [src]="imageToShow == null ? '/assets/LogoTemp.png' : imageToShow" alt="company logo" height="200px"
+      <img [src]="getImage == null ? '/assets/LogoTemp.png' : getImage" alt="company logo" height="200px"
         width="200px">
       <button mat-raised-button type="button" class="change-photo-btn" (click)="file.click()">Dodaj Logo</button>
       <input type="file" #file placeholder="Choose file" (change)="uploadFile(file.files)" style="display:none;">

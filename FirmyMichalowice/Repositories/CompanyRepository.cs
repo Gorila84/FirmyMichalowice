@@ -27,7 +27,26 @@ namespace FirmyMichalowice.Repositories
 
         public async Task<PageList<User>> GetCompanies(UserParams userParams)
         {
-            var users =  _context.Users.Include(p => p.Photos);
+            var users = _context.Users.Include(p => p.Photos).AsQueryable();
+
+            if (userParams.CompanyName != null || userParams.CompanyType != null || userParams.City != null)
+            {
+                users = users.Where(u => u.CompanyName.Contains(userParams.CompanyName) 
+                                    || u.CompanyType == userParams.CompanyType 
+                                    || u.City == userParams.City);
+            }
+            //if (userParams.CompanyType != null)
+            //{
+            //    users = users.Where(u => u.CompanyType == userParams.CompanyType);
+            //}
+            //if (userParams.City != null)
+            //{
+            //    users = users.Where(u => u.City == userParams.City);
+            //}
+
+            
+            var cos = users.Count();
+
             return await PageList<User>.CreateListAsync(users, userParams.PageNumber, userParams.PageSize);
         }
 
@@ -38,7 +57,7 @@ namespace FirmyMichalowice.Repositories
 
         public async Task<IList<string>> GetCompanyTypes()
         {
-            return _context.CompanyTypes.OrderBy(x => x.Name).Select(x=>x.Name).ToList();
+            return _context.CompanyTypes.OrderBy(x => x.Name).Select(x => x.Name).ToList();
         }
     }
 }

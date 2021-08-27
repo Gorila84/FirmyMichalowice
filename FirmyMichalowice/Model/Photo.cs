@@ -13,7 +13,9 @@ namespace FirmyMichalowice.Model
         public DateTime DateAdded { get; set; }     // Data dodania
         public bool IsMain { get; set; }            // Czy zdjęcie jest główne
 
-        public User User { get; set; }
+        // public User User { get; set; }
         public int UserId { get; set; }
+
+        public byte[] FileData { get; set; }
     }
 }

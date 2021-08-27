@@ -4,21 +4,23 @@
       <h1>Firmy na północy Krakowa</h1>
       <hr>
     </div>
+   
     <div class="col-12">
     <accordion>
     <accordion-group class="text-dark text-right accordion-text" heading="Wyszukiwarka">
-      <div class="row d-flex align-items-end">
-        <div class="col-3  d-flex justify-content-end">
-            <h2>Wyszukaj:</h2>
-        </div>
-        
+      
+        <form #ngForm="ngForm" (ngSubmit)="loadCompanies()">
+          <div class="row d-flex align-items-end">
+            <div class="col-2  d-flex justify-content-end">
+                <h2>Wyszukaj:</h2>
+            </div>
         <div class="col-3 d-flex justify-content-end">
           <mat-form-field class="example-full-width companyName " appearance="legacy">
             <mat-label>Nazwa firmy</mat-label>
            
   
             <input matInput class="form-control " name="companyName" id="companyName"
-               style="width:600px;">
+               [(ngModel)]="companyParams.CompanyName" style="width:600px;">
           </mat-form-field>
         </div>
         <div class="col-3 d-flex justify-content-end">
@@ -26,8 +28,8 @@
             <mat-label>Kategoria</mat-label>
            
   
-            <input matInput class="form-control " name="companyName" id="companyName"
-               style="width:600px;">
+            <input matInput class="form-control " name="companyType" id="companyType"
+            [(ngModel)]="companyParams.CompanyType" style="width:600px;">
           </mat-form-field>
         </div>
         <div class="col-3 d-flex justify-content-end">
@@ -35,11 +37,16 @@
             <mat-label>Miejscowość</mat-label>
            
   
-            <input matInput class="form-control " name="companyName" id="companyName"
-               style="width:600px;">
+            <input matInput class="form-control " name="city" id="city"
+            [(ngModel)]="companyParams.City"  style="width:600px;">
           </mat-form-field>
         </div>
+        <div form="editForm" class="search-button mr-3 d-flex justify-content-end">
+          <button mat-raised-button class="mt-4 save-button" typ="submit">Wyszukaj</button>
+        </div>
       </div>
+      </form>
+      
     </accordion-group>
   </accordion></div>
     <div class="col-12">
