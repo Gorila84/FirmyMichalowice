@@ -1,6 +1,16 @@
 .dropdown-toggle{
-    cursor: pointer;
+    cursor: pointer!important;
 }
 .dropdown-item{
-    cursor: pointer;
+    cursor: pointer!important;
+}
+
+.navbar{
+   
+        box-shadow: inset 0px -5px 10px -5px rgba(0,0,0, .4);
+    
+}
+
+.navbar-brand{
+    cursor: pointer!important;
 }

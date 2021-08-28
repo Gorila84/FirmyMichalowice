@@ -29,21 +29,13 @@ namespace FirmyMichalowice.Repositories
         {
             var users = _context.Users.Include(p => p.Photos).AsQueryable();
 
-            if (userParams.CompanyName != null || userParams.CompanyType != null || userParams.City != null)
+            if (userParams.CompanyName != "undefined" || userParams.CompanyType != "undefined" || userParams.City != "undefined")
             {
                 users = users.Where(u => u.CompanyName.Contains(userParams.CompanyName) 
                                     || u.CompanyType == userParams.CompanyType 
                                     || u.City == userParams.City);
             }
-            //if (userParams.CompanyType != null)
-            //{
-            //    users = users.Where(u => u.CompanyType == userParams.CompanyType);
-            //}
-            //if (userParams.City != null)
-            //{
-            //    users = users.Where(u => u.City == userParams.City);
-            //}
-
+   
             
             var cos = users.Count();
 
