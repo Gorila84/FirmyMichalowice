@@ -11024,11 +11024,19 @@
   "project": {
     "version": "1.0.0",
     "restore": {
+<<<<<<< HEAD
       "projectUniqueName": "E:\\repos\\Firmy_Michalowice\\FirmyMichalowice\\FirmyMichalowice\\FirmyMichalowice.csproj",
       "projectName": "FirmyMichalowice",
       "projectPath": "E:\\repos\\Firmy_Michalowice\\FirmyMichalowice\\FirmyMichalowice\\FirmyMichalowice.csproj",
       "packagesPath": "C:\\Users\\Karol\\.nuget\\packages\\",
       "outputPath": "E:\\repos\\Firmy_Michalowice\\FirmyMichalowice\\FirmyMichalowice\\obj\\",
+=======
+      "projectUniqueName": "C:\\C#\\FirmyMichalowice\\FirmyMichalowice\\FirmyMichalowice\\FirmyMichalowice.csproj",
+      "projectName": "FirmyMichalowice",
+      "projectPath": "C:\\C#\\FirmyMichalowice\\FirmyMichalowice\\FirmyMichalowice\\FirmyMichalowice.csproj",
+      "packagesPath": "C:\\Users\\Maciek\\.nuget\\packages\\",
+      "outputPath": "C:\\C#\\FirmyMichalowice\\FirmyMichalowice\\FirmyMichalowice\\obj\\",
+>>>>>>> origin/master
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft\\Xamarin\\NuGet\\",
