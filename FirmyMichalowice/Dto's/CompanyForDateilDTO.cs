@@ -33,5 +33,9 @@ namespace FirmyMichalowice.Dto_s
 
         public Photo Photo { get; set; }
 
+        [Required(ErrorMessage = "To pole jest obowiązkowe")]
+        [StringLength(10)]
+        public string NIP { get; set; }
+
     }
 }

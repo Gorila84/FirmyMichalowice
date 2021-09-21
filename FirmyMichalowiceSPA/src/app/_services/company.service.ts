@@ -49,4 +49,7 @@ updateCompany(id: number, company: Company){
   return this.http.put(this.baseUrl + 'company/' + id, company, { headers});
 }
 
+getDataFromCEIDG(nip: string){
+  return this.http.get<string>(this.baseUrl + 'company/GetDataFromCeidg/' + nip);
+}
 }

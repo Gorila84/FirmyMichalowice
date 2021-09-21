@@ -17,7 +17,6 @@ public addBearer(): HttpHeaders {
     const token =   localStorage.getItem('token');
     return new HttpHeaders({
       'Content-Type': 'application/json',
-      // tslint:disable-next-line:object-literal-key-quotes
       'Authorization': `Bearer ${token}`
     });
 }

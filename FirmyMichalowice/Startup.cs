@@ -50,10 +50,11 @@ namespace FirmyMichalowice
             //services.AddDbContext<DataContext>(options => {
             //    options.UseSqlServer("server=localhost\\SQLEXPRESS; database = CompanyMichalowice;User Id=md; Password=PASS ");
             //});
-
+            services.AddControllers().AddNewtonsoftJson();
             services.AddAutoMapper(typeof(Startup));
             services.AddCors();
             services.AddTransient<Seed>();
+            services.AddTransient<CEIDGmanger>();
             services.AddScoped<IAuthRepository, AuthRepository>();
             services.AddScoped<IGenericRepository, GenericRepository>();
             services.AddScoped<ICompanyRepository, CompanyRepository>();

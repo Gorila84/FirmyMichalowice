@@ -16,4 +16,5 @@ export interface Company {
         photoUrl: string;
         companyType: string;
         photo: Photo;
+        nip: string;
 }

@@ -1,6 +1,7 @@
 ﻿using FirmyMichalowice.Model;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -25,5 +26,9 @@ namespace FirmyMichalowice.Dto_s
         public string CompanyType { get; set; }
 
         public Photo Photo { get; set; }
+
+        [Required(ErrorMessage = "To pole jest obowiązkowe")]
+        [StringLength(10)]
+        public string NIP { get; set; }
     }
 }

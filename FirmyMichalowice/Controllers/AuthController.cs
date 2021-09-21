@@ -27,14 +27,20 @@ namespace FirmyMichalowice.Controllers
         [HttpPost("register")]
         public async Task<IActionResult> Register(UserForRegisterDTO userRegisterDto)
         {
+            if (!IsValidEmail(userRegisterDto.UserName))
+            {
+                return BadRequest("Logowanie możliwe tylko za pomocą adresu email");
+            }
 
             userRegisterDto.UserName = userRegisterDto.UserName.ToLower();
-            if (await _repository.UserExist(userRegisterDto.UserName))
-                return BadRequest("Uzytkownik o podanej nazwie juz istnieje! Podaj inna nazwe uzytkownika.");
+            var validationResult = await _repository.UserValidation(userRegisterDto.UserName, userRegisterDto.NIP);
+            if (validationResult.Item1)
+                return BadRequest(validationResult.Item2);
 
             var userToCreate = new User
             {
-                Username = userRegisterDto.UserName
+                Username = userRegisterDto.UserName,
+                NIP = userRegisterDto.NIP
             };
 
             var createdUser = await _repository.Register(userToCreate, userRegisterDto.Password);
@@ -45,6 +51,11 @@ namespace FirmyMichalowice.Controllers
         [HttpPost("login")]
         public async Task<IActionResult> Login(UserForLoginDTO userForLoginDto)
         {
+
+            if (!IsValidEmail(userForLoginDto.UserName))
+            {
+                return BadRequest("Logowanie możliwe tylko za pomocą adresu email");
+            }
             var userFromRepository = await _repository.Login(userForLoginDto.UserName.ToLower(),
                 userForLoginDto.Password
                 );
@@ -70,6 +81,19 @@ namespace FirmyMichalowice.Controllers
             var token = tokenHandler.CreateToken(tokenDescriptor);
             return Ok(new { token = tokenHandler.WriteToken(token) });
 
+        }
+
+        private bool IsValidEmail(string email)
+        {
+            try
+            {
+                var addr = new System.Net.Mail.MailAddress(email);
+                return addr.Address == email;
+            }
+            catch
+            {
+                return false;
+            }
         }
     }
 }

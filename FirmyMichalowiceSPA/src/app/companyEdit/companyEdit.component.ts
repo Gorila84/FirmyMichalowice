@@ -1,4 +1,4 @@
-import { UpperCasePipe } from '@angular/common';
+
 import { Component, EventEmitter, OnInit, Output, ViewChild } from '@angular/core';
 import { FormControl, NgForm } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
@@ -11,10 +11,10 @@ import { UploadPhotoService } from '../_services/uploadPhoto.service';
 import { environment } from 'src/environments/environment';
 import { HttpEventType } from '@angular/common/http';
 import { NGXLogger } from 'ngx-logger';
-import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
-import { buffer, map, startWith } from 'rxjs/operators';
+import { map, startWith } from 'rxjs/operators';
 import { CompanyTypeService } from '../_services/companyType.service';
-import { toBase64String } from '@angular/compiler/src/output/source_map';
+
+
 
 
 
@@ -33,6 +33,7 @@ export class CompanyEditComponent implements OnInit {
   company: Company;
   baseUrl = environment.apiUrl;
   fileToUpload: File | null = null;
+  nipFromModal: string;
   @ViewChild('editForm') editForm: NgForm;
   constructor(private route: ActivatedRoute,
               private alertify: AlertifyService,
@@ -40,11 +41,11 @@ export class CompanyEditComponent implements OnInit {
               private companyService: CompanyService,
               private uploadPhotoService: UploadPhotoService,
               private logger: NGXLogger,
-              private sanitizer: DomSanitizer,
               private companyTypeService: CompanyTypeService) { }
 
   // tslint:disable-next-line:typedef
   ngOnInit() {
+    this.nipFromModal = '';
     this.getCompanyTypes();
     this.route.data.subscribe(data => {
       this.company = data.company;
@@ -60,7 +61,6 @@ export class CompanyEditComponent implements OnInit {
   }
   // tslint:disable-next-line:typedef
   getImage(result: string) {
-    const mediaType = 'application/image';
     return result.slice(22, result.length);
   }
 
@@ -128,5 +128,20 @@ export class CompanyEditComponent implements OnInit {
 });
 
   }
-
+ getCompanyData(){
+   this.companyService.getDataFromCEIDG(this.nipFromModal).subscribe(data => {
+    this.alertify.success('Twoje dane zostały pomyślnie pobrane.');
+    alert(data);
+    let myObj = JSON.parse(data);
+    this.company.companyName = myObj.firma[0].nazwa;  
+    this.company.postalCode = myObj.firma[0].adresDzialanosci.kod;
+    this.company.street = myObj.firma[0].adresDzialanosci.ulica + ' ' + myObj.firma[0].adresDzialanosci.budynek;
+    this.company.city = myObj.firma[0].adresDzialanosci.miasto;
+    this.company.nip = myObj.firma[0].wlasciciel.nip;
+  }, error => {
+    this.alertify.error(error);
+});
+ }
 }
+
+

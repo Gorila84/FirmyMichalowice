@@ -13,5 +13,8 @@ namespace FirmyMichalowice.Dto_s
         [Required(ErrorMessage = "Hasło jest wymagane")]
         [StringLength(12, MinimumLength = 6)]
         public string Password { get; set; }
+        [Required(ErrorMessage = "NIP jest wymagane")]
+        [StringLength(10)]
+        public string NIP { get; set; }
     }
 }

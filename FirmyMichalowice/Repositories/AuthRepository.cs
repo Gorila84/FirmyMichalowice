@@ -1,10 +1,12 @@
 ﻿using FirmyMichalowice.Data;
 using FirmyMichalowice.Model;
 using Microsoft.EntityFrameworkCore;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.Json;
 using System.Threading.Tasks;
 
 namespace FirmyMichalowice.Repositories
@@ -12,10 +14,12 @@ namespace FirmyMichalowice.Repositories
     public class AuthRepository : IAuthRepository
     {
         private readonly DataContext _context;
+        private readonly CEIDGmanger _cEIDGmanger;
 
-        public AuthRepository(DataContext context)
+        public AuthRepository(DataContext context, CEIDGmanger cEIDGmanger)
         {
             _context = context;
+            _cEIDGmanger = cEIDGmanger;
         }
         #region method public
 
@@ -48,11 +52,38 @@ namespace FirmyMichalowice.Repositories
 
 
 
-        public async Task<bool> UserExist(string userName)
+        public async Task<Tuple<bool, string>> UserValidation(string userName, string nip)
         {
+            var ceidgJson = await _cEIDGmanger.GetData(nip);
+            var data = JObject.Parse(ceidgJson);
+            var companYJson = data.First.First.First.ToString();
+
+
+            try
+            {
+                Firma firma = JsonSerializer.Deserialize<Firma>(companYJson);
+            }
+            catch(Exception ex)
+            {
+
+            }
+       
+
             if (await _context.Users.AnyAsync(x => x.Username == userName))
-                return true;
-            return false;
+            {
+                Tuple<bool, string> result = Tuple.Create(true, "Użytkownik o podanej nazwie juz istnieje! Podaj inna nazwe użytkownika.");
+                return result;                       
+            }
+
+            if (await _context.Users.AnyAsync(x => x.NIP == nip))
+            {
+                Tuple<bool, string> result = Tuple.Create(true, "Użytkownik o podanym NIPie juz istnieje! Sprawdź NIP");
+                return result;
+            }
+
+          
+
+            return Tuple.Create(false, string.Empty);
         }
         #endregion
         #region method private
