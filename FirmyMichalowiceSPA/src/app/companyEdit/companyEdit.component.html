@@ -6,33 +6,10 @@
     </div>
   </div>
 
-  <!-- Button trigger modal -->
-<button type="button" mat-raised-button class="my-4 save-button" data-toggle="modal" data-target="#exampleModal"> Pobierz dane z CEIDG</button>
+  
+<button type="button" mat-raised-button class="my-4 save-button"  (click)="getCompanyData()"> Pobierz dane z CEIDG</button>
 
-<!-- Modal -->
-<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Wypełnij swój profil danymi z CEIDG</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-          
-      <mat-form-field class="example-full-width companyName" appearance="legacy">
-        <mat-label>NIP firmy</mat-label>
-        <input matInput class="form-control" type="text" [(ngModel)]='nipFromModal'  maxlength=10 minlength=10 >
-        </mat-form-field>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Zamknij</button>
-        <button type="button" class="btn btn-primary" (click)="getCompanyData()">Pobierz</button>
-      </div>
-    </div>
-  </div>
-</div>
+
 
   <div class="row  ">
     <div class="col-4 text-center title d-flex justify-content-start align-items-center">
@@ -55,8 +32,8 @@
         <mat-label>NIP firmy</mat-label>
        
 
-        <input matInput class="form-control " name="companyNip" id="companyNip" type="number" formControlName="nip"
-          [(ngModel)]="company.nip" style="width:600px;">
+        <input matInput class="form-control " name="companyNip" id="companyNip" type="number" 
+          [ngModel]="company.nip" style="width:600px;" readonly>
          
       </mat-form-field>
     
@@ -84,7 +61,7 @@
       <h3>Logo</h3>
       <hr>
   
-        <img [src]= "company.photo.fileData != null ? 'data:image/png;base64,' + company.photo.fileData : '/assets/LogoTemp.png'" alt="company logo" height="200px"
+        <img [src]= "company.photo != null ? 'data:image/png;base64,' + company.photo.fileData : '/assets/LogoTemp.png'" alt="company logo" height="200px"
         width="200px"/>
 
       <button mat-raised-button type="button" class="change-photo-btn" (click)="file.click()">Dodaj Logo</button>

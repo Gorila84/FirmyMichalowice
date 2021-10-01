@@ -33,7 +33,6 @@ export class CompanyEditComponent implements OnInit {
   company: Company;
   baseUrl = environment.apiUrl;
   fileToUpload: File | null = null;
-  nipFromModal: string;
   @ViewChild('editForm') editForm: NgForm;
   constructor(private route: ActivatedRoute,
               private alertify: AlertifyService,
@@ -45,7 +44,7 @@ export class CompanyEditComponent implements OnInit {
 
   // tslint:disable-next-line:typedef
   ngOnInit() {
-    this.nipFromModal = '';
+    
     this.getCompanyTypes();
     this.route.data.subscribe(data => {
       this.company = data.company;
@@ -129,7 +128,7 @@ export class CompanyEditComponent implements OnInit {
 
   }
  getCompanyData(){
-   this.companyService.getDataFromCEIDG(this.nipFromModal).subscribe(data => {
+   this.companyService.getDataFromCEIDG(this.company.nip).subscribe(data => {
     this.alertify.success('Twoje dane zostały pomyślnie pobrane.');
     alert(data);
     let myObj = JSON.parse(data);
