@@ -9,7 +9,7 @@ import { AuthService } from '../_services/auth.service';
   })
 export class ApiClient {
 
-    baseUrl = environment.apiUrl;
+    baseUrl = environment.apiUrl as string;
 
 constructor(private http: HttpClient, private authService: AuthService) {}
 

@@ -4,7 +4,8 @@
 
 export const environment = {
   production: false,
-  apiUrl:'https://localhost:44329/api/',
+  //apiUrl:'https://localhost:44329/api/',
+  apiUrl:'https://firmymichalowiceapi.berg-dev.eu/api/',
 };
 
 /*
