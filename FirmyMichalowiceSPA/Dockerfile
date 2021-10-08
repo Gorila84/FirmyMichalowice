@@ -1,10 +1,9 @@
-FROM node:12.7-alpine AS build
-WORKDIR /usr/src/app
-COPY package.json package-lock.json ./
+FROM node:latest as node
+WORKDIR /app
+COPY . .
 RUN npm install
-COPY ./ /usr/src/app/
-RUN npm run build
+RUN npm run build --prod
 
 ### STAGE 2: Run ###
-FROM nginx:1.17.1-alpine
-COPY --from=build /usr/src/app/dist/FirmyMichalowiceSPA /usr/share/nginx/html
+FROM nginx:alpine
+COPY --from=node /app/dist/FirmyMichalowiceSPA /usr/share/nginx/html
