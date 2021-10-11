@@ -18,11 +18,13 @@ namespace FirmyMichalowice.Controllers
     {
         private readonly IAuthRepository _repository;
         private readonly IConfiguration _config;
+        private readonly IEmailSender _emailSender;
 
-        public AuthController(IAuthRepository repository, IConfiguration config)
+        public AuthController(IAuthRepository repository, IConfiguration config, IEmailSender emailSender)
         {
             _repository = repository;
             _config = config;
+            _emailSender = emailSender;
         }
         [HttpPost("register")]
         public async Task<IActionResult> Register(UserForRegisterDTO userRegisterDto)
@@ -38,6 +40,8 @@ namespace FirmyMichalowice.Controllers
             };
 
             var createdUser = await _repository.Register(userToCreate, userRegisterDto.Password);
+
+           
 
             return StatusCode(201);
 
@@ -68,8 +72,12 @@ namespace FirmyMichalowice.Controllers
             };
             var tokenHandler = new JwtSecurityTokenHandler();
             var token = tokenHandler.CreateToken(tokenDescriptor);
+         
             return Ok(new { token = tokenHandler.WriteToken(token) });
 
         }
+
+
+      
     }
 }

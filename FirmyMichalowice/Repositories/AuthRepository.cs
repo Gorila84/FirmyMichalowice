@@ -1,18 +1,22 @@
 ﻿using FirmyMichalowice.Data;
+using FirmyMichalowice.Dto_s;
 using FirmyMichalowice.Model;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System;
-using System.Collections.Generic;
 using System.Linq;
+using System.Security.Policy;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web.Http.ModelBinding;
+
 
 namespace FirmyMichalowice.Repositories
 {
     public class AuthRepository : IAuthRepository
     {
         private readonly DataContext _context;
-
+        private static Random random = new Random();
         public AuthRepository(DataContext context)
         {
             _context = context;
@@ -46,7 +50,7 @@ namespace FirmyMichalowice.Repositories
             return user;
         }
 
-
+       
 
         public async Task<bool> UserExist(string userName)
         {

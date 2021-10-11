@@ -531,9 +531,6 @@ C:\C#\FirmyMichalowice\FirmyMichalowice\FirmyMichalowice\bin\Debug\netcoreapp3.1
 C:\C#\FirmyMichalowice\FirmyMichalowice\FirmyMichalowice\bin\Debug\netcoreapp3.1\runtimes\unix\lib\netcoreapp2.1\System.Security.Principal.Windows.dll
 C:\C#\FirmyMichalowice\FirmyMichalowice\FirmyMichalowice\bin\Debug\netcoreapp3.1\runtimes\win\lib\netcoreapp2.1\System.Security.Principal.Windows.dll
 C:\C#\FirmyMichalowice\FirmyMichalowice\FirmyMichalowice\bin\Debug\netcoreapp3.1\runtimes\win\lib\netcoreapp3.0\System.Windows.Extensions.dll
-C:\C#\FirmyMichalowice\FirmyMichalowice\FirmyMichalowice\obj\Debug\netcoreapp3.1\FirmyMichalowice.csproj.CoreCompileInputs.cache
-C:\C#\FirmyMichalowice\FirmyMichalowice\FirmyMichalowice\obj\Debug\netcoreapp3.1\FirmyMichalowice.MvcApplicationPartsAssemblyInfo.cs
-C:\C#\FirmyMichalowice\FirmyMichalowice\FirmyMichalowice\obj\Debug\netcoreapp3.1\FirmyMichalowice.MvcApplicationPartsAssemblyInfo.cache
 C:\C#\FirmyMichalowice\FirmyMichalowice\FirmyMichalowice\obj\Debug\netcoreapp3.1\FirmyMichalowice.AssemblyInfoInputs.cache
 C:\C#\FirmyMichalowice\FirmyMichalowice\FirmyMichalowice\obj\Debug\netcoreapp3.1\FirmyMichalowice.AssemblyInfo.cs
 C:\C#\FirmyMichalowice\FirmyMichalowice\FirmyMichalowice\obj\Debug\netcoreapp3.1\FirmyMichalowice.RazorTargetAssemblyInfo.cache
@@ -544,3 +541,11 @@ C:\C#\FirmyMichalowice\FirmyMichalowice\FirmyMichalowice\obj\Debug\netcoreapp3.1
 C:\C#\FirmyMichalowice\FirmyMichalowice\FirmyMichalowice\obj\Debug\netcoreapp3.1\FirmyMichalowice.pdb
 C:\C#\FirmyMichalowice\FirmyMichalowice\FirmyMichalowice\obj\Debug\netcoreapp3.1\FirmyMichalowice.genruntimeconfig.cache
 C:\C#\FirmyMichalowice\FirmyMichalowice\FirmyMichalowice\obj\Debug\netcoreapp3.1\FirmyMichalowice.csprojAssemblyReference.cache
+C:\C#\FirmyMichalowice\FirmyMichalowice\FirmyMichalowice\bin\Debug\netcoreapp3.1\System.Net.Http.Formatting.dll
+C:\C#\FirmyMichalowice\FirmyMichalowice\FirmyMichalowice\bin\Debug\netcoreapp3.1\System.Web.Http.dll
+C:\C#\FirmyMichalowice\FirmyMichalowice\FirmyMichalowice\bin\Debug\netcoreapp3.1\MailKit.dll
+C:\C#\FirmyMichalowice\FirmyMichalowice\FirmyMichalowice\bin\Debug\netcoreapp3.1\MimeKit.dll
+C:\C#\FirmyMichalowice\FirmyMichalowice\FirmyMichalowice\bin\Debug\netcoreapp3.1\BouncyCastle.Crypto.dll
+C:\C#\FirmyMichalowice\FirmyMichalowice\FirmyMichalowice\obj\Debug\netcoreapp3.1\FirmyMichalowice.csproj.CoreCompileInputs.cache
+C:\C#\FirmyMichalowice\FirmyMichalowice\FirmyMichalowice\obj\Debug\netcoreapp3.1\FirmyMichalowice.MvcApplicationPartsAssemblyInfo.cs
+C:\C#\FirmyMichalowice\FirmyMichalowice\FirmyMichalowice\obj\Debug\netcoreapp3.1\FirmyMichalowice.MvcApplicationPartsAssemblyInfo.cache

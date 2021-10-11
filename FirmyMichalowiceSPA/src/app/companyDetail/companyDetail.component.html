@@ -5,8 +5,8 @@
   <hr>
   <div class="row mt-4">
     <div class="col-md-3 d-flex justify-content-center align-item-center">
-      <img [src]= "company.photo.fileData != undefined ? 'data:image/png;base64,' + company.photo.fileData : '/assets/LogoTemp.png'" alt="company logo" height="200px"
-      width="200px"/> 
+      <!-- <img [src]= "company.photo.fileData != undefined ? 'data:image/png;base64,' + company.photo.fileData : '/assets/LogoTemp.png'" alt="company logo" height="200px"
+      width="200px"/>  -->
     </div>
     <div class="col-md-3 text-center contact">
       <p>Kontakt:</p>
@@ -47,6 +47,6 @@
     <p>{{company.longDescription}}</p>
   </div>
   <div class="d-flex justify-content-end">
-    <button type="submit" class="btn btn-back-to-home" [routerLink]="['']">Wróć do listy</button>
+    <button class="btn btn-back-to-home" [routerLink]="['']">Wróć do listy</button>
   </div>
 </div>

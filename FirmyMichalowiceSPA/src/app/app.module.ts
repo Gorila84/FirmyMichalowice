@@ -32,6 +32,7 @@ import {MatButtonModule} from '@angular/material/button';
 import {MatCardModule} from '@angular/material/card';
 import { FooterComponent } from './footer/footer.component';
 import { AccordionModule } from 'ngx-bootstrap/accordion';
+import { MatMenuModule} from '@angular/material/menu';
 
 @NgModule({
   declarations: [	
@@ -60,6 +61,7 @@ import { AccordionModule } from 'ngx-bootstrap/accordion';
     BrowserAnimationsModule,
     FileUploadModule,
     MatButtonModule,
+    MatMenuModule,
     MatCardModule,
     AccordionModule.forRoot(),
     // tslint:disable-next-line:max-line-length

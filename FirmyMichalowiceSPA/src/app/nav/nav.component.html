@@ -1,9 +1,15 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
   <div class="container">
     <a class="navbar-brand" href="#">Firmy Północy Krakowa</a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <!-- <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
-    </button>
+    </button> -->
+    <button class="navbar-toggler" type="button" mat-button [matMenuTriggerFor]="menu"> <span class="navbar-toggler-icon"></span></button>
+<mat-menu #menu="matMenu">
+  <button mat-menu-item  [routerLink]="['/logowanie/']">Zaloguj</button>
+  <button mat-menu-item [routerLink]="['/rejstracja/']">Zarejstruj</button>
+</mat-menu>
+
     <div  class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav ml-auto mb-2 mb-lg-0">
         
