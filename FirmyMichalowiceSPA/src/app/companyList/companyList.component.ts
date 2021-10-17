@@ -43,5 +43,9 @@ export class CompanyListComponent implements OnInit {
       this.alertify.error(error);
     });
   }
+
+  clearFilrFileds(){
+      
+  }
  
 }

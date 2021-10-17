@@ -22,7 +22,7 @@
     <accordion>
     <accordion-group class="text-dark text-right accordion-text" heading="Wyszukiwarka">
       
-        <form #ngForm="ngForm" (ngSubmit)="loadCompanies()">
+        <form name= "filterForm" #ngForm="ngForm" (ngSubmit)="loadCompanies()">
           <div class="row d-flex align-items-end">
             <div class="col-2  d-flex justify-content-end">
                 <h2>Wyszukaj:</h2>
@@ -55,7 +55,7 @@
           </mat-form-field>
         </div>
         <div form="editForm" class="search-button mr-3 d-flex justify-content-end">
-          <button mat-raised-button class="mt-4 save-button mx-1" color="warn" typ="submit">Usuń filtry</button>
+          <button mat-raised-button class="mt-4 save-button mx-1" color="warn">Usuń filtry</button>
           <button mat-raised-button class="mt-4 save-button" typ="submit">Wyszukaj</button>
         </div>
       </div>

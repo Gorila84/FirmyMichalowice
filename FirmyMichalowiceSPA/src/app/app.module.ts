@@ -33,9 +33,10 @@ import {MatCardModule} from '@angular/material/card';
 import { FooterComponent } from './footer/footer.component';
 import { AccordionModule } from 'ngx-bootstrap/accordion';
 import { MatMenuModule} from '@angular/material/menu';
+import { Polityka_prywatnosciComponent } from './polityka_prywatnosci/polityka_prywatnosci.component';
 
 @NgModule({
-  declarations: [	
+  declarations: [		
     AppComponent,
       NavComponent,
       LoginComponent,
@@ -44,7 +45,8 @@ import { MatMenuModule} from '@angular/material/menu';
       CompanyListComponent,
       CompanyDetailComponent,
       CompanyEditComponent,
-      FooterComponent
+      FooterComponent,
+      Polityka_prywatnosciComponent
    ],
   imports: [
     BrowserModule,
@@ -63,6 +65,7 @@ import { MatMenuModule} from '@angular/material/menu';
     MatButtonModule,
     MatMenuModule,
     MatCardModule,
+   
     AccordionModule.forRoot(),
     // tslint:disable-next-line:max-line-length
     LoggerModule.forRoot({serverLoggingUrl: environment.apiUrl + 'logs/post', level: NgxLoggerLevel.DEBUG, serverLogLevel: NgxLoggerLevel.ERROR})
