@@ -1,6 +1,7 @@
 using FirmyMichalowice.Data;
 using FirmyMichalowice.Helpers;
 using FirmyMichalowice.Repositories;
+using FirmyMichalowice.Serv;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Diagnostics;
@@ -56,6 +57,7 @@ namespace FirmyMichalowice
             services.AddTransient<CeidgService>();
             services.AddTransient<SmtpManager>();
             services.AddTransient<MapQuestService>();
+            services.AddTransient<MapBoxService>();
             services.AddScoped<IAuthRepository, AuthRepository>();
             services.AddScoped<IGenericRepository, GenericRepository>();
             services.AddScoped<ICompanyRepository, CompanyRepository>();

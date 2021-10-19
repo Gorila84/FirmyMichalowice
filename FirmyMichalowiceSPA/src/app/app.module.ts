@@ -48,7 +48,7 @@ import { Polityka_prywatnosciComponent } from './polityka_prywatnosci/polityka_p
       CompanyDetailComponent,
       CompanyEditComponent,
       FooterComponent,
-      ContactComponent
+      ContactComponent,
       Polityka_prywatnosciComponent
    ],
   imports: [

@@ -26,7 +26,7 @@ namespace FirmyMichalowice.Serv
             //Geolocation geoLocCompany = geolocations.Where(x => x. == "Poland" && x.region == "Lesser Poland Voivodeship" && x.administrative_area == firma.adresDzialanosci.gmina).FirstOrDefault();
 
             IList<Location> geoLocCompanies = geolocations.Select(x => x.locations).FirstOrDefault();
-            Location searchingGeo = geoLocCompanies.Where(y => y.adminArea1 == "PL" && y.adminArea3 == "Lesser Poland Voivodeship" && y.adminArea4 == "gmina " + firma.adresDzialanosci.gmina && (firma.adresDzialanosci.ulica + ' ' + firma.adresDzialanosci.budynek).Contains(y.street)).FirstOrDefault();
+            Location searchingGeo = geoLocCompanies.Where(y => y.adminArea1 == "PL" && y.adminArea3 == "Lesser Poland Voivodeship" && y.adminArea4 == "gmina " + firma.adresDzialanosci.gmina && (firma.adresDzialanosci.ulica + ' ' + firma.adresDzialanosci.budynek).ToLower().Contains(y.street.ToLower())).FirstOrDefault();
 
 
             string geolocationUrl = string.Format("https://api.mapbox.com/styles/v1/mapbox/light-v10/static/pin-s-l+000({1},{0})/{1},{0},14/500x300?access_token={2}", searchingGeo.latLng.lat.ToString().Replace(",", "."), searchingGeo.latLng.lng.ToString().Replace(",", "."), mapBoxKey);

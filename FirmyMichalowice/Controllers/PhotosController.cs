@@ -1,10 +1,5 @@
-<<<<<<< HEAD
-﻿
 
 using FirmyMichalowice.Helpers;
-=======
-﻿using FirmyMichalowice.Helpers;
->>>>>>> master
 using FirmyMichalowice.Model;
 using FirmyMichalowice.Repositories;
 using log4net;
