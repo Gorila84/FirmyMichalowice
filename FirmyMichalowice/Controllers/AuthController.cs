@@ -40,7 +40,8 @@ namespace FirmyMichalowice.Controllers
             var userToCreate = new User
             {
                 Username = userRegisterDto.UserName,
-                NIP = userRegisterDto.NIP
+                NIP = userRegisterDto.NIP,
+                Created = DateTime.Now
             };
 
             var createdUser = await _repository.Register(userToCreate, userRegisterDto.Password);
