@@ -26,6 +26,12 @@ getUsers(page?, itemsPerPage?, userParams?, likesParam?): Observable<PaginationR
       params = params.append('pageNumber', page);
       params = params.append('pageSize', itemsPerPage);
     }
+
+    if(userParams != null){
+      params = params.append('companyName', userParams.CompanyName);
+      params = params.append('companyType', userParams.CompanyType);
+      params = params.append('city', userParams.City);      
+    }
     return this.http.get<Company[]>(this.baseUrl + 'company', {observe: 'response', params})
       .pipe(
         map(response => {

@@ -12,7 +12,10 @@ import { environment } from 'src/environments/environment';
 import { HttpEventType } from '@angular/common/http';
 import { NGXLogger } from 'ngx-logger';
 import { map, startWith } from 'rxjs/operators';
+import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
+import { buffer, map, startWith } from 'rxjs/operators';
 import { CompanyTypeService } from '../_services/companyType.service';
+import { toBase64String } from '@angular/compiler/src/output/source_map';
 
 
 
@@ -130,7 +133,6 @@ export class CompanyEditComponent implements OnInit {
  getCompanyData(){
    this.companyService.getDataFromCEIDG(this.company.nip).subscribe(data => {
     this.alertify.success('Twoje dane zostały pomyślnie pobrane.');
-    alert(data);
     let myObj = JSON.parse(data);
     this.company.companyName = myObj.firma[0].nazwa;  
     this.company.postalCode = myObj.firma[0].adresDzialanosci.kod;

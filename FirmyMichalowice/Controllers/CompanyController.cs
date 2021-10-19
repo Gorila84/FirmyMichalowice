@@ -22,6 +22,7 @@ namespace FirmyMichalowice.Controllers
 
     [Route("api/[controller]")]
     [ApiController]
+    
     public class CompanyController : ControllerBase
     {
         private readonly ICompanyRepository _userRepository;

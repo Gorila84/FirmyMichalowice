@@ -1,8 +1,6 @@
-using AutoMapper;
 using FirmyMichalowice.Data;
 using FirmyMichalowice.Helpers;
 using FirmyMichalowice.Repositories;
-using log4net;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Diagnostics;
@@ -12,11 +10,8 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
-using Swashbuckle.AspNetCore.Filters;
 using System;
 using System.Net;
 using System.Text;
@@ -36,6 +31,10 @@ namespace FirmyMichalowice
             //configuration MySql
             var connectionString = _configuration.GetConnectionString("DefaultConnection");
             var serverVersion = new MySqlServerVersion(new Version(5, 5, 51));
+            var emailConfig = _configuration.GetSection("EmailConfiguration");
+            services.AddSingleton(emailConfig);
+            services.AddScoped<IEmailSender, EmailSender>();
+
 
             services.AddDbContext<DataContext>(options => {
                 options.UseMySql(connectionString, serverVersion);
@@ -73,25 +72,25 @@ namespace FirmyMichalowice
                         ValidateAudience = false
                     };
                 });
-            services.AddSwaggerGen(c =>
-            {
-                // configure SwaggerDoc and others
-
-                // add JWT Authentication
-                var securityScheme = new OpenApiSecurityScheme
+                services.AddSwaggerGen(c =>
                 {
-                    Name = "JWT Authentication",
-                    Description = "Enter JWT Bearer token **_only_**",
-                    In = ParameterLocation.Header,
-                    Type = SecuritySchemeType.Http,
-                    Scheme = "bearer", // must be lower case
-                    BearerFormat = "JWT",
-                    Reference = new OpenApiReference
+                    // configure SwaggerDoc and others
+
+                    // add JWT Authentication
+                    var securityScheme = new OpenApiSecurityScheme
                     {
-                        Id = JwtBearerDefaults.AuthenticationScheme,
-                        Type = ReferenceType.SecurityScheme
-                    }
-                };
+                        Name = "JWT Authentication",
+                        Description = "Enter JWT Bearer token **_only_**",
+                        In = ParameterLocation.Header,
+                        Type = SecuritySchemeType.Http,
+                        Scheme = "bearer", // must be lower case
+                        BearerFormat = "JWT",
+                        Reference = new OpenApiReference
+                        {
+                            Id = JwtBearerDefaults.AuthenticationScheme,
+                            Type = ReferenceType.SecurityScheme
+                        }
+                    };
                 c.AddSecurityDefinition(securityScheme.Reference.Id, securityScheme);
                 c.AddSecurityRequirement(new OpenApiSecurityRequirement
     {
@@ -112,7 +111,8 @@ namespace FirmyMichalowice
     });
             });
             
-            
+
+
         }
 
        

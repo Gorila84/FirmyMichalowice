@@ -1,13 +1,17 @@
 ﻿using FirmyMichalowice.Data;
+using FirmyMichalowice.Dto_s;
 using FirmyMichalowice.Model;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json.Linq;
 using System;
-using System.Collections.Generic;
 using System.Linq;
+using System.Security.Policy;
 using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
+using System.Web.Http.ModelBinding;
+
 
 namespace FirmyMichalowice.Repositories
 {
@@ -50,7 +54,7 @@ namespace FirmyMichalowice.Repositories
             return user;
         }
 
-
+       
 
         public async Task<Tuple<bool, string>> UserValidation(string userName, string nip)
         {
