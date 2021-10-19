@@ -54,7 +54,9 @@ namespace FirmyMichalowice
             services.AddAutoMapper(typeof(Startup));
             services.AddCors();
             services.AddTransient<Seed>();
-            services.AddTransient<CEIDGmanger>();
+            services.AddTransient<CeidgService>();
+            services.AddTransient<SmtpManager>();
+            services.AddTransient<MapQuestService>();
             services.AddScoped<IAuthRepository, AuthRepository>();
             services.AddScoped<IGenericRepository, GenericRepository>();
             services.AddScoped<ICompanyRepository, CompanyRepository>();

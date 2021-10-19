@@ -37,5 +37,10 @@ namespace FirmyMichalowice.Dto_s
         [StringLength(10)]
         public string NIP { get; set; }
 
+        public PKD MainPKD { get; set; }
+        public IList<PKD> PKDS { get; set; }
+
+        public string GeolocationUrl { get; set; }
+
     }
 }

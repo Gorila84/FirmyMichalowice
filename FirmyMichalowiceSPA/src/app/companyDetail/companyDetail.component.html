@@ -4,46 +4,60 @@
   </div>
   <hr>
   <div class="row mt-4">
-    <div class="col-md-3 d-flex justify-content-center align-item-center">
+    <div class="col-md-4 d-flex justify-content-center align-item-center">
       <img [src]= "company.photo != null ? 'data:image/png;base64,' + company.photo.fileData : '/assets/LogoTemp.png'" alt="company logo" height="200px"
       width="200px"/> 
     </div>
-    <div class="col-md-3 text-center contact">
-      <p>Kontakt:</p>
+    <div class="col-md-4 text-center contact">
+      <p><b><u>Kontakt:</u></b></p>
       <ul>
-      <li>{{company.webSite}}</li>
-      <li>tel: {{company.phoneNumber}}</li>
-      <li>{{company.emailAddress}}</li>
+      <li><b>strona www:</b> {{company.webSite}}</li>
+      <li><b>tel:</b> {{company.phoneNumber}}</li>
+      <li><b>email:</b> {{company.emailAddress}}</li>
     </ul>
     <br>
-    <p>Rodzaj działalności:</p>
+    <p><b><u>Rodzaj działalności:</u></b></p>
     <ul>
       <li>{{company.companyType}}</li>
     </ul>
     </div>
-    <div class="col-md-3 text-center address">
-      <p>Adres:</p>
+  
+    <div class="col-md-4 text-center contact">
+      <p><b><u>Kody PKD według danych z CEIDG:</u></b></p>
+      <h5><b><u>Główna Specjalizacja</u></b></h5>
       <ul>
-      
-      <li>ul. {{company.street}}</li>
-      <li>{{company.postalCode}}</li>
-      <li>{{company.city}}</li>
-    </ul>
-    </div>
-    <div class="col-md-3 text-center hours">
-      <p>Godziny otwarcia:</p>
+        <li>{{company.mainPKD.symbol}} - {{company.mainPKD.nazwa}}</li>
+      </ul>
+     <br>
+     <h5><b><u>Reszta kodów:</u></b></h5>
       <ul>
-        <li>Pn: 8:00 - 15:00</li>
-        <li>Wt: 8:00 - 15:00</li>
-        <li>Śr: 8:00 - 15:00</li>
-        <li>Czw: 8:00 - 15:00</li>
-        <li>Pt: 8:00 - 15:00</li>
+        <li *ngFor="let pkd of company.pkds">
+         {{pkd.symbol}} - {{pkd.nazwa}}
+        </li>
       </ul>
     </div>
   </div>
+  <br><br>
+  <hr>
+<div class="row">
+  <div class="col-md-3 text-center ">
+    <p><b><u>Adres:</u></b></p>
+    <ul>
+    
+    <li>{{company.street}}</li>
+    <li>{{company.postalCode}}</li>
+    <li>{{company.city}}</li>
+  </ul>
+  </div>
+  <div class="col-md-9 text-center address">
+    <h3> <b><u>Mapa</u></b> </h3>
+    <img [src]="company.geolocationUrl" title="Mapa z lokalizacja firmy"/>
+  </div>
+</div>
+
   <hr>
   <div class="description text-center">
-    <h3>Opis działalności</h3>
+    <h3><b><u>Opis działalności</u></b></h3>
     <p>{{company.longDescription}}</p>
   </div>
   <div class="d-flex justify-content-end">

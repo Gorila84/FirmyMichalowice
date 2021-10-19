@@ -14,9 +14,9 @@ namespace FirmyMichalowice.Repositories
     public class AuthRepository : IAuthRepository
     {
         private readonly DataContext _context;
-        private readonly CEIDGmanger _cEIDGmanger;
+        private readonly CeidgService _cEIDGmanger;
 
-        public AuthRepository(DataContext context, CEIDGmanger cEIDGmanger)
+        public AuthRepository(DataContext context, CeidgService cEIDGmanger)
         {
             _context = context;
             _cEIDGmanger = cEIDGmanger;
@@ -54,36 +54,49 @@ namespace FirmyMichalowice.Repositories
 
         public async Task<Tuple<bool, string>> UserValidation(string userName, string nip)
         {
-            var ceidgJson = await _cEIDGmanger.GetData(nip);
-            var data = JObject.Parse(ceidgJson);
-            var companYJson = data.First.First.First.ToString();
-
+          
+            bool isError = false;
+            string errorMessage = string.Empty;
 
             try
             {
-                Firma firma = JsonSerializer.Deserialize<Firma>(companYJson);
+                
+
+                if (await _context.Users.AnyAsync(x => x.Username == userName))
+                {
+                    isError = true;
+                    errorMessage = "Użytkownik o podanej nazwie juz istnieje! Podaj inna nazwe użytkownika.";
+                    
+                }
+
+                if (await _context.Users.AnyAsync(x => x.NIP == nip))
+                {
+                    isError = true;
+                    errorMessage =  "Użytkownik o podanym NIPie juz istnieje! Sprawdź NIP";
+                   
+                }
+                if(isError == false && string.IsNullOrEmpty(errorMessage)) CheckMunicipalitie(ref isError, ref errorMessage, nip);
+               
             }
             catch(Exception ex)
             {
-
+                return Tuple.Create(true, ex.Message);
             }
-       
 
-            if (await _context.Users.AnyAsync(x => x.Username == userName))
+            return Tuple.Create(isError, errorMessage);
+        }
+
+        private void CheckMunicipalitie(ref bool isError, ref string errorMessage, string nip)
+        {
+
+            var firma = _cEIDGmanger.GetData(nip).Result;       
+            IQueryable<string> listOfAllowedMunicipalities = _context.Municipalities.Select(x => x.Name);
+
+            if (!listOfAllowedMunicipalities.Contains(firma.adresDzialanosci.gmina))
             {
-                Tuple<bool, string> result = Tuple.Create(true, "Użytkownik o podanej nazwie juz istnieje! Podaj inna nazwe użytkownika.");
-                return result;                       
+                isError = true;
+                errorMessage = "Firma zarejestrowana poza dozwolonymi gminami";
             }
-
-            if (await _context.Users.AnyAsync(x => x.NIP == nip))
-            {
-                Tuple<bool, string> result = Tuple.Create(true, "Użytkownik o podanym NIPie juz istnieje! Sprawdź NIP");
-                return result;
-            }
-
-          
-
-            return Tuple.Create(false, string.Empty);
         }
         #endregion
         #region method private

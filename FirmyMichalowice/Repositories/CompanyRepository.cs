@@ -1,14 +1,18 @@
 ﻿using FirmyMichalowice.Data;
 using FirmyMichalowice.Helpers;
 using FirmyMichalowice.Model;
+using FirmyMichalowice.Serv;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Net;
+using System.Text.Json;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace FirmyMichalowice.Repositories
@@ -16,18 +20,51 @@ namespace FirmyMichalowice.Repositories
     public class CompanyRepository : GenericRepository, ICompanyRepository
     {
         private readonly DataContext _context;
-       
+        private readonly CeidgService _ceidgService;
+        private readonly MapBoxService _mapBoxService;
+        private readonly IConfiguration _configuration;
 
-        public CompanyRepository(DataContext context) : base(context)
+        public CompanyRepository(DataContext context, CeidgService ceidgService,  IConfiguration configuration, MapBoxService mapBoxService) : base(context)
         {
             _context = context;
+            _ceidgService = ceidgService;
+            _configuration = configuration;
+            _mapBoxService = mapBoxService;
+
         }
 
         public async Task<User> GetCompany(int id)
         {
-            var user = await _context.Users.Include(x=>x.Photo).FirstOrDefaultAsync(u => u.Id == id);
-            return user;
+            try
+            {
+                var user = await _context.Users.Include(x => x.Photo).FirstOrDefaultAsync(u => u.Id == id);
+                if (user != null)
+                {
+                    var firma = await _ceidgService.GetData(user.NIP);
+                    user.MainPKD = _context.PKD.Where(x => x.Symbol == Regex.Replace(firma.pkdGlowny, ".{2}", "$0.")).FirstOrDefault();
+                    List<string> pkds = new List<string>();
+                    firma.pkd.ToList().ForEach(x =>
+                    {
+                        var kod = Regex.Replace(x, ".{2}", "$0.");
+                        pkds.Add(kod);
+
+                    });
+
+                    user.PKDS = _context.PKD.Where(x => pkds.Contains(x.Symbol)).ToList();
+                    user.GeolocationUrl = await _mapBoxService.GetGeolocationURL(firma);
+                
+                }
+
+                return user;
+            }
+            catch(Exception ex)
+            {
+                return null;
+            }
+            
         }
+
+       
 
         public async Task<PageList<User>> GetCompanies(UserParams userParams)
         {

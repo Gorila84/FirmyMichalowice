@@ -29,9 +29,9 @@ namespace FirmyMichalowice.Controllers
         private readonly ILoggerManager _logger;
         private readonly HttpClient _httpClient;
         private readonly IConfiguration _configuration;
-        private readonly CEIDGmanger _cEIDGmanger;
+        private readonly CeidgService _cEIDGmanger;
 
-        public CompanyController(ICompanyRepository userRepository, IMapper mapper, ILoggerManager logger, IConfiguration configuration, CEIDGmanger cEIDGmanager)
+        public CompanyController(ICompanyRepository userRepository, IMapper mapper, ILoggerManager logger, IConfiguration configuration, CeidgService cEIDGmanager)
         {
             _userRepository = userRepository;
             _mapper = mapper;

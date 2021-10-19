@@ -31,6 +31,7 @@ import {MatSelectModule} from '@angular/material/select';
 import {MatButtonModule} from '@angular/material/button';
 import {MatCardModule} from '@angular/material/card';
 import { FooterComponent } from './footer/footer.component';
+import { ContactComponent } from './contact/contact.component';
 
 
 @NgModule({
@@ -43,7 +44,8 @@ import { FooterComponent } from './footer/footer.component';
       CompanyListComponent,
       CompanyDetailComponent,
       CompanyEditComponent,
-      FooterComponent
+      FooterComponent,
+      ContactComponent
    ],
   imports: [
     BrowserModule,

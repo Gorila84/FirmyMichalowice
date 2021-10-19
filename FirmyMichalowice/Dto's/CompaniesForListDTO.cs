@@ -30,5 +30,7 @@ namespace FirmyMichalowice.Dto_s
         [Required(ErrorMessage = "To pole jest obowiązkowe")]
         [StringLength(10)]
         public string NIP { get; set; }
+        public PKD MainPKD { get; set; }
+        public IList<PKD> PKDS { get; set; }
     }
 }

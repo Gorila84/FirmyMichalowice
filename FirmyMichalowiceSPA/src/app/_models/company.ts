@@ -17,4 +17,12 @@ export interface Company {
         companyType: string;
         photo: Photo;
         nip: string;
+        mainPKD: PKD;
+        pkds: PKD[];
+        geolocationUrl: string;
+}
+
+export interface PKD {
+        symbol: string;
+        nazwa: string;
 }

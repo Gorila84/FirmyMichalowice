@@ -40,5 +40,12 @@ namespace FirmyMichalowice.Model
         [StringLength(10)]
         public string NIP { get; set; }
 
+        [NotMapped]
+        public PKD MainPKD { get; set; }
+        [NotMapped]
+        public IList<PKD> PKDS { get; set; }
+        [NotMapped]
+        public string GeolocationUrl { get; set; }
+
     }
 }
