@@ -13,7 +13,7 @@ import { HttpEventType } from '@angular/common/http';
 import { NGXLogger } from 'ngx-logger';
 import { map, startWith } from 'rxjs/operators';
 import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
-import { buffer, map, startWith } from 'rxjs/operators';
+import { buffer } from 'rxjs/operators';
 import { CompanyTypeService } from '../_services/companyType.service';
 import { toBase64String } from '@angular/compiler/src/output/source_map';
 
