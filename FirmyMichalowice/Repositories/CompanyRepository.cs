@@ -70,7 +70,7 @@ namespace FirmyMichalowice.Repositories
         {
             var users = _context.Users.Include(p => p.Photo).AsQueryable();
 
-            if (userParams.CompanyName != "undefined" || userParams.CompanyType != "undefined" || userParams.City != "undefined")
+            if (userParams.CompanyName != null || userParams.CompanyType != null || userParams.City != null)
             {
                 users = users.Where(u => u.CompanyName.Contains(userParams.CompanyName) 
                                     || u.CompanyType == userParams.CompanyType 
