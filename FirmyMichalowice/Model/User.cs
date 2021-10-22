@@ -28,6 +28,7 @@ namespace FirmyMichalowice.Model
         public string City { get; set; }
         public string Street { get; set; }
         public string PostalCode { get; set; }
+        public string Municipalitie { get; set; } 
         public string Rodo { get; set; }
         public DateTime Created { get; set; }
         public DateTime Modify { get; set; }
@@ -46,6 +47,7 @@ namespace FirmyMichalowice.Model
         public IList<PKD> PKDS { get; set; }
         [NotMapped]
         public string GeolocationUrl { get; set; }
+        
 
     }
 }

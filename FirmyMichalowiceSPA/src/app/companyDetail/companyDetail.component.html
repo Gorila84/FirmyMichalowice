@@ -1,66 +1,109 @@
 <div class="container">
   <div class="col-12 text-center title mt-4">
-    <h2>{{company.companyName}}</h2>
+    <h2>{{ company.companyName }}</h2>
   </div>
-  <hr>
+  <hr />
   <div class="row mt-4">
     <div class="col-md-4 d-flex justify-content-center align-item-center">
-      <img [src]= "company.photo != null ? 'data:image/png;base64,' + company.photo.fileData : '/assets/LogoTemp.png'" alt="company logo" height="200px"
-      width="200px"/> 
+      <img
+        [src]="
+          company.photo != null
+            ? 'data:image/png;base64,' + company.photo.fileData
+            : '/assets/LogoTemp.png'
+        "
+        alt="company logo"
+        height="200px"
+        width="200px"
+      />
     </div>
     <div class="col-md-4 text-center contact">
-      <p><b><u>Kontakt:</u></b></p>
+      <p>
+        <b><u>Kontakt:</u></b>
+      </p>
       <ul>
-      <li><b>strona www:</b> {{company.webSite}}</li>
-      <li><b>tel:</b> {{company.phoneNumber}}</li>
-      <li><b>email:</b> {{company.emailAddress}}</li>
-    </ul>
-    <br>
-    <p><b><u>Rodzaj działalności:</u></b></p>
-    <ul>
-      <li>{{company.companyType}}</li>
-    </ul>
-    </div>
-  
-    <div class="col-md-4 text-center contact">
-      <p><b><u>Kody PKD według danych z CEIDG:</u></b></p>
-      <h5><b><u>Główna Specjalizacja</u></b></h5>
-      <ul>
-        <li>{{company.mainPKD.symbol}} - {{company.mainPKD.nazwa}}</li>
+        <li><b>strona www:</b> {{ company.webSite }}</li>
+        <li><b>tel:</b> {{ company.phoneNumber }}</li>
+        <li><b>email:</b> {{ company.emailAddress }}</li>
       </ul>
-     <br>
-     <h5><b><u>Reszta kodów:</u></b></h5>
+      <br />
+      <p>
+        <b><u>Rodzaj działalności:</u></b>
+      </p>
+      <ul>
+        <li>{{ company.companyType }}</li>
+      </ul>
+    </div>
+
+    <div class="col-md-4 text-center contact">
+      <p>
+        <b><u>Kody PKD według danych z CEIDG:</u></b>
+      </p>
+      <h5>
+        <b><u>Główna Specjalizacja</u></b>
+      </h5>
+      <ul>
+        <li>{{ company.mainPKD.symbol }} - {{ company.mainPKD.nazwa }}</li>
+      </ul>
+      <br />
+      <h5>
+        <b><u>Reszta kodów:</u></b>
+      </h5>
       <ul>
         <li *ngFor="let pkd of company.pkds">
-         {{pkd.symbol}} - {{pkd.nazwa}}
+          {{ pkd.symbol }} - {{ pkd.nazwa }}
         </li>
       </ul>
     </div>
   </div>
-  <br><br>
-  <hr>
-<div class="row">
-  <div class="col-md-3 text-center ">
-    <p><b><u>Adres:</u></b></p>
-    <ul>
-    
-    <li>{{company.street}}</li>
-    <li>{{company.postalCode}}</li>
-    <li>{{company.city}}</li>
-  </ul>
-  </div>
-  <div class="col-md-9 text-center address">
-    <h3> <b><u>Mapa</u></b> </h3>
-    <img [src]="company.geolocationUrl" title="Mapa z lokalizacja firmy"/>
-  </div>
-</div>
-
-  <hr>
+  <br /><br />
+  <hr />
   <div class="description text-center">
-    <h3><b><u>Opis działalności</u></b></h3>
-    <p>{{company.longDescription}}</p>
+    <h3>
+      <b><u>Opis działalności</u></b>
+    </h3>
+    <p>{{ company.longDescription }}</p>
   </div>
+  <br />
+  <hr />
+  <div class="row">
+    <div class="col-md-3 text-center">
+      <p>
+        <b><u>Adres:</u></b>
+      </p>
+      <ul>
+        <li>{{ company.street }}</li>
+        <li>{{ company.postalCode }}</li>
+        <li>{{ company.city }}</li>
+      </ul>
+      <br />
+      <p>
+        <b><u>Gmina:</u></b>
+      </p>
+      <ul>
+        <li>
+          {{ company.municipalitie }}
+          <img [src]="company.armsUrl" title="Herb gminy" class="my_arms" />
+        </li>
+        <img [src]="company.armsUrl" title="Herb gminy" class="my_arms2" />
+      </ul>
+    </div>
+    <div class="col-md-9 text-center address">
+      <h3>
+        <b><u>Mapa</u></b>
+      </h3>
+      <img
+        [src]="company.geolocationUrl"
+        class="geolocation"
+        title="Mapa z lokalizacja firmy"
+      />
+    </div>
+    <hr />
+  </div>
+  <br />
+  <hr />
   <div class="d-flex justify-content-end">
-    <button class="btn btn-back-to-home" [routerLink]="['']">Wróć do listy</button>
+    <button class="btn btn-back-to-home" [routerLink]="['']">
+      Wróć do listy
+    </button>
   </div>
 </div>

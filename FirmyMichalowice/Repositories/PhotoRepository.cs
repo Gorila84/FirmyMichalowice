@@ -21,7 +21,7 @@ namespace FirmyMichalowice.Repositories
             _logger = logger;
         }
 
-        public bool SaveImage(Photo logo)
+        public async Task<bool> SaveImage(Photo logo)
         {
             try
             {
@@ -30,8 +30,8 @@ namespace FirmyMichalowice.Repositories
                     RemoveUserLogo(logo.UserId);
 
                 }
-                _context.Photo.Add(logo);
-                _context.SaveChanges();
+                await _context.Photo.AddAsync(logo);
+                await _context.SaveChangesAsync();
                 return true;
             }
 

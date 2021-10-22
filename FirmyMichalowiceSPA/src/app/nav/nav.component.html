@@ -1,52 +1,84 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
   <div class="container">
     <a class="navbar-brand" href="#">
-      <img src="/assets/FPK_Logo.png" width="130" height="80" class="align-top" alt="FPK_Logo" />
+      <img
+        src="/assets/FPK_Logo.png"
+        width="130"
+        height="80"
+        class="align-top"
+        alt="FPK_Logo"
+      />
     </a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button> -->
-    <button class="navbar-toggler" type="button" mat-button [matMenuTriggerFor]="menu"> <span class="navbar-toggler-icon"></span></button>
-<mat-menu #menu="matMenu">
-  <button mat-menu-item  [routerLink]="['/logowanie/']">Zaloguj</button>
-  <button mat-menu-item [routerLink]="['/rejstracja/']">Zarejstruj</button>
-</mat-menu>
+    <div
+      class="d-flex justify-content-center bd-highlight"
+      *ngFor="let item of armsUrls"
+    >
+      <img [src]="item" height="45" width="39" class="arms bd-highlight mx-3" />
+    </div>
 
-    <div  class="collapse navbar-collapse" id="navbarSupportedContent">
+    <button
+      class="navbar-toggler"
+      type="button"
+      data-bs-toggle="collapse"
+      data-bs-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+    >
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <button
+      class="navbar-toggler"
+      type="button"
+      mat-button
+      [matMenuTriggerFor]="menu"
+    >
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <mat-menu #menu="matMenu">
+      <button mat-menu-item [routerLink]="['/logowanie/']">Zaloguj</button>
+      <button mat-menu-item [routerLink]="['/rejstracja/']">Zarejstruj</button>
+    </mat-menu>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav ml-auto mb-2 mb-lg-0">
-        
-        <li  class="nav-item">
+        <li class="nav-item">
           <a class="nav-link" [routerLink]="['/kontakt/']">Kontakt</a>
         </li>
 
         <li *ngIf="!loginCheck()" class="nav-item">
-          <a class="nav-link" aria-current="page" [routerLink]="['/logowanie/']">Zaloguj</a>
+          <a class="nav-link" aria-current="page" [routerLink]="['/logowanie/']"
+            >Zaloguj</a
+          >
         </li>
         <li *ngIf="!loginCheck()" class="nav-item">
           <a class="nav-link" [routerLink]="['/rejstracja/']">Zarejstruj</a>
         </li>
-    
+
         <!-- <li *ngIf="loginCheck()">Witaj {{ authService.decotedToken?.unique_name | titlecase }}</li>
         <li *ngIf="loginCheck()" class="nav-item">
          
           <a (click)="logOut()" class="nav-link">Wyloguj</a>
          
         </li> -->
-       
       </ul>
     </div>
-      <div *ngIf="loginCheck()" class="dropdown" dropdown>
-        <a class="dropdown-toggle text-dark" dropdownToggle>
-          Witaj {{ authService.decotedToken?.unique_name | titlecase }}
-        </a>
-  
-        <div class="dropdown-menu mt-3" *dropdownMenu>
-          <a class="dropdown-item" [routerLink]="['/edycja/', getUserId()]"><i class="fa fa-user pr-2"></i>Edytuj profil</a>
-          <div class="dropdown-divider"></div>
-          <a class="dropdown-item" (click)="logOut()"><i class="fa fa-sign-out pr-2"></i>Wyloguj</a>
-        </div>
+    <div *ngIf="loginCheck()" class="dropdown" dropdown>
+      <a class="dropdown-toggle text-dark" dropdownToggle>
+        Witaj {{ authService.decotedToken?.unique_name | titlecase }}
+      </a>
+
+      <div class="dropdown-menu mt-3" *dropdownMenu>
+        <a class="dropdown-item" [routerLink]="['/edycja/', getUserId()]"
+          ><i class="fa fa-user pr-2"></i>Edytuj profil</a
+        >
+        <div class="dropdown-divider"></div>
+        <a class="dropdown-item" (click)="logOut()"
+          ><i class="fa fa-sign-out pr-2"></i>Wyloguj</a
+        >
       </div>
-      <!-- <div class="dropdown show">
+    </div>
+    <!-- <div class="dropdown show">
         <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
           Dropdown button
         </button>
@@ -56,6 +88,5 @@
           <li><a class="dropdown-item" href="#">Something else here</a></li>
         </ul>
       </div> -->
-     
   </div>
 </nav>

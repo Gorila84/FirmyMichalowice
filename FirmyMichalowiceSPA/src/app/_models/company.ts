@@ -20,9 +20,12 @@ export interface Company {
         mainPKD: PKD;
         pkds: PKD[];
         geolocationUrl: string;
+        municipalitie: string;
+        armsUrl: string;
 }
 
 export interface PKD {
         symbol: string;
         nazwa: string;
 }
+

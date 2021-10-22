@@ -43,7 +43,8 @@ namespace FirmyMichalowice.Controllers
             {
                 Username = userRegisterDto.UserName,
                 NIP = userRegisterDto.NIP,
-                Created = DateTime.Now
+                Created = DateTime.Now,
+                Municipalitie = validationResult.Item3
             };
 
             var createdUser = await _repository.Register(userToCreate, userRegisterDto.Password);

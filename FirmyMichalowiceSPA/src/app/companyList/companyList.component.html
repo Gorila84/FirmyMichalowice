@@ -1,86 +1,145 @@
 <header>
   <div class="hero-shadow"></div>
-  <div class="baner d-flex flex-column justify-content-center jutify-content-md-center align-items-center ">
-    <div class="div-img-banner">  
-    <img class="baner-img" src="../../assets/baner.jpg" alt="">
-  </div>
-   <div class="div-slogan text-center">
+  <div
+    class="
+      baner
+      d-flex
+      flex-column
+      justify-content-center
+      jutify-content-md-center
+      align-items-center
+    "
+  >
+    <div class="div-img-banner">
+      <img class="baner-img" src="../../assets/baner.jpg" alt="" />
+    </div>
+    <div class="div-slogan text-center">
       <p class="display-2 slogan text-light">Popraw swoje wyniki</p>
-      <p class="second-slogan text-light">Zarejestruj się i zdobywaj nowych klientów z nami !!!</p>
+      <p class="second-slogan text-light">
+        Zarejestruj się i zdobywaj nowych klientów z nami !!!
+      </p>
     </div>
   </div>
 </header>
 <div class="aboutus-shadow">
-<div class = "container pt-4">
-  <div class = "row">
-    <div class="text-center col-12">
-      <h2>Firmy Północy Krakowa</h2>
-      <hr>
-    </div>
-   
-    <div class="col-12">
-    <accordion>
-    <accordion-group class="text-dark text-right accordion-text" heading="Wyszukiwarka">
-      
-        <form name= "filterForm" #ngForm="ngForm" (ngSubmit)="loadCompanies()">
-          <div class="row d-flex align-items-end">
-            <div class="col-2  d-flex justify-content-end">
-                <h2>Wyszukaj:</h2>
-            </div>
-        <div class="col-3 d-flex justify-content-end">
-          <mat-form-field class="example-full-width companyName " appearance="legacy">
-            <mat-label>Nazwa firmy</mat-label>
-           
-  
-            <input matInput class="form-control " name="companyName" id="companyName"
-               [(ngModel)]="companyParams.CompanyName" style="width:600px;">
-          </mat-form-field>
-        </div>
-        <div class="col-3 d-flex justify-content-end">
-          <mat-form-field class="example-full-width companyName" appearance="legacy">
-            <mat-label>Kategoria</mat-label>
-           
-  
-            <input matInput class="form-control " name="companyType" id="companyType"
-            [(ngModel)]="companyParams.CompanyType" style="width:600px;">
-          </mat-form-field>
-        </div>
-        <div class="col-3 d-flex justify-content-end">
-          <mat-form-field class="example-full-width companyName" appearance="legacy">
-            <mat-label>Miejscowość</mat-label>
-           
-  
-            <input matInput class="form-control " name="city" id="city"
-            [(ngModel)]="companyParams.City"  style="width:600px;">
-          </mat-form-field>
-        </div>
-        <div form="editForm" class="search-button mr-3 d-flex justify-content-end">
-          <button mat-raised-button class="mt-4 save-button mx-1" color="warn">Usuń filtry</button>
-          <button mat-raised-button class="mt-4 save-button" typ="submit">Wyszukaj</button>
-        </div>
+  <div class="container pt-4">
+    <div class="row">
+      <div class="text-center col-12">
+        <h2>Firmy Północy Krakowa</h2>
+        <hr />
       </div>
-      </form>
-      
-    </accordion-group>
-  </accordion></div>
-    <div class="col-12">
-      <div class="row">
-        <div *ngFor="let company of companies" class="company-card-list">
-          
-          <app-CompanyCard [company]='company'></app-CompanyCard>
-        </div>
-      </div>
-    </div>
-  </div>
-  
-  <pagination class=" justify-content-center py-3 text-dark"
-    [boundaryLinks]="true" 
-    [totalItems]="pagination.totalItems"
-    [itemsPerPage]="pagination.itemsPerPage"
-    [(ngModel)]="pagination.currentPage"
-    (pageChanged)="pageChanged($event)"
-previousText="&lsaquo;" nextText="&rsaquo;" firstText="&laquo;" lastText="&raquo;">
-</pagination>
 
-</div>
+      <div class="col-12">
+        <accordion>
+          <accordion-group
+            class="text-dark text-right accordion-text"
+            heading="Wyszukiwarka"
+          >
+            <form
+              name="filterForm"
+              #ngForm="ngForm"
+              (ngSubmit)="loadCompanies()"
+            >
+              <div class="row d-flex align-items-end">
+                <div class="col-2 d-flex justify-content-end">
+                  <h2>Wyszukaj:</h2>
+                </div>
+                <div class="col-3 d-flex justify-content-end">
+                  <mat-form-field
+                    class="example-full-width companyName"
+                    appearance="legacy"
+                  >
+                    <mat-label>Nazwa firmy</mat-label>
+
+                    <input
+                      matInput
+                      class="form-control"
+                      name="companyName"
+                      id="companyName"
+                      [(ngModel)]="companyParams.CompanyName"
+                      style="width: 600px"
+                    />
+                  </mat-form-field>
+                </div>
+                <div class="col-3 d-flex justify-content-end">
+                  <mat-form-field
+                    class="example-full-width companyName"
+                    appearance="legacy"
+                  >
+                    <mat-label>Kategoria</mat-label>
+
+                    <input
+                      matInput
+                      class="form-control"
+                      name="companyType"
+                      id="companyType"
+                      [(ngModel)]="companyParams.CompanyType"
+                      style="width: 600px"
+                    />
+                  </mat-form-field>
+                </div>
+                <div class="col-3 d-flex justify-content-end">
+                  <mat-form-field
+                    class="example-full-width companyName"
+                    appearance="legacy"
+                  >
+                    <mat-label>Miejscowość</mat-label>
+
+                    <input
+                      matInput
+                      class="form-control"
+                      name="city"
+                      id="city"
+                      [(ngModel)]="companyParams.City"
+                      style="width: 600px"
+                    />
+                  </mat-form-field>
+                </div>
+                <div
+                  form="editForm"
+                  class="search-button mr-3 d-flex justify-content-end"
+                >
+                  <button
+                    mat-raised-button
+                    class="mt-4 save-button mx-1"
+                    color="warn"
+                  >
+                    Usuń filtry
+                  </button>
+                  <button
+                    mat-raised-button
+                    class="mt-4 save-button"
+                    typ="submit"
+                  >
+                    Wyszukaj
+                  </button>
+                </div>
+              </div>
+            </form>
+          </accordion-group>
+        </accordion>
+      </div>
+      <div class="col-12">
+        <div class="row">
+          <div *ngFor="let company of companies" class="company-card-list">
+            <app-CompanyCard [company]="company"></app-CompanyCard>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <pagination
+      class="justify-content-center py-3 text-dark my-pagination"
+      [boundaryLinks]="true"
+      [totalItems]="pagination.totalItems"
+      [itemsPerPage]="pagination.itemsPerPage"
+      [(ngModel)]="pagination.currentPage"
+      (pageChanged)="pageChanged($event)"
+      previousText="&lsaquo;"
+      nextText="&rsaquo;"
+      firstText="&laquo;"
+      lastText="&raquo;"
+    >
+    </pagination>
+  </div>
 </div>

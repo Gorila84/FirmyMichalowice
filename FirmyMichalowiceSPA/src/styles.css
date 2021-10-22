@@ -1,8 +1,25 @@
-@import '~bootstrap/dist/css/bootstrap.min.css';
-@import '../node_modules/font-awesome/css/font-awesome.min.css';
+@import "~bootstrap/dist/css/bootstrap.min.css";
+@import "../node_modules/font-awesome/css/font-awesome.min.css";
 
-html, body { height: 100%; }
-body { margin: 0; }
+html,
+body {
+  height: 100%;
+}
+body {
+  margin: 0;
+}
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+html,
+body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+.page-item.active .page-link {
+  color: #fff !important;
+  background: grey !important;
+  border-color: darkgrey !important;
+}

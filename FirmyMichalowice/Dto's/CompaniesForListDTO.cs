@@ -21,7 +21,7 @@ namespace FirmyMichalowice.Dto_s
         public string WebSite { get; set; }
         public string EmailAddress { get; set; }
 
-
+        public string Municipalitie { get; set; }
         public string PhotoUrl { get; set; }
         public string CompanyType { get; set; }
 

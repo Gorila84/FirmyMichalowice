@@ -56,11 +56,12 @@ namespace FirmyMichalowice.Repositories
 
        
 
-        public async Task<Tuple<bool, string>> UserValidation(string userName, string nip)
+        public async Task<Tuple<bool, string, string>> UserValidation(string userName, string nip)
         {
           
             bool isError = false;
             string errorMessage = string.Empty;
+            string municipalitie = string.Empty;
 
             try
             {
@@ -79,18 +80,18 @@ namespace FirmyMichalowice.Repositories
                     errorMessage =  "Użytkownik o podanym NIPie juz istnieje! Sprawdź NIP";
                    
                 }
-                if(isError == false && string.IsNullOrEmpty(errorMessage)) CheckMunicipalitie(ref isError, ref errorMessage, nip);
+                if(isError == false && string.IsNullOrEmpty(errorMessage)) CheckMunicipalitie(ref isError, ref errorMessage, ref municipalitie, nip);
                
             }
             catch(Exception ex)
             {
-                return Tuple.Create(true, ex.Message);
+                return Tuple.Create(true, ex.Message, municipalitie);
             }
 
-            return Tuple.Create(isError, errorMessage);
+            return Tuple.Create(isError, errorMessage, municipalitie);
         }
 
-        private void CheckMunicipalitie(ref bool isError, ref string errorMessage, string nip)
+        private void CheckMunicipalitie(ref bool isError, ref string errorMessage, ref string municipalitie, string nip)
         {
 
             var firma = _cEIDGmanger.GetData(nip).Result;       
@@ -100,6 +101,7 @@ namespace FirmyMichalowice.Repositories
             {
                 isError = true;
                 errorMessage = "Firma zarejestrowana poza dozwolonymi gminami";
+                municipalitie = firma.adresDzialanosci.gmina;
             }
         }
         #endregion

@@ -52,7 +52,7 @@ namespace FirmyMichalowice.Controllers
                     logo = new Photo { DateAdded = DateTime.Now, UserId = userId, IsMain = true, Description = "This is main Logo", Url = image.FileName, FileData = fileBytes };
                 }
 
-                bool result = _photoRepository.SaveImage(logo);
+                bool result = await _photoRepository.SaveImage(logo);
 
                 if (result)
                     return Ok();

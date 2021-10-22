@@ -23,6 +23,8 @@ namespace FirmyMichalowice.Dto_s
         public string Street { get; set; }
         public string PostalCode { get; set; }
 
+        public string Municipalitie { get; set; }
+
         //public DataType Created { get; set; }
         //public DataType Modify { get; set; }
 
@@ -34,5 +36,7 @@ namespace FirmyMichalowice.Dto_s
         [Required(ErrorMessage = "To pole jest obowiązkowe")]
         [StringLength(10)]
         public string NIP { get; set; }
+
+        
     }
 }

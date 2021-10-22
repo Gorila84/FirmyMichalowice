@@ -31,8 +31,9 @@ namespace FirmyMichalowice.Controllers
         private readonly HttpClient _httpClient;
         private readonly IConfiguration _configuration;
         private readonly CeidgService _cEIDGmanger;
+        private readonly IMunicipalitieRepository _municipalitieRepository;
 
-        public CompanyController(ICompanyRepository userRepository, IMapper mapper, ILoggerManager logger, IConfiguration configuration, CeidgService cEIDGmanager)
+        public CompanyController(ICompanyRepository userRepository, IMapper mapper, ILoggerManager logger, IConfiguration configuration, CeidgService cEIDGmanager, IMunicipalitieRepository municipalitieRepository)
         {
             _userRepository = userRepository;
             _mapper = mapper;
@@ -40,6 +41,7 @@ namespace FirmyMichalowice.Controllers
             _httpClient = new HttpClient();
             _configuration = configuration;
             _cEIDGmanger = cEIDGmanager;
+            _municipalitieRepository = municipalitieRepository;
         }
 
         [HttpGet]
@@ -68,6 +70,7 @@ namespace FirmyMichalowice.Controllers
             var user = await _userRepository.GetCompany(id);
 
             var userToReturn = _mapper.Map<CompanyForDateilDTO>(user);
+            userToReturn.ArmsUrl =  _municipalitieRepository.GetMunicipalities().Result.Where(x=>x.Name == user.Municipalitie).Select(x=>x.Path).FirstOrDefault();
 
             return Ok(userToReturn);
         }
@@ -81,6 +84,7 @@ namespace FirmyMichalowice.Controllers
             var comapnyFromRepository = await _userRepository.GetCompany(id);
 
             _mapper.Map(companiesForEditDTO, comapnyFromRepository);
+            comapnyFromRepository.Modify = DateTime.Now;
 
             if (await _userRepository.SaveAll())
                 return NoContent();

@@ -4,11 +4,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace FirmyMichalowice.Repositories
+namespace FirmyMichalowice.Data
 {
-    public interface IPhotoRepository
+    public interface IMunicipalitieRepository
     {
-        Task<bool> SaveImage(Photo logo);
-
+        Task<List<Municipalitie>> GetMunicipalities();
     }
 }

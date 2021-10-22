@@ -1,5 +1,7 @@
+import { HttpClient } from '@angular/common/http';
 import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { environment } from 'src/environments/environment';
 import { LoginComponent } from '../login/login.component';
 import { Company } from '../_models/company';
 import { AlertifyService } from '../_services/alertify.service';
@@ -15,14 +17,22 @@ import { AuthService } from '../_services/auth.service';
 export class NavComponent implements OnInit {
 
   @Input() loginInformation: any;
-  company: Company
+  company: Company;
+  armsUrls :any;
+  apiUrl = environment.apiUrl + 'Arms/GetArms';
+
   constructor(public authService: AuthService, 
               private alertifyService: AlertifyService,
-              private router: Router) {
+              private router: Router,
+              private http: HttpClient) {
    
   }
 
   ngOnInit() {
+    this.http.get(this.apiUrl).subscribe(data =>{
+      this.armsUrls = data
+    });
+      
   }
 
   loginCheck(){

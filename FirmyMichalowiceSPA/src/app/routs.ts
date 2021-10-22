@@ -22,4 +22,5 @@ export const appRoutes: Routes = [
                         resolve: {company: CompanyEditlResolver},
                         canDeactivate: [PreventUnsavedChanges]},
         {path: 'kontakt', component: ContactComponent},
+        {path: 'rejstracja/zp', component: Polityka_prywatnosciComponent},
     ];

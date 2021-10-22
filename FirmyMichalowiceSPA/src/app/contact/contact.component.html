@@ -1,20 +1,20 @@
 <div class="center">
-    <div class="container shadow-lg p-3 mb-5 bg-white rounded">
-        <div class="row">
-            <div class="col-lg-6">
-            <div class="contact1-pic js-tilt" data-tilt>
-                <img src="/assets/img-01.png" alt="IMG" height="200" width="200">
-            </div>
-            </div>
-            <div class="col-lg-6">
-                <h2><b>Formularz kontaktowy</b></h2>
-                <form #contactForm="ngForm" (ngSubmit)="sendMessage()">
-                  <!-- <div class="mb-3">
+  <div class="container shadow-lg p-3 mb-5 bg-white rounded mt-5">
+    <div class="row">
+      <div class="col-lg-6">
+        <div class="contact1-pic js-tilt" data-tilt>
+          <img src="/assets/img-01.png" alt="IMG" height="200" width="200" />
+        </div>
+      </div>
+      <div class="col-lg-6">
+        <h2><b>Formularz kontaktowy</b></h2>
+        <form #contactForm="ngForm" (ngSubmit)="sendMessage()">
+          <!-- <div class="mb-3">
                     <label for="exampleInputEmail1" class="form-label">Adres email</label>
                     <input #login type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" 
                       name="username" [(ngModel)]="model.username" required
                       >   </div> -->
-                  <!-- <div class="mb-3">
+          <!-- <div class="mb-3">
                     <label for="exampleInputPassword1" class="form-label">Hasło</label>
                     <input type="password" class="form-control" id="exampleInputPassword1" #password name="password" 
                           [(ngModel)]="model.password" required>   </div>
@@ -22,49 +22,77 @@
                     <label for="nip" class="form-label">Nip</label>
                     <input type="text" class="form-control" id="nip" #nip name="nip" maxlength="10" minlength="10"
                           [(ngModel)]="model.nip" required></div> -->
-                          <mat-form-field class="example-full-width" appearance="fill">
-                            <mat-label>Email</mat-label>
-                            <input type="email" #login matInput [formControl]="emailFormControl" [errorStateMatcher]="matcher"
-                                   placeholder="Ex. pat@example.com"  [(ngModel)]="model.username" >
-                            <mat-hint>Podaj email kontaktowy</mat-hint>
-                            <mat-error *ngIf="emailFormControl.hasError('email') && !emailFormControl.hasError('required')">
-                            Wpisz poprawy adres email.
-                            </mat-error>
-                            <mat-error *ngIf="emailFormControl.hasError('required')">
-                              Email jest <strong>obowiązkowy</strong>
-                            </mat-error>
-                          </mat-form-field>
-              
-                          <mat-form-field class="example-full-width" appearance="fill">
-                            <mat-label>Temat</mat-label>
-                            <input type="text" matInput [formControl]="subjectFormControl" [errorStateMatcher]="matcher"
-                                   placeholder="Temat" [(ngModel)]="model.subject"   > 
-                            <mat-hint>Wpisz temat wiadomości</mat-hint>
-                            <mat-error *ngIf="subjectFormControl.hasError('required')">
-                              Hasło jest <strong>obowiązkowe</strong>
-                            </mat-error>
-                          
-                          </mat-form-field>
-              
-                          <mat-form-field class="example-full-width" appearance="fill">
-                            <mat-label>Wiadomość</mat-label>
-                            <textarea  matInput [formControl]="contentFormControl" [errorStateMatcher]="matcher"
-                                   placeholder="Treść wiadomości"  [(ngModel)]="model.content" name='content'> </textarea>
-                            <mat-hint>Wpisz treść wiadomości</mat-hint>
-                            
-                            <mat-error *ngIf="contentFormControl.hasError('required')">
-                              Treść jest <strong>obowiązkowa</strong>
-                            </mat-error>
-                           
-                          </mat-form-field>
-                      <br><br>
-                          <button type='submit' mat-raised-button color="primary">Wyślij wiadomość</button>
+          <mat-form-field class="example-full-width" appearance="fill">
+            <mat-label>Email</mat-label>
+            <input
+              type="email"
+              #login
+              matInput
+              [formControl]="emailFormControl"
+              [errorStateMatcher]="matcher"
+              placeholder="Ex. pat@example.com"
+              [(ngModel)]="model.username"
+            />
+            <mat-hint>Podaj email kontaktowy</mat-hint>
+            <mat-error
+              *ngIf="
+                emailFormControl.hasError('email') &&
+                !emailFormControl.hasError('required')
+              "
+            >
+              Wpisz poprawy adres email.
+            </mat-error>
+            <mat-error *ngIf="emailFormControl.hasError('required')">
+              Email jest <strong>obowiązkowy</strong>
+            </mat-error>
+          </mat-form-field>
 
-              
-                </form>
-              
-            </div>
+          <mat-form-field class="example-full-width" appearance="fill">
+            <mat-label>Temat</mat-label>
+            <input
+              type="text"
+              matInput
+              [formControl]="subjectFormControl"
+              [errorStateMatcher]="matcher"
+              placeholder="Temat"
+              [(ngModel)]="model.subject"
+            />
+            <mat-hint>Wpisz temat wiadomości</mat-hint>
+            <mat-error *ngIf="subjectFormControl.hasError('required')">
+              Hasło jest <strong>obowiązkowe</strong>
+            </mat-error>
+          </mat-form-field>
 
-        </div>
+          <mat-form-field class="example-full-width" appearance="fill">
+            <mat-label>Wiadomość</mat-label>
+            <textarea
+              matInput
+              [formControl]="contentFormControl"
+              [errorStateMatcher]="matcher"
+              placeholder="Treść wiadomości"
+              [(ngModel)]="model.content"
+              name="content"
+            >
+            </textarea>
+            <mat-hint>Wpisz treść wiadomości</mat-hint>
+
+            <mat-error *ngIf="contentFormControl.hasError('required')">
+              Treść jest <strong>obowiązkowa</strong>
+            </mat-error>
+          </mat-form-field>
+          <br /><br />
+          <div class="my-mat-basic">
+            <button
+              type="submit"
+              class="my-mat-basic"
+              mat-raised-button
+              color="basic"
+            >
+              Wyślij wiadomość
+            </button>
+          </div>
+        </form>
+      </div>
     </div>
-    </div>
+  </div>
+</div>

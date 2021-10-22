@@ -23,7 +23,9 @@ namespace FirmyMichalowice.Dto_s
         public string City { get; set; }
         public string Street { get; set; }
         public string PostalCode { get; set; }
-       
+
+        public string Municipalitie { get; set; }
+
         //public DataType Created { get; set; }
         //public DataType Modify { get; set; }
 
@@ -41,6 +43,8 @@ namespace FirmyMichalowice.Dto_s
         public IList<PKD> PKDS { get; set; }
 
         public string GeolocationUrl { get; set; }
+
+        public string ArmsUrl { get; set; }
 
     }
 }

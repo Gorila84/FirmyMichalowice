@@ -1,43 +1,53 @@
 <!-- <div class="container text-center"> -->
-  <!-- <hr>
+<!-- <hr>
   <div class="display-3 my-3">Lista firm z północy Krakowa</div>
   <hr class="mb-4"> -->
 
-  <div class="card mt-4 company-card" >
-    <div class="card-body">
+<div class="card mt-4 company-card">
+  <div class="card-body">
+    <div class="row">
+      <div class="col-md-2 text-center">
+        <!-- <img [src]="imageToShow == null ? '/assets/LogoTemp.png' : imageToShow" alt="company logo" height="200px" width="200px">    -->
 
-      <div class="row">
-        <div class="col-md-2">
-          <!-- <img [src]="imageToShow == null ? '/assets/LogoTemp.png' : imageToShow" alt="company logo" height="200px" width="200px">    -->
-        
-          <img [src]= "company.photo != null ? 'data:image/png;base64,' + company.photo.fileData : '/assets/LogoTemp.png'" alt="company logo" height="200px"
-          width="200px"/> 
-
-        </div>
-        <div class="col-md-10">
-          <div class="col text-center">
-            <h2 class="py-2">{{company.companyName}}</h2>
-            <p class="pl-3">{{company.shortDescription}}</p>
-            <div class="row d-flex justify-content-between">
-              <div class="col-md-4 text-center">
-                <p class="ml-2"><i class="fa fa-at mr-2"></i>{{company.emailAddress}}</p>
-              </div>
-              <div class="col-md-3 text-center">
-                <p><i class="fa fa-phone mr-2"></i>{{company.phoneNumber}}</p>
-              </div>
-              <div class="col-md-5 text-center">
-                <p class="mr-3"><i class="fa fa-globe pr-2"></i>{{company.webSite}}</p>
-
-              </div>
+        <img
+          [src]="
+            company.photo != null
+              ? 'data:image/png;base64,' + company.photo.fileData
+              : '/assets/LogoTemp.png'
+          "
+          alt="company logo"
+          height="200px"
+          width="200px"
+        />
+      </div>
+      <div class="col-md-10">
+        <div class="col text-center">
+          <h2>{{ company.companyName }}</h2>
+          <p>{{ company.shortDescription }}</p>
+          <div class="row d-flex justify-content-between">
+            <div class="col-md-4 text-center">
+              <p><i class="fa fa-at mr-2"></i>{{ company.emailAddress }}</p>
             </div>
-            <div class="d-flex justify-content-end mr-3">
-              <button mat-raised-button type="submit" class="card-detail-button ml-auto" [routerLink]="['/firma/',company.id]">Szczegóły</button>
+            <div class="col-md-3 text-center">
+              <p><i class="fa fa-phone mr-2"></i>{{ company.phoneNumber }}</p>
+            </div>
+            <div class="col-md-5 text-center">
+              <p><i class="fa fa-globe pr-2"></i>{{ company.webSite }}</p>
             </div>
           </div>
-
-
-
+          <br />
+          <div class="d-flex justify-content-end">
+            <button
+              mat-raised-button
+              type="submit"
+              class="card-detail-button ml-auto"
+              [routerLink]="['/firma/', company.id]"
+            >
+              Szczegóły
+            </button>
+          </div>
         </div>
       </div>
     </div>
-  
+  </div>
+</div>

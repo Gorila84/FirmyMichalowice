@@ -12,7 +12,7 @@ import {DomSanitizer} from '@angular/platform-browser';
 export class CompanyDetailComponent implements OnInit {
   company: Company;
   constructor(private route: ActivatedRoute,
-              private sanitizer: DomSanitizer
+             // private sanitizer: DomSanitizer
              ) { }
 
   // tslint:disable-next-line:typedef
@@ -21,11 +21,6 @@ export class CompanyDetailComponent implements OnInit {
       this.company = data.company;
     });
   }
-  // tslint:disable-next-line:typedef
 
-}
-
- function transformToSafety(geolocationUrl: string): string {
-  return this.sanitizer.bypassSecurityTrustResourceUrl(geolocationUrl);
 }
 
