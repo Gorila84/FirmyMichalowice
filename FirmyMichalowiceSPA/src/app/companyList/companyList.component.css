@@ -48,3 +48,14 @@ header {
   background-color: rgba(0, 0, 0, 0.7);
   z-index: -2;
 }
+
+.mat-basic {
+  border: 1px solid;
+}
+.danger:hover{
+  background-color: red;
+}
+
+.confirm:hover{
+  background-color: greenyellow;
+}

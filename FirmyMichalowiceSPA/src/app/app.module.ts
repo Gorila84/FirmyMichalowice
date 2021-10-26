@@ -6,6 +6,7 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { PaginationModule } from 'ngx-bootstrap/pagination';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {MatCheckboxDefaultOptions, MatCheckboxModule, MAT_CHECKBOX_DEFAULT_OPTIONS} from '@angular/material/checkbox';
 
 
 import { AppComponent } from './app.component';
@@ -68,7 +69,7 @@ import { Polityka_prywatnosciComponent } from './polityka_prywatnosci/polityka_p
     MatButtonModule,
     MatMenuModule,
     MatCardModule,
-   
+    MatCheckboxModule,
     AccordionModule.forRoot(),
     // tslint:disable-next-line:max-line-length
     LoggerModule.forRoot({serverLoggingUrl: environment.apiUrl + 'logs/post', level: NgxLoggerLevel.DEBUG, serverLogLevel: NgxLoggerLevel.ERROR})
@@ -79,6 +80,7 @@ import { Polityka_prywatnosciComponent } from './polityka_prywatnosci/polityka_p
     CompanyDetailResolver,
     CompanyEditlResolver,
     PreventUnsavedChanges,
+    {provide: MAT_CHECKBOX_DEFAULT_OPTIONS, useValue: { clickAction: 'noop' } as MatCheckboxDefaultOptions},
   ],
   bootstrap: [AppComponent]
 })

@@ -41,19 +41,19 @@
               (ngSubmit)="loadCompanies()"
             >
               <div class="row d-flex align-items-end">
-                <div class="col-2 d-flex justify-content-end">
+                <div class="col-md-2 d-flex justify-content-end">
                   <h2>Wyszukaj:</h2>
                 </div>
-                <div class="col-3 d-flex justify-content-end">
+                <div class="col-md-3 d-flex justify-content-end">
                   <mat-form-field
                     class="example-full-width companyName"
-                    appearance="legacy"
+                    appearance="fill"
                   >
                     <mat-label>Nazwa firmy</mat-label>
 
                     <input
                       matInput
-                      class="form-control"
+                      
                       name="companyName"
                       id="companyName"
                       [(ngModel)]="companyParams.CompanyName"
@@ -61,16 +61,16 @@
                     />
                   </mat-form-field>
                 </div>
-                <div class="col-3 d-flex justify-content-end">
+                <div class="col-md-3 d-flex justify-content-end">
                   <mat-form-field
                     class="example-full-width companyName"
-                    appearance="legacy"
+                    appearance="fill"
                   >
                     <mat-label>Kategoria</mat-label>
 
                     <input
                       matInput
-                      class="form-control"
+                     
                       name="companyType"
                       id="companyType"
                       [(ngModel)]="companyParams.CompanyType"
@@ -78,16 +78,16 @@
                     />
                   </mat-form-field>
                 </div>
-                <div class="col-3 d-flex justify-content-end">
+                <div class="col-md-3 d-flex justify-content-end">
                   <mat-form-field
                     class="example-full-width companyName"
-                    appearance="legacy"
+                    appearance="fill"
                   >
                     <mat-label>Miejscowość</mat-label>
 
                     <input
                       matInput
-                      class="form-control"
+                      
                       name="city"
                       id="city"
                       [(ngModel)]="companyParams.City"
@@ -100,15 +100,15 @@
                   class="search-button mr-3 d-flex justify-content-end"
                 >
                   <button
-                    mat-raised-button
-                    class="mt-4 save-button mx-1"
-                    color="warn"
+                    
+                    class="mt-4 btn mat-basic mx-1 danger"
+                   
                   >
                     Usuń filtry
                   </button>
                   <button
-                    mat-raised-button
-                    class="mt-4 save-button"
+                   
+                    class="mt-4 btn mat-basic confirm"
                     typ="submit"
                   >
                     Wyszukaj

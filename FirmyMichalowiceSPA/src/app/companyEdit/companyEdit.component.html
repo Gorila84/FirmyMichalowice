@@ -111,7 +111,7 @@
                 
                 <li><mat-form-field class="full-width" appearance="legacy">
                   <mat-label>ul. </mat-label>
-                  <input matInput class="form-control" type="text" name="street" [(ngModel)]="company.street">
+                  <input matInput class="form-control" type="text" name="street" [(ngModel)]="company.street" readonly>
                 </mat-form-field>
                 </li>
                 
@@ -119,24 +119,31 @@
                   <mat-form-field class="example-full-width" appearance="legacy">
                 
                     <mat-label>kod pocztowy:</mat-label>
-                  <input matInput class="form-control" type="text" name="postalCode" [(ngModel)]="company.postalCode">
+                  <input matInput class="form-control" type="text" name="postalCode" [(ngModel)]="company.postalCode" readonly>
                 </mat-form-field>
                 </li>
                
                 <li><mat-form-field class="example-full-width" appearance="legacy">
                   <mat-label for="city">Miejscowość:</mat-label>
-                  <input matInput class="form-control" type="text" name="city" [(ngModel)]="company.city">
+                  <input matInput class="form-control" type="text" name="city" [(ngModel)]="company.city" readonly>
                 </mat-form-field>
                 </li>
               </ul>
             </div>
-
+            <mat-checkbox></mat-checkbox>
 
           </div>
         </form>
 
       </div>
     </div>
+
+    <!-- <div class="card company-card">
+      <mat-form-field class="example-full-width" appearance="legacy">
+                  <mat-label for="city">Wprowadź inny adres działalności</mat-label>
+                 
+                </mat-form-field>
+    </div> -->
     <br><br>
 
 
