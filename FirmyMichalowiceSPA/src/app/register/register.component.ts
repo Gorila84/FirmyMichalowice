@@ -37,7 +37,7 @@ export class RegisterComponent implements OnInit {
   emailFormControl = new FormControl('', [
     Validators.required,
     Validators.email,
-  ]);
+     ]);
 
   nipFormControl = new FormControl('', [
     Validators.required,

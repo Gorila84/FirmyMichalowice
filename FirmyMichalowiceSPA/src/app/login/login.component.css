@@ -12,3 +12,7 @@
 .cancel-button:hover{
     background:red;
 }
+
+input{
+    width:100%;
+}

@@ -23,3 +23,18 @@ body {
   background: grey !important;
   border-color: darkgrey !important;
 }
+
+.mat-basic {
+  border: 1px solid;
+}
+.danger:hover{
+  background-color: red;
+}
+
+.confirm:hover{
+  background-color: greenyellow;
+}
+
+a{
+  cursor: pointer;
+}

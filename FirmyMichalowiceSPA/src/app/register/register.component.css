@@ -9,18 +9,3 @@ mat-form-fiel{
     width: 100vw;
 }
 
-.register-button{
-    background:linear-gradient(45deg, lightgreen, darkgreen, lightgreen)
-}
-
-.cancel-button{
-    background:linear-gradient(45deg, pink, red, pink)
-}
-
-.register-button:hover{
-    background: green;
-}
-
-.cancel-button:hover{
-    background:red;
-}

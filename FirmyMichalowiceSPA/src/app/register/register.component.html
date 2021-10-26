@@ -132,16 +132,17 @@
     <button
       [disabled]="!rodoCheck.checked"
       type="submit"
-      class="btn btn-primary mr-2"
+      class="btn mat-basic confirm mr-2"
     >
       Zarejstruj
     </button>
     <button
       type="button"
-      class="btn btn-danger"
+      class="btn mat-basic danger"
       (click)="cancel()"
       (click)="password.value = ''"
       (click)="login.value = ''"
+      (click)="nip.value = ''"
       (click)="rodoCheck.value = false"
     >
       Anuluj

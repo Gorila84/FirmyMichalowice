@@ -15,8 +15,12 @@
     >
       <img [src]="item" height="45" width="39" class="arms bd-highlight mx-3" />
     </div>
-
-    <button
+    <button class="navbar-toggler border-0 navbar-toggler-icon" type="button" data-toggle="collapse"
+    data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false"
+    aria-label="Toggle navigation">
+   
+</button>
+    <!-- <button
       class="navbar-toggler"
       type="button"
       data-bs-toggle="collapse"
@@ -34,13 +38,13 @@
       [matMenuTriggerFor]="menu"
     >
       <span class="navbar-toggler-icon"></span>
-    </button>
+    </button> -->
     <mat-menu #menu="matMenu">
       <button mat-menu-item [routerLink]="['/logowanie/']">Zaloguj</button>
       <button mat-menu-item [routerLink]="['/rejstracja/']">Zarejstruj</button>
     </mat-menu>
 
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <div class="collapse navbar-collapse text-center" id="navbarNavAltMarkup">
       <ul class="navbar-nav ml-auto mb-2 mb-lg-0">
         <li class="nav-item">
           <a class="nav-link" [routerLink]="['/kontakt/']">Kontakt</a>
