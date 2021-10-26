@@ -61,3 +61,4 @@ Thumbs.db
 /FirmyMichalowice/obj/Debug/*
 /FirmyMichalowice/bin/Debug/*
 /FirmyMichalowice/appsettings.json
+/FirmyMichalowice/appsettings.Development.json
