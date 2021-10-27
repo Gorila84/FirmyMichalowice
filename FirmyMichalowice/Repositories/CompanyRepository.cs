@@ -68,7 +68,7 @@ namespace FirmyMichalowice.Repositories
 
         public async Task<PageList<User>> GetCompanies(UserParams userParams)
         {
-            var users = _context.Users.Include(p => p.Photo).AsQueryable();
+            var users = _context.Users.Where(x=>x.IsActive == true).Include(p => p.Photo).AsQueryable();
 
             if (userParams.CompanyName != null || userParams.CompanyType != null || userParams.City != null)
             {
