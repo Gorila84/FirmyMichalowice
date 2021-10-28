@@ -56,7 +56,7 @@ import { Polityka_prywatnosciComponent } from './polityka_prywatnosci/polityka_p
     BrowserModule,
     FormsModule,
     ReactiveFormsModule,
-    RouterModule.forRoot(appRoutes),
+    RouterModule.forRoot(appRoutes, { relativeLinkResolution: 'legacy' }),
     HttpClientModule,
     BsDropdownModule.forRoot(),
     MatAutocompleteModule,
