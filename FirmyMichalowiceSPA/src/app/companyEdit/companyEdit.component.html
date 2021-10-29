@@ -130,13 +130,47 @@
                 </li>
               </ul>
             </div>
-            <mat-checkbox></mat-checkbox>
-
+          
           </div>
+          <div>
+            <input
+            #rodoCheck
+            type="checkbox"
+            class="form-check-input"
+            id="adress"
+            name="adress"
+            (change)="(0)"
+          />
+          <label for="adress">Chcę dodać inny adres firmy</label>
+          </div>
+          <div class="row">
+            <div class="col-12 pt-2 pb-2">
+                  
+           
+      
+              <div   [hidden]="!rodoCheck.checked">
+                <mat-form-field class="full-width" appearance="legacy">
+                  <mat-label>ul. </mat-label>
+                  <input matInput class="form-control" type="text" name="street" >
+                </mat-form-field>
+                <mat-form-field class="full-width" appearance="legacy">
+                  <mat-label>Miejscowość </mat-label>
+                  <input matInput class="form-control" type="text" name="street" >
+                </mat-form-field>
+                <mat-form-field class="full-width" appearance="legacy">
+                  <mat-label>Kod pocztowy </mat-label>
+                  <input matInput class="form-control" type="text" name="street" >
+                </mat-form-field>
+              </div>
+            </div>
+            </div>
         </form>
-
+       
       </div>
     </div>
+
+    
+   
 
     <!-- <div class="card company-card">
       <mat-form-field class="example-full-width" appearance="legacy">
@@ -148,7 +182,9 @@
 
 
     <hr>
+  
     <div class="container">
+     
     <form #editForm="ngForm" id="editForm" (ngSubmit)="updateCompany()">
 
 

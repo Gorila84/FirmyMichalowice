@@ -36,6 +36,8 @@ export class CompanyEditComponent implements OnInit {
   company: Company;
   baseUrl = environment.apiUrl;
   fileToUpload: File | null = null;
+  shown: any;
+
   @ViewChild('editForm') editForm: NgForm;
   constructor(private route: ActivatedRoute,
               private alertify: AlertifyService,
@@ -143,6 +145,8 @@ export class CompanyEditComponent implements OnInit {
     this.alertify.error(error);
 });
  }
+
+
 }
 
 
