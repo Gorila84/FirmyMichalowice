@@ -22,6 +22,11 @@ export interface Company {
         geolocationUrl: string;
         municipalitie: string;
         armsUrl: string;
+        officeCity: string;
+        officeStreet: string;
+        officePostalCode: string;
+       
+
 }
 
 export interface PKD {

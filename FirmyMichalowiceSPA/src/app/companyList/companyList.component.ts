@@ -14,6 +14,7 @@ import { CompanyService } from '../_services/company.service';
 export class CompanyListComponent implements OnInit {
 
   companies: Company[];
+  companyTypes: CompanyTypes[];
   pagination: Pagination;
   constructor(private route: ActivatedRoute,
               private companyService: CompanyService,
@@ -43,6 +44,8 @@ export class CompanyListComponent implements OnInit {
       this.alertify.error(error);
     });
   }
+
+
 
   clearFilrFileds(){
       

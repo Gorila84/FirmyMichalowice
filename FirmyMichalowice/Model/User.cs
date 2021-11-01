@@ -50,5 +50,9 @@ namespace FirmyMichalowice.Model
         
         public bool IsActive { get; set; }
 
+        public string OfficeCity { get; set; }
+        public string OfficeStreet { get; set; }
+        public string OfficePostalCode { get; set; }
+
     }
 }

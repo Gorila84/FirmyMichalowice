@@ -21,9 +21,9 @@
         <b><u>Kontakt:</u></b>
       </p>
       <ul>
-        <li><b>strona www: </b><a href="http://{{ company.webSite }}">{{ company.webSite }}</a> </li>
-        <li><b>tel: </b> {{ company.phoneNumber }}</li>
-        <li><b>email: </b> {{ company.emailAddress }}</li>
+        <li class="py-2"><b>strona www: </b><a href="http://{{ company.webSite }}">{{ company.webSite }}</a> </li>
+        <li class="py-2"><b>tel: </b> {{ company.phoneNumber }}</li>
+        <li class="py-2"><b>email: </b> {{ company.emailAddress }}</li>
       </ul>
       <br />
       <p>
@@ -67,14 +67,26 @@
   <hr />
   <div class="row">
     <div class="col-md-3 text-center">
+      
       <p>
-        <b><u>Adres:</u></b>
+        <b><u>Adres rejestracji:</u></b>
       </p>
       <ul>
         <li>{{ company.street }}</li>
         <li>{{ company.postalCode }}</li>
         <li>{{ company.city }}</li>
       </ul>
+      
+      <p>
+
+        <b><u>Adres siedziby:</u></b>
+      </p>
+      <ul>
+        <li>{{ company.officeStreet }}</li>
+        <li>{{ company.officePostalCode }}</li>
+        <li>{{ company.officeCity }}</li>
+      </ul>
+    
       <br />
       <p>
         <b><u>Gmina:</u></b>

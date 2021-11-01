@@ -7,7 +7,7 @@ import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { PaginationModule } from 'ngx-bootstrap/pagination';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatCheckboxDefaultOptions, MatCheckboxModule, MAT_CHECKBOX_DEFAULT_OPTIONS} from '@angular/material/checkbox';
-
+import { CommonModule } from "@angular/common";
 
 import { AppComponent } from './app.component';
 import { NavComponent } from './nav/nav.component';
@@ -71,6 +71,7 @@ import { Polityka_prywatnosciComponent } from './polityka_prywatnosci/polityka_p
     MatCardModule,
     MatCheckboxModule,
     AccordionModule.forRoot(),
+    CommonModule,
     // tslint:disable-next-line:max-line-length
     LoggerModule.forRoot({serverLoggingUrl: environment.apiUrl + 'logs/post', level: NgxLoggerLevel.DEBUG, serverLogLevel: NgxLoggerLevel.ERROR})
     // FontAwesomeModule

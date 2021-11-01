@@ -151,15 +151,15 @@
               <div   [hidden]="!rodoCheck.checked">
                 <mat-form-field class="full-width" appearance="legacy">
                   <mat-label>ul. </mat-label>
-                  <input matInput class="form-control" type="text" name="street" >
+                  <input matInput class="form-control" type="text" name="officeStreet" [(ngModel)]="company.officeStreet">
                 </mat-form-field>
                 <mat-form-field class="full-width" appearance="legacy">
                   <mat-label>Miejscowość </mat-label>
-                  <input matInput class="form-control" type="text" name="street" >
+                  <input matInput class="form-control" type="text" name="officeCity" [(ngModel)]="company.officeCity">
                 </mat-form-field>
                 <mat-form-field class="full-width" appearance="legacy">
                   <mat-label>Kod pocztowy </mat-label>
-                  <input matInput class="form-control" type="text" name="street" >
+                  <input matInput class="form-control" type="text" name="officePostalCode" [(ngModel)]="company.officePostalCode">
                 </mat-form-field>
               </div>
             </div>
