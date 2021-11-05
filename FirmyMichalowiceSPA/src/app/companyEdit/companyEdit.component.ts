@@ -148,11 +148,7 @@ export class CompanyEditComponent implements OnInit {
 
 
  showContactData(){
-   var addressData = document.getElementById("additionalAddress")
-    addressData.value
 
  }
 
 }
-
-

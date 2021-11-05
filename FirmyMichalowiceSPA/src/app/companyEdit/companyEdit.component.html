@@ -139,7 +139,9 @@
             class="form-check-input"
             id="adress"
             name="adress"
+            [checked]="company.additionalAddress" 
             (change)="(0)"
+            [(ngModel)]="company.additionalAddress"
           />
           <label for="adress">Chcę dodać inny adres firmy</label>
           </div>

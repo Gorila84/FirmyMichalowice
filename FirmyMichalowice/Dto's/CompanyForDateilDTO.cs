@@ -45,7 +45,7 @@ namespace FirmyMichalowice.Dto_s
         public string GeolocationUrl { get; set; }
 
         public string ArmsUrl { get; set; }
-
+        public bool AdditionalAddress { get; set; }
         public string OfficeCity { get; set; }
         public string OfficeStreet { get; set; }
         public string OfficePostalCode { get; set; }

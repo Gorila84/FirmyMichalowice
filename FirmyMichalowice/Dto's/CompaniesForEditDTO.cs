@@ -37,7 +37,7 @@ namespace FirmyMichalowice.Dto_s
         [StringLength(10)]
         public string NIP { get; set; }
 
-
+        public bool AdditionalAddress { get; set; }
         public string OfficeCity { get; set; }
         public string OfficeStreet { get; set; }
         public string OfficePostalCode { get; set; }

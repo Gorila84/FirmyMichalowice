@@ -49,7 +49,7 @@ namespace FirmyMichalowice.Model
         public string GeolocationUrl { get; set; }
         
         public bool IsActive { get; set; }
-
+        public bool AdditionalAddress { get; set; }
         public string OfficeCity { get; set; }
         public string OfficeStreet { get; set; }
         public string OfficePostalCode { get; set; }

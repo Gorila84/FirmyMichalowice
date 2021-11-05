@@ -76,7 +76,7 @@
         <li>{{ company.postalCode }}</li>
         <li>{{ company.city }}</li>
       </ul>
-      
+      <div *ngIf="getIfAdditionalAddressIsTrue()">
       <p>
 
         <b><u>Adres siedziby:</u></b>
@@ -86,7 +86,7 @@
         <li>{{ company.officePostalCode }}</li>
         <li>{{ company.officeCity }}</li>
       </ul>
-    
+    </div>
       <br />
       <p>
         <b><u>Gmina:</u></b>

@@ -25,7 +25,7 @@ export interface Company {
         officeCity: string;
         officeStreet: string;
         officePostalCode: string;
-       
+        additionalAddress: boolean;
 
 }
 

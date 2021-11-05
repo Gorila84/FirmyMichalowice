@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Company } from '../_models/company';
 import {DomSanitizer} from '@angular/platform-browser';
+import { CompanyService } from '../_services/company.service';
 
 @Component({
   // tslint:disable-next-line:component-selector
@@ -11,8 +12,9 @@ import {DomSanitizer} from '@angular/platform-browser';
 })
 export class CompanyDetailComponent implements OnInit {
   company: Company;
+  id: number;
   constructor(private route: ActivatedRoute,
-             // private sanitizer: DomSanitizer
+              private companyService: CompanyService
              ) { }
 
   // tslint:disable-next-line:typedef
@@ -25,6 +27,11 @@ export class CompanyDetailComponent implements OnInit {
   isEmptyObject(obj) {
   return (obj && (Object.keys(obj).length === 0));
 }
+
+  getIfAdditionalAddressIsTrue(){
+    
+    return this.company.additionalAddress;
+  }
 
 }
 
