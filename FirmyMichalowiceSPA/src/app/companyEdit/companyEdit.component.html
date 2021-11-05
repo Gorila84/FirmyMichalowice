@@ -68,15 +68,15 @@
       <input type="file" #file placeholder="Choose file" (change)="uploadFile(file.files)" style="display:none;">
     </div>
 
-    <div class="col-md-8 card text-center company-card">
+    <div class="contact-data col-md-8 mx-2 ml-3 card text-center company-card">
       <h3>Dane kontaktowe</h3>
       <hr>
       <div class="container">
-        <form #editForm="ngForm" id="editForm" (ngSubmit)="updateCompany()">
+        <form #editForm="ngForm"  id="editForm" (ngSubmit)="updateCompany()">
 
 
 
-          <div class="row d-flex justify-content-between">
+          <div class="row   d-flex justify-content-between">
             <div class="col-md-6 text-center contact">
               <!-- <p>Kontakt:</p> -->
               <ul>
@@ -151,7 +151,7 @@
               <div   [hidden]="!rodoCheck.checked">
                 <mat-form-field class="full-width" appearance="legacy">
                   <mat-label>ul. </mat-label>
-                  <input matInput class="form-control" type="text" name="officeStreet" [(ngModel)]="company.officeStreet">
+                  <input matInput id="additionalAddress" class="form-control" type="text" name="officeStreet" [(ngModel)]="company.officeStreet">
                 </mat-form-field>
                 <mat-form-field class="full-width" appearance="legacy">
                   <mat-label>Miejscowość </mat-label>
