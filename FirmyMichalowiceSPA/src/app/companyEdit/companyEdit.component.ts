@@ -56,7 +56,7 @@ export class CompanyEditComponent implements OnInit {
     });
     // this.getImage(this.authService.decotedToken.nameid);
     // this.getImage();
-    console.log(this.company);
+   
     this.filteredOptions = this.myControl.valueChanges
     .pipe(
       startWith(''),

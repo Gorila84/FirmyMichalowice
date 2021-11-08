@@ -1,4 +1,5 @@
 ﻿using FirmyMichalowice.Data;
+using FirmyMichalowice.Helpers;
 using FirmyMichalowice.Model;
 using Microsoft.Extensions.Configuration;
 using System;
@@ -12,25 +13,35 @@ namespace FirmyMichalowice.Serv
     {
         private readonly IConfiguration _configuration;
         private readonly MapQuestService _mapQuestService;
-        public MapBoxService(IConfiguration configuration, MapQuestService mapQuestService)
+        private ILoggerManager _logger;
+        public MapBoxService(IConfiguration configuration, MapQuestService mapQuestService, ILoggerManager logger)
         {
             _configuration = configuration;
             _mapQuestService = mapQuestService;
+            _logger = logger;
         }
-        public async Task<string> GetGeolocationURL(Firma firma)
+        public async Task<string> GetGeolocationURL(string adress, string gmina)
         {
-            string adress = string.Format("{0} {1}, {2} {3}", firma.adresDzialanosci.ulica, firma.adresDzialanosci.budynek, firma.adresDzialanosci.miasto, firma.adresDzialanosci.kod);
-            var geolocations = await _mapQuestService.GetGeolocations(adress);
-            string mapBoxKey = _configuration.GetSection("MapBox:ApiKey").Value;
+            try
+            {
+                var geolocations = await _mapQuestService.GetGeolocations(adress);
+                string mapBoxKey = _configuration.GetSection("MapBox:ApiKey").Value;
 
-            //Geolocation geoLocCompany = geolocations.Where(x => x. == "Poland" && x.region == "Lesser Poland Voivodeship" && x.administrative_area == firma.adresDzialanosci.gmina).FirstOrDefault();
+                //Geolocation geoLocCompany = geolocations.Where(x => x. == "Poland" && x.region == "Lesser Poland Voivodeship" && x.administrative_area == firma.adresDzialanosci.gmina).FirstOrDefault();
 
-            IList<Location> geoLocCompanies = geolocations.Select(x => x.locations).FirstOrDefault();
-            Location searchingGeo = geoLocCompanies.Where(y => y.adminArea1 == "PL" && y.adminArea3 == "Lesser Poland Voivodeship" && y.adminArea4 == "gmina " + firma.adresDzialanosci.gmina && (firma.adresDzialanosci.ulica + ' ' + firma.adresDzialanosci.budynek).ToLower().Contains(y.street.ToLower())).FirstOrDefault();
+                IList<Location> geoLocCompanies = geolocations.Select(x => x.locations).FirstOrDefault();
+                Location searchingGeo = geoLocCompanies.Where(y => y.adminArea1 == "PL" && y.adminArea3 == "Lesser Poland Voivodeship" && y.adminArea4 == "gmina " + gmina && (adress.Split(",").First().ToLower().Contains(y.street.ToLower()))).FirstOrDefault();
+                string geolocationUrl = string.Empty;
 
-
-            string geolocationUrl = string.Format("https://api.mapbox.com/styles/v1/mapbox/light-v10/static/pin-s-l+000({1},{0})/{1},{0},14/500x300?access_token={2}", searchingGeo.latLng.lat.ToString().Replace(",", "."), searchingGeo.latLng.lng.ToString().Replace(",", "."), mapBoxKey);
-            return geolocationUrl;
+                if (searchingGeo != null)
+                    geolocationUrl = string.Format("https://api.mapbox.com/styles/v1/mapbox/light-v10/static/pin-s-l+000({1},{0})/{1},{0},14/500x300?access_token={2}", searchingGeo.latLng.lat.ToString().Replace(",", "."), searchingGeo.latLng.lng.ToString().Replace(",", "."), mapBoxKey);
+                return geolocationUrl;
+            }
+            catch (Exception ex)
+            {
+                _logger.LogInformation(ex.Message);
+                return string.Empty;
+            }
         }
     }
 }

@@ -5,6 +5,6 @@ namespace FirmyMichalowice.Serv
 {
     public interface IMapBoxService
     {
-        Task<string> GetGeolocationURL(Firma firma);
+        Task<string> GetGeolocationURL(string adress, string gmina);
     }
 }

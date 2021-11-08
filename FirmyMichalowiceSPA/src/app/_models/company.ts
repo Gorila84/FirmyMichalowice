@@ -20,11 +20,14 @@ export interface Company {
         mainPKD: PKD;
         pkds: PKD[];
         geolocationUrl: string;
+        geolocation2Url: string;
         municipalitie: string;
         armsUrl: string;
         officeCity: string;
         officeStreet: string;
         officePostalCode: string;
+        officeMunicipalitie: string;
+        statusFromCeidg: string;
        
 
 }

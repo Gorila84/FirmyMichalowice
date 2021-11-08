@@ -37,6 +37,7 @@ import { ContactComponent } from './contact/contact.component';
 import { AccordionModule } from 'ngx-bootstrap/accordion';
 import { MatMenuModule} from '@angular/material/menu';
 import { Polityka_prywatnosciComponent } from './polityka_prywatnosci/polityka_prywatnosci.component';
+import {MatTabsModule} from '@angular/material/tabs';
 
 @NgModule({
   declarations: [		
@@ -73,8 +74,9 @@ import { Polityka_prywatnosciComponent } from './polityka_prywatnosci/polityka_p
     AccordionModule.forRoot(),
     CommonModule,
     // tslint:disable-next-line:max-line-length
-    LoggerModule.forRoot({serverLoggingUrl: environment.apiUrl + 'logs/post', level: NgxLoggerLevel.DEBUG, serverLogLevel: NgxLoggerLevel.ERROR})
+    LoggerModule.forRoot({serverLoggingUrl: environment.apiUrl + 'logs/post', level: NgxLoggerLevel.DEBUG, serverLogLevel: NgxLoggerLevel.ERROR}),
     // FontAwesomeModule
+    MatTabsModule
   ],
   providers: [
     CompanyListResolver,

@@ -49,6 +49,8 @@ namespace FirmyMichalowice.Dto_s
         public string OfficeCity { get; set; }
         public string OfficeStreet { get; set; }
         public string OfficePostalCode { get; set; }
+        public string StatusFromCeidg { get; set; }
+        public string Geolocation2Url { get; set; }
 
     }
 }

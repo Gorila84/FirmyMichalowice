@@ -28,7 +28,8 @@ namespace FirmyMichalowice.Model
         public string City { get; set; }
         public string Street { get; set; }
         public string PostalCode { get; set; }
-        public string Municipalitie { get; set; } 
+
+        public string Municipalitie { get; set; }
         public string Rodo { get; set; }
         public DateTime Created { get; set; }
         public DateTime Modify { get; set; }
@@ -53,6 +54,14 @@ namespace FirmyMichalowice.Model
         public string OfficeCity { get; set; }
         public string OfficeStreet { get; set; }
         public string OfficePostalCode { get; set; }
+
+        public string OfficeMunicipalitie { get; set; }
+
+        [NotMapped]
+        public string StatusFromCeidg { get; set; }
+
+        [NotMapped]
+        public string Geolocation2Url { get; set; }
 
     }
 }

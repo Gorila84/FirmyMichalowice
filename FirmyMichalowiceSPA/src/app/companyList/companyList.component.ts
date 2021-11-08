@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Company } from '../_models/company';
+import { CompanyType } from '../_models/companyTypes';
 import { Pagination, PaginationResult } from '../_models/pagination';
 import { AlertifyService } from '../_services/alertify.service';
 import { CompanyService } from '../_services/company.service';
@@ -14,7 +15,7 @@ import { CompanyService } from '../_services/company.service';
 export class CompanyListComponent implements OnInit {
 
   companies: Company[];
-  companyTypes: CompanyTypes[];
+  companyTypes: CompanyType[];
   pagination: Pagination;
   constructor(private route: ActivatedRoute,
               private companyService: CompanyService,

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Company } from '../_models/company';
-import {DomSanitizer} from '@angular/platform-browser';
+
 
 @Component({
   // tslint:disable-next-line:component-selector
@@ -11,6 +11,7 @@ import {DomSanitizer} from '@angular/platform-browser';
 })
 export class CompanyDetailComponent implements OnInit {
   company: Company;
+  isCompanyActive: boolean;
   constructor(private route: ActivatedRoute,
              // private sanitizer: DomSanitizer
              ) { }
@@ -20,6 +21,7 @@ export class CompanyDetailComponent implements OnInit {
     this.route.data.subscribe(data => {
       this.company = data.company;
     });
+    this.isCompanyActive = this.company.statusFromCeidg == 'AKTYWNY';
   }
 
   isEmptyObject(obj) {

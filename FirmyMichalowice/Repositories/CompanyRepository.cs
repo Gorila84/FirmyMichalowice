@@ -51,7 +51,14 @@ namespace FirmyMichalowice.Repositories
                     });
 
                     user.PKDS = _context.PKD.Where(x => pkds.Contains(x.Symbol)).ToList();
-                    user.GeolocationUrl = await _mapBoxService.GetGeolocationURL(firma);
+                    string adress = string.Format("{0} {1}, {2} {3}", firma.adresDzialanosci.ulica, firma.adresDzialanosci.budynek, firma.adresDzialanosci.miasto, firma.adresDzialanosci.kod);
+                    user.GeolocationUrl = await _mapBoxService.GetGeolocationURL(adress, firma.adresDzialanosci.gmina);
+                    if (!string.IsNullOrEmpty(user.OfficeCity))
+                    {
+                        string adress2 = string.Format("{0}, {1} {2}", user.OfficeStreet, user.OfficeCity, user.OfficePostalCode);
+                        user.Geolocation2Url = await _mapBoxService.GetGeolocationURL(adress2, user.OfficeMunicipalitie);
+                    }
+                    user.StatusFromCeidg = firma.status;
                 
                 }
 
