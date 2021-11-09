@@ -33,7 +33,7 @@ namespace FirmyMichalowice.Repositories
 
         }
 
-        public async Task<User> GetCompany(int id)
+        public async Task<User> GetCompany(int id, bool isForEdit)
         {
             try
             {
@@ -51,12 +51,16 @@ namespace FirmyMichalowice.Repositories
                     });
 
                     user.PKDS = _context.PKD.Where(x => pkds.Contains(x.Symbol)).ToList();
-                    string adress = string.Format("{0} {1}, {2} {3}", firma.adresDzialanosci.ulica, firma.adresDzialanosci.budynek, firma.adresDzialanosci.miasto, firma.adresDzialanosci.kod);
-                    user.GeolocationUrl = await _mapBoxService.GetGeolocationURL(adress, firma.adresDzialanosci.gmina);
-                    if (!string.IsNullOrEmpty(user.OfficeCity))
+
+                    if (!isForEdit)
                     {
-                        string adress2 = string.Format("{0}, {1} {2}", user.OfficeStreet, user.OfficeCity, user.OfficePostalCode);
-                        user.Geolocation2Url = await _mapBoxService.GetGeolocationURL(adress2, user.OfficeMunicipalitie);
+                        string adress = string.Format("{0} {1}, {2} {3}", firma.adresDzialanosci.ulica, firma.adresDzialanosci.budynek, firma.adresDzialanosci.miasto, firma.adresDzialanosci.kod);
+                        user.GeolocationUrl = await _mapBoxService.GetGeolocationURL(adress, firma.adresDzialanosci.gmina, false);
+                        if (!string.IsNullOrEmpty(user.OfficeCity) && !string.IsNullOrEmpty(user.OfficeStreet) && !string.IsNullOrEmpty(user.OfficePostalCode))
+                        {
+                            string adress2 = ValidateOfficeAdress(user.OfficeCity, user.OfficeStreet, user.OfficePostalCode);  
+                            user.Geolocation2Url = await _mapBoxService.GetGeolocationURL(adress2, user.OfficeMunicipalitie, true);
+                        }
                     }
                     user.StatusFromCeidg = firma.status;
                 
@@ -71,7 +75,31 @@ namespace FirmyMichalowice.Repositories
             
         }
 
-       
+        private string ValidateOfficeAdress(string officeCity, string officeStreet, string officePostalCode)
+        {
+            Regex regex = new Regex(@"\s");
+            string[] bits = regex.Split(officeStreet.ToLower());
+            string[] numbers = bits.Last().Split("/");
+            string ulOrOs = bits.First() == "os." || bits.First() == "os" ? "osiedle" : bits.First();
+            string number = numbers.First();
+            List<string> possibleCases = new List<string>() { "ul", "ul.", "os.", "os", "osiedle", "ulica" };
+
+
+            if (bits.Length == 3 && possibleCases.Contains(ulOrOs)) 
+            {
+                return string.Format("{0}, {1} {2}", string.Format("{0} {1} {2}", ulOrOs, bits[1], number), officeCity, officePostalCode);
+            }
+            if(bits.Length > 3)
+            {
+                return string.Format("{0}, {1} {2}", officeStreet, officeCity, officePostalCode);
+            }
+            else
+            {
+                return string.Format("{0}, {1} {2}", string.Format("{0} {1}",  bits.First(), bits.Last()), officeCity, officePostalCode);
+            }
+        
+           
+        }
 
         public async Task<PageList<User>> GetCompanies(UserParams userParams)
         {

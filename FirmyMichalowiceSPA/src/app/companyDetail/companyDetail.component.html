@@ -88,17 +88,19 @@
         <li>{{ company.postalCode }}</li>
         <li>{{ company.city }}</li>
       </ul>
-      <br />
+      <div *ngIf="getIfAdditionalAddressIsTrue()">
+        <p></p>
 
-      <p>
-        <b><u>Adres siedziby:</u></b>
-      </p>
-      <ul>
-        <li>{{ company.officeStreet }}</li>
-        <li>{{ company.officePostalCode }}</li>
-        <li>{{ company.officeCity }}</li>
-      </ul>
-
+        <p>
+          <b><u>Adres siedziby:</u></b>
+        </p>
+        <ul>
+          <li>{{ company.officeStreet }}</li>
+          <li>{{ company.officePostalCode }}</li>
+          <li>{{ company.officeCity }}</li>
+        </ul>
+        <br />
+      </div>
       <br />
       <p>
         <b><u>Gmina:</u></b>
@@ -124,7 +126,7 @@
             title="Mapa z lokalizacja firmy"
           />
         </mat-tab>
-        <mat-tab label="Adres biura" [disabled]="company.geolocation2Url != ''">
+        <mat-tab label="Adres biura" [disabled]="isEnabledGeolocation2Url">
           <br />
           <img
             [src]="company.geolocation2Url"

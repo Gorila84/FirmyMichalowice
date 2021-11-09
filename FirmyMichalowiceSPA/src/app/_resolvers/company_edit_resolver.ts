@@ -18,7 +18,7 @@ export class CompanyEditlResolver implements Resolve<Company>{
                 private authService: AuthService){}
 
     resolve(route: ActivatedRouteSnapshot): Observable<Company> {
-        return this.campanyService.getUser(this.authService.decotedToken.nameid).pipe(
+        return this.campanyService.getUser(this.authService.decotedToken.nameid, true).pipe(
             catchError(error => {
                 this.alertify.error('Problem z pobraniem danych');
                 this.router.navigate(['']);

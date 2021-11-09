@@ -64,10 +64,10 @@ namespace FirmyMichalowice.Controllers
 
 
         }
-        [HttpGet("{id}")]
-        public async Task<IActionResult> GetUser(int id)
+        [HttpGet("getUser/{id}/{isForEdit}")]
+        public async Task<IActionResult> GetUser(int id, bool isForEdit)
         {
-            var user = await _userRepository.GetCompany(id);
+            var user = await _userRepository.GetCompany(id, isForEdit);
 
             var userToReturn = _mapper.Map<CompanyForDateilDTO>(user);
             userToReturn.ArmsUrl =  _municipalitieRepository.GetMunicipalities().Result.Where(x=>x.Name == user.Municipalitie).Select(x=>x.Path).FirstOrDefault();
@@ -81,7 +81,7 @@ namespace FirmyMichalowice.Controllers
         public async Task<IActionResult> UpdateCompany(int id, CompaniesForEditDTO companiesForEditDTO)
         {
             
-            var comapnyFromRepository = await _userRepository.GetCompany(id);
+            var comapnyFromRepository = await _userRepository.GetCompany(id, true);
 
             _mapper.Map(companiesForEditDTO, comapnyFromRepository);
             comapnyFromRepository.Modify = DateTime.Now;

@@ -17,4 +17,9 @@
   .arms {
     display: none;
   }
+  .navbar-toggler {
+    float: right !important;
+    margin-right: 14px;
+    font-size: 14px !important;
+  }
 }

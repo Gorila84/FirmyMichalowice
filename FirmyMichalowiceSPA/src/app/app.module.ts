@@ -38,6 +38,7 @@ import { AccordionModule } from 'ngx-bootstrap/accordion';
 import { MatMenuModule} from '@angular/material/menu';
 import { Polityka_prywatnosciComponent } from './polityka_prywatnosci/polityka_prywatnosci.component';
 import {MatTabsModule} from '@angular/material/tabs';
+import {MatTooltipModule} from '@angular/material/tooltip';
 
 @NgModule({
   declarations: [		
@@ -76,7 +77,8 @@ import {MatTabsModule} from '@angular/material/tabs';
     // tslint:disable-next-line:max-line-length
     LoggerModule.forRoot({serverLoggingUrl: environment.apiUrl + 'logs/post', level: NgxLoggerLevel.DEBUG, serverLogLevel: NgxLoggerLevel.ERROR}),
     // FontAwesomeModule
-    MatTabsModule
+    MatTabsModule,
+    MatTooltipModule
   ],
   providers: [
     CompanyListResolver,

@@ -131,6 +131,8 @@
         type="button"
         class="change-photo-btn"
         (click)="file.click()"
+        #tooltip="matTooltip"
+        matTooltip="Dozwolone rozszerzenia: PNG, JPG, JPEG"
       >
         Dodaj Logo
       </button>
@@ -143,7 +145,7 @@
       />
     </div>
 
-    <div class="col-md-8 card text-center company-card">
+    <div class="contact-data col-md-8 mx-2 ml-3 card text-center company-card">
       <h3>Dane kontaktowe</h3>
       <hr />
       <div class="container">
@@ -261,7 +263,9 @@
               class="form-check-input"
               id="adress"
               name="adress"
+              [checked]="company.additionalAddress"
               (change)="(0)"
+              [(ngModel)]="company.additionalAddress"
             />
             <label for="adress">Chcę dodać inny adres firmy</label>
           </div>
@@ -272,6 +276,7 @@
                   <mat-label>ul. </mat-label>
                   <input
                     matInput
+                    id="additionalAddress"
                     class="form-control"
                     type="text"
                     name="officeStreet"
@@ -304,7 +309,7 @@
                     matInput
                     class="form-control"
                     type="text"
-                    name="officePostalCode"
+                    name="officeMunicipalitie"
                     [(ngModel)]="company.officeMunicipalitie"
                   />
                 </mat-form-field>

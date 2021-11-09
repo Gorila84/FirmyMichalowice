@@ -29,6 +29,7 @@ export interface Company {
         officeMunicipalitie: string;
         statusFromCeidg: string;
        
+        additionalAddress: boolean;
 
 }
 

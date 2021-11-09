@@ -22,7 +22,7 @@ namespace FirmyMichalowice.Dto_s
         public string EmailAddress { get; set; }
         public string City { get; set; }
         public string Street { get; set; }
-        public string PostalCode { get; set; }
+        public string PostalCode { get; set; }   
 
         public string Municipalitie { get; set; }
 
@@ -45,10 +45,11 @@ namespace FirmyMichalowice.Dto_s
         public string GeolocationUrl { get; set; }
 
         public string ArmsUrl { get; set; }
-
+        public bool AdditionalAddress { get; set; }
         public string OfficeCity { get; set; }
         public string OfficeStreet { get; set; }
         public string OfficePostalCode { get; set; }
+        public string OfficeMunicipalitie { get; set; }
         public string StatusFromCeidg { get; set; }
         public string Geolocation2Url { get; set; }
 

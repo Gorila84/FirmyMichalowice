@@ -20,7 +20,7 @@ namespace FirmyMichalowice.Serv
             _mapQuestService = mapQuestService;
             _logger = logger;
         }
-        public async Task<string> GetGeolocationURL(string adress, string gmina)
+        public async Task<string> GetGeolocationURL(string adress, string gmina, bool isOfficeGeoloacations)
         {
             try
             {
@@ -30,7 +30,23 @@ namespace FirmyMichalowice.Serv
                 //Geolocation geoLocCompany = geolocations.Where(x => x. == "Poland" && x.region == "Lesser Poland Voivodeship" && x.administrative_area == firma.adresDzialanosci.gmina).FirstOrDefault();
 
                 IList<Location> geoLocCompanies = geolocations.Select(x => x.locations).FirstOrDefault();
-                Location searchingGeo = geoLocCompanies.Where(y => y.adminArea1 == "PL" && y.adminArea3 == "Lesser Poland Voivodeship" && y.adminArea4 == "gmina " + gmina && (adress.Split(",").First().ToLower().Contains(y.street.ToLower()))).FirstOrDefault();
+                if(!geoLocCompanies.Any(x=>x.adminArea1 == "PL"))
+                {
+                    geolocations = await _mapQuestService.GetGeolocations(adress + ", PL");
+                    geoLocCompanies = geolocations.Select(x => x.locations).FirstOrDefault();
+                }
+                Location searchingGeo;
+                if (isOfficeGeoloacations)
+                {
+                    searchingGeo = geoLocCompanies.Where(y => y.adminArea1 == "PL" && (y.adminArea3 == "Lesser Poland Voivodeship" || y.adminArea3 == "Małopolskie") && (adress.Split(",").First().ToLower().Contains(y.street.ToLower()))).FirstOrDefault();
+
+                }
+                else
+                {
+                    var searchingAdress = adress.Split(",").First().Split(".").Last().ToLower();
+                    searchingGeo = geoLocCompanies.Where(y => y.adminArea1 == "PL" && y.adminArea3 == "Lesser Poland Voivodeship" && y.adminArea4 == "gmina " + gmina && (adress.Split(",").First().ToLower().Contains(y.street.ToLower()))).FirstOrDefault();
+                }
+               
                 string geolocationUrl = string.Empty;
 
                 if (searchingGeo != null)

@@ -16,7 +16,7 @@ export class CompanyDetailResolver implements Resolve<Company>{
                 private alertify: AlertifyService){}
 
     resolve(route: ActivatedRouteSnapshot): Observable<Company> {
-        return this.campanyService.getUser(route.params.id).pipe(
+        return this.campanyService.getUser(route.params.id, false).pipe(
             catchError(error => {
                 this.alertify.error('Problem z pobraniem danych');
                 this.router.navigate(['/uzytkownicy']);

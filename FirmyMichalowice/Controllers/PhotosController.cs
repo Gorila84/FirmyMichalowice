@@ -41,7 +41,12 @@ namespace FirmyMichalowice.Controllers
         {
             try
             {
+                List<string> allowedExtensions = new List<string>() { "image/png", "image/jpeg", "image/jpg" };
                 var image = Request.Form.Files[0];
+                if (image.Length > 2500000 || !allowedExtensions.Contains(image.ContentType))
+                {
+                    return BadRequest();
+                }
                 var id = userId;
                 Photo logo = new Photo();
                 using (var ms = new MemoryStream())

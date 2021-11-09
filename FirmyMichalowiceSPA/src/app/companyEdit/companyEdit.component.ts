@@ -18,7 +18,10 @@ import { CompanyTypeService } from '../_services/companyType.service';
 import { toBase64String } from '@angular/compiler/src/output/source_map';
 
 
-
+interface Item {
+  value: string;
+  viewValue: string;
+}
 
 
 @Component({
@@ -63,8 +66,10 @@ export class CompanyEditComponent implements OnInit {
       map(value => this._filter(value))
     );
   }
+
+
   // tslint:disable-next-line:typedef
-  getImage(result: string) {
+  getImage(result: string, extenssion: string) {
     return result.slice(22, result.length);
   }
 
@@ -84,10 +89,23 @@ export class CompanyEditComponent implements OnInit {
   }
   // tslint:disable-next-line:typedef
   uploadFile = (files) => {
+    const fileToUpload = files[0] as File;
+    let allowedExtrensions = ["image/png", "image/jpeg", "image/jpg" ];
+
+    console.log(fileToUpload.size);
     if (files.length === 0) {
       return;
     }
-    const fileToUpload = files[0] as File;
+    else if (fileToUpload.size > 2500000) {
+      this.alertify.error('Błąd. Rozmiar obrazka nie może być wiekszy niż 2,5 MB.');
+      return;
+    }
+    else if (!allowedExtrensions.includes(fileToUpload.type)){
+      alert(fileToUpload.type);
+      this.alertify.error('Błąd. Niedozwolone rozszerzenie pliku. Użyj PNG, JPG lub JPEG');
+      return;
+    }
+   
     const formData = new FormData();
     formData.append('file', fileToUpload, fileToUpload.name);
     this.uploadPhotoService.uploadImage(this.authService.decotedToken.nameid, fileToUpload)
@@ -100,7 +118,7 @@ export class CompanyEditComponent implements OnInit {
            // window.location.reload();
            const fileReader = new FileReader();
            fileReader.onload = (e) => {
-           this.company.photo.fileData = this.getImage(fileReader.result.toString()) as any ;
+           this.company.photo.fileData = this.getImage(fileReader.result.toString(), fileToUpload.type) as any ;
            };
            fileReader.readAsDataURL(files[0]);
 
@@ -109,6 +127,8 @@ export class CompanyEditComponent implements OnInit {
           const userId = this.authService.decotedToken.nameid;
           err.userId = userId;
           err.componentName = this.constructor.name;
+          //delete err['headers'];
+          console.log(err);
           this.logger.error(err);
           this.alertify.error('Błąd. Nie udało się wysłać pliku');
          }
@@ -135,18 +155,21 @@ export class CompanyEditComponent implements OnInit {
  getCompanyData(){
    this.companyService.getDataFromCEIDG(this.company.nip).subscribe(data => {
     this.alertify.success('Twoje dane zostały pomyślnie pobrane.');
-    let myObj = JSON.parse(data);
-    this.company.companyName = myObj.firma[0].nazwa;  
-    this.company.postalCode = myObj.firma[0].adresDzialanosci.kod;
-    this.company.street = myObj.firma[0].adresDzialanosci.ulica + ' ' + myObj.firma[0].adresDzialanosci.budynek;
-    this.company.city = myObj.firma[0].adresDzialanosci.miasto;
-    this.company.nip = myObj.firma[0].wlasciciel.nip;
+    let myObj = JSON.parse(JSON.stringify(data));
+    console.log(myObj);
+    this.company.companyName = myObj.nazwa;  
+    this.company.postalCode = myObj.adresDzialanosci.kod;
+    this.company.street = myObj.adresDzialanosci.ulica + ' ' + myObj.adresDzialanosci.budynek;
+    this.company.city = myObj.adresDzialanosci.miasto;
+    this.company.nip = myObj.wlasciciel.nip;
   }, error => {
     this.alertify.error(error);
 });
  }
 
 
+ showContactData(){
+
+ }
+
 }
-
-

@@ -45,8 +45,8 @@ getUsers(page?, itemsPerPage?, userParams?, likesParam?): Observable<PaginationR
     ;
   }
 
-getUser(id: number): Observable<Company>{
-  return this.http.get<Company>(this.baseUrl + 'company/' + id);
+getUser(id: number, isForEdit: boolean): Observable<Company>{
+  return this.http.get<Company>(this.baseUrl + 'company/GetUser/' + id + '/' +  isForEdit );
 }
 
 // tslint:disable-next-line:typedef
