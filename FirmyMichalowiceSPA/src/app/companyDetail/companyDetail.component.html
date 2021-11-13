@@ -108,9 +108,19 @@
       <ul>
         <li>
           {{ company.municipalitie }}
-          <img [src]="company.armsUrl" title="Herb gminy" class="my_arms" />
+          <img
+            *ngIf="showArms"
+            [src]="company.armsUrl"
+            title="Herb gminy"
+            class="my_arms"
+          />
         </li>
-        <img [src]="company.armsUrl" title="Herb gminy" class="my_arms2" />
+        <img
+          *ngIf="showArms"
+          [src]="company.armsUrl"
+          title="Herb gminy"
+          class="my_arms2"
+        />
       </ul>
     </div>
     <div class="col-md-9 text-center address">

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { environment } from 'src/environments/environment';
 import { Company } from '../_models/company';
 import { CompanyService } from '../_services/company.service';
 
@@ -14,6 +15,7 @@ export class CompanyDetailComponent implements OnInit {
   isCompanyActive: boolean;
   isEnabledGeolocation2Url: boolean;
   id: number;
+  showArms = environment.showArms;
   constructor(private route: ActivatedRoute,
               private companyService: CompanyService
              ) { }

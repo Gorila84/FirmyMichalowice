@@ -20,6 +20,7 @@ export class NavComponent implements OnInit {
   company: Company;
   armsUrls :any;
   apiUrl = environment.apiUrl + 'Arms/GetArms';
+  showArms = environment.showArms;
 
   constructor(public authService: AuthService, 
               private alertifyService: AlertifyService,
@@ -29,9 +30,11 @@ export class NavComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.http.get(this.apiUrl).subscribe(data =>{
-      this.armsUrls = data
-    });
+    if(this.showArms){
+      this.http.get(this.apiUrl).subscribe(data =>{
+        this.armsUrls = data
+      });
+    }
       
   }
 

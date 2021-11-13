@@ -18,8 +18,10 @@
     display: none;
   }
   .navbar-toggler {
-    float: right !important;
     margin-right: 14px;
     font-size: 14px !important;
+  }
+  .navbar-toggler2 {
+    margin-right: -120px !important;
   }
 }
