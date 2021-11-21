@@ -146,9 +146,10 @@ export class CompanyEditComponent implements OnInit {
 });
  }
 
+  getCompanyType(){
+    console.log(this.company.companyType)
+    return this.company.companyType;
+  }
 
- showContactData(){
-
- }
 
 }

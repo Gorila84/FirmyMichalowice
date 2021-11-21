@@ -59,7 +59,7 @@
       class="btn mat-basic confirm mr-2">
       Zaloguj
     </button>
-    <button  type="submit" class="btn mat-basic danger">Resetuj hasło</button>
+    <button  (click)="resetPassword()" class="btn mat-basic danger"  [(ngModel)]="model.username">Resetuj hasło</button>
   </div>
   
   </form>

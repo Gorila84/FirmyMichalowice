@@ -41,4 +41,8 @@ export class AuthService {
   logOut() {
     localStorage.removeItem('token');
   }
+
+  resetPassword(model:any){
+    return this.http.post(this.baseUrl + 'resetPassword', model);
+  }
 }

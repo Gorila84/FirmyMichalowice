@@ -11,5 +11,7 @@ namespace FirmyMichalowice.Repositories
         Task<User> Login(string nuserName, string pasword);
         Task<User> Register(User user, string password);
         Task<Tuple<bool, string, string>> UserValidation(string userName, string nip);
+
+        void ResetPassword(string userName);
     }
 }

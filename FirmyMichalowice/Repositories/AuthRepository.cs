@@ -104,6 +104,27 @@ namespace FirmyMichalowice.Repositories
                 municipalitie = firma.adresDzialanosci.gmina;
             }
         }
+
+        public void ResetPassword(string userName)
+        {
+            Random random = new Random();
+            byte[] passwordHash, passwordSalt;
+            const string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+            string password = new string(Enumerable.Repeat(chars, 6)
+                .Select(s => s[random.Next(s.Length)]).ToArray());
+
+            CreatePasswordHashSalt(password, out passwordHash, out passwordSalt);
+
+            var user = _context.Users.Where(x => x.Username == userName).FirstOrDefault();
+
+           
+                user.PasswordHash =passwordHash;
+                user.PasswordSalt = passwordSalt;
+
+            _context.SaveChanges();
+           
+
+        }
         #endregion
         #region method private
         private void CreatePasswordHashSalt(string password, out byte[] passwordHash, out byte[] passwordSalt)

@@ -76,7 +76,7 @@ namespace FirmyMichalowice.Repositories
                                     || u.CompanyType == userParams.CompanyType 
                                     || u.City == userParams.City);
             }
-   
+           
             
             var cos = users.Count();
 

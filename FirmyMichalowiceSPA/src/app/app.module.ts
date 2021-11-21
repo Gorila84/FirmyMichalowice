@@ -37,9 +37,10 @@ import { ContactComponent } from './contact/contact.component';
 import { AccordionModule } from 'ngx-bootstrap/accordion';
 import { MatMenuModule} from '@angular/material/menu';
 import { Polityka_prywatnosciComponent } from './polityka_prywatnosci/polityka_prywatnosci.component';
+import { ChangePasswordComponent } from './changePassword/changePassword.component';
 
 @NgModule({
-  declarations: [		
+  declarations: [			
     AppComponent,
       NavComponent,
       LoginComponent,
@@ -50,7 +51,8 @@ import { Polityka_prywatnosciComponent } from './polityka_prywatnosci/polityka_p
       CompanyEditComponent,
       FooterComponent,
       ContactComponent,
-      Polityka_prywatnosciComponent
+      Polityka_prywatnosciComponent,
+      ChangePasswordComponent
    ],
   imports: [
     BrowserModule,

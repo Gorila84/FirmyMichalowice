@@ -1,4 +1,5 @@
 import { Routes } from '@angular/router';
+import { ChangePasswordComponent } from './changePassword/changePassword.component';
 import { CompanyDetailComponent } from './companyDetail/companyDetail.component';
 import { CompanyEditComponent } from './companyEdit/companyEdit.component';
 import { CompanyListComponent } from './companyList/companyList.component';
@@ -23,4 +24,5 @@ export const appRoutes: Routes = [
                         canDeactivate: [PreventUnsavedChanges]},
         {path: 'kontakt', component: ContactComponent},
         {path: 'rejstracja/zp', component: Polityka_prywatnosciComponent},
+        {path: 'zmienHaslo', component: ChangePasswordComponent}
     ];

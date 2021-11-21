@@ -90,6 +90,15 @@ namespace FirmyMichalowice.Controllers
 
         }
 
+        [HttpPost("resetPassword")]
+        public void ResetPassword(UserForLoginDTO userForLoginDto)
+        {
+
+            _repository.ResetPassword(userForLoginDto.UserName);
+
+           
+        }
+
         private bool IsValidEmail(string email)
         {
             try

@@ -36,6 +36,7 @@
             heading="Wyszukiwarka"
           >
             <form
+            
               name="filterForm"
               #ngForm="ngForm"
               (ngSubmit)="loadCompanies()"
@@ -53,7 +54,7 @@
 
                     <input
                       matInput
-                      
+                      #companyName
                       name="companyName"
                       id="companyName"
                       [(ngModel)]="companyParams.CompanyName"
@@ -102,7 +103,7 @@
                   <button
                     
                     class="mt-4 btn mat-basic mx-1 danger"
-                   
+                   (click)="clearFilterFields()"
                   >
                     Usuń filtry
                   </button>
