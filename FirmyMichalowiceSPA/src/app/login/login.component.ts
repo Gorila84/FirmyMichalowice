@@ -34,6 +34,11 @@ export class LoginComponent implements OnInit {
 
 
   login(){
+
+    if (this.loginFormControl.invalid || this.passwordFormControl.invalid) {
+      return;
+  }
+
     this.authService.login(this.model).subscribe(next => {
       this.alertifyService.success('Zalogowałeś się do aplikacji');
     }, error => {
