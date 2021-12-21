@@ -70,13 +70,21 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "FirmyMichalowiceSPA:build",
-            "disableHostCheck": true
+            "browserTarget": "FirmyMichalowiceSPA:build"
           },
           "configurations": {
             "production": {
               "browserTarget": "FirmyMichalowiceSPA:build:production"
-            }
+            },
+            
+                      "development": { 
+                        "buildOptimizer": false,
+                        "optimization": false,
+                        "vendorChunk": true,
+                        "extractLicenses": false,
+                        "sourceMap": true,
+                        "namedChunks": true
+                      }
           }
         },
         "extract-i18n": {
