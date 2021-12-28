@@ -19,7 +19,7 @@ export class CompanyDetailResolver implements Resolve<Company>{
         return this.campanyService.getUser(route.params.id, false).pipe(
             catchError(error => {
                 this.alertify.error('Problem z pobraniem danych');
-                this.router.navigate(['/uzytkownicy']);
+                this.router.navigate(['']);
                 return of(null)
             }
                 

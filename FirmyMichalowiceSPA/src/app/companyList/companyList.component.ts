@@ -28,6 +28,9 @@ export class CompanyListComponent implements OnInit {
     this.route.data.subscribe(data => {
       this.companies = data.companies.result;
       this.pagination = data.companies.pagination;
+      this.companyParams.CompanyType = "";
+      this.companyParams.CompanyName = "";
+      this.companyParams.City = "";
     });
   }
 
