@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormControl } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { Company } from '../_models/company';
 import { CompanyType } from '../_models/companyTypes';
@@ -17,6 +18,11 @@ export class CompanyListComponent implements OnInit {
   companies: Company[];
   companyTypes: CompanyType[];
   pagination: Pagination;
+  city: string;
+  companyName: string;
+  companyType:string;
+  filterForm: FormControl;
+
   constructor(private route: ActivatedRoute,
               private companyService: CompanyService,
               private alertify: AlertifyService
@@ -50,9 +56,9 @@ export class CompanyListComponent implements OnInit {
   }
 
 
+clear(){
+  this.filterForm.reset();
+}
 
-  clearFilrFileds(){
-      
-  }
  
 }
