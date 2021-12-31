@@ -62,3 +62,7 @@ Thumbs.db
 /FirmyMichalowice/bin/Debug/*
 /FirmyMichalowice/appsettings.json
 /FirmyMichalowice/appsettings.Development.json
+/.vs/FirmyMichalowice/v16/.suo
+/FirmyMichalowiceSPA/.angular/cache/angular-webpack/345d300d7901200694ae5b4e210a909fe66395b1/0.pack
+/FirmyMichalowiceSPA/.angular/cache/angular-webpack/
+/FirmyMichalowiceSPA/.angular/cache/babel-webpack/
