@@ -58,6 +58,7 @@ namespace FirmyMichalowice
             services.AddTransient<SmtpManager>();
             services.AddTransient<MapQuestService>();
             services.AddTransient<MapBoxService>();
+            services.AddTransient<RecaptchaService>();
             services.AddScoped<IAuthRepository, AuthRepository>();
             services.AddScoped<IGenericRepository, GenericRepository>();
             services.AddScoped<ICompanyRepository, CompanyRepository>();

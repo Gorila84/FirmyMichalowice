@@ -34,7 +34,7 @@ namespace FirmyMichalowice.Controllers
                
                 message2.Subject = message.Subject;
                 BodyBuilder bodyBuilder = new BodyBuilder();
-                bodyBuilder.HtmlBody = "<b><u> Wiadomość od: </u></b>" + message.Username + "<br> <br>" + message.Content;
+                bodyBuilder.HtmlBody = "<b><u> Wiadomość od: </u></b>" + message.Username + "<br> <br>" + message.Content + "<br> <br>" + "<p style='font-size:8px'>Wiadomość od FirmyMichalowice</p>";
                 message2.Body = bodyBuilder.ToMessageBody();
 
                 bool result = await SendEmail(message2);

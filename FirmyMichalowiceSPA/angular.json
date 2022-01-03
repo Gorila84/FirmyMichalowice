@@ -9,6 +9,7 @@
       "root": "",
       "sourceRoot": "src",
       "prefix": "app",
+ 
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
@@ -36,6 +37,7 @@
               "./node_modules/bootstrap/dist/js/bootstrap.min.js"
             ]
           },
+          
           "configurations": {
             "production": {
               "fileReplacements": [
@@ -64,11 +66,20 @@
                   "maximumError": "10kb"
                 }
               ]
+            },
+            "development": {
+              "buildOptimizer": false,
+              "optimization": false,
+              "vendorChunk": true,
+              "extractLicenses": false,
+              "sourceMap": true,
+              "namedChunks": true
             }
-          }
+          }        
         },
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
+       
           "options": {
             "browserTarget": "FirmyMichalowiceSPA:build",
             "disableHostCheck": true
@@ -76,8 +87,12 @@
           "configurations": {
             "production": {
               "browserTarget": "FirmyMichalowiceSPA:build:production"
+            },
+            "development": {
+              "browserTarget": "FirmyMichalowiceSPA:build:development"
             }
-          }
+          },
+            "defaultConfiguration": "development"
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",

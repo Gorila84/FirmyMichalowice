@@ -7,7 +7,7 @@ import { CompanyService } from "../_services/company.service";
 import { catchError } from 'rxjs/operators';
 
 @Injectable()
-export class CompanyListResolver implements Resolve<Company[]>{
+export class CompanyListResolver implements Resolve<any>{
 
     pageNumber = 1;
     pageSize = 10;
@@ -16,7 +16,7 @@ export class CompanyListResolver implements Resolve<Company[]>{
                 private router: Router, 
                 private alertify: AlertifyService){}
 
-    resolve(route: ActivatedRouteSnapshot): Observable<Company[]> {
+    resolve(route: ActivatedRouteSnapshot): any {
         return this.companyService.getUsers(this.pageNumber, this.pageSize).pipe(
             catchError(error => {
                 this.alertify.error('Problem z pobraniem danych');

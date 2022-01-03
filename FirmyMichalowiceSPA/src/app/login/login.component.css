@@ -1,18 +1,17 @@
-.register-button{
-    background:linear-gradient(45deg, lightgreen, darkgreen, lightgreen)
+.register-button {
+  background: linear-gradient(45deg, lightgreen, darkgreen, lightgreen);
 }
 
-.cancel-button{
-    background:linear-gradient(45deg, pink, red, pink)
+.cancel-button {
+  background: linear-gradient(45deg, pink, red, pink);
 }
-.register-button:hover{
-    background: green;
-}
-
-.cancel-button:hover{
-    background:red;
+button:hover {
+  background-color: grey;
 }
 
-input{
-    width:100%;
+input {
+  width: 100%;
+}
+.danger {
+  margin-left: 15px;
 }

@@ -8,7 +8,7 @@
       </div>
       <div class="col-lg-6">
         <h2><b>Formularz kontaktowy</b></h2>
-        <form #contactForm="ngForm" (ngSubmit)="sendMessage()">
+        <form #contactForm="ngForm" (ngSubmit)="sendMessage(contactForm)">
           <!-- <div class="mb-3">
                     <label for="exampleInputEmail1" class="form-label">Adres email</label>
                     <input #login type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" 

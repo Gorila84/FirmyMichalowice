@@ -27,14 +27,7 @@ body {
 .mat-basic {
   border: 1px solid;
 }
-.danger:hover{
-  background-color: red;
-}
 
-.confirm:hover{
-  background-color: greenyellow;
-}
-
-a{
+a {
   cursor: pointer;
 }

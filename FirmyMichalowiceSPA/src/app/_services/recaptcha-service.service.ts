@@ -14,6 +14,6 @@ export class RecaptchaService{
   check(token: string) {
     let headers = new HttpHeaders({'Content-Type' : 'application/json'})
     let model = {"secret" : "", "response" : token}
-     return this.http.post(this.ulr ,model)
+     return this.http.post(this.ulr ,model, {headers: headers})
   }
 }

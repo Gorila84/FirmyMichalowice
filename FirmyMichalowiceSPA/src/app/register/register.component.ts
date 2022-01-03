@@ -2,8 +2,10 @@ import { Component, EventEmitter, OnInit, Output, ViewChild } from '@angular/cor
 import { FormControl, FormGroup, FormGroupDirective, NgForm, Validators } from '@angular/forms';
 import { ErrorStateMatcher } from '@angular/material/core';
 import { Router } from '@angular/router';
+import { ReCaptchaV3Service } from 'ng-recaptcha';
 import { AlertifyService } from '../_services/alertify.service';
 import { AuthService } from '../_services/auth.service';
+import { RecaptchaService } from '../_services/recaptcha-service.service';
 
 export class MyErrorStateMatcher implements ErrorStateMatcher {
   isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
@@ -27,7 +29,9 @@ export class RegisterComponent implements OnInit {
   
   constructor(private authService: AuthService, 
               private alertify: AlertifyService,
-              private router: Router
+              private router: Router,
+              private recaptchaV3Service: ReCaptchaV3Service,
+              private recaptchaValidationService : RecaptchaService
               ) { }
 
   ngOnInit() {
@@ -57,17 +61,28 @@ export class RegisterComponent implements OnInit {
   get f() { return this.singInForm.controls; }
   
 
-  register(){
+  register(form: NgForm)
+  {
+    if (form.invalid) {
+      for (const control of Object.keys(form.controls)) {
+        form.controls[control].markAsTouched();
+      }
+    }
     let element = <HTMLInputElement> document.getElementById("rodoCheckBox");
 
     if (this.emailFormControl.invalid || this.passwordFormControl.invalid || this.nipFormControl.invalid || !element.checked) {
       return;
   }
-  
-      this.authService.register(this.model).subscribe( data=>{
+  this.recaptchaV3Service.execute('importantAction')
+  .subscribe((token: string) => {
+
+    this.recaptchaValidationService.check(token).subscribe(data => {
+    const result = JSON.parse(JSON.stringify(data));
+    if(result['success'])
+    {
+      this.authService.register(this.model).subscribe( data =>{
       this.alertify.success('Rejestracja powiodła się.');},
       error => {
-        alert(error);
         this.alertify.error(error.error);
       }, 
       ()=>
@@ -75,10 +90,14 @@ export class RegisterComponent implements OnInit {
         this.authService.login(this.model).subscribe(()=>
         this.router.navigate(['edycja/']
         ));
-      }
+      },
+     )
+    }
 
-  )}
-    
+  })
+})
+  }
+
 
   cancel(){
     this.cancelRegister.emit(false);

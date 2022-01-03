@@ -38,8 +38,6 @@ export class LoginComponent implements OnInit {
 
 
   login(form: NgForm){
-    alert()
-debugger
     if (form.invalid) {
       for (const control of Object.keys(form.controls)) {
         form.controls[control].markAsTouched();
@@ -57,7 +55,6 @@ debugger
 
     this.recaptchaValidationService.check(token).subscribe(data => {
     const result = JSON.parse(JSON.stringify(data));
-    debugger
     if(result['success'])
     {
     this.authService.login(this.model).subscribe(next => {

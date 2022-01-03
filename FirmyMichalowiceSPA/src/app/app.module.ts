@@ -39,6 +39,7 @@ import { MatMenuModule} from '@angular/material/menu';
 import { Polityka_prywatnosciComponent } from './polityka_prywatnosci/polityka_prywatnosci.component';
 import {MatTabsModule} from '@angular/material/tabs';
 import {MatTooltipModule} from '@angular/material/tooltip';
+import { RECAPTCHA_V3_SITE_KEY, RecaptchaV3Module } from 'ng-recaptcha';
 
 @NgModule({
   declarations: [		
@@ -78,7 +79,8 @@ import {MatTooltipModule} from '@angular/material/tooltip';
     LoggerModule.forRoot({serverLoggingUrl: environment.apiUrl + 'logs/post', level: NgxLoggerLevel.DEBUG, serverLogLevel: NgxLoggerLevel.ERROR}),
     // FontAwesomeModule
     MatTabsModule,
-    MatTooltipModule
+    MatTooltipModule,
+    RecaptchaV3Module,
   ],
   providers: [
     CompanyListResolver,
@@ -86,6 +88,9 @@ import {MatTooltipModule} from '@angular/material/tooltip';
     CompanyEditlResolver,
     PreventUnsavedChanges,
     {provide: MAT_CHECKBOX_DEFAULT_OPTIONS, useValue: { clickAction: 'noop' } as MatCheckboxDefaultOptions},
+    { provide: RECAPTCHA_V3_SITE_KEY, 
+      useValue: environment.recaptcha.siteKey
+     }
   ],
   bootstrap: [AppComponent]
 })
