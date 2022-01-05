@@ -12,16 +12,3 @@
 .navbar-brand {
   cursor: pointer !important;
 }
-
-@media only screen and (max-width: 600px) {
-  .arms {
-    display: none;
-  }
-  .navbar-toggler {
-    margin-right: 14px;
-    font-size: 14px !important;
-  }
-  .navbar-toggler2 {
-    margin-right: -120px !important;
-  }
-}

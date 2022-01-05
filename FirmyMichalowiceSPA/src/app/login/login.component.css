@@ -15,3 +15,6 @@ input {
 .danger {
   margin-left: 15px;
 }
+.example-full-width {
+  width: 300px;
+}

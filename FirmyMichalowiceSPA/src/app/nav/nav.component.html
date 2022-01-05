@@ -22,7 +22,6 @@
         />
       </div>
     </div>
-    <div style="float: right"></div>
     <div class="navbar-toggler2">
       <button
         *ngIf="!loginCheck()"
@@ -36,21 +35,15 @@
       ></button>
       <button
         *ngIf="loginCheck()"
-        class="navbar-toggler border-0"
+        class="navbar-toggler border-0 navbar-toggler-icon"
         type="button"
         data-toggle="collapse"
         data-target="#navbarNavAltMarkup"
         aria-controls="navbarNavAltMarkup"
         aria-expanded="false"
         aria-label="Toggle navigation"
-      >
-        Witaj {{ authService.decotedToken?.unique_name | titlecase }}
-      </button>
+      ></button>
     </div>
-    <mat-menu #menu="matMenu">
-      <button mat-menu-item [routerLink]="['/logowanie/']">Zaloguj</button>
-      <button mat-menu-item [routerLink]="['/rejstracja/']">Zarejstruj</button>
-    </mat-menu>
 
     <div
       *ngIf="!loginCheck()"
