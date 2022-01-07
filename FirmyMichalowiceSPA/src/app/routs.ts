@@ -17,10 +17,10 @@ export const appRoutes: Routes = [
         {path: 'firma/:id', component: CompanyDetailComponent, resolve: {company: CompanyDetailResolver}},
         {path: 'logowanie', component: LoginComponent},
         {path: 'rodo', component: Polityka_prywatnosciComponent},
-        {path: 'rejstracja', component: RegisterComponent},
+        {path: 'rejestracja', component: RegisterComponent},
         {path: 'edycja/:id', component: CompanyEditComponent,
                         resolve: {company: CompanyEditlResolver},
                         canDeactivate: [PreventUnsavedChanges]},
         {path: 'kontakt', component: ContactComponent},
-        {path: 'rejstracja/zp', component: Polityka_prywatnosciComponent},
+        {path: 'rejestracja/zp', component: Polityka_prywatnosciComponent},
     ];

@@ -1,48 +1,51 @@
-.descriptionTextArea{
-    width: 100vw;
+.descriptionTextArea {
+  width: 100vw;
 }
-.description{
-    width: 100vw;
+.description {
+  width: 100vw;
 }
 
 ul li {
-    list-style: none;
+  list-style: none;
 }
 
-ul{
-    margin: 0;
-    padding: 0;
+ul {
+  margin: 0;
+  padding: 0;
 }
-.form-control{
-    padding:0;
-    margin: 0;
-}
-
-.change-photo-btn{
-    width: 200px;
-    margin-top: 10px;
-    margin-bottom: 10px;
-    cursor: pointer;
+.form-control {
+  padding: 0;
+  margin: 0;
 }
 
-.companyName{
-    width: 400px;
+.change-photo-btn {
+  width: 200px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  cursor: pointer;
 }
 
-mat-form-field{
-    width: 100%;
+.companyName {
+  width: 400px;
 }
-.company-card{
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-    
- }
 
- .save-button:hover{
-    background-color: lightslategrey;
+mat-form-field {
+  width: 100%;
+}
+.company-card {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.save-button:hover {
+  background-color: lightslategrey;
 }
 
 @media screen and (max-width: 600px) {
-    .contact-data {
-      margin-top: 20px;
-    }
+  .contact-data {
+    margin-top: 20px;
   }
+  .rmr {
+    margin-left: 15px !important;
+    margin-right: 15px !important;
+  }
+}

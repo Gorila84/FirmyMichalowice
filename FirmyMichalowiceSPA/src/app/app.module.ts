@@ -40,6 +40,49 @@ import { Polityka_prywatnosciComponent } from './polityka_prywatnosci/polityka_p
 import {MatTabsModule} from '@angular/material/tabs';
 import {MatTooltipModule} from '@angular/material/tooltip';
 import { RECAPTCHA_V3_SITE_KEY, RecaptchaV3Module } from 'ng-recaptcha';
+import {NgcCookieConsentConfig, NgcCookieConsentModule} from 'ngx-cookieconsent';
+
+
+const cookieConfig:NgcCookieConsentConfig = {
+  cookie: {
+    domain: 'localhost'// it is recommended to set your domain, for cookies to work properly
+  },
+  palette: {
+    popup: {
+      background: '#000'
+    },
+    button: {
+      background: '#f1d600'
+    }
+  },
+  theme: 'edgeless',
+  type: 'opt-out',
+  layout: 'my-custom-layout',
+  layouts: {
+    "my-custom-layout": '{{messagelink}}{{compliance}}'
+  },
+  elements:{
+    messagelink: `
+    <span id="cookieconsent:desc" class="cc-message">{{message}} 
+      <a aria-label="learn more about cookies" tabindex="0" class="cc-link" href="{{cookiePolicyHref}}" target="_blank" rel="noopener">{{cookiePolicyLink}}</a>, 
+      <a aria-label="learn more about our privacy policy" tabindex="1" class="cc-link"  href="{{privacyPolicyHref}}" target="_blank" rel="noopener">{{privacyPolicyLink}}</a> oraz 
+      <a aria-label="learn more about our terms of service" tabindex="2" class="cc-link" [routerLink]="['zp']" target="_blank" rel="noopener">{{tosLink}}</a>
+    </span>
+    `,
+  },
+  content:{
+    message: 'Używając tej aplikacji zgadzasz się z ',
+    
+    cookiePolicyLink: 'Polityka Cookie',
+    cookiePolicyHref: '#',
+
+    privacyPolicyLink: 'Polityka Prywtaności',
+    privacyPolicyHref: '/rejestracja/zp',
+
+    tosLink: 'Regulaminem',
+    tosHref: '#',
+  }
+};
 
 @NgModule({
   declarations: [		
@@ -81,6 +124,7 @@ import { RECAPTCHA_V3_SITE_KEY, RecaptchaV3Module } from 'ng-recaptcha';
     MatTabsModule,
     MatTooltipModule,
     RecaptchaV3Module,
+    NgcCookieConsentModule.forRoot(cookieConfig),
   ],
   providers: [
     CompanyListResolver,

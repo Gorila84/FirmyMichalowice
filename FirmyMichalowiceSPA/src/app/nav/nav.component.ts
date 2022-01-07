@@ -34,8 +34,7 @@ export class NavComponent implements OnInit {
       this.http.get(this.apiUrl).subscribe(data =>{
         this.armsUrls = data
       });
-    }
-      
+    }  
   }
 
   loginCheck(){
@@ -43,6 +42,10 @@ export class NavComponent implements OnInit {
   }
   getUserId(){
     return this.authService.decotedToken.nameid;
+  }
+
+  getUserName(){
+    return this.authService.decotedToken.unique_name;
   }
   
     logOut(){

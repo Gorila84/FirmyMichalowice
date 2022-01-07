@@ -15,6 +15,7 @@ export class Polityka_prywatnosciComponent implements OnInit {
   }
 
   backClicked() {
+    debugger
     this._location.back();
   }
 
