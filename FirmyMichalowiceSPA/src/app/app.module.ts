@@ -59,7 +59,7 @@ const cookieConfig:NgcCookieConsentConfig = {
   type: 'opt-out',
   layout: 'my-custom-layout',
   layouts: {
-    "my-custom-layout": '{{messagelink}}{{compliance}}'
+    "my-custom-layout": '{{messagelink}}{{myCompliance}}'
   },
   elements:{
     messagelink: `
@@ -69,6 +69,10 @@ const cookieConfig:NgcCookieConsentConfig = {
       <a aria-label="learn more about our terms of service" tabindex="2" class="cc-link" [routerLink]="['zp']" target="_blank" rel="noopener">{{tosLink}}</a>
     </span>
     `,
+    myCompliance : `<div class="btn-group btn-group-sm" role="group" aria-label="...">
+    <a aria-label="deny cookies" role="button" tabindex="0" class="cc-btn cc-deny" style="background-color: black; color: white">Odrzuć</a>
+    <a aria-label="allow cookies" role="button" tabindex="0" class="cc-btn cc-allow">Zaakceptuj</a>
+    </div>`
   },
   content:{
     message: 'Używając tej aplikacji zgadzasz się z ',
