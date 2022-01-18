@@ -105,14 +105,19 @@ namespace FirmyMichalowice.Repositories
         {
             var users = _context.Users.Where(x=>x.IsActive == true).Include(p => p.Photo).AsQueryable();
 
-            if (userParams.CompanyName != null || userParams.CompanyType != null || userParams.City != null)
+            if (userParams.CompanyName != null )
             {
-                users = users.Where(u => u.CompanyName.Contains(userParams.CompanyName) 
-                                    || u.CompanyType == userParams.CompanyType 
-                                    || u.City == userParams.City);
+                users = users.Where(u => u.CompanyName.Contains(userParams.CompanyName));
             }
-   
-            
+            if ( userParams.CompanyType != null)
+            {
+                users = users.Where(u => u.CompanyType == userParams.CompanyType);
+            }
+            if (userParams.City != null)
+            {
+                users = users.Where(u => u.City == userParams.City);
+            }
+
             var cos = users.Count();
 
             return await PageList<User>.CreateListAsync(users, userParams.PageNumber, userParams.PageSize);
