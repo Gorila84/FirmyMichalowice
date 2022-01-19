@@ -3,6 +3,8 @@ import { HttpClient } from '@angular/common/http';
 import { map } from 'rxjs/operators';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { environment } from 'src/environments/environment';
+import { Company } from '../_models/company';
+
 
 @Injectable({
   providedIn: 'root'
@@ -10,8 +12,10 @@ import { environment } from 'src/environments/environment';
 export class AuthService {
 
   baseUrl = environment.apiUrl + 'auth/';
+  resetPassUrl = environment.apiUrl;
   jwtHelper = new JwtHelperService();
   decotedToken: any;
+  client: any;
 
   constructor(private http: HttpClient) { }
 
@@ -40,5 +44,13 @@ export class AuthService {
   // tslint:disable-next-line:typedef
   logOut() {
     localStorage.removeItem('token');
+  }
+  resetPassword(model:any){
+    return this.http.post(this.resetPassUrl + 'resetPassword', model);
+  }
+
+  changePassword(id:number,model:any){
+    //const headers = this.client.addBearer();
+    return this.http.post(this.resetPassUrl + 'changePassword/' + id, model);
   }
 }

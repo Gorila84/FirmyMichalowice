@@ -70,5 +70,8 @@ export class LoginComponent implements OnInit {
   loggedIn(){
     return this.authService.loggedIn();
   }
+  resetPassword(){
+    this.authService.resetPassword(this.model).subscribe();
+  }
 
 }

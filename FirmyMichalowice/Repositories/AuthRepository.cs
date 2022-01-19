@@ -1,16 +1,16 @@
-﻿using FirmyMichalowice.Data;
-using FirmyMichalowice.Dto_s;
+﻿using FirmyMichalowice.Controllers;
+using FirmyMichalowice.Data;
+using FirmyMichalowice.Helpers;
 using FirmyMichalowice.Model;
-using Microsoft.AspNetCore.Mvc;
+using MailKit.Net.Smtp;
 using Microsoft.EntityFrameworkCore;
-using Newtonsoft.Json.Linq;
+using MimeKit;
 using System;
 using System.Linq;
-using System.Security.Policy;
+
 using System.Text;
-using System.Text.Json;
 using System.Threading.Tasks;
-using System.Web.Http.ModelBinding;
+
 
 
 namespace FirmyMichalowice.Repositories
@@ -19,11 +19,15 @@ namespace FirmyMichalowice.Repositories
     {
         private readonly DataContext _context;
         private readonly CeidgService _cEIDGmanger;
+        private readonly SmtpManager _smtpManager;
+        private readonly ILoggerManager _logger;
 
-        public AuthRepository(DataContext context, CeidgService cEIDGmanger)
+        public AuthRepository(DataContext context, CeidgService cEIDGmanger, SmtpManager smtpManager, ILoggerManager logger)
         {
             _context = context;
             _cEIDGmanger = cEIDGmanger;
+            _smtpManager = smtpManager;
+            _logger = logger;
         }
         #region method public
 
@@ -54,36 +58,36 @@ namespace FirmyMichalowice.Repositories
             return user;
         }
 
-       
+
 
         public async Task<Tuple<bool, string, string>> UserValidation(string userName, string nip)
         {
-          
+
             bool isError = false;
             string errorMessage = string.Empty;
             string municipalitie = string.Empty;
 
             try
             {
-                
+
 
                 if (await _context.Users.AnyAsync(x => x.Username == userName))
                 {
                     isError = true;
                     errorMessage = "Użytkownik o podanej nazwie juz istnieje! Podaj inna nazwe użytkownika.";
-                    
+
                 }
 
                 if (await _context.Users.AnyAsync(x => x.NIP == nip))
                 {
                     isError = true;
-                    errorMessage =  "Użytkownik o podanym NIPie juz istnieje! Sprawdź NIP";
-                   
+                    errorMessage = "Użytkownik o podanym NIPie juz istnieje! Sprawdź NIP";
+
                 }
-                if(isError == false && string.IsNullOrEmpty(errorMessage)) CheckMunicipalitie(ref isError, ref errorMessage, ref municipalitie, nip);
-               
+                if (isError == false && string.IsNullOrEmpty(errorMessage)) CheckMunicipalitie(ref isError, ref errorMessage, ref municipalitie, nip);
+
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 return Tuple.Create(true, ex.Message, municipalitie);
             }
@@ -94,7 +98,7 @@ namespace FirmyMichalowice.Repositories
         private void CheckMunicipalitie(ref bool isError, ref string errorMessage, ref string municipalitie, string nip)
         {
 
-            var firma = _cEIDGmanger.GetData(nip).Result;       
+            var firma = _cEIDGmanger.GetData(nip).Result;
             IQueryable<string> listOfAllowedMunicipalities = _context.Municipalities.Select(x => x.Name);
 
             if (!listOfAllowedMunicipalities.Contains(firma.adresDzialanosci.gmina))
@@ -127,6 +131,49 @@ namespace FirmyMichalowice.Repositories
                 return true;
             }
         }
-        #endregion
+
+        public string ResetPassword(string userName)
+        {
+            Random random = new Random();
+            byte[] passwordHash, passwordSalt;
+            const string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+            string password = new string(Enumerable.Repeat(chars, 6)
+                .Select(s => s[random.Next(s.Length)]).ToArray());
+
+            CreatePasswordHashSalt(password, out passwordHash, out passwordSalt);
+
+            var user = _context.Users.Where(x => x.Username == userName).FirstOrDefault();
+
+
+            user.PasswordHash = passwordHash;
+            user.PasswordSalt = passwordSalt;
+
+            _context.SaveChanges();
+
+            return password;
+
+
+
+        }
+
+        public void ChangePassword(int id, string password)
+        {
+            byte[] passwordHash, passwordSalt;
+            CreatePasswordHashSalt(password, out passwordHash, out passwordSalt);
+
+            var user = _context.Users.Where(x => x.Id == id).FirstOrDefault();
+
+
+            user.PasswordHash = passwordHash;
+            user.PasswordSalt = passwordSalt;
+
+            _context.SaveChanges();
+
+
+
+
+
+            #endregion
+        }
     }
 }
