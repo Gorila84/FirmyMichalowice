@@ -11,6 +11,9 @@ import { AuthService } from '../_services/auth.service';
 export class ChangePasswordComponent implements OnInit {
 
   model: any = {};
+  newPassword: string;
+  confirmPassword: string;
+
   constructor(private authService: AuthService,
               private alertifyService: AlertifyService) { }
 
@@ -20,15 +23,29 @@ export class ChangePasswordComponent implements OnInit {
     Validators.required,
     Validators.minLength(6),
   ]);
+  secondPasswordFormControl = new FormControl('', [
+    Validators.required,
+    Validators.minLength(6),
+  ]);
   matcher = new MyErrorStateMatcher();
 
   changePassword(){
-    this.authService.changePassword(this.authService.decotedToken.nameid, this.model).subscribe(
-      next => 
-      {this.alertifyService.success("Twoje hasło zostało zmienione")
-    }, 
-    error=>{this.alertifyService.error('Nie udało się zmienić hasła');}
     
-    );
+    this.newPassword = (<HTMLInputElement>document.getElementById("newPassword")).value;
+    this.confirmPassword = (<HTMLInputElement>document.getElementById("confirmPassword")).value;
+
+    if(this.newPassword === this.confirmPassword){
+      this.authService.changePassword(this.authService.decotedToken.nameid, this.model).subscribe(
+        next => 
+        {this.alertifyService.success("Twoje hasło zostało zmienione")
+      }, 
+      error=>{this.alertifyService.error('Nie udało się zmienić hasła');}
+      
+      );
+    }else{
+      this.alertifyService.error('Nie udało się zmienić hasła. Wprowadzone hasła są różne!!!');
+    }
+
+    
   }  
 }
