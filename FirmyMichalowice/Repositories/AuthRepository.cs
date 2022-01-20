@@ -134,23 +134,35 @@ namespace FirmyMichalowice.Repositories
 
         public string ResetPassword(string userName)
         {
-            Random random = new Random();
-            byte[] passwordHash, passwordSalt;
-            const string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
-            string password = new string(Enumerable.Repeat(chars, 6)
-                .Select(s => s[random.Next(s.Length)]).ToArray());
+            try
+            {
+                Random random = new Random();
+                byte[] passwordHash, passwordSalt;
+                const string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+                string password = new string(Enumerable.Repeat(chars, 6)
+                    .Select(s => s[random.Next(s.Length)]).ToArray());
 
-            CreatePasswordHashSalt(password, out passwordHash, out passwordSalt);
+                CreatePasswordHashSalt(password, out passwordHash, out passwordSalt);
 
-            var user = _context.Users.Where(x => x.Username == userName).FirstOrDefault();
+                var user = _context.Users.Where(x => x.Username == userName).FirstOrDefault();
 
+                
+                    user.PasswordHash = passwordHash;
+                    user.PasswordSalt = passwordSalt;
 
-            user.PasswordHash = passwordHash;
-            user.PasswordSalt = passwordSalt;
+                    _context.SaveChanges();
 
-            _context.SaveChanges();
+                    
+                
+                return password;
 
-            return password;
+            }
+            catch (Exception e)
+            {
+
+                throw;
+            }
+           
 
 
 

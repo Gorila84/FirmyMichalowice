@@ -23,10 +23,20 @@ namespace FirmyMichalowice.Controllers
 
 
         [HttpPost("{id}")]
-        public void ChangePassword(int id, UserForLoginDTO userForLoginDTO)
+        public async Task<ActionResult> ChangePassword(int id, UserForLoginDTO userForLoginDTO)
         {
-            _authRepository.ChangePassword(id, userForLoginDTO.Password);
+            try
+            {
+                _authRepository.ChangePassword(id, userForLoginDTO.Password);
+                return Ok(200);
                 
+            }
+            catch (Exception e)
+            {
+
+                return BadRequest(e);
+            }
+           
         }
     }
 }

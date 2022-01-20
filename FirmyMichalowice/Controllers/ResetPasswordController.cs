@@ -29,16 +29,17 @@ namespace FirmyMichalowice.Controllers
         }
 
         [HttpPost()]
-        public void ResetPassword(UserForLoginDTO userForLoginDto)
+        public async Task<IActionResult> ResetPassword(UserForLoginDTO userForLoginDto)
         {
 
-           
+            try
+            {
                 MimeMessage message2 = new MimeMessage();
 
                 MailboxAddress from = new MailboxAddress("Admin", "admin@firmymichalowiceapi.berg-dev.eu");
                 message2.From.Add(from);
 
-                MailboxAddress to = new MailboxAddress("Admin", userForLoginDto.UserName );
+                MailboxAddress to = new MailboxAddress("Admin", userForLoginDto.UserName);
                 message2.To.Add(to);
 
                 message2.Subject = "Twoje hasło do serwisu Firmy Północy Krakowa zostało zresetowane";
@@ -47,6 +48,15 @@ namespace FirmyMichalowice.Controllers
                 message2.Body = bodyBuilder.ToMessageBody();
 
                 bool result = SendEmail(message2);
+
+                return Ok(200);
+            }
+            catch (Exception e)
+            {
+
+                return BadRequest(e);
+            }
+               
               
                    
         }
