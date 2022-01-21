@@ -7,6 +7,7 @@ export const environment = {
   apiUrl:'https://localhost:44329/api/',
   //apiUrl:'https://firmymichalowiceapi.berg-dev.eu/api/',
   showArms: false,
+  useGeoportal: false,
   recaptcha: {
     siteKey: "6LcCILYdAAAAAEJ9aoyjK0_2Jkc20hGkb2QgOUgA",
   },

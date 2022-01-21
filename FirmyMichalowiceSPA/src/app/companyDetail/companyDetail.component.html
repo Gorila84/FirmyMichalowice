@@ -127,10 +127,15 @@
       <h3>
         <b><u>Mapa</u></b>
       </h3>
-      <mat-tab-group mat-align-tabs="center">
+      <mat-tab-group
+        mat-align-tabs="center"
+        (selectedTabChange)="showMapFn($event)"
+      >
         <mat-tab label="Adres rejestracji">
           <br />
+
           <img
+            *ngIf="!useGeoportal"
             [src]="company.geolocationUrl"
             class="geolocation"
             title="Mapa z lokalizacja firmy"
@@ -138,13 +143,31 @@
         </mat-tab>
         <mat-tab label="Adres biura" [disabled]="isEnabledGeolocation2Url">
           <br />
+
           <img
+            *ngIf="!useGeoportal"
             [src]="company.geolocation2Url"
             class="geolocation"
             title="Mapa z lokalizacja biura firmy"
           />
         </mat-tab>
       </mat-tab-group>
+      <div *ngIf="useGeoportal">
+        <div>
+          <div id="iapi" class="center">
+            <div id="gpApiPanel"></div>
+          </div>
+        </div>
+        <br />
+        <span id="gpApiText">Korzystamy z API:</span>
+        <a href="https://geoportal.gov.pl" target="_blank">
+          <img
+            id="gpImg"
+            src="https://mapy.geoportal.gov.pl/imap/resources/images/favicon.ico"
+          />
+          geoportal.gov.pl
+        </a>
+      </div>
     </div>
     <hr />
   </div>

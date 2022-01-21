@@ -70,7 +70,6 @@ const cookieConfig:NgcCookieConsentConfig = {
     </span>
     `,
     myCompliance : `<div class="btn-group btn-group-sm" role="group" aria-label="...">
-    <a aria-label="deny cookies" role="button" tabindex="0" class="cc-btn cc-deny" style="background-color: black; color: white">Odrzuć</a>
     <a aria-label="allow cookies" role="button" tabindex="0" class="cc-btn cc-allow">Zaakceptuj</a>
     </div>`
   },

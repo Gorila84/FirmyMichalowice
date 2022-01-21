@@ -35,6 +35,11 @@ ul {
   width: 211px;
 }
 
+.center {
+  margin: auto;
+  width: 50%;
+}
+
 @media only screen and (max-width: 600px) {
   .geolocation {
     width: 300px;
