@@ -28,6 +28,9 @@ export class CompanyListComponent implements OnInit {
     this.route.data.subscribe(data => {
       this.companies = data.companies.result;
       this.pagination = data.companies.pagination;
+      this.companyParams.CompanyType = "";
+      this.companyParams.CompanyName = "";
+      this.companyParams.City = "";
     });
   }
 
@@ -48,8 +51,19 @@ export class CompanyListComponent implements OnInit {
 
 
 
-  clearFilrFileds(){
-      
+  clearFiltrFileds(){
+    var name = <HTMLInputElement>document.getElementById('companyName');
+    var category = <HTMLInputElement>document.getElementById('companyName');
+    var city = <HTMLInputElement>document.getElementById('companyName');
+    name.value = "";
+    category.value = "";
+    city.value = "";
+
+    this.companyParams.CompanyType = "";
+    this.companyParams.CompanyName = "";
+    this.companyParams.City = "";
+
+    this.loadCompanies();
   }
  
 }

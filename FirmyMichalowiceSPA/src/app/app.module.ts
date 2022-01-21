@@ -41,6 +41,8 @@ import {MatTabsModule} from '@angular/material/tabs';
 import {MatTooltipModule} from '@angular/material/tooltip';
 import { RECAPTCHA_V3_SITE_KEY, RecaptchaV3Module } from 'ng-recaptcha';
 import {NgcCookieConsentConfig, NgcCookieConsentModule} from 'ngx-cookieconsent';
+import { ChangePasswordComponent } from './change-password/change-password.component';
+import { ResetPasswordComponent } from './reset-password/reset-password.component';
 
 
 const cookieConfig:NgcCookieConsentConfig = {
@@ -99,7 +101,9 @@ const cookieConfig:NgcCookieConsentConfig = {
       CompanyEditComponent,
       FooterComponent,
       ContactComponent,
-      Polityka_prywatnosciComponent
+      Polityka_prywatnosciComponent,
+      ChangePasswordComponent,
+      ResetPasswordComponent
    ],
   imports: [
     BrowserModule,

@@ -95,7 +95,9 @@
                 </div>
                 <div form="editForm" class="search-button mr-3 d-flex">
                   <button
-                    mat-raised-button
+                  mat-raised-button
+                    (click)="clearFiltrFileds()"
+                    type="button"
                     class="card-detail-button ml-auto danger"
                   >
                     Usuń filtry
