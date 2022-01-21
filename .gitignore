@@ -67,3 +67,6 @@ Thumbs.db
 /FirmyMichalowiceSPA/.angular/cache/angular-webpack/
 /FirmyMichalowiceSPA/.angular/cache/babel-webpack/
 /FirmyMichalowiceSPA/.angular/cache/13.1.3/
+/.vs/FirmyMichalowice/v16/.suo
+/FirmyMichalowice/bin/Debug/netcoreapp3.1/FirmyMichalowice.deps.json
+/.vs/FirmyMichalowice/DesignTimeBuild/.dtbcache.v2

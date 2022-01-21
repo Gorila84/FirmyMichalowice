@@ -18,5 +18,6 @@ namespace FirmyMichalowice.Data
         public DbSet<Photo> Photo { get; set; }
         public DbSet<Municipalitie> Municipalities { get; set; }
         public DbSet<PKD> PKD { get; set; }
+        public DbSet<CookieConsent> CookieConsents { get; set; }
     }
 }

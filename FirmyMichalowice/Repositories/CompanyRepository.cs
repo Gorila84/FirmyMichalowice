@@ -23,13 +23,15 @@ namespace FirmyMichalowice.Repositories
         private readonly CeidgService _ceidgService;
         private readonly MapBoxService _mapBoxService;
         private readonly IConfiguration _configuration;
+        private readonly ILoggerManager _logger;
 
-        public CompanyRepository(DataContext context, CeidgService ceidgService,  IConfiguration configuration, MapBoxService mapBoxService) : base(context)
+        public CompanyRepository(DataContext context, CeidgService ceidgService,  IConfiguration configuration, MapBoxService mapBoxService, ILoggerManager logger) : base(context)
         {
             _context = context;
             _ceidgService = ceidgService;
             _configuration = configuration;
             _mapBoxService = mapBoxService;
+            _logger = logger;
 
         }
 
@@ -70,6 +72,7 @@ namespace FirmyMichalowice.Repositories
             }
             catch(Exception ex)
             {
+                _logger.LogInformation(ex.Message);
                 return null;
             }
             

@@ -33,34 +33,51 @@ namespace FirmyMichalowice.Repositories
 
         public async Task<User> Login(string username, string pasword)
         {
-            var user = await _context.Users.FirstOrDefaultAsync(x => x.Username == username);
-            if (user == null)
-                return null;
+            try
+            {
+                var user = await _context.Users.FirstOrDefaultAsync(x => x.Username == username);
+                if (user == null)
+                    return null;
 
-            if (!VerifyPasswordHash(pasword, user.PasswordHash, user.PasswordSalt))
-                return null;
+                if (!VerifyPasswordHash(pasword, user.PasswordHash, user.PasswordSalt))
+                    return null;
 
-            return user;
+                return user;
+            }
+            catch( Exception ex)
+            {
+                _logger.LogInformation(ex.Message);
+                return null;
+            }
+           
         }
 
 
 
         public async Task<User> Register(User user, string password)
         {
-            byte[] passwordHash, passwordSalt;
-            CreatePasswordHashSalt(password, out passwordHash, out passwordSalt);
+            try
+            {
+                byte[] passwordHash, passwordSalt;
+                CreatePasswordHashSalt(password, out passwordHash, out passwordSalt);
 
-            user.PasswordHash = passwordHash;
-            user.PasswordSalt = passwordSalt;
+                user.PasswordHash = passwordHash;
+                user.PasswordSalt = passwordSalt;
 
-            await _context.Users.AddAsync(user);
-            await _context.SaveChangesAsync();
-            return user;
+                await _context.Users.AddAsync(user);
+                await _context.SaveChangesAsync();
+                return user;
+            }
+            catch (Exception ex)
+            {
+                _logger.LogInformation(ex.Message);
+                return null;
+            }
         }
 
 
 
-        public async Task<Tuple<bool, string, string>> UserValidation(string userName, string nip)
+            public async Task<Tuple<bool, string, string>> UserValidation(string userName, string nip)
         {
 
             bool isError = false;
@@ -89,7 +106,9 @@ namespace FirmyMichalowice.Repositories
             }
             catch (Exception ex)
             {
+                _logger.LogInformation(ex.Message);
                 return Tuple.Create(true, ex.Message, municipalitie);
+
             }
 
             return Tuple.Create(isError, errorMessage, municipalitie);
@@ -145,7 +164,6 @@ namespace FirmyMichalowice.Repositories
                 CreatePasswordHashSalt(password, out passwordHash, out passwordSalt);
 
                 var user = _context.Users.Where(x => x.Username == userName).FirstOrDefault();
-
                 
                     user.PasswordHash = passwordHash;
                     user.PasswordSalt = passwordSalt;
