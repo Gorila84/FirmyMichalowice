@@ -1,6 +1,7 @@
 ﻿using FirmyMichalowice.Data;
 using FirmyMichalowice.Helpers;
 using MailKit.Net.Smtp;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using MimeKit;
 using System;
@@ -20,7 +21,9 @@ namespace FirmyMichalowice.Controllers
             _smtpManager = smtpManager;
             _logger = logger;
         }
+        
         [HttpPost("AddMessage")]
+        [AllowAnonymous]
         public async Task<bool> AddMessage(Message message)
         {
             if(ModelState.IsValid && message.IsEmailValid()){
@@ -29,7 +32,7 @@ namespace FirmyMichalowice.Controllers
                 MailboxAddress from = new MailboxAddress("Admin", "admin@firmymichalowiceapi.berg-dev.eu");
                 message2.From.Add(from);
 
-                MailboxAddress to = new MailboxAddress("Admin", _smtpManager.User);
+                MailboxAddress to = new MailboxAddress("User", message.Username);
                 message2.To.Add(to);
                
                 message2.Subject = message.Subject;
@@ -41,6 +44,27 @@ namespace FirmyMichalowice.Controllers
                 return result;
             }
             return false;
+        }
+
+        public void Meassage23(Message message)
+        {
+          
+                MimeMessage message2 = new MimeMessage();
+
+                MailboxAddress from = new MailboxAddress("Admin", "admin@firmymichalowiceapi.berg-dev.eu");
+                message2.From.Add(from);
+
+                MailboxAddress to = new MailboxAddress("Admin", message.Username);
+                message2.To.Add(to);
+
+                message2.Subject = message.Subject;
+                BodyBuilder bodyBuilder = new BodyBuilder();
+                bodyBuilder.HtmlBody = "<b><u> Wiadomość od: </u></b>" + message.Username + "<br> <br>" + message.Content + "<br> <br>" + "<p style='font-size:8px'>Wiadomość od FirmyMichalowice</p>";
+                message2.Body = bodyBuilder.ToMessageBody();
+
+                 SendEmail(message2);
+               
+          
         }
 
         private async Task<bool> SendEmail(MimeMessage message2)
@@ -63,5 +87,9 @@ namespace FirmyMichalowice.Controllers
                 return false; 
             } 
         }
+
+  
+
+
     }
 }

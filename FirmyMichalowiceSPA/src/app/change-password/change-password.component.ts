@@ -48,4 +48,9 @@ export class ChangePasswordComponent implements OnInit {
 
     
   }  
+
+  getUserId(){
+
+    return this.authService.decotedToken.nameid;
+  }
 }
