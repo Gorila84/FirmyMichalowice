@@ -337,12 +337,12 @@
         <hr />
         <div class="description text-center col-12 card company-card">
           <h3>Krótki opis działalności</h3>
-          <hr />
-
+          <hr />      
           <mat-form-field class="example-full-width" appearance="fill">
             <mat-label>Krótki opis działalności</mat-label>
             <textarea
               matInput
+              #shortDescriptio
               class="form-control"
               name="companyDescription"
               name="shortDescription"
@@ -350,7 +350,9 @@
               id="shortDescriptionTextArea"
               cols="150"
               rows="10"
+              maxlength="256"
             ></textarea>
+            <mat-hint align="end">{{shortDescriptio.value.length}} / 256</mat-hint>
           </mat-form-field>
         </div>
         <hr />
@@ -367,6 +369,7 @@
             <mat-label>Dokładny opis działalności</mat-label>
             <textarea
               matInput
+              #longDescription
               class="form-control"
               name="companyDescription"
               name="longDescription"
@@ -374,7 +377,9 @@
               id="descriptionTextArea"
               cols="150"
               rows="10"
+              maxlength="5000"
             ></textarea>
+            <mat-hint align="end">{{longDescription.value.length}} / 5000</mat-hint>
           </mat-form-field>
         </div>
         <div form="editForm" class="d-flex justify-content-end">
