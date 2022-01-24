@@ -96,7 +96,7 @@ namespace FirmyMichalowice.Controllers
         
         [HttpPost("resetPassword")]
         [AllowAnonymous]
-        public async Task<IActionResult> ResetPassword(UserForLoginDTO userForLoginDto)
+        public async Task<IActionResult> ResetPassword(ResetPasswordDTO userForLoginDto)
         {
             var result = _repository.ResetPassword(userForLoginDto.UserName);
            

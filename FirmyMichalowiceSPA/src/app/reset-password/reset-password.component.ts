@@ -26,12 +26,17 @@ export class ResetPasswordComponent implements OnInit {
     Validators.email,
    ]);
 
-  resetPassword(){
-    this.authService.resetPassword(this.model).subscribe(next => 
-      {this.alertifyService.success("Twoje hasło zostało zresetowane i wysłane na Twojego maila.")
-    }, 
-    error=>{this.alertifyService.error('Wprowadziłeś niepoprawny email. Twoje hasło nie zostało zresetowane.');}
-    );
+  resetPassword()
+  {
+    
+    if(this.loginFormControl.valid){
+      this.authService.resetPassword(this.model).subscribe(next => 
+        {this.alertifyService.success("Twoje hasło zostało zresetowane i wysłane na Twojego maila.")
+      },
+      error=>{this.alertifyService.error('Wprowadziłeś niepoprawny email. Twoje hasło nie zostało zresetowane.');}
+      );
+    }
+    
   }
 
 }
