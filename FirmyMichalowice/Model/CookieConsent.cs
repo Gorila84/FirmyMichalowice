@@ -7,10 +7,10 @@ using System.Threading.Tasks;
 namespace FirmyMichalowice.Model
 {
 
-    [Keyless]
+
     public class CookieConsent
     {
-       
+        public int Id { get; set; } 
         public DateTime Date { get; set; }
         public string UserIP { get; set; }
 

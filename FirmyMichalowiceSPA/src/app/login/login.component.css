@@ -1,20 +1,38 @@
-.register-button {
-  background: linear-gradient(45deg, lightgreen, darkgreen, lightgreen);
+.contact1-pic {
+  text-align: center;
+}
+.example-form {
+  min-width: 150px;
+  max-width: 500px;
+  width: 100%;
 }
 
-.cancel-button {
-  background: linear-gradient(45deg, pink, red, pink);
+.example-full-width {
+  width: 100%;
 }
+
 button:hover {
   background-color: grey;
 }
 
-input {
-  width: 100%;
+@media only screen and (max-width: 600px) {
+  h2 {
+    text-align: center;
+  }
+  .my-mat-basic {
+    text-align: center !important;
+  }
 }
-.danger {
-  margin-left: 15px;
+.mat-basic {
+  border: 1px solid;
 }
-.example-full-width {
-  width: 300px;
+img {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.content {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
 }

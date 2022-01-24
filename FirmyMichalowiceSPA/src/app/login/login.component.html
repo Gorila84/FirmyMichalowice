@@ -1,68 +1,80 @@
-<div class="center">
+<div class="center container">
   <div class="container shadow-lg p-3 mb-5 bg-white rounded mt-5">
-    <div class="container text-center">
-      <div>
-        <h2><b>Zaloguj się</b></h2>
+    <div class="row">
+      <div class="col-lg-6 content">
+        <img
+          src="/assets/login.png"
+          class="content"
+          alt="IMG"
+          height="200"
+          width="200"
+        />
       </div>
-      <hr />
-    </div>
-    <div class="container text-center d-flex justify-content-center mt-4">
-      <form
-        #loginForm="ngForm"
-        class="form-inline col-md-6 text-center d-flex justify-content-center"
-        (ngSubmit)="login(loginForm)"
-      >
-        <div class="row">
-          <div class="mb-3 col-12">
-            <mat-form-field class="example-full-width" appearance="fill">
-              <mat-label>Email</mat-label>
-              <input
-                matInput
-                type="email"
-                id="email"
-                [formControl]="loginFormControl"
-                id="exampleInputEmail1"
-                aria-describedby="emailHelp"
-                [(ngModel)]="model.username"
-                name="username"
-                size="40"
-                required
-              />
-              <mat-hint>Wpisz adres email</mat-hint>
-              <mat-error *ngIf="loginFormControl.hasError('required')">
-                Wprowadź <strong>e-mail</strong>
-              </mat-error>
-              <mat-error *ngIf="loginFormControl.hasError('email')">
-                E-mail powinien zawierać <strong>@</strong>
-              </mat-error>
-            </mat-form-field>
-          </div>
-          <div class="mb-4 col-12">
-            <mat-form-field class="example-full-width" appearance="fill">
-              <mat-label>Hasło</mat-label>
-              <input
-                matInput
-                [formControl]="passwordFormControl"
-                type="password"
-                id="password"
-                [(ngModel)]="model.password"
-                name="password"
-                size="40"
-                required
-              />
-              <mat-hint>Wpisz hasło</mat-hint>
-              <mat-error *ngIf="passwordFormControl.hasError('required')">
-                Wprowadź <strong>hasło</strong>
-              </mat-error>
-            </mat-form-field>
-          </div>
+      <div class="col-lg-6">
+        <h2><b>Zaloguj się</b></h2>
+        <form #loginForm="ngForm" (ngSubmit)="login(loginForm)">
+          <mat-form-field class="example-full-width" appearance="fill">
+            <mat-label>Email</mat-label>
+            <input
+              matInput
+              type="email"
+              id="email"
+              [formControl]="loginFormControl"
+              id="exampleInputEmail1"
+              aria-describedby="emailHelp"
+              [(ngModel)]="model.username"
+              name="username"
+              required
+            />
+            <mat-hint>Wpisz adres email</mat-hint>
+            <mat-error *ngIf="loginFormControl.hasError('required')">
+              Wprowadź <strong>e-mail</strong>
+            </mat-error>
+            <mat-error *ngIf="loginFormControl.hasError('email')">
+              E-mail powinien zawierać <strong>@</strong>
+            </mat-error>
+          </mat-form-field>
 
-          <div class="mb-4 col-12">
-            <button type="submit" class="btn mat-basic confirm">Zaloguj</button>
-            <button type="button" [routerLink]="['/resetHasla/']" class="btn mat-basic danger">Resetuj hasło</button>
+          <mat-form-field class="example-full-width" appearance="fill">
+            <mat-label>Hasło</mat-label>
+            <input
+              matInput
+              [formControl]="passwordFormControl"
+              type="password"
+              id="password"
+              [(ngModel)]="model.password"
+              name="password"
+              required
+            />
+            <mat-hint>Wpisz hasło</mat-hint>
+            <mat-error *ngIf="passwordFormControl.hasError('required')">
+              Wprowadź <strong>hasło</strong>
+            </mat-error>
+          </mat-form-field>
+          <br /><br />
+          <div class="my-mat-basic">
+            <button
+              type="submit"
+              class="my-mat-basic"
+              mat-raised-button
+              color="basic"
+            >
+              Zaloguj
+            </button>
+
+            <button
+              type="submit"
+              class="my-mat-basic"
+              mat-raised-button
+              color="basic"
+              [routerLink]="['/resetHasla/']"
+              style="margin-left: 15px"
+            >
+              Resetuj hasło
+            </button>
           </div>
-        </div>
-      </form>
+        </form>
+      </div>
     </div>
   </div>
 </div>

@@ -1,160 +1,142 @@
-<div class="center">
+<div class="center container">
   <div class="container shadow-lg p-3 mb-5 bg-white rounded mt-5">
-    <div class="container text-center">
-      <div>
-        <h2><b>Zarejstruj się</b></h2>
+    <div class="row">
+      <div class="col-lg-6 content">
+        <img src="/assets/registry.png" alt="IMG" height="200" width="200" />
       </div>
-      <hr/>
-    </div>
-    <div for="rodoCheckBox" class="container d-flex justify-content-center">
-      <div
-        *ngIf="!rodoCheck.checked && registerForm.dirty"
-        class="alert alert-info col-md-8"
-      >
-        <strong>Informacja: </strong>W celu rejestracji zaakceptuj warunki RODO,
-        Politykę prywatności i Regulamin!
+      <div class="col-lg-6">
+        <h2><b>Formularz kontaktowy</b></h2>
+        <form #registerForm="ngForm" (ngSubmit)="register(registerForm)">
+          <mat-form-field class="example-full-width" appearance="fill">
+            <mat-label>Email</mat-label>
+            <input
+              type="email"
+              #login
+              matInput
+              [formControl]="emailFormControl"
+              [errorStateMatcher]="matcher"
+              placeholder="Ex. pat@example.com"
+              [(ngModel)]="model.username"
+            />
+            <mat-hint>Podaj email jako nazwe użytkownika</mat-hint>
+            <mat-error
+              *ngIf="
+                emailFormControl.hasError('email') &&
+                !emailFormControl.hasError('required')
+              "
+            >
+              Wpisz poprawy adres email.
+            </mat-error>
+            <mat-error *ngIf="emailFormControl.hasError('required')">
+              Email jest <strong>obowiązkowy</strong>
+            </mat-error>
+          </mat-form-field>
+
+          <mat-form-field class="example-full-width" appearance="fill">
+            <mat-label>Hasło</mat-label>
+            <input
+              type="password"
+              matInput
+              [formControl]="passwordFormControl"
+              [errorStateMatcher]="matcher"
+              placeholder="Hasło"
+              [(ngModel)]="model.password"
+              #password
+            />
+            <mat-hint>Minimalna długość hasła to 6 znaków</mat-hint>
+            <mat-error
+              *ngIf="
+                passwordFormControl.hasError('email') &&
+                !passwordFormControl.hasError('required')
+              "
+            >
+              Hasło niepoprawne
+            </mat-error>
+            <mat-error *ngIf="passwordFormControl.hasError('required')">
+              Hasło jest <strong>obowiązkowe</strong>
+            </mat-error>
+            <mat-error *ngIf="passwordFormControl.hasError('minlength')">
+              Minimalna długość hasła to 6 znaków
+            </mat-error>
+          </mat-form-field>
+
+          <mat-form-field class="example-full-width" appearance="fill">
+            <mat-label>NIP</mat-label>
+            <input
+              type="text"
+              matInput
+              [formControl]="nipFormControl"
+              [errorStateMatcher]="matcher"
+              placeholder="1234567890"
+              [(ngModel)]="model.nip"
+              #nip
+              minlength="10"
+              maxlength="10"
+              pattern="^[0-9]*$"
+            />
+            <mat-hint>Wpisz NIP bez myśliników oraz spacji</mat-hint>
+            <mat-error
+              *ngIf="
+                nipFormControl.hasError('nip') &&
+                !nipFormControl.hasError('required')
+              "
+            >
+              Wpisz poprawny numer + format NIP
+            </mat-error>
+            <mat-error *ngIf="nipFormControl.hasError('required')">
+              Nip jest <strong>obowiązkowy</strong>
+            </mat-error>
+            <mat-error *ngIf="nipFormControl.hasError('minlength')">
+              Za krótki NIP
+            </mat-error>
+            <mat-error *ngIf="nipFormControl.hasError('maxlength')">
+              Za długi
+            </mat-error>
+          </mat-form-field>
+
+          <br /><br />
+
+          <div class="mb-3 form-check">
+            <input
+              #rodoCheck
+              type="checkbox"
+              class="form-check-input"
+              id="rodoCheckBox"
+              (change)="(0)"
+            />
+            <label class="form-check-label" for="exampleCheck1"
+              >Akceptuje warunki <a href="">RODO</a>,
+              <a href="">Reguliamn i </a>
+              <a [routerLink]="['zp']">Zasady prywatności</a>
+            </label>
+          </div>
+
+          <div class="my-mat-basic">
+            <button
+              [disabled]="!rodoCheck.checked"
+              type="submit"
+              mat-raised-button
+              color="basic"
+            >
+              Zarejstruj
+            </button>
+
+            <button
+              type="button"
+              mat-raised-button
+              color="basic"
+              (click)="cancel()"
+              (click)="password.value = ''"
+              (click)="login.value = ''"
+              (click)="nip.value = ''"
+              (click)="rodoCheck.value = false"
+              style="margin-left: 15px"
+            >
+              Anuluj
+            </button>
+          </div>
+        </form>
       </div>
-    </div>
-    <div class="container text-center d-flex justify-content-center mt-4">
-      <form
-        #registerForm="ngForm"
-        class="col-md-4"
-        (ngSubmit)="register(registerForm)"
-      >
-        <!-- <div class="mb-3">
-        <label for="exampleInputEmail1" class="form-label">Adres email</label>
-        <input #login type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" 
-          name="username" [(ngModel)]="model.username" required
-          >   </div> -->
-        <!-- <div class="mb-3">
-        <label for="exampleInputPassword1" class="form-label">Hasło</label>
-        <input type="password" class="form-control" id="exampleInputPassword1" #password name="password" 
-              [(ngModel)]="model.password" required>   </div>
-      <div class="mb-3">
-        <label for="nip" class="form-label">Nip</label>
-        <input type="text" class="form-control" id="nip" #nip name="nip" maxlength="10" minlength="10"
-              [(ngModel)]="model.nip" required></div> -->
-        <mat-form-field class="example-full-width" appearance="fill">
-          <mat-label>Email</mat-label>
-          <input
-            type="email"
-            #login
-            matInput
-            [formControl]="emailFormControl"
-            [errorStateMatcher]="matcher"
-            placeholder="Ex. pat@example.com"
-            [(ngModel)]="model.username"
-          />
-          <mat-hint>Podaj email jako nazwe użytkownika</mat-hint>
-          <mat-error
-            *ngIf="
-              emailFormControl.hasError('email') &&
-              !emailFormControl.hasError('required')
-            "
-          >
-            Wpisz poprawy adres email.
-          </mat-error>
-          <mat-error *ngIf="emailFormControl.hasError('required')">
-            Email jest <strong>obowiązkowy</strong>
-          </mat-error>
-        </mat-form-field>
-
-        <mat-form-field class="example-full-width" appearance="fill">
-          <mat-label>Hasło</mat-label>
-          <input
-            type="password"
-            matInput
-            [formControl]="passwordFormControl"
-            [errorStateMatcher]="matcher"
-            placeholder="Hasło"
-            [(ngModel)]="model.password"
-            #password
-          />
-          <mat-hint>Minimalna długość hasła to 6 znaków</mat-hint>
-          <mat-error
-            *ngIf="
-              passwordFormControl.hasError('email') &&
-              !passwordFormControl.hasError('required')
-            "
-          >
-            Hasło niepoprawne
-          </mat-error>
-          <mat-error *ngIf="passwordFormControl.hasError('required')">
-            Hasło jest <strong>obowiązkowe</strong>
-          </mat-error>
-          <mat-error *ngIf="passwordFormControl.hasError('minlength')">
-            Minimalna długość hasła to 6 znaków
-          </mat-error>
-        </mat-form-field>
-
-        <mat-form-field class="example-full-width" appearance="fill">
-          <mat-label>NIP</mat-label>
-          <input
-            type="text"
-            matInput
-            [formControl]="nipFormControl"
-            [errorStateMatcher]="matcher"
-            placeholder="1234567890"
-            [(ngModel)]="model.nip"
-            #nip
-            minlength="10"
-            maxlength="10"
-            pattern="^[0-9]*$"
-          />
-          <mat-hint>Wpisz NIP bez myśliników oraz spacji</mat-hint>
-          <mat-error
-            *ngIf="
-              nipFormControl.hasError('nip') &&
-              !nipFormControl.hasError('required')
-            "
-          >
-            Wpisz poprawny numer + format NIP
-          </mat-error>
-          <mat-error *ngIf="nipFormControl.hasError('required')">
-            Nip jest <strong>obowiązkowy</strong>
-          </mat-error>
-          <mat-error *ngIf="nipFormControl.hasError('minlength')">
-            Za krótki NIP
-          </mat-error>
-          <mat-error *ngIf="nipFormControl.hasError('maxlength')">
-            Za długi
-          </mat-error>
-        </mat-form-field>
-
-        <br /><br />
-
-        <div class="mb-3 form-check">
-          <input
-            #rodoCheck
-            type="checkbox"
-            class="form-check-input"
-            id="rodoCheckBox"
-            (change)="(0)"
-          />
-          <label class="form-check-label" for="exampleCheck1"
-            >Akceptuje warunki <a href="">RODO</a>, <a href="">Reguliamn i </a>
-            <a [routerLink]="['zp']">Zasady prywatności</a>
-          </label>
-        </div>
-        <button
-          [disabled]="!rodoCheck.checked"
-          type="submit"
-          class="btn mat-basic confirm mr-2"
-        >
-          Zarejstruj
-        </button>
-        <button
-          type="button"
-          class="btn mat-basic danger"
-          (click)="cancel()"
-          (click)="password.value = ''"
-          (click)="login.value = ''"
-          (click)="nip.value = ''"
-          (click)="rodoCheck.value = false"
-        >
-          Anuluj
-        </button>
-      </form>
     </div>
   </div>
 </div>
