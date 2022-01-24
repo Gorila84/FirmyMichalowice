@@ -15,56 +15,36 @@ namespace FirmyMichalowice.Controllers
     {
         private readonly ILoggerManager _logger;
         private SmtpManager _smtpManager;
-        
+
         public MessageController(SmtpManager smtpManager, ILoggerManager logger)
         {
             _smtpManager = smtpManager;
             _logger = logger;
         }
-        
+
         [HttpPost("AddMessage")]
         [AllowAnonymous]
-        public async Task<bool> AddMessage(Message message)
+        public async Task<bool> AddMessage(Message message, bool isResetPassRequest = false)
         {
-            if(ModelState.IsValid && message.IsEmailValid()){
+            if (ModelState.IsValid && message.IsEmailValid()) {
                 MimeMessage message2 = new MimeMessage();
 
-                MailboxAddress from = new MailboxAddress("Admin", "admin@firmymichalowiceapi.berg-dev.eu");
+                MailboxAddress from = new MailboxAddress("Admin FPK", "admin@firmymichalowiceapi.berg-dev.eu");
                 message2.From.Add(from);
 
                 MailboxAddress to = new MailboxAddress("User", message.Username);
                 message2.To.Add(to);
-               
+
                 message2.Subject = message.Subject;
                 BodyBuilder bodyBuilder = new BodyBuilder();
-                bodyBuilder.HtmlBody = "<b><u> Wiadomość od: </u></b>" + message.Username + "<br> <br>" + message.Content + "<br> <br>" + "<p style='font-size:8px'>Wiadomość od FirmyMichalowice</p>";
+                if (isResetPassRequest) bodyBuilder.HtmlBody = message.Content;
+                else bodyBuilder.HtmlBody = "<b><u> Wiadomość od: </u></b>" + message.Username + "<br> <br>" + message.Content + "<br> <br>" + "<p style='font-size:8px'>Wiadomość od FirmyMichalowice</p>";
                 message2.Body = bodyBuilder.ToMessageBody();
 
                 bool result = await SendEmail(message2);
                 return result;
             }
             return false;
-        }
-
-        public void Meassage23(Message message)
-        {
-          
-                MimeMessage message2 = new MimeMessage();
-
-                MailboxAddress from = new MailboxAddress("Admin", "admin@firmymichalowiceapi.berg-dev.eu");
-                message2.From.Add(from);
-
-                MailboxAddress to = new MailboxAddress("Admin", message.Username);
-                message2.To.Add(to);
-
-                message2.Subject = message.Subject;
-                BodyBuilder bodyBuilder = new BodyBuilder();
-                bodyBuilder.HtmlBody = "<b><u> Wiadomość od: </u></b>" + message.Username + "<br> <br>" + message.Content + "<br> <br>" + "<p style='font-size:8px'>Wiadomość od FirmyMichalowice</p>";
-                message2.Body = bodyBuilder.ToMessageBody();
-
-                 SendEmail(message2);
-               
-          
         }
 
         private async Task<bool> SendEmail(MimeMessage message2)
@@ -84,11 +64,16 @@ namespace FirmyMichalowice.Controllers
             catch (Exception ex)
             {
                 _logger.LogInformation(ex.Message);
-                return false; 
-            } 
+                return false;
+            }
         }
-
-  
+        [HttpGet("AddMessage")]
+        [AllowAnonymous]
+        public void AddMessage(string json)
+        {
+            Message message = Newtonsoft.Json.JsonConvert.DeserializeObject<Message>(json);
+            _ = AddMessage(message, true);
+        }
 
 
     }

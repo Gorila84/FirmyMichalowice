@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using MimeKit;
+using Newtonsoft.Json;
 using System;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
@@ -26,7 +27,7 @@ namespace FirmyMichalowice.Controllers
         {
             _repository = repository;
             _config = config;
-           
+          
            
         }
         [HttpPost("register")]
@@ -98,14 +99,29 @@ namespace FirmyMichalowice.Controllers
         [AllowAnonymous]
         public async Task<IActionResult> ResetPassword(ResetPasswordDTO userForLoginDto)
         {
-            var result = _repository.ResetPassword(userForLoginDto.UserName);
-           
-                Message message = new Message() { Content = result, Subject = "Twoje nowe hasło do aplikacji Firmy Północy Krakowa.", Username = userForLoginDto.UserName };
-                RedirectToAction("addmessage", "message", new { message = message });
-           
-            return Ok();
+            try
+            {
+                var result = _repository.ResetPassword(userForLoginDto.UserName);
 
+                Message message = new Message() { Content = string.Format("<b><u> Wiadomość od: FPK - Firmy Północy Krakowa </u ></b> <br/> <br/> Twoje nowe hasło to : {0} <br/> Po zalogowaniu do aplikacji użyj opcji zmień hasło aby ustawić nowe hasło.<br/> <br/>" + "<p style='font-size:8px'>Wiadomość od FPK - Firmy Północy Krakowa, prosimy nie odpowiadać na ten email.</p>", result), Subject = "Twoje nowe hasło do aplikacji Firmy Północy Krakowa.", Username = userForLoginDto.UserName };
+                if (message.IsEmailValid())
+                {
+                    string json = JsonConvert.SerializeObject(message);
 
+                    return RedirectToAction("AddMessage", "Message", new { json });
+                 
+                }
+                else
+                {
+                    return BadRequest();
+                }
+
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
+         
         }
 
         [HttpPost("changePassword/{id}")]

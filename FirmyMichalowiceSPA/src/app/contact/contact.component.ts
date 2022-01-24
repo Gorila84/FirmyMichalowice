@@ -56,7 +56,6 @@ export class ContactComponent implements OnInit {
   get f() { return this.singInForm.controls; }
 
   sendMessage(form: NgForm){
-    debugger
     if (form.invalid) {
       for (const control of Object.keys(form.controls)) {
         form.controls[control].markAsTouched();
@@ -84,7 +83,6 @@ export class ContactComponent implements OnInit {
   }
   },
   error => {
-    console.log(error);
     this.alertify.error("Nie wysłano wiadomości.");
   })
 }
