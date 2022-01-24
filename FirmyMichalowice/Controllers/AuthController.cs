@@ -1,9 +1,11 @@
 ﻿using FirmyMichalowice.Dto_s;
 using FirmyMichalowice.Model;
 using FirmyMichalowice.Repositories;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
+using MimeKit;
 using System;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
@@ -18,13 +20,14 @@ namespace FirmyMichalowice.Controllers
     {
         private readonly IAuthRepository _repository;
         private readonly IConfiguration _config;
-        private readonly IEmailSender _emailSender;
+       
 
-        public AuthController(IAuthRepository repository, IConfiguration config, IEmailSender emailSender)
+        public AuthController(IAuthRepository repository, IConfiguration config)
         {
             _repository = repository;
             _config = config;
-            _emailSender = emailSender;
+           
+           
         }
         [HttpPost("register")]
         public async Task<IActionResult> Register(UserForRegisterDTO userRegisterDto)
@@ -87,6 +90,38 @@ namespace FirmyMichalowice.Controllers
             var token = tokenHandler.CreateToken(tokenDescriptor);
          
             return Ok(new { token = tokenHandler.WriteToken(token) });
+
+        }
+
+        
+        [HttpPost("resetPassword")]
+        [AllowAnonymous]
+        public async Task<IActionResult> ResetPassword(ResetPasswordDTO userForLoginDto)
+        {
+            var result = _repository.ResetPassword(userForLoginDto.UserName);
+           
+                Message message = new Message() { Content = result, Subject = "Twoje nowe hasło do aplikacji Firmy Północy Krakowa.", Username = userForLoginDto.UserName };
+                RedirectToAction("addmessage", "message", new { message = message });
+           
+            return Ok();
+
+
+        }
+
+        [HttpPost("changePassword/{id}")]
+        public async Task<ActionResult> ChangePassword(int id, UserForLoginDTO userForLoginDTO)
+        {
+            try
+            {
+                _repository.ChangePassword(id, userForLoginDTO.Password);
+                return Ok(200);
+
+            }
+            catch (Exception e)
+            {
+
+                return BadRequest(e);
+            }
 
         }
 

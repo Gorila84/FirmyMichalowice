@@ -155,24 +155,27 @@ namespace FirmyMichalowice.Repositories
         {
             try
             {
-                Random random = new Random();
-                byte[] passwordHash, passwordSalt;
-                const string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
-                string password = new string(Enumerable.Repeat(chars, 6)
-                    .Select(s => s[random.Next(s.Length)]).ToArray());
+                var user =  _context.Users.Where(x => x.Username == userName).FirstOrDefault() ?? throw new Exception("Nie ma takiego usera");
 
-                CreatePasswordHashSalt(password, out passwordHash, out passwordSalt);
+                if (user != null)
+                {
+                    Random random = new Random();
+                    byte[] passwordHash, passwordSalt;
+                    const string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+                    string password = new string(Enumerable.Repeat(chars, 6)
+                        .Select(s => s[random.Next(s.Length)]).ToArray());
 
-                var user = _context.Users.Where(x => x.Username == userName).FirstOrDefault();
-                
+                    CreatePasswordHashSalt(password, out passwordHash, out passwordSalt);
+
+             
                     user.PasswordHash = passwordHash;
                     user.PasswordSalt = passwordSalt;
 
                     _context.SaveChanges();
+                    return password;
 
-                    
-                
-                return password;
+                }
+                return null;
 
             }
             catch (Exception e)

@@ -46,11 +46,11 @@ export class AuthService {
     localStorage.removeItem('token');
   }
   resetPassword(model:any){
-    return this.http.post(this.resetPassUrl + 'resetPassword', model);
+    return this.http.post(this.baseUrl + 'ResetPassword', model);
   }
 
   changePassword(id:number,model:any){
     //const headers = this.client.addBearer();
-    return this.http.post(this.resetPassUrl + 'changePassword/' + id, model);
+    return this.http.post(this.baseUrl + 'changePassword/' + id, model);
   }
 }

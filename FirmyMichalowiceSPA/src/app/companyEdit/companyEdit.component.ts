@@ -168,8 +168,5 @@ export class CompanyEditComponent implements OnInit {
  }
 
 
- showContactData(){
-
- }
 
 }
