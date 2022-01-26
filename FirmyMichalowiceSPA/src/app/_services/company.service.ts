@@ -7,6 +7,8 @@ import { Company } from '../_models/company';
 import { PaginationResult } from '../_models/pagination';
 import { map, catchError } from 'rxjs/operators';
 import { CompanyType } from '../_models/companyTypes';
+import { identifierName } from '@angular/compiler';
+import { Offer } from '../_models/offer';
 
 @Injectable({
     providedIn: 'root'
@@ -58,4 +60,9 @@ updateCompany(id: number, company: Company){
 getDataFromCEIDG(nip: string){
   return this.http.get<string>(this.baseUrl + 'company/GetDataFromCeidg/' + nip);
 }
+
+getOffers(id: number): Observable<Offer>{
+  return this.http.get<Offer>(this.baseUrl + 'company/getOffers/' + id);
+}
+
 }

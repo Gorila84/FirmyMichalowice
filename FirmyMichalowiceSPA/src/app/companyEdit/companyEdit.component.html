@@ -383,6 +383,41 @@
            
           </mat-form-field>
         </div>
+        <hr />
+        <div class="description text-center col-12 card company-card">
+          <h3>Oferta</h3>
+          <hr />
+          
+          <p>
+            <label for="description"
+              >Wpisz swoja ofertę np. menu, usługi, towary, którymi handlujesz.</label
+            >
+          </p>
+          <table class="table table-striped">
+            <thead>
+        
+              <tr>
+                <th scope="col">Id</th>
+                <th scope="col">Nazwa</th>
+                <th scope="col">Cena</th>
+                
+                <th></th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let offer of offers; let i = index">
+                <th scope="row">{{ i+1 }}</th>
+                <td>{{ offer.name}}</td>
+                <td>{{ offer.price }}</td>
+                
+                <!-- (click)="open(content)" -->
+              
+              </tr>
+            </tbody>
+          </table>
+          
+        </div>
         <div form="editForm" class="d-flex justify-content-end">
           <button mat-raised-button class="mt-4 save-button">
             Zapisz zmiany

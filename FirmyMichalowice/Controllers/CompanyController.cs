@@ -22,9 +22,11 @@ namespace FirmyMichalowice.Controllers
 
     [Route("api/[controller]")]
     [ApiController]
-    
+
     public class CompanyController : ControllerBase
     {
+        private readonly DataContext _context;
+        private readonly IOfferRepository _offerRepository;
         private readonly ICompanyRepository _userRepository;
         private readonly IMapper _mapper;
         private readonly ILoggerManager _logger;
@@ -33,8 +35,10 @@ namespace FirmyMichalowice.Controllers
         private readonly CeidgService _cEIDGmanger;
         private readonly IMunicipalitieRepository _municipalitieRepository;
 
-        public CompanyController(ICompanyRepository userRepository, IMapper mapper, ILoggerManager logger, IConfiguration configuration, CeidgService cEIDGmanager, IMunicipalitieRepository municipalitieRepository)
+        public CompanyController(DataContext context, IOfferRepository offerRepository, ICompanyRepository userRepository, IMapper mapper, ILoggerManager logger, IConfiguration configuration, CeidgService cEIDGmanager, IMunicipalitieRepository municipalitieRepository)
         {
+            _context = context;
+            _offerRepository = offerRepository;
             _userRepository = userRepository;
             _mapper = mapper;
             _logger = logger;
@@ -70,7 +74,7 @@ namespace FirmyMichalowice.Controllers
             var user = await _userRepository.GetCompany(id, isForEdit);
 
             var userToReturn = _mapper.Map<CompanyForDateilDTO>(user);
-            userToReturn.ArmsUrl =  _municipalitieRepository.GetMunicipalities().Result.Where(x=>x.Name == user.Municipalitie).Select(x=>x.Path).FirstOrDefault();
+            userToReturn.ArmsUrl = _municipalitieRepository.GetMunicipalities().Result.Where(x => x.Name == user.Municipalitie).Select(x => x.Path).FirstOrDefault();
 
             return Ok(userToReturn);
         }
@@ -80,7 +84,7 @@ namespace FirmyMichalowice.Controllers
 
         public async Task<IActionResult> UpdateCompany(int id, CompaniesForEditDTO companiesForEditDTO)
         {
-            
+
             var comapnyFromRepository = await _userRepository.GetCompany(id, true);
 
             _mapper.Map(companiesForEditDTO, comapnyFromRepository);
@@ -98,7 +102,36 @@ namespace FirmyMichalowice.Controllers
             var data = await _cEIDGmanger.GetData(nip);
             var result = new JsonResult(data);
             return result;
-        } 
+        }
+
+        [HttpPost("addOffer")]
+        public async Task<IActionResult> AddOffer(Offer offer)
+        {
+
+            try
+            {
+                offer.ModifyDate = DateTime.Now;
+                await _context.Offers.AddAsync(offer);
+                _context.SaveChanges();
+                return Ok(offer);
+            }
+            catch (Exception e)
+            {
+
+                throw;
+            }
+          
+        }
+
+        [HttpGet("getOffers/{id}")]
+        public async Task<IActionResult> GetOffers(int id)
+        {
+            var offers = await _offerRepository.GetOffer(id);
+            //var offersForReturn = _mapper.Map<OfferDTO>(offers);
+            return Ok(offers);
+        }
+
+
 
         [HttpGet("getcompanytypes")]
         [Authorize]

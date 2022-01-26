@@ -8,6 +8,7 @@ import { PaginationModule } from 'ngx-bootstrap/pagination';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatCheckboxDefaultOptions, MatCheckboxModule, MAT_CHECKBOX_DEFAULT_OPTIONS} from '@angular/material/checkbox';
 import { CommonModule } from "@angular/common";
+import {MatTableModule} from '@angular/material/table';
 
 import { AppComponent } from './app.component';
 import { NavComponent } from './nav/nav.component';
@@ -116,6 +117,7 @@ const cookieConfig:NgcCookieConsentConfig = {
     MatFormFieldModule,
     MatInputModule,
     MatSelectModule,
+    MatTableModule,
     PaginationModule.forRoot(),
     BrowserAnimationsModule,
     FileUploadModule,

@@ -19,6 +19,7 @@ namespace FirmyMichalowice.Helpers
             CreateMap<CompaniesForEditDTO, User>();
             CreateMap<CompanyType, CompanyTypeDTO>();
             CreateMap<CookieConsentDTO, CookieConsent>();
+            CreateMap<OfferDTO, Offer>();
          
         }
     }

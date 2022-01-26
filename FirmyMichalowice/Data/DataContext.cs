@@ -19,5 +19,6 @@ namespace FirmyMichalowice.Data
         public DbSet<Municipalitie> Municipalities { get; set; }
         public DbSet<PKD> PKD { get; set; }
         public DbSet<CookieConsent> CookieConsents { get; set; }
+        public DbSet<Offer> Offers { get; set; }
     }
 }

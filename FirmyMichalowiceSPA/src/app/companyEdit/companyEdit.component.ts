@@ -16,6 +16,8 @@ import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 import { buffer } from 'rxjs/operators';
 import { CompanyTypeService } from '../_services/companyType.service';
 import { toBase64String } from '@angular/compiler/src/output/source_map';
+import { OffsetModifier } from '@popperjs/core/lib/modifiers/offset';
+import { Offer } from '../_models/offer';
 
 
 interface Item {
@@ -33,10 +35,12 @@ interface Item {
 export class CompanyEditComponent implements OnInit {
   myControl = new FormControl();
   options: string[] = [];
+  displayedColumns: string[] = ['name', 'price'];
   filteredOptions: Observable<string[]>;
   // tslint:disable-next-line:no-output-on-prefix
   @Output() public onUploadFinished = new EventEmitter();
   company: Company;
+  offers: any;
   baseUrl = environment.apiUrl;
   fileToUpload: File | null = null;
   shown: any;
@@ -56,6 +60,7 @@ export class CompanyEditComponent implements OnInit {
     this.getCompanyTypes();
     this.route.data.subscribe(data => {
       this.company = data.company;
+      this.offers = data.offers;
     });
     // this.getImage(this.authService.decotedToken.nameid);
     // this.getImage();
@@ -65,6 +70,8 @@ export class CompanyEditComponent implements OnInit {
       startWith(''),
       map(value => this._filter(value))
     );
+
+    this.getOffers();
   }
 
 
@@ -167,6 +174,13 @@ export class CompanyEditComponent implements OnInit {
 });
  }
 
+getOffers(){
 
+  this.companyService.getOffers(this.authService.decotedToken.nameid).subscribe(
+    response => {
+      this.offers = response;
+    }
+  );
+}
 
 }
