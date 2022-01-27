@@ -33,19 +33,20 @@ namespace FirmyMichalowice.Controllers
 
       
         [HttpPost("addconsent")]
-        public void AddConsent([FromBody] CookieConsentDTO consent)
+        public async Task<bool> AddConsent([FromBody] CookieConsentDTO consent)
         {
             try
             {
                 consent.Date = DateTime.Now;
                 var _consent = _mapper.Map<CookieConsent>(consent);
-                _consentRepository.AddConsent(_consent);
-                //return Ok();
+                var result = await _consentRepository.AddConsent(_consent);
+                return result;
             }
             catch(Exception ex)
             {
                 _logger.LogInformation(ex.Message);
                 //return BadRequest();
+                return false;
             }
         }
         

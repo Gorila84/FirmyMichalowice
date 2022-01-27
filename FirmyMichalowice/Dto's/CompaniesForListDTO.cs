@@ -32,5 +32,7 @@ namespace FirmyMichalowice.Dto_s
         public string NIP { get; set; }
         public PKD MainPKD { get; set; }
         public IList<PKD> PKDS { get; set; }
+        public DateTime Created { get; set; }
+        public DateTime Modify { get; set; }
     }
 }

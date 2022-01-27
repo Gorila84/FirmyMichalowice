@@ -30,6 +30,8 @@ export interface Company {
         statusFromCeidg: string;
        
         additionalAddress: boolean;
+        created?:Date;
+        modify?:Date;
 
 }
 

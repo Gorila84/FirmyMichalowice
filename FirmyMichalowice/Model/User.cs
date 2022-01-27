@@ -61,5 +61,7 @@ namespace FirmyMichalowice.Model
         [NotMapped]
         public string Geolocation2Url { get; set; }
 
+     
+
     }
 }

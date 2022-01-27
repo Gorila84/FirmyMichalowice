@@ -70,3 +70,5 @@ Thumbs.db
 /.vs/FirmyMichalowice/v16/.suo
 /FirmyMichalowice/bin/Debug/netcoreapp3.1/FirmyMichalowice.deps.json
 /.vs/FirmyMichalowice/DesignTimeBuild/.dtbcache.v2
+/.vs/FirmyMichalowice/v16/.suo
+/FirmyMichalowice/Properties/PublishProfiles/firmymichalowiceapi.berg-dev.eu - Web Deploy.pubxml

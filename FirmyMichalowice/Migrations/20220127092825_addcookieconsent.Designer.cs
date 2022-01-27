@@ -9,8 +9,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FirmyMichalowice.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20220121125923_addCookieConsent")]
-    partial class addCookieConsent
+    [Migration("20220127092825_addcookieconsent")]
+    partial class addcookieconsent
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -38,11 +38,17 @@ namespace FirmyMichalowice.Migrations
 
             modelBuilder.Entity("FirmyMichalowice.Model.CookieConsent", b =>
                 {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
                     b.Property<DateTime>("Date")
                         .HasColumnType("datetime");
 
                     b.Property<string>("UserIP")
                         .HasColumnType("longtext");
+
+                    b.HasKey("Id");
 
                     b.ToTable("CookieConsents");
                 });
@@ -62,6 +68,29 @@ namespace FirmyMichalowice.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Municipalities");
+                });
+
+            modelBuilder.Entity("FirmyMichalowice.Model.Offer", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("ModifyDate")
+                        .HasColumnType("datetime");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("longtext");
+
+                    b.Property<double>("Price")
+                        .HasColumnType("double");
+
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Offers");
                 });
 
             modelBuilder.Entity("FirmyMichalowice.Model.PKD", b =>

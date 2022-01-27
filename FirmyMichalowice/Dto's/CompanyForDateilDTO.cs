@@ -52,6 +52,8 @@ namespace FirmyMichalowice.Dto_s
         public string OfficeMunicipalitie { get; set; }
         public string StatusFromCeidg { get; set; }
         public string Geolocation2Url { get; set; }
+        public DateTime Created { get; set; }
+        public DateTime Modify { get; set; }
 
     }
 }

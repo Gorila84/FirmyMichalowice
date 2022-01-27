@@ -19,15 +19,18 @@ namespace FirmyMichalowice.Repositories
             _logger = logger;
             
         }
-        public void AddConsent(CookieConsent consent)
+        public async Task<bool> AddConsent(CookieConsent consent)
         {
             try
             {
                 _context.CookieConsents.Add(consent);
+                 await _context.SaveChangesAsync();
+                return true;
             }
             catch (Exception ex)
             {
                 _logger.LogInformation(ex.Message);
+                return false;
             }
         }
     }

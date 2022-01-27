@@ -42,5 +42,7 @@ namespace FirmyMichalowice.Dto_s
         public string OfficeStreet { get; set; }
         public string OfficePostalCode { get; set; }
         public string OfficeMunicipalitie { get; set; }
+
+
     }
 }

@@ -38,7 +38,6 @@ export class AppComponent implements OnInit, OnDestroy{
         consent.userIP =res.ip;
         consent.date = null;
         this.ip.addConsent(consent).subscribe((res:any)=>{ 
-          console.log(res);
         });
    });
   })
@@ -50,7 +49,6 @@ export class AppComponent implements OnInit, OnDestroy{
           consent.userIP = res.ip;
           consent.date = null;
           this.ip.addConsent(consent).subscribe((res:any)=>{ 
-            console.log(res);
           })
    });
   })

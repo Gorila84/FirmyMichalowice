@@ -9,8 +9,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FirmyMichalowice.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20220124110323_updateCC")]
-    partial class updateCC
+    [Migration("20220127095943_updateuser2")]
+    partial class updateuser2
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -68,6 +68,29 @@ namespace FirmyMichalowice.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Municipalities");
+                });
+
+            modelBuilder.Entity("FirmyMichalowice.Model.Offer", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("ModifyDate")
+                        .HasColumnType("datetime");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("longtext");
+
+                    b.Property<double>("Price")
+                        .HasColumnType("double");
+
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Offers");
                 });
 
             modelBuilder.Entity("FirmyMichalowice.Model.PKD", b =>

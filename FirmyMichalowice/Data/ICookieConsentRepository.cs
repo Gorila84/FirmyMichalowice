@@ -8,6 +8,6 @@ namespace FirmyMichalowice.Data
 {
     public interface ICookieConsentRepository
     {
-      void AddConsent(CookieConsent consent);
+      Task<bool> AddConsent(CookieConsent consent);
     }
 }

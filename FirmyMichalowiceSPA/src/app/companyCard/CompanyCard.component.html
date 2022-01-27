@@ -4,6 +4,9 @@
   <hr class="mb-4"> -->
 
 <div class="card mt-4 company-card">
+  <div class="card-header text-center">
+    Data dołączenia do FPK : {{ company.created | date: "dd/MM/yyyy" }}
+  </div>
   <div class="card-body">
     <div class="row">
       <div class="col-md-2 text-center">
@@ -49,5 +52,9 @@
         </div>
       </div>
     </div>
+  </div>
+  <div class="card-footer text-center">
+    Ostatnia aktualizacja przez użytkownika:
+    {{ company.modify | date: "dd/MM/yyyy" }}
   </div>
 </div>

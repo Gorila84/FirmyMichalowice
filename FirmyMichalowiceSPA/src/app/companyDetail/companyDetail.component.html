@@ -45,6 +45,18 @@
         </li>
       </ul>
       <br />
+      <div>
+        <div>
+          <b><u> Data dołączenia do FPK :</u></b>
+          {{ company.created | date: "dd/MM/yyyy" }}
+        </div>
+        <br />
+        <div>
+          <b><u> Data ostatniej aktualizacji:</u></b>
+          {{ company.modify | date: "dd/MM/yyyy" }}
+        </div>
+      </div>
+      <br />
     </div>
 
     <div class="col-md-4 text-center contact">
