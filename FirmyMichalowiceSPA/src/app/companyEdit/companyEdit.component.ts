@@ -18,6 +18,7 @@ import { CompanyTypeService } from '../_services/companyType.service';
 import { toBase64String } from '@angular/compiler/src/output/source_map';
 import { OffsetModifier } from '@popperjs/core/lib/modifiers/offset';
 import { Offer } from '../_models/offer';
+import { MatPaginator } from '@angular/material/paginator';
 
 
 interface Item {
@@ -36,10 +37,14 @@ export class CompanyEditComponent implements OnInit {
   myControl = new FormControl();
   options: string[] = [];
   displayedColumns: string[] = ['name', 'price'];
+   rowofferItems : Offer[];
   filteredOptions: Observable<string[]>;
   // tslint:disable-next-line:no-output-on-prefix
   @Output() public onUploadFinished = new EventEmitter();
+  @ViewChild(MatPaginator) paginator: MatPaginator;
   company: Company;
+  offer: Offer;
+  model: any={};
   offers: any;
   baseUrl = environment.apiUrl;
   fileToUpload: File | null = null;
@@ -176,11 +181,15 @@ export class CompanyEditComponent implements OnInit {
 
 getOffers(){
 
-  this.companyService.getOffers(this.authService.decotedToken.nameid).subscribe(
-    response => {
-      this.offers = response;
-    }
-  );
+  const rowoferItems = this.companyService.getOffers(this.authService.decotedToken.nameid);
+return rowoferItems; 
+}
+
+addOffer(){
+  this.model.userId = this.authService.decotedToken.nameid;
+  this.companyService.addOffer(this.model).subscribe();
+  this.offers.push(this.model);
+  location.reload();
 }
 
 }

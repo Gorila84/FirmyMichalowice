@@ -25,6 +25,13 @@ namespace FirmyMichalowice.Repositories
             return offers;
         }
 
+        public void AddOffer(Offer offer)
+        {
+            offer.ModifyDate = DateTime.Now;
+             _context.Offers.Add(offer);
+            _context.SaveChanges();
+        }
+
        
     }
 }
