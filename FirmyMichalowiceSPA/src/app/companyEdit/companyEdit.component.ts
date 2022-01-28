@@ -49,6 +49,7 @@ export class CompanyEditComponent implements OnInit {
   baseUrl = environment.apiUrl;
   fileToUpload: File | null = null;
   shown: any;
+  dataSource : any;
 
   @ViewChild('editForm') editForm: NgForm;
   constructor(private route: ActivatedRoute,
@@ -75,8 +76,9 @@ export class CompanyEditComponent implements OnInit {
       startWith(''),
       map(value => this._filter(value))
     );
-
-    this.getOffers();
+    this.dataSource =  this.getOffers().subscribe(data =>{
+      this.dataSource = data
+    } );
   }
 
 
@@ -186,8 +188,10 @@ return rowoferItems;
 }
 
 addOffer(){
+  debugger
+  console.log(this.offer)
   this.model.userId = this.authService.decotedToken.nameid;
-  this.companyService.addOffer(this.model).subscribe();
+  this.companyService.addOffer(this.model);
   this.offers.push(this.model);
   location.reload();
 }

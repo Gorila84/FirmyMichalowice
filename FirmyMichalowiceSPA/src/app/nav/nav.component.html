@@ -9,11 +9,8 @@
         alt="FPK_Logo"
       />
     </a>
-    <div *ngIf="showArms">
-      <div
-        class="d-flex justify-content-center bd-highlight"
-        *ngFor="let item of armsUrls"
-      >
+    <div *ngIf="showArms" class="d-flex justify-content-center bd-highlight">
+      <div *ngFor="let item of armsUrls">
         <img
           [src]="item"
           height="45"

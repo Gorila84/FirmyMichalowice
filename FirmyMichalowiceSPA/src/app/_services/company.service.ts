@@ -62,11 +62,15 @@ getDataFromCEIDG(nip: string){
 }
 
 getOffers(id: number): Observable<Offer>{
-  return this.http.get<Offer>(this.baseUrl + 'company/getOffers/' + id);
+  const headers = this.client.addBearer();
+  return this.http.get<Offer>(this.baseUrl + 'company/getOffers/' + id,  { headers});
 }
 
 addOffer(model: any){
-  return this.http.post(this.baseUrl + 'company/addOffer/', model);
+  debugger
+  const headers = this.client.addBearer();
+  return this.http.post(this.baseUrl + 'company/addOffer/', model,  { headers}).subscribe(() => {
+  });
 }
 
 }

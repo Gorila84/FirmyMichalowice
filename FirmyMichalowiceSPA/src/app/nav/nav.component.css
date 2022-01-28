@@ -12,3 +12,6 @@
 .navbar-brand {
   cursor: pointer !important;
 }
+.arms {
+  float: left;
+}

@@ -19,7 +19,8 @@ export class CompanyDetailComponent implements OnInit, AfterViewInit   {
   isCompanyActive: boolean;
   isEnabledGeolocation2Url: boolean;
   id: number;
-  showArms = environment.showArms;
+  showArms: boolean; 
+  isConsentToUseMA: boolean;
   useGeoportal = environment.useGeoportal;
   scrHeight:any;
   scrWidth:any;
@@ -47,6 +48,7 @@ export class CompanyDetailComponent implements OnInit, AfterViewInit   {
     });
     this.isCompanyActive = this.company.statusFromCeidg == 'AKTYWNY';
     this.isEnabledGeolocation2Url = this.company.geolocation2Url.length == 0;
+    this.showArms =  environment.showArms && this.company.armsUrl ? true : false ;
   }
   showMapFn($event){
     // if(this.useGeoportal)

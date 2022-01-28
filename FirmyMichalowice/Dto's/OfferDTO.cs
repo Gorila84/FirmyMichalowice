@@ -7,9 +7,11 @@ namespace FirmyMichalowice.Dto_s
 {
     public class OfferDTO
     {
-     
+  
         public string Name { get; set; }
         public double Price { get; set; }
+        public int UserId { get; set; }
+  
         
     }
 }

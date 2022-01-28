@@ -17,7 +17,7 @@ namespace FirmyMichalowice.Repositories
         }
         public async Task<List<Municipalitie>> GetMunicipalities()
         {
-            return await _context.Municipalities.Where(x=>x.Name != null).ToListAsync();
+            return await _context.Municipalities.Where(x=>x.Name != null && x.IsConsentToUse).ToListAsync();
         }
     }
 }

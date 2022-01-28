@@ -5,6 +5,7 @@ import { NgcCookieConsentService, NgcNoCookieLawEvent, NgcStatusChangeEvent } fr
 import { Subscription }   from 'rxjs';
 import { IpServiceService } from './_services/ip-service.service';
 import { CookieConsent } from './_models/cookieConsent';
+import * as $ from 'jquery';
 
 @Component({
   selector: 'app-root',
@@ -52,6 +53,9 @@ export class AppComponent implements OnInit, OnDestroy{
           })
    });
   })
+  debugger
+  var elem = $('.cc-bottom');
+  elem[0].innerHTML = "Polityka Cookie";
 }
 
   ngOnDestroy() {

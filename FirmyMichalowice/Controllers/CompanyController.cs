@@ -62,7 +62,7 @@ namespace FirmyMichalowice.Controllers
             }
             catch (Exception ex)
             {
-
+                _logger.LogInformation(ex.Message);
                 return StatusCode(500, "Ręcznie wygenerowany błąd");
             }
 
@@ -104,23 +104,27 @@ namespace FirmyMichalowice.Controllers
             return result;
         }
 
+        [Authorize]
         [HttpPost("addOffer")]
-        public async Task<IActionResult> AddOffer([FromBody]Offer offer)
+        public async Task<IActionResult> AddOffer([FromBody]OfferDTO offerDto)
         {
 
             try
             {
+                Offer offer = _mapper.Map<Offer>(offerDto);
                 _offerRepository.AddOffer(offer);
-                return Ok(offer);
+                return Ok(offerDto);
             }
             catch (Exception e)
             {
 
-                throw;
+                _logger.LogInformation(e.Message);
+                return StatusCode(400, e.Message);
             }
           
         }
 
+        [Authorize]
         [HttpGet("getOffers/{id}")]
         public async Task<IActionResult> GetOffers(int id)
         {
