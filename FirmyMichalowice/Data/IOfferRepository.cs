@@ -9,5 +9,6 @@ namespace FirmyMichalowice.Data
     public interface IOfferRepository
     {
          Task<List<Offer>> GetOffer(int userId);
+        void AddOffer(Offer offer);
     }
 }

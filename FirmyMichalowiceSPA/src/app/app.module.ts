@@ -9,6 +9,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatCheckboxDefaultOptions, MatCheckboxModule, MAT_CHECKBOX_DEFAULT_OPTIONS} from '@angular/material/checkbox';
 import { CommonModule } from "@angular/common";
 import {MatTableModule} from '@angular/material/table';
+import {MatPaginatorModule} from '@angular/material/paginator';
 
 import { AppComponent } from './app.component';
 import { NavComponent } from './nav/nav.component';
@@ -118,6 +119,7 @@ const cookieConfig:NgcCookieConsentConfig = {
     MatInputModule,
     MatSelectModule,
     MatTableModule,
+    MatPaginatorModule,
     PaginationModule.forRoot(),
     BrowserAnimationsModule,
     FileUploadModule,

@@ -65,4 +65,8 @@ getOffers(id: number): Observable<Offer>{
   return this.http.get<Offer>(this.baseUrl + 'company/getOffers/' + id);
 }
 
+addOffer(model: any){
+  return this.http.post(this.baseUrl + 'company/addOffer/', model);
+}
+
 }

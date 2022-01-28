@@ -25,7 +25,7 @@ namespace FirmyMichalowice.Controllers
 
     public class CompanyController : ControllerBase
     {
-        private readonly DataContext _context;
+        
         private readonly IOfferRepository _offerRepository;
         private readonly ICompanyRepository _userRepository;
         private readonly IMapper _mapper;
@@ -35,9 +35,9 @@ namespace FirmyMichalowice.Controllers
         private readonly CeidgService _cEIDGmanger;
         private readonly IMunicipalitieRepository _municipalitieRepository;
 
-        public CompanyController(DataContext context, IOfferRepository offerRepository, ICompanyRepository userRepository, IMapper mapper, ILoggerManager logger, IConfiguration configuration, CeidgService cEIDGmanager, IMunicipalitieRepository municipalitieRepository)
+        public CompanyController(IOfferRepository offerRepository, ICompanyRepository userRepository, IMapper mapper, ILoggerManager logger, IConfiguration configuration, CeidgService cEIDGmanager, IMunicipalitieRepository municipalitieRepository)
         {
-            _context = context;
+            
             _offerRepository = offerRepository;
             _userRepository = userRepository;
             _mapper = mapper;
@@ -105,14 +105,12 @@ namespace FirmyMichalowice.Controllers
         }
 
         [HttpPost("addOffer")]
-        public async Task<IActionResult> AddOffer(Offer offer)
+        public async Task<IActionResult> AddOffer([FromBody]Offer offer)
         {
 
             try
             {
-                offer.ModifyDate = DateTime.Now;
-                await _context.Offers.AddAsync(offer);
-                _context.SaveChanges();
+                _offerRepository.AddOffer(offer);
                 return Ok(offer);
             }
             catch (Exception e)

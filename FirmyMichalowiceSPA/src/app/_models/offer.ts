@@ -4,6 +4,5 @@ export interface Offer {
     name: string;
     price: number;
     userId: number;
-    modifyDate: Date;
 
 }
