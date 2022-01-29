@@ -32,6 +32,14 @@ namespace FirmyMichalowice.Repositories
             _context.SaveChanges();
         }
 
+        public void RemoveOffer(int id)
+        {
+            var offerToRemove = _context.Offers.Find(id);
+            _context.Offers.Remove(offerToRemove);
+            _context.SaveChanges();
+
+        }
+
        
     }
 }

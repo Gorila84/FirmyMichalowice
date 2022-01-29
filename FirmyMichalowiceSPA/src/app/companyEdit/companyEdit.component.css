@@ -49,4 +49,16 @@ table {
     margin-right: 15px !important;
     
   }
+
+}
+.service-name{
+  width: 60vw;
+}
+
+.price-column{
+  width: 20vw;
+}
+
+.buttons-column{
+  width: 20vw;
 }

@@ -67,10 +67,17 @@ getOffers(id: number): Observable<Offer>{
 }
 
 addOffer(model: any){
-  debugger
+  
   const headers = this.client.addBearer();
   return this.http.post(this.baseUrl + 'company/addOffer/', model,  { headers}).subscribe(() => {
   });
+}
+
+removeOffer(id:number){
+  const headers = this.client.addBearer();
+  return this.http.delete(this.baseUrl + 'company/removeOffer/' + id, { headers}).subscribe(() => {
+  });
+  
 }
 
 }

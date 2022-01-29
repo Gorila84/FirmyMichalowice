@@ -10,6 +10,7 @@ import {MatCheckboxDefaultOptions, MatCheckboxModule, MAT_CHECKBOX_DEFAULT_OPTIO
 import { CommonModule } from "@angular/common";
 import {MatTableModule} from '@angular/material/table';
 import {MatPaginatorModule} from '@angular/material/paginator';
+import {MatDialogModule} from '@angular/material/dialog';
 
 import { AppComponent } from './app.component';
 import { NavComponent } from './nav/nav.component';
@@ -45,6 +46,7 @@ import { RECAPTCHA_V3_SITE_KEY, RecaptchaV3Module } from 'ng-recaptcha';
 import {NgcCookieConsentConfig, NgcCookieConsentModule} from 'ngx-cookieconsent';
 import { ChangePasswordComponent } from './change-password/change-password.component';
 import { ResetPasswordComponent } from './reset-password/reset-password.component';
+import { EditOfferDialogComponent } from './edit-offer-dialog/edit-offer-dialog.component';
 
 
 const cookieConfig:NgcCookieConsentConfig = {
@@ -105,7 +107,8 @@ const cookieConfig:NgcCookieConsentConfig = {
       ContactComponent,
       Polityka_prywatnosciComponent,
       ChangePasswordComponent,
-      ResetPasswordComponent
+      ResetPasswordComponent,
+      EditOfferDialogComponent
    ],
   imports: [
     BrowserModule,
@@ -127,6 +130,7 @@ const cookieConfig:NgcCookieConsentConfig = {
     MatMenuModule,
     MatCardModule,
     MatCheckboxModule,
+    MatDialogModule,
     AccordionModule.forRoot(),
     CommonModule,
     // tslint:disable-next-line:max-line-length

@@ -20,6 +20,9 @@ import { OffsetModifier } from '@popperjs/core/lib/modifiers/offset';
 import { Offer } from '../_models/offer';
 import { MatPaginator } from '@angular/material/paginator';
 
+import { EditOfferDialogComponent } from '../edit-offer-dialog/edit-offer-dialog.component';
+import { MatDialog } from '@angular/material/dialog';
+
 
 interface Item {
   value: string;
@@ -36,7 +39,7 @@ interface Item {
 export class CompanyEditComponent implements OnInit {
   myControl = new FormControl();
   options: string[] = [];
-  displayedColumns: string[] = ['name', 'price'];
+  displayedColumns: string[] = ['name', 'price','buttons'];
    rowofferItems : Offer[];
   filteredOptions: Observable<string[]>;
   // tslint:disable-next-line:no-output-on-prefix
@@ -58,7 +61,8 @@ export class CompanyEditComponent implements OnInit {
               private companyService: CompanyService,
               private uploadPhotoService: UploadPhotoService,
               private logger: NGXLogger,
-              private companyTypeService: CompanyTypeService) { }
+              private companyTypeService: CompanyTypeService,
+              public dialog: MatDialog) { }
 
   // tslint:disable-next-line:typedef
   ngOnInit() {
@@ -188,12 +192,29 @@ return rowoferItems;
 }
 
 addOffer(){
-  debugger
+  
   console.log(this.offer)
   this.model.userId = this.authService.decotedToken.nameid;
   this.companyService.addOffer(this.model);
   this.offers.push(this.model);
   location.reload();
+}
+
+removeOffer(id: number){
+  
+  this.companyService.removeOffer(id);
+  this.offers.splice(id);
+  location.reload();
+}
+
+openDialog(): void {
+  const dialogRef = this.dialog.open(EditOfferDialogComponent, {
+    width: '250px',
+    // data: {name: this.name, animal: this.animal}
+  });
+  
+
+ 
 }
 
 }

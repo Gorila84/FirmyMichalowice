@@ -153,6 +153,15 @@ namespace FirmyMichalowice.Controllers
 
         }
 
+
+        [HttpDelete("removeOffer/{id}")]
+
+        public async Task<IActionResult> RemoveOffer(int id)
+        {
+            _offerRepository.RemoveOffer(id);
+            return Ok();
+        }
+
   
     }
 }
