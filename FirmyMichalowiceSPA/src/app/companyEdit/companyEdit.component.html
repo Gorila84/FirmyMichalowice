@@ -415,8 +415,13 @@
                     placeholder="Nazwa"
                     name="name"
                     [(ngModel)]="model.name"
+                    required
+                    [formControl]="offerNameFormControl"
                   />
                 </mat-form-field>
+                <mat-error *ngIf="offerNameFormControl.hasError('required')">
+                  Wprowadź <strong>Nazwę</strong>
+                </mat-error>
               </div>
 
               <div class="col-5">

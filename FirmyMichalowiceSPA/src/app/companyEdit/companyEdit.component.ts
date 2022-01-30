@@ -1,6 +1,6 @@
 
 import { Component, EventEmitter, OnInit, Output, ViewChild } from '@angular/core';
-import { FormControl, NgForm } from '@angular/forms';
+import { FormControl, NgForm, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
 import { Company } from '../_models/company';
@@ -91,6 +91,10 @@ export class CompanyEditComponent implements OnInit {
     this.dataSource.paginator = this.paginator;
     
   }
+
+  offerNameFormControl = new FormControl('', [
+    Validators.required
+  ]);
  
 
   // tslint:disable-next-line:typedef
