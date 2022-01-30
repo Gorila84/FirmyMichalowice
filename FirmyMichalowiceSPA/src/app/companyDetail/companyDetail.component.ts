@@ -5,6 +5,7 @@ import { environment } from 'src/environments/environment';
 import { Company } from '../_models/company';
 import { CompanyService } from '../_services/company.service';
 import { HostListener } from "@angular/core";
+import { AuthService } from '../_services/auth.service';
 
 declare var $: any;
 
@@ -24,7 +25,8 @@ export class CompanyDetailComponent implements OnInit, AfterViewInit   {
   useGeoportal = environment.useGeoportal;
   scrHeight:any;
   scrWidth:any;
- 
+  dataSource : any;
+  displayedColumns: string[] = ['name', 'price'];
   @HostListener('window:resize', ['$event'])
     getScreenSize(event?) {
           this.scrHeight = window.innerHeight;
@@ -32,7 +34,8 @@ export class CompanyDetailComponent implements OnInit, AfterViewInit   {
     }
 
   constructor(private route: ActivatedRoute,
-              private companyService: CompanyService
+              private companyService: CompanyService, 
+              private authService: AuthService
              ) { 
               this.getScreenSize();
              }
@@ -49,6 +52,11 @@ export class CompanyDetailComponent implements OnInit, AfterViewInit   {
     this.isCompanyActive = this.company.statusFromCeidg == 'AKTYWNY';
     this.isEnabledGeolocation2Url = this.company.geolocation2Url.length == 0;
     this.showArms =  environment.showArms && this.company.armsUrl ? true : false ;
+
+    this.dataSource =  this.getOffers().subscribe(data =>{
+      this.dataSource = data
+    } );
+
   }
   showMapFn($event){
     // if(this.useGeoportal)
@@ -94,8 +102,13 @@ export class CompanyDetailComponent implements OnInit, AfterViewInit   {
   getIfAdditionalAddressIsTrue(){
     return this.company.additionalAddress;
   }
-}
+  
+  getOffers(){
 
+    const rowoferItems = this.companyService.getOffers(this.authService.decotedToken.nameid);
+  return rowoferItems; 
+  }
+}
 // function searchAdr(idx: Number, company: Company) {
 //   if( idx == 0) return company.city + ', ' + company.street;
 //  else if (idx == 1) return company.officeCity + ', ' +  company.officeStreet

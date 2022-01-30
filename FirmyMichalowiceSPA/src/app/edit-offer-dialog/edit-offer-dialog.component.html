@@ -2,16 +2,16 @@
 <div mat-dialog-content>
   <p>Nazwa</p>
   <mat-form-field>
-    <input matInput>
+    <input matInput [(ngModel)]="data.name">
   </mat-form-field>
 </div>
 <div mat-dialog-content>
     <p>Cena</p>
     <mat-form-field>
-      <input matInput>
+      <input matInput  [(ngModel)]="data.price">
     </mat-form-field>
   </div>
 <div mat-dialog-actions>
-  <button mat-raised-button class="save-button" >Anuluj</button>
-  <button mat-raised-button class="save-button"  cdkFocusInitial>Zapisz</button>
+  <button mat-raised-button class="save-button" (click)="closeEditDialog()">Anuluj</button>
+  <button mat-raised-button class="save-button" (click)=" editOffer()" cdkFocusInitial>Zapisz</button>
 </div>

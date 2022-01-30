@@ -11,73 +11,92 @@ import { identifierName } from '@angular/compiler';
 import { Offer } from '../_models/offer';
 
 @Injectable({
-    providedIn: 'root'
-  })
+  providedIn: 'root',
+})
 export class CompanyService {
+  baseUrl = environment.apiUrl;
 
-    baseUrl = environment.apiUrl;
+  constructor(private http: HttpClient, private client: ApiClient) {}
 
-constructor(private http: HttpClient, private client: ApiClient) { }
-
-getUsers(page?, itemsPerPage?, userParams?, likesParam?): Observable<PaginationResult<Company[]>>{
-
-    const paginationResult: PaginationResult<Company[]> = new PaginationResult<Company[]>();
+  getUsers(
+    page?,
+    itemsPerPage?,
+    userParams?,
+    likesParam?
+  ): Observable<PaginationResult<Company[]>> {
+    const paginationResult: PaginationResult<Company[]> = new PaginationResult<
+      Company[]
+    >();
     let params = new HttpParams();
 
-    if (page != null && itemsPerPage != null){
+    if (page != null && itemsPerPage != null) {
       params = params.append('pageNumber', page);
       params = params.append('pageSize', itemsPerPage);
     }
 
-    if(userParams != null){
+    if (userParams != null) {
       params = params.append('companyName', userParams.CompanyName);
       params = params.append('companyType', userParams.CompanyType);
-      params = params.append('city', userParams.City);      
+      params = params.append('city', userParams.City);
     }
-    return this.http.get<Company[]>(this.baseUrl + 'company', {observe: 'response', params})
+    return this.http
+      .get<Company[]>(this.baseUrl + 'company', { observe: 'response', params })
       .pipe(
-        map(response => {
+        map((response) => {
           paginationResult.result = response.body;
-          if (response.headers.get('Pagination') != null){
-            paginationResult.pagination = JSON.parse(response.headers.get('Pagination'));
+          if (response.headers.get('Pagination') != null) {
+            paginationResult.pagination = JSON.parse(
+              response.headers.get('Pagination')
+            );
           }
           return paginationResult;
         })
-      )
-    ;
+      );
   }
 
-getUser(id: number, isForEdit: boolean): Observable<Company>{
-  return this.http.get<Company>(this.baseUrl + 'company/GetUser/' + id + '/' +  isForEdit );
-}
+  getUser(id: number, isForEdit: boolean): Observable<Company> {
+    return this.http.get<Company>(
+      this.baseUrl + 'company/GetUser/' + id + '/' + isForEdit
+    );
+  }
 
-// tslint:disable-next-line:typedef
-updateCompany(id: number, company: Company){
-  const headers = this.client.addBearer();
-  return this.http.put(this.baseUrl + 'company/' + id, company, { headers});
-}
+  // tslint:disable-next-line:typedef
+  updateCompany(id: number, company: Company) {
+    const headers = this.client.addBearer();
+    return this.http.put(this.baseUrl + 'company/' + id, company, { headers });
+  }
 
-getDataFromCEIDG(nip: string){
-  return this.http.get<string>(this.baseUrl + 'company/GetDataFromCeidg/' + nip);
-}
+  getDataFromCEIDG(nip: string) {
+    return this.http.get<string>(
+      this.baseUrl + 'company/GetDataFromCeidg/' + nip
+    );
+  }
 
-getOffers(id: number): Observable<Offer>{
-  const headers = this.client.addBearer();
-  return this.http.get<Offer>(this.baseUrl + 'company/getOffers/' + id,  { headers});
-}
+  getOffers(id: number): Observable<Offer> {
+    const headers = this.client.addBearer();
+    return this.http.get<Offer>(this.baseUrl + 'company/getOffers/' + id, {
+      headers,
+    });
+  }
 
-addOffer(model: any){
-  
-  const headers = this.client.addBearer();
-  return this.http.post(this.baseUrl + 'company/addOffer/', model,  { headers}).subscribe(() => {
-  });
-}
+  addOffer(model: any) {
+    const headers = this.client.addBearer();
+    return this.http
+      .post(this.baseUrl + 'company/addOffer/', model, { headers })
+      .subscribe(() => {});
+  }
 
-removeOffer(id:number){
-  const headers = this.client.addBearer();
-  return this.http.delete(this.baseUrl + 'company/removeOffer/' + id, { headers}).subscribe(() => {
-  });
-  
-}
+  removeOffer(id: number) {
+    const headers = this.client.addBearer();
+    return this.http
+      .delete(this.baseUrl + 'company/removeOffer/' + id, { headers })
+      .subscribe(() => {});
+  }
 
+  editOffer(id: number, offer: Offer) {
+    const headers = this.client.addBearer();
+    debugger
+    return this.http.put(this.baseUrl + 'company/editOffer/' + id, offer, { headers });
+    debugger
+  }
 }

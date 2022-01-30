@@ -22,6 +22,7 @@ import { MatPaginator } from '@angular/material/paginator';
 
 import { EditOfferDialogComponent } from '../edit-offer-dialog/edit-offer-dialog.component';
 import { MatDialog } from '@angular/material/dialog';
+import { MatTableDataSource } from '@angular/material/table';
 
 
 interface Item {
@@ -46,7 +47,7 @@ export class CompanyEditComponent implements OnInit {
   @Output() public onUploadFinished = new EventEmitter();
   @ViewChild(MatPaginator) paginator: MatPaginator;
   company: Company;
-  offer: Offer;
+  offer: Offer[];
   model: any={};
   offers: any;
   baseUrl = environment.apiUrl;
@@ -55,6 +56,7 @@ export class CompanyEditComponent implements OnInit {
   dataSource : any;
 
   @ViewChild('editForm') editForm: NgForm;
+ 
   constructor(private route: ActivatedRoute,
               private alertify: AlertifyService,
               private authService: AuthService,
@@ -83,8 +85,13 @@ export class CompanyEditComponent implements OnInit {
     this.dataSource =  this.getOffers().subscribe(data =>{
       this.dataSource = data
     } );
-  }
 
+    // this.dataSource = new MatTableDataSource (this.getOffers().subscribe(data => 
+    //                                           this.dataSource = data));
+    this.dataSource.paginator = this.paginator;
+    
+  }
+ 
 
   // tslint:disable-next-line:typedef
   getImage(result: string, extenssion: string) {
@@ -207,14 +214,14 @@ removeOffer(id: number){
   location.reload();
 }
 
-openDialog(): void {
+openDialog(id: number, name: string, price: number): void {
+ 
   const dialogRef = this.dialog.open(EditOfferDialogComponent, {
     width: '250px',
-    // data: {name: this.name, animal: this.animal}
+    data: {id: id, name: name, price: price}
   });
-  
-
  
 }
+
 
 }

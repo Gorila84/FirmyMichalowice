@@ -25,6 +25,13 @@ namespace FirmyMichalowice.Repositories
             return offers;
         }
 
+        public async Task<Offer> GetOfferForEdit(int id)
+        {
+            var offer = _context.Offers.Where(x => x.Id == id).FirstOrDefault();
+            return offer;
+
+        }
+
         public void AddOffer(Offer offer)
         {
             offer.ModifyDate = DateTime.Now;
@@ -40,6 +47,11 @@ namespace FirmyMichalowice.Repositories
 
         }
 
-       
+        public async Task<bool> SaveAll()
+        {
+            return await _context.SaveChangesAsync() > 0;
+        }
+
+
     }
 }
