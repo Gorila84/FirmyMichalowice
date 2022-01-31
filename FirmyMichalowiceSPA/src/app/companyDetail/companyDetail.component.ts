@@ -104,8 +104,7 @@ export class CompanyDetailComponent implements OnInit, AfterViewInit   {
   }
   
   getOffers(){
-
-    const rowoferItems = this.companyService.getOffers(this.authService.decotedToken.nameid);
+    const rowoferItems = this.companyService.getOffers(this.company.id);
   return rowoferItems; 
   }
 }

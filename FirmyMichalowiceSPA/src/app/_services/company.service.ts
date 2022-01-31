@@ -73,10 +73,7 @@ export class CompanyService {
   }
 
   getOffers(id: number): Observable<Offer> {
-    const headers = this.client.addBearer();
-    return this.http.get<Offer>(this.baseUrl + 'company/getOffers/' + id, {
-      headers,
-    });
+    return this.http.get<Offer>(this.baseUrl + 'company/getOffers/' + id);
   }
 
   addOffer(model: any) {
@@ -95,8 +92,6 @@ export class CompanyService {
 
   editOffer(id: number, offer: Offer) {
     const headers = this.client.addBearer();
-    debugger
     return this.http.put(this.baseUrl + 'company/editOffer/' + id, offer, { headers });
-    debugger
   }
 }
