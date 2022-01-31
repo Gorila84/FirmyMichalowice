@@ -70,11 +70,12 @@ const cookieConfig:NgcCookieConsentConfig = {
     <span id="cookieconsent:desc" class="cc-message">{{message}} 
       <a aria-label="learn more about cookies" tabindex="0" class="cc-link" href="{{cookiePolicyHref}}" target="_blank" rel="noopener">{{cookiePolicyLink}}</a>, 
       <a aria-label="learn more about our privacy policy" tabindex="1" class="cc-link"  href="{{privacyPolicyHref}}" target="_blank" rel="noopener">{{privacyPolicyLink}}</a> oraz 
-      <a aria-label="learn more about our terms of service" tabindex="2" class="cc-link" [routerLink]="['zp']" target="_blank" rel="noopener">{{tosLink}}</a>
+      <a aria-label="learn more about our terms of service" tabindex="2" class="cc-link" [routerLink]="['zp']" target="_blank" rel="noopener">{{tosLink}}</a>    
+      <a aria-label="learn more about our terms of service" tabindex="3" class="cc-link"  [routerLink]="['zp']">Zasady prywatności</a>
     </span>
     `,
     myCompliance : `<div class="btn-group btn-group-sm" role="group" aria-label="...">
-    <a aria-label="allow cookies" role="button" tabindex="0" class="cc-btn cc-allow">Zaakceptuj</a>
+    <a aria-label="allow cookies" role="button" tabindex="0" class="cc-btn cc-allow">Przejdź do FPK</a>
     </div>`
   },
   content:{

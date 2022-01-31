@@ -26,5 +26,6 @@ export const appRoutes: Routes = [
         {path: 'kontakt', component: ContactComponent},
         {path: 'rejestracja/zp', component: Polityka_prywatnosciComponent},
         {path: 'zmienHaslo', component: ChangePasswordComponent},
-        {path: 'resetHasla', component: ResetPasswordComponent}
+        {path: 'resetHasla', component: ResetPasswordComponent},
+        {path: 'zp', component: Polityka_prywatnosciComponent},
     ];

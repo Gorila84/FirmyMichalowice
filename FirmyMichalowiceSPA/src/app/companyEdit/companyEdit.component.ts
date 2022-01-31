@@ -182,13 +182,11 @@ export class CompanyEditComponent implements OnInit {
  }
 
 getOffers(){
-
   const rowoferItems = this.companyService.getOffers(this.authService.decotedToken.nameid);
-return rowoferItems; 
+  return rowoferItems; 
 }
 
 addOffer(){
-  debugger
   console.log(this.offer)
   this.model.userId = this.authService.decotedToken.nameid;
   this.companyService.addOffer(this.model);
