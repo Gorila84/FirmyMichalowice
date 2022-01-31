@@ -124,7 +124,7 @@ namespace FirmyMichalowice.Controllers
           
         }
 
-        [Authorize]
+
         [HttpGet("getOffers/{id}")]
         public async Task<IActionResult> GetOffers(int id)
         {
