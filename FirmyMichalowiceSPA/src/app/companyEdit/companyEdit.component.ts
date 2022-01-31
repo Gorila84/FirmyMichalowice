@@ -1,6 +1,6 @@
 
 import { Component, EventEmitter, OnInit, Output, ViewChild } from '@angular/core';
-import { FormControl, NgForm } from '@angular/forms';
+import { FormControl, NgForm, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
 import { Company } from '../_models/company';
@@ -20,6 +20,10 @@ import { OffsetModifier } from '@popperjs/core/lib/modifiers/offset';
 import { Offer } from '../_models/offer';
 import { MatPaginator } from '@angular/material/paginator';
 
+import { EditOfferDialogComponent } from '../edit-offer-dialog/edit-offer-dialog.component';
+import { MatDialog } from '@angular/material/dialog';
+import { MatTableDataSource } from '@angular/material/table';
+
 
 interface Item {
   value: string;
@@ -36,14 +40,14 @@ interface Item {
 export class CompanyEditComponent implements OnInit {
   myControl = new FormControl();
   options: string[] = [];
-  displayedColumns: string[] = ['name', 'price'];
+  displayedColumns: string[] = ['name', 'price','buttons'];
    rowofferItems : Offer[];
   filteredOptions: Observable<string[]>;
   // tslint:disable-next-line:no-output-on-prefix
   @Output() public onUploadFinished = new EventEmitter();
   @ViewChild(MatPaginator) paginator: MatPaginator;
   company: Company;
-  offer: Offer;
+  offer: Offer[];
   model: any={};
   offers: any;
   baseUrl = environment.apiUrl;
@@ -52,13 +56,15 @@ export class CompanyEditComponent implements OnInit {
   dataSource : any;
 
   @ViewChild('editForm') editForm: NgForm;
+ 
   constructor(private route: ActivatedRoute,
               private alertify: AlertifyService,
               private authService: AuthService,
               private companyService: CompanyService,
               private uploadPhotoService: UploadPhotoService,
               private logger: NGXLogger,
-              private companyTypeService: CompanyTypeService) { }
+              private companyTypeService: CompanyTypeService,
+              public dialog: MatDialog) { }
 
   // tslint:disable-next-line:typedef
   ngOnInit() {
@@ -79,8 +85,17 @@ export class CompanyEditComponent implements OnInit {
     this.dataSource =  this.getOffers().subscribe(data =>{
       this.dataSource = data
     } );
+
+    // this.dataSource = new MatTableDataSource (this.getOffers().subscribe(data => 
+    //                                           this.dataSource = data));
+    this.dataSource.paginator = this.paginator;
+    
   }
 
+  offerNameFormControl = new FormControl('', [
+    Validators.required
+  ]);
+ 
 
   // tslint:disable-next-line:typedef
   getImage(result: string, extenssion: string) {
@@ -187,11 +202,29 @@ getOffers(){
 }
 
 addOffer(){
+  
   console.log(this.offer)
   this.model.userId = this.authService.decotedToken.nameid;
   this.companyService.addOffer(this.model);
   this.offers.push(this.model);
   location.reload();
 }
+
+removeOffer(id: number){
+  
+  this.companyService.removeOffer(id);
+  this.offers.splice(id);
+  location.reload();
+}
+
+openDialog(id: number, name: string, price: number): void {
+ 
+  const dialogRef = this.dialog.open(EditOfferDialogComponent, {
+    width: '250px',
+    data: {id: id, name: name, price: price}
+  });
+ 
+}
+
 
 }

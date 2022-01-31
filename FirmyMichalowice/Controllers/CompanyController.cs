@@ -153,6 +153,30 @@ namespace FirmyMichalowice.Controllers
 
         }
 
+        [Authorize]
+        [HttpDelete("removeOffer/{id}")]
+
+        public async Task<IActionResult> RemoveOffer(int id)
+        {
+            _offerRepository.RemoveOffer(id);
+            return Ok();
+        }
+
+        [HttpPut("editOffer/{id}")]
+
+        public async Task<IActionResult> UpdateOffer(int id, OfferForEditDTO offerForEditDTO)
+        {
+            offerForEditDTO.Name = offerForEditDTO.Name.ToLower();
+            var offer = await _offerRepository.GetOfferForEdit(id);
+            _mapper.Map(offerForEditDTO, offer);
+            offer.ModifyDate = DateTime.Now;
+            if (await _offerRepository.SaveAll())
+                return NoContent();
+
+            throw new Exception($"Aktualizacja oferty o id: {id} nie powiodła sie przy zapisywaniu do bazy");
+            
+        }
+
   
     }
 }

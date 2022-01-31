@@ -10,5 +10,9 @@ namespace FirmyMichalowice.Data
     {
          Task<List<Offer>> GetOffer(int userId);
         void AddOffer(Offer offer);
+        void RemoveOffer(int id);
+
+        Task<Offer> GetOfferForEdit(int id);
+        Task<bool> SaveAll();
     }
 }

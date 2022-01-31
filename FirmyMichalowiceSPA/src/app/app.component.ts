@@ -53,6 +53,7 @@ export class AppComponent implements OnInit, OnDestroy{
           })
    });
   })
+ 
   var elem = $('.cc-bottom');
   elem[0].innerHTML = "Polityka Cookie";
 }
