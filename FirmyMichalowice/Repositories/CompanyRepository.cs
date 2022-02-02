@@ -39,7 +39,7 @@ namespace FirmyMichalowice.Repositories
         {
             try
             {
-                var user = await _context.Users.Include(x => x.Photo).FirstOrDefaultAsync(u => u.Id == id);
+                var user = await _context.Users.Include(x => x.Photo).Include(x=>x.Offers).FirstOrDefaultAsync(u => u.Id == id);
                 if (user != null)
                 {
                     var firma = await _ceidgService.GetData(user.NIP);
@@ -135,7 +135,7 @@ namespace FirmyMichalowice.Repositories
 
         public async Task<IList<string>> GetCompanyTypes()
         {
-            return _context.CompanyTypes.OrderBy(x => x.Name).Select(x => x.Name).ToList();
+            return _context.Trade.OrderBy(x => x.Name).Select(x => x.Name).ToList();
         }
 
       

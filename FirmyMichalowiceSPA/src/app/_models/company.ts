@@ -1,3 +1,4 @@
+import { Offer } from './offer';
 import { Photo } from './photo';
 
 export interface Company {
@@ -32,6 +33,7 @@ export interface Company {
         additionalAddress: boolean;
         created?:Date;
         modify?:Date;
+        offers: Offer[];
 
 }
 

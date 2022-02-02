@@ -12,6 +12,7 @@ namespace FirmyMichalowice.Model
         public string Name { get; set; }
         public double Price { get; set; }
         public int UserId { get; set; }
+        public User User { get; set; }
         public DateTime ModifyDate { get; set; }
     }
 }

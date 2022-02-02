@@ -17,7 +17,7 @@ namespace FirmyMichalowice.Helpers
             CreateMap<Photo, PhotoForDetailDTO>();
             CreateMap<CompanyForDateilDTO, User>();
             CreateMap<CompaniesForEditDTO, User>();
-            CreateMap<CompanyType, CompanyTypeDTO>();
+            CreateMap<Trade, CompanyTypeDTO>();
             CreateMap<CookieConsentDTO, CookieConsent>();
             CreateMap<OfferDTO, Offer>();
             CreateMap<OfferForEditDTO, Offer>();

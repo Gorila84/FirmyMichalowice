@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace FirmyMichalowice.Model
 {
-    public class CompanyType
+    public class Trade
     {
         public int Id { get; set; }
         public string Name { get; set; }

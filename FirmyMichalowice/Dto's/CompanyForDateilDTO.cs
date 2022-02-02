@@ -54,6 +54,7 @@ namespace FirmyMichalowice.Dto_s
         public string Geolocation2Url { get; set; }
         public DateTime Created { get; set; }
         public DateTime Modify { get; set; }
+        public IList<Offer> Offers { get; set; }
 
     }
 }

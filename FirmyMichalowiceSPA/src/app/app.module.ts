@@ -47,6 +47,8 @@ import {NgcCookieConsentConfig, NgcCookieConsentModule} from 'ngx-cookieconsent'
 import { ChangePasswordComponent } from './change-password/change-password.component';
 import { ResetPasswordComponent } from './reset-password/reset-password.component';
 import { EditOfferDialogComponent } from './edit-offer-dialog/edit-offer-dialog.component';
+import { StatuteComponent } from './statute/statute.component';
+import { AboutComponent } from './about/about.component';
 
 
 const cookieConfig:NgcCookieConsentConfig = {
@@ -70,10 +72,10 @@ const cookieConfig:NgcCookieConsentConfig = {
   elements:{
     messagelink: `
     <span id="cookieconsent:desc" class="cc-message">{{message}} 
-      <a aria-label="learn more about cookies" tabindex="0" class="cc-link" href="{{cookiePolicyHref}}" target="_blank" rel="noopener">{{cookiePolicyLink}}</a>, 
-      <a aria-label="learn more about our privacy policy" tabindex="1" class="cc-link"  href="{{privacyPolicyHref}}" target="_blank" rel="noopener">{{privacyPolicyLink}}</a> oraz 
-      <a aria-label="learn more about our terms of service" tabindex="2" class="cc-link" [routerLink]="['zp']" target="_blank" rel="noopener">{{tosLink}}</a>    
-      <a aria-label="learn more about our terms of service" tabindex="3" class="cc-link"  [routerLink]="['zp']">Zasady prywatności</a>
+      <a _ngcontent-xmk-c153="" ng-reflect-router-link="zp" href="/zp/#cookiesInfo">{{cookiePolicyLink}}</a>,
+      <a _ngcontent-xmk-c153="" ng-reflect-router-link="zp" href="/zp">Zasadami prywatności</a> oraz 
+      <a _ngcontent-xmk-c153="" ng-reflect-router-link="zp" href="/regulamin">{{statuteLink}}</a>    
+
     </span>
     `,
     myCompliance : `<div class="btn-group btn-group-sm" role="group" aria-label="...">
@@ -83,14 +85,14 @@ const cookieConfig:NgcCookieConsentConfig = {
   content:{
     message: 'Używając tej aplikacji zgadzasz się z ',
     
-    cookiePolicyLink: 'Polityka Cookie',
-    cookiePolicyHref: '#',
+    cookiePolicyLink: 'Polityką Cookie',
+    cookiePolicyHref: '',
 
-    privacyPolicyLink: 'Polityka Prywtaności',
-    privacyPolicyHref: '/rejestracja/zp',
+    privacyPolicyLink: 'Polityką Prywtaności',
+    privacyPolicyHref: '',
 
-    tosLink: 'Regulaminem',
-    tosHref: '#',
+    statuteLink: 'Regulaminem',
+    statuteHref: '',
   }
 };
 
@@ -109,7 +111,9 @@ const cookieConfig:NgcCookieConsentConfig = {
       Polityka_prywatnosciComponent,
       ChangePasswordComponent,
       ResetPasswordComponent,
-      EditOfferDialogComponent
+      EditOfferDialogComponent,
+      StatuteComponent,
+      AboutComponent
    ],
   imports: [
     BrowserModule,

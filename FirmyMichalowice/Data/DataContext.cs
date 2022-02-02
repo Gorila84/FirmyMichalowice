@@ -14,11 +14,13 @@ namespace FirmyMichalowice.Data
         }
 
         public DbSet<User> Users { get; set; }
-        public DbSet<CompanyType> CompanyTypes { get; set; }
+        //public DbSet<CompanyType> CompanyTypes { get; set; }
         public DbSet<Photo> Photo { get; set; }
         public DbSet<Municipalitie> Municipalities { get; set; }
         public DbSet<PKD> PKD { get; set; }
         public DbSet<CookieConsent> CookieConsents { get; set; }
         public DbSet<Offer> Offers { get; set; }
+
+        public DbSet<Trade> Trade { get; set; }
     }
 }

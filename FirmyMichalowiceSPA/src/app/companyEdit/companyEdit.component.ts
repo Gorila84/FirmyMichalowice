@@ -1,6 +1,6 @@
 
 import { Component, EventEmitter, OnInit, Output, ViewChild } from '@angular/core';
-import { FormControl, NgForm, Validators } from '@angular/forms';
+import { Form, FormControl, NgForm, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
 import { Company } from '../_models/company';
@@ -54,6 +54,7 @@ export class CompanyEditComponent implements OnInit {
   fileToUpload: File | null = null;
   shown: any;
   dataSource : any;
+  trade: FormControl;
 
   @ViewChild('editForm') editForm: NgForm;
  
@@ -66,6 +67,7 @@ export class CompanyEditComponent implements OnInit {
               private companyTypeService: CompanyTypeService,
               public dialog: MatDialog) { }
 
+
   // tslint:disable-next-line:typedef
   ngOnInit() {
     
@@ -73,10 +75,11 @@ export class CompanyEditComponent implements OnInit {
     this.route.data.subscribe(data => {
       this.company = data.company;
       this.offers = data.offers;
+
     });
     // this.getImage(this.authService.decotedToken.nameid);
     // this.getImage();
-   
+    this.trade = new FormControl(this.company.companyType);
     this.filteredOptions = this.myControl.valueChanges
     .pipe(
       startWith(''),
