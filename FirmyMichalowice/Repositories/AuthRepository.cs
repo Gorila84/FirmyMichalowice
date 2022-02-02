@@ -120,12 +120,15 @@ namespace FirmyMichalowice.Repositories
             var firma = _cEIDGmanger.GetData(nip).Result;
             IQueryable<string> listOfAllowedMunicipalities = _context.Municipalities.Select(x => x.Name);
 
+            municipalitie = firma.adresDzialanosci.gmina;
+
             if (!listOfAllowedMunicipalities.Contains(firma.adresDzialanosci.gmina))
             {
                 isError = true;
                 errorMessage = "Firma zarejestrowana poza dozwolonymi gminami";
-                municipalitie = firma.adresDzialanosci.gmina;
+                //municipalitie = firma.adresDzialanosci.gmina;
             }
+
         }
         #endregion
         #region method private
