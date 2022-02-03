@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { environment } from 'src/environments/environment';
 //import * as ILITEAPI from '../imapLiteApi-core';
@@ -6,6 +6,8 @@ import { Company } from '../_models/company';
 import { CompanyService } from '../_services/company.service';
 import { HostListener } from "@angular/core";
 import { AuthService } from '../_services/auth.service';
+import { MatTableDataSource } from '@angular/material/table';
+import { MatPaginator } from '@angular/material/paginator';
 
 declare var $: any;
 
@@ -15,7 +17,11 @@ declare var $: any;
   templateUrl: './companyDetail.component.html',
   styleUrls: ['./companyDetail.component.css']
 })
+
 export class CompanyDetailComponent implements OnInit, AfterViewInit   {
+
+  @ViewChild('paginator') paginator: MatPaginator;
+ 
   company: Company;
   isCompanyActive: boolean;
   isEnabledGeolocation2Url: boolean;
@@ -42,6 +48,8 @@ export class CompanyDetailComponent implements OnInit, AfterViewInit   {
   ngAfterViewInit(): void {
     // if(this.useGeoportal)
     // this.initMap(0, this.company)
+    this.dataSource = new MatTableDataSource();
+    this.dataSource.paginator = this.paginator;
   }
 
   // tslint:disable-next-line:typedef
@@ -104,8 +112,11 @@ export class CompanyDetailComponent implements OnInit, AfterViewInit   {
   }
   
   getOffers(){
+    
     const rowoferItems = this.companyService.getOffers(this.company.id);
+    debugger
   return rowoferItems; 
+  
   }
 }
 // function searchAdr(idx: Number, company: Company) {
