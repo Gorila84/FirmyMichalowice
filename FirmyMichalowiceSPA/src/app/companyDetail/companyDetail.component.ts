@@ -8,6 +8,7 @@ import { HostListener } from "@angular/core";
 import { AuthService } from '../_services/auth.service';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
+import { Offer } from '../_models/offer';
 
 declare var $: any;
 
@@ -33,6 +34,8 @@ export class CompanyDetailComponent implements OnInit, AfterViewInit   {
   scrWidth:any;
   dataSource : any;
   displayedColumns: string[] = ['name', 'price'];
+  offer: Offer[] = [];
+ 
   @HostListener('window:resize', ['$event'])
     getScreenSize(event?) {
           this.scrHeight = window.innerHeight;
@@ -48,8 +51,8 @@ export class CompanyDetailComponent implements OnInit, AfterViewInit   {
   ngAfterViewInit(): void {
     // if(this.useGeoportal)
     // this.initMap(0, this.company)
-    this.dataSource = new MatTableDataSource();
     this.dataSource.paginator = this.paginator;
+    
   }
 
   // tslint:disable-next-line:typedef
@@ -60,10 +63,14 @@ export class CompanyDetailComponent implements OnInit, AfterViewInit   {
     this.isCompanyActive = this.company.statusFromCeidg == 'AKTYWNY';
     this.isEnabledGeolocation2Url = this.company.geolocation2Url.length == 0;
     this.showArms =  environment.showArms && this.company.armsUrl ? true : false ;
-
+    
+    
     this.dataSource =  this.getOffers().subscribe(data =>{
       this.dataSource = data
     } );
+
+    this.dataSource = new MatTableDataSource(this.dataSource);
+   
 
   }
   showMapFn($event){
