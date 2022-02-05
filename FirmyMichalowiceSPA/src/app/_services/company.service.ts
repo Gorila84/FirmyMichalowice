@@ -72,8 +72,8 @@ export class CompanyService {
     );
   }
 
-  getOffers(id: number): Observable<Offer> {
-    return this.http.get<Offer>(this.baseUrl + 'company/getOffers/' + id);
+  getOffers(id: number) {
+    return this.http.get<Offer[]>(this.baseUrl + 'company/getOffers/' + id);
   }
 
   addOffer(model: any) {
