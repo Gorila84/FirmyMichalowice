@@ -8,6 +8,7 @@ import { HostListener } from "@angular/core";
 import { AuthService } from '../_services/auth.service';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
+
 import { Offer } from '../_models/offer';
 
 declare var $: any;
@@ -21,7 +22,8 @@ declare var $: any;
 
 export class CompanyDetailComponent implements OnInit, AfterViewInit   {
 
-  @ViewChild('paginator') paginator: MatPaginator;
+  @ViewChild(MatPaginator) paginator: MatPaginator;
+
  
   company: Company;
   isCompanyActive: boolean;
@@ -32,7 +34,8 @@ export class CompanyDetailComponent implements OnInit, AfterViewInit   {
   useGeoportal = environment.useGeoportal;
   scrHeight:any;
   scrWidth:any;
-  dataSource : any;
+  dataSource :MatTableDataSource<any>; 
+  dataFromApi: any;
   displayedColumns: string[] = ['name', 'price'];
   offer: Offer[] = [];
  
@@ -48,12 +51,7 @@ export class CompanyDetailComponent implements OnInit, AfterViewInit   {
              ) { 
               this.getScreenSize();
              }
-  ngAfterViewInit(): void {
-    // if(this.useGeoportal)
-    // this.initMap(0, this.company)
-    this.dataSource.paginator = this.paginator;
-    
-  }
+
 
   // tslint:disable-next-line:typedef
   ngOnInit() {
@@ -61,18 +59,20 @@ export class CompanyDetailComponent implements OnInit, AfterViewInit   {
       this.company = data.company;
     });
     this.isCompanyActive = this.company.statusFromCeidg == 'AKTYWNY';
-    this.isEnabledGeolocation2Url = this.company.geolocation2Url.length == 0;
+    let isNull = this.company.geolocation2Url ?? true; 
+    isNull ? this.isEnabledGeolocation2Url = true  : this.isEnabledGeolocation2Url = this.company.geolocation2Url.length == 0;
     this.showArms =  environment.showArms && this.company.armsUrl ? true : false ;
-    
-    
-    this.dataSource =  this.getOffers().subscribe(data =>{
-      this.dataSource = data
-    } );
-
-    this.dataSource = new MatTableDataSource(this.dataSource);
-   
+    this.dataSource = new MatTableDataSource(this.company.offers);   
 
   }
+
+  ngAfterViewInit(): void {
+    // if(this.useGeoportal)
+    // this.initMap(0, this.company)
+    this.dataSource.paginator = this.paginator;
+  }
+
+
   showMapFn($event){
     // if(this.useGeoportal)
     // this.initMap($event.index, this.company)

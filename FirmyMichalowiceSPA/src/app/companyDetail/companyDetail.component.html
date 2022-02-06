@@ -94,8 +94,9 @@
     <h3>
       <b><u>Oferta</u></b>
     </h3>
+
     <div class="mat-elevation-z8 mb-2">
-      <table mat-table [dataSource]="company.offers">
+      <table mat-table [dataSource]="dataSource" matSort>
         <!-- Position Column -->
         <ng-container matColumnDef="name">
           <th mat-header-cell *matHeaderCellDef class="text-center">Nazwa</th>
@@ -117,7 +118,6 @@
       </table>
 
       <mat-paginator
-        #paginator
         [pageSizeOptions]="[1, 2, 3]"
         showFirstLastButtons
         aria-label="Wybierz ilość wierszy"

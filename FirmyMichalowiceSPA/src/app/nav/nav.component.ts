@@ -1,12 +1,12 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, Input, OnInit } from '@angular/core';
+import { AfterViewInit, Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { environment } from 'src/environments/environment';
 import { LoginComponent } from '../login/login.component';
 import { Company } from '../_models/company';
 import { AlertifyService } from '../_services/alertify.service';
 import { AuthService } from '../_services/auth.service';
-
+import * as $ from 'jquery';
 
 
 @Component({
@@ -14,7 +14,7 @@ import { AuthService } from '../_services/auth.service';
   templateUrl: './nav.component.html',
   styleUrls: ['./nav.component.css']
 })
-export class NavComponent implements OnInit {
+export class NavComponent implements OnInit , AfterViewInit {
 
   @Input() loginInformation: any;
   company: Company;
@@ -28,6 +28,15 @@ export class NavComponent implements OnInit {
               private http: HttpClient) {
    
   }
+  ngAfterViewInit(): void {
+    $('.nav-link').click(($event)=>{
+   debugger
+      $('.nav-link').removeClass("active")
+      $($event.currentTarget).addClass("active")
+    });
+  }
+
+ 
 
   ngOnInit() {
     if(this.showArms){
@@ -35,6 +44,7 @@ export class NavComponent implements OnInit {
         this.armsUrls = data
       });
     }  
+   
   }
 
   loginCheck(){

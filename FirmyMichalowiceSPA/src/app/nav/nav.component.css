@@ -15,3 +15,10 @@
 .arms {
   float: left;
 }
+a {
+  font-weight: bolder;
+}
+.active {
+  color: rgb(136, 167, 25) !important;
+  font-size: large;
+}
