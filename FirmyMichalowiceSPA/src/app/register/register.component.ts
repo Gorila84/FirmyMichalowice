@@ -85,10 +85,11 @@ export class RegisterComponent implements OnInit {
       error => {
         this.alertify.error(error.error);
       }, 
+
       ()=>
       {
         this.authService.login(this.model).subscribe(()=>
-        this.router.navigate(['edycja/']
+        this.router.navigate(['edycja/' + this.authService.decotedToken.nameid]
         ));
       },
      )
