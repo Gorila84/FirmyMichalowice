@@ -78,20 +78,22 @@ export class CompanyService {
 
   addOffer(model: any) {
     const headers = this.client.addBearer();
-    return this.http
-      .post(this.baseUrl + 'company/addOffer/', model, { headers })
-      .subscribe(() => {});
+    return this.http.post(this.baseUrl + 'company/addOffer/', model, {
+      headers,
+    });
   }
 
   removeOffer(id: number) {
     const headers = this.client.addBearer();
-    return this.http
-      .delete(this.baseUrl + 'company/removeOffer/' + id, { headers })
-      .subscribe(() => {});
+    return this.http.delete(this.baseUrl + 'company/removeOffer/' + id, {
+      headers,
+    });
   }
 
   editOffer(id: number, offer: Offer) {
     const headers = this.client.addBearer();
-    return this.http.put(this.baseUrl + 'company/editOffer/' + id, offer, { headers });
+    return this.http.put(this.baseUrl + 'company/editOffer/' + id, offer, {
+      headers,
+    });
   }
 }

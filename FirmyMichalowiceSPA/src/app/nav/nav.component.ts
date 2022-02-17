@@ -31,6 +31,9 @@ export class NavComponent implements OnInit, AfterViewInit {
       $('.nav-link').removeClass('active');
       $($event.currentTarget).addClass('active');
     });
+    $('img').click(() => {
+      $('.nav-link').removeClass('active');
+    });
   }
 
   ngOnInit() {

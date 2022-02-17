@@ -12,10 +12,12 @@ namespace FirmyMichalowice.Repositories
     public class OfferRepository : IOfferRepository
     {
         private readonly DataContext _context;
+        private readonly ILoggerManager _logger;
 
-        public OfferRepository(DataContext context)
+        public OfferRepository(DataContext context, ILoggerManager logger)
         {
             _context = context;
+            _logger = logger;
         }
 
         public async Task<List<Offer>> GetOffer(int userId)
@@ -32,19 +34,36 @@ namespace FirmyMichalowice.Repositories
 
         }
 
-        public void AddOffer(Offer offer)
+        public async Task<bool> AddOffer(Offer offer)
         {
-            offer.ModifyDate = DateTime.Now;
-             _context.Offers.Add(offer);
-            _context.SaveChanges();
+            try
+            {
+                offer.ModifyDate = DateTime.Now;
+                _context.Offers.Add(offer);
+                await _context.SaveChangesAsync();
+                return true;
+            }
+           catch (Exception ex)
+            {
+                _logger.LogInformation(ex.Message);
+                return false;
+            }
         }
 
-        public void RemoveOffer(int id)
+        public async Task<bool> RemoveOffer(int id)
         {
-            var offerToRemove = _context.Offers.Find(id);
-            _context.Offers.Remove(offerToRemove);
-            _context.SaveChanges();
-
+            try
+            {
+                var offerToRemove = _context.Offers.Find(id);
+                _context.Remove(offerToRemove);
+                await _context.SaveChangesAsync();
+                return true;
+            }
+            catch(Exception ex)
+            {
+                _logger.LogInformation(ex.Message);
+                return false;
+            }
         }
 
         public async Task<bool> SaveAll()

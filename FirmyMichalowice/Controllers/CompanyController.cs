@@ -70,7 +70,7 @@ namespace FirmyMichalowice.Controllers
         }
         [HttpGet("getUser/{id}/{isForEdit}")]
         public async Task<IActionResult> GetUser(int id, bool isForEdit)
-        {
+         {
             var user = await _userRepository.GetCompany(id, isForEdit);
 
             var userToReturn = _mapper.Map<CompanyForDateilDTO>(user);
@@ -112,7 +112,7 @@ namespace FirmyMichalowice.Controllers
             try
             {
                 Offer offer = _mapper.Map<Offer>(offerDto);
-                _offerRepository.AddOffer(offer);
+               var result = await _offerRepository.AddOffer(offer);
                 return Ok(offerDto);
             }
             catch (Exception e)
@@ -158,8 +158,8 @@ namespace FirmyMichalowice.Controllers
 
         public async Task<IActionResult> RemoveOffer(int id)
         {
-            _offerRepository.RemoveOffer(id);
-            return Ok();
+            var result = await _offerRepository.RemoveOffer(id);
+            return Ok(result);
         }
 
         [HttpPut("editOffer/{id}")]
