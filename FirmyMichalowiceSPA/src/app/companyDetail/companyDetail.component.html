@@ -74,10 +74,19 @@
         <b><u>Reszta kodów:</u></b>
       </h5>
       <ul>
-        <li *ngFor="let pkd of company.pkds">
+        <li
+          *ngFor="
+            let pkd of collection
+              | paginate: { itemsPerPage: 8, currentPage: p }
+          "
+        >
           {{ pkd.symbol }} - {{ pkd.nazwa }}
         </li>
       </ul>
+      <br />
+      <div class="inner">
+        <pagination-controls (pageChange)="p = $event"></pagination-controls>
+      </div>
     </div>
   </div>
   <br /><br />

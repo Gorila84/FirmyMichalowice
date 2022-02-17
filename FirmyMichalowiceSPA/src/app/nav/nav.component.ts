@@ -8,59 +8,53 @@ import { AlertifyService } from '../_services/alertify.service';
 import { AuthService } from '../_services/auth.service';
 import * as $ from 'jquery';
 
-
 @Component({
   selector: 'app-nav',
   templateUrl: './nav.component.html',
-  styleUrls: ['./nav.component.css']
+  styleUrls: ['./nav.component.css'],
 })
-export class NavComponent implements OnInit , AfterViewInit {
-
+export class NavComponent implements OnInit, AfterViewInit {
   @Input() loginInformation: any;
   company: Company;
-  armsUrls :any;
+  armsUrls: any;
   apiUrl = environment.apiUrl + 'Arms/GetArms';
   showArms = environment.showArms;
 
-  constructor(public authService: AuthService, 
-              private alertifyService: AlertifyService,
-              private router: Router,
-              private http: HttpClient) {
-   
-  }
+  constructor(
+    public authService: AuthService,
+    private alertifyService: AlertifyService,
+    private router: Router,
+    private http: HttpClient
+  ) {}
   ngAfterViewInit(): void {
-    $('.nav-link').click(($event)=>{
-   debugger
-      $('.nav-link').removeClass("active")
-      $($event.currentTarget).addClass("active")
+    $('.nav-link').click(($event) => {
+      $('.nav-link').removeClass('active');
+      $($event.currentTarget).addClass('active');
     });
   }
 
- 
-
   ngOnInit() {
-    if(this.showArms){
-      this.http.get(this.apiUrl).subscribe(data =>{
-        this.armsUrls = data
+    if (this.showArms) {
+      this.http.get(this.apiUrl).subscribe((data) => {
+        this.armsUrls = data;
       });
-    }  
-   
+    }
   }
 
-  loginCheck(){
+  loginCheck() {
     return this.authService.loggedIn();
   }
-  getUserId(){
+  getUserId() {
     return this.authService.decotedToken.nameid;
   }
 
-  getUserName(){
+  getUserName() {
     return this.authService.decotedToken.unique_name;
   }
-  
-    logOut(){
+
+  logOut() {
     localStorage.removeItem('token');
     this.alertifyService.message('Zostałeś wylogowany');
-    this.router.navigate([''])
+    this.router.navigate(['']);
   }
 }

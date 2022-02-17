@@ -1,16 +1,20 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { RouterModule  } from '@angular/router';
+import { RouterModule } from '@angular/router';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { PaginationModule } from 'ngx-bootstrap/pagination';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import {MatCheckboxDefaultOptions, MatCheckboxModule, MAT_CHECKBOX_DEFAULT_OPTIONS} from '@angular/material/checkbox';
-import { CommonModule } from "@angular/common";
-import {MatTableModule} from '@angular/material/table';
-import {MatPaginatorModule} from '@angular/material/paginator';
-import {MatDialogModule} from '@angular/material/dialog';
+import {
+  MatCheckboxDefaultOptions,
+  MatCheckboxModule,
+  MAT_CHECKBOX_DEFAULT_OPTIONS,
+} from '@angular/material/checkbox';
+import { CommonModule } from '@angular/common';
+import { MatTableModule } from '@angular/material/table';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatDialogModule } from '@angular/material/dialog';
 
 import { AppComponent } from './app.component';
 import { NavComponent } from './nav/nav.component';
@@ -31,45 +35,48 @@ import { environment } from 'src/environments/environment';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
-import {MatSelectModule} from '@angular/material/select';
-import {MatButtonModule} from '@angular/material/button';
-import {MatCardModule} from '@angular/material/card';
+import { MatSelectModule } from '@angular/material/select';
+import { MatButtonModule } from '@angular/material/button';
+import { MatCardModule } from '@angular/material/card';
 import { FooterComponent } from './footer/footer.component';
 import { ContactComponent } from './contact/contact.component';
 
 import { AccordionModule } from 'ngx-bootstrap/accordion';
-import { MatMenuModule} from '@angular/material/menu';
+import { MatMenuModule } from '@angular/material/menu';
 import { Polityka_prywatnosciComponent } from './polityka_prywatnosci/polityka_prywatnosci.component';
-import {MatTabsModule} from '@angular/material/tabs';
-import {MatTooltipModule} from '@angular/material/tooltip';
+import { MatTabsModule } from '@angular/material/tabs';
+import { MatTooltipModule } from '@angular/material/tooltip';
 import { RECAPTCHA_V3_SITE_KEY, RecaptchaV3Module } from 'ng-recaptcha';
-import {NgcCookieConsentConfig, NgcCookieConsentModule} from 'ngx-cookieconsent';
+import {
+  NgcCookieConsentConfig,
+  NgcCookieConsentModule,
+} from 'ngx-cookieconsent';
 import { ChangePasswordComponent } from './change-password/change-password.component';
 import { ResetPasswordComponent } from './reset-password/reset-password.component';
 import { EditOfferDialogComponent } from './edit-offer-dialog/edit-offer-dialog.component';
 import { StatuteComponent } from './statute/statute.component';
 import { AboutComponent } from './about/about.component';
+import { NgxPaginationModule } from 'ngx-pagination'; // <-- import the module
 
-
-const cookieConfig:NgcCookieConsentConfig = {
+const cookieConfig: NgcCookieConsentConfig = {
   cookie: {
-    domain: 'localhost'// it is recommended to set your domain, for cookies to work properly
+    domain: 'localhost', // it is recommended to set your domain, for cookies to work properly
   },
   palette: {
     popup: {
-      background: '#000'
+      background: '#000',
     },
     button: {
-      background: '#f1d600'
-    }
+      background: '#f1d600',
+    },
   },
   theme: 'edgeless',
   type: 'opt-out',
   layout: 'my-custom-layout',
   layouts: {
-    "my-custom-layout": '{{messagelink}}{{myCompliance}}'
+    'my-custom-layout': '{{messagelink}}{{myCompliance}}',
   },
-  elements:{
+  elements: {
     messagelink: `
     <span id="cookieconsent:desc" class="cc-message">{{message}} 
       <a _ngcontent-xmk-c153="" ng-reflect-router-link="zp" href="/zp/#cookiesInfo">{{cookiePolicyLink}}</a>,
@@ -78,13 +85,13 @@ const cookieConfig:NgcCookieConsentConfig = {
 
     </span>
     `,
-    myCompliance : `<div class="btn-group btn-group-sm" role="group" aria-label="...">
+    myCompliance: `<div class="btn-group btn-group-sm" role="group" aria-label="...">
     <a aria-label="allow cookies" role="button" tabindex="0" class="cc-btn cc-allow">Przejdź do FPK</a>
-    </div>`
+    </div>`,
   },
-  content:{
+  content: {
     message: 'Używając tej aplikacji zgadzasz się z ',
-    
+
     cookiePolicyLink: 'Polityką Cookie',
     cookiePolicyHref: '',
 
@@ -93,28 +100,28 @@ const cookieConfig:NgcCookieConsentConfig = {
 
     statuteLink: 'Regulaminem',
     statuteHref: '',
-  }
+  },
 };
 
 @NgModule({
-  declarations: [		
+  declarations: [
     AppComponent,
-      NavComponent,
-      LoginComponent,
-      RegisterComponent,
-      CompanyCardComponent,
-      CompanyListComponent,
-      CompanyDetailComponent,
-      CompanyEditComponent,
-      FooterComponent,
-      ContactComponent,
-      Polityka_prywatnosciComponent,
-      ChangePasswordComponent,
-      ResetPasswordComponent,
-      EditOfferDialogComponent,
-      StatuteComponent,
-      AboutComponent
-   ],
+    NavComponent,
+    LoginComponent,
+    RegisterComponent,
+    CompanyCardComponent,
+    CompanyListComponent,
+    CompanyDetailComponent,
+    CompanyEditComponent,
+    FooterComponent,
+    ContactComponent,
+    Polityka_prywatnosciComponent,
+    ChangePasswordComponent,
+    ResetPasswordComponent,
+    EditOfferDialogComponent,
+    StatuteComponent,
+    AboutComponent,
+  ],
   imports: [
     BrowserModule,
     FormsModule,
@@ -139,23 +146,29 @@ const cookieConfig:NgcCookieConsentConfig = {
     AccordionModule.forRoot(),
     CommonModule,
     // tslint:disable-next-line:max-line-length
-    LoggerModule.forRoot({serverLoggingUrl: environment.apiUrl + 'logs/post', level: NgxLoggerLevel.DEBUG, serverLogLevel: NgxLoggerLevel.ERROR}),
+    LoggerModule.forRoot({
+      serverLoggingUrl: environment.apiUrl + 'logs/post',
+      level: NgxLoggerLevel.DEBUG,
+      serverLogLevel: NgxLoggerLevel.ERROR,
+    }),
     // FontAwesomeModule
     MatTabsModule,
     MatTooltipModule,
     RecaptchaV3Module,
     NgcCookieConsentModule.forRoot(cookieConfig),
+    NgxPaginationModule,
   ],
   providers: [
     CompanyListResolver,
     CompanyDetailResolver,
     CompanyEditlResolver,
     PreventUnsavedChanges,
-    {provide: MAT_CHECKBOX_DEFAULT_OPTIONS, useValue: { clickAction: 'noop' } as MatCheckboxDefaultOptions},
-    { provide: RECAPTCHA_V3_SITE_KEY, 
-      useValue: environment.recaptcha.siteKey
-     }
+    {
+      provide: MAT_CHECKBOX_DEFAULT_OPTIONS,
+      useValue: { clickAction: 'noop' } as MatCheckboxDefaultOptions,
+    },
+    { provide: RECAPTCHA_V3_SITE_KEY, useValue: environment.recaptcha.siteKey },
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

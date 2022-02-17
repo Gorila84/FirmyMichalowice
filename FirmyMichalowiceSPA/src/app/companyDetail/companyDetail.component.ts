@@ -4,7 +4,7 @@ import { environment } from 'src/environments/environment';
 //import * as ILITEAPI from '../imapLiteApi-core';
 import { Company } from '../_models/company';
 import { CompanyService } from '../_services/company.service';
-import { HostListener } from "@angular/core";
+import { HostListener } from '@angular/core';
 import { AuthService } from '../_services/auth.service';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
@@ -17,72 +17,75 @@ declare var $: any;
   // tslint:disable-next-line:component-selector
   selector: 'app-companyDetail',
   templateUrl: './companyDetail.component.html',
-  styleUrls: ['./companyDetail.component.css']
+  styleUrls: ['./companyDetail.component.css'],
 })
-
-export class CompanyDetailComponent implements OnInit, AfterViewInit   {
-
+export class CompanyDetailComponent implements OnInit, AfterViewInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
- 
   company: Company;
   isCompanyActive: boolean;
   isEnabledGeolocation2Url: boolean;
   id: number;
-  showArms: boolean; 
+  showArms: boolean;
   isConsentToUseMA: boolean;
   useGeoportal = environment.useGeoportal;
-  scrHeight:any;
-  scrWidth:any;
-  dataSource :MatTableDataSource<any>; 
+  scrHeight: any;
+  scrWidth: any;
+  dataSource: MatTableDataSource<any>;
   dataFromApi: any;
   displayedColumns: string[] = ['name', 'price'];
   offer: Offer[] = [];
- 
+  p: number = 1;
+  collection: any[];
+
   @HostListener('window:resize', ['$event'])
-    getScreenSize(event?) {
-          this.scrHeight = window.innerHeight;
-          this.scrWidth = window.innerWidth;
-    }
+  getScreenSize(event?) {
+    this.scrHeight = window.innerHeight;
+    this.scrWidth = window.innerWidth;
+  }
 
-  constructor(private route: ActivatedRoute,
-              private companyService: CompanyService, 
-              private authService: AuthService
-             ) { 
-              this.getScreenSize();
-             }
-
+  constructor(
+    private route: ActivatedRoute,
+    private companyService: CompanyService,
+    private authService: AuthService
+  ) {
+    this.getScreenSize();
+  }
 
   // tslint:disable-next-line:typedef
   ngOnInit() {
-    this.route.data.subscribe(data => {
+    this.route.data.subscribe((data) => {
       this.company = data.company;
     });
     this.isCompanyActive = this.company.statusFromCeidg == 'AKTYWNY';
-    let isNull = this.company.geolocation2Url ?? true; 
-    isNull ? this.isEnabledGeolocation2Url = true  : this.isEnabledGeolocation2Url = this.company.geolocation2Url.length == 0;
-    this.showArms =  environment.showArms && this.company.armsUrl ? true : false ;
-    this.dataSource = new MatTableDataSource(this.company.offers);   
-
+    let isNull = this.company.geolocation2Url ?? true;
+    isNull
+      ? (this.isEnabledGeolocation2Url = true)
+      : (this.isEnabledGeolocation2Url =
+          this.company.geolocation2Url.length == 0);
+    this.showArms = environment.showArms && this.company.armsUrl ? true : false;
+    this.dataSource = new MatTableDataSource(this.company.offers);
+    this.collection = this.company.pkds;
   }
 
   ngAfterViewInit(): void {
     // if(this.useGeoportal)
     // this.initMap(0, this.company)
     this.dataSource.paginator = this.paginator;
+    $('.ngx-pagination').css('padding-left', 0);
+    $('.pagination-previous').html('Poprzednie');
+    $('.pagination-next').html('Następne');
   }
 
-
-  showMapFn($event){
+  showMapFn($event) {
     // if(this.useGeoportal)
     // this.initMap($event.index, this.company)
-}
-
+  }
 
   //  initMap(index:number, company: Company) {
   //   const body = document.getElementsByTagName("BODY")[0];
   //   const mapDiv = document.getElementById("iapi");
-    
+
   //   let mapWidth = 500;
   //   if(this.scrWidth < 600) mapWidth = this.scrWidth - 60;
 
@@ -96,11 +99,11 @@ export class CompanyDetailComponent implements OnInit, AfterViewInit   {
   //       activeGpActions: ["pan", "fullExtent"],
   //       useMenu: false,
   //       scale: 15,
-  //       /*'marker' : { 
-  //     'x' : 591920, 
-  //     'y' : 259048, 
-  //     'scale':1000, 
-  //     'opts' : { 'title' : '', 'content' : '', show: false } 
+  //       /*'marker' : {
+  //     'x' : 591920,
+  //     'y' : 259048,
+  //     'scale':1000,
+  //     'opts' : { 'title' : '', 'content' : '', show: false }
   //   }*/
   //     },
   //     this.onInitMap(index, company)
@@ -114,16 +117,13 @@ export class CompanyDetailComponent implements OnInit, AfterViewInit   {
   // }
   // }
 
-  getIfAdditionalAddressIsTrue(){
+  getIfAdditionalAddressIsTrue() {
     return this.company.additionalAddress;
   }
-  
-  getOffers(){
-    
+
+  getOffers() {
     const rowoferItems = this.companyService.getOffers(this.company.id);
-    debugger
-  return rowoferItems; 
-  
+    return rowoferItems;
   }
 }
 // function searchAdr(idx: Number, company: Company) {
@@ -147,6 +147,3 @@ export class CompanyDetailComponent implements OnInit, AfterViewInit   {
 // else if (idx == 1 ) return json2;
 // else return json;
 // }
-
-
-
