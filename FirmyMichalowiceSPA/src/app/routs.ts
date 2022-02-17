@@ -27,6 +27,7 @@ export const appRoutes: Routes = [
                         canDeactivate: [PreventUnsavedChanges]},
         {path: 'kontakt', component: ContactComponent},
         {path: 'rejestracja/zp', component: Polityka_prywatnosciComponent},
+        {path: 'rejestracja/regulamin', component: StatuteComponent},
         {path: 'zmienHaslo', component: ChangePasswordComponent},
         {path: 'resetHasla', component: ResetPasswordComponent},
         {path: 'zp', component: Polityka_prywatnosciComponent},
