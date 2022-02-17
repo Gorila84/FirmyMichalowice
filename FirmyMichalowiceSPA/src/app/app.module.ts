@@ -60,7 +60,8 @@ import { NgxPaginationModule } from 'ngx-pagination'; // <-- import the module
 
 const cookieConfig: NgcCookieConsentConfig = {
   cookie: {
-    domain: 'localhost', // it is recommended to set your domain, for cookies to work properly
+    //domain: 'localhost', // it is recommended to set your domain, for cookies to work properly
+    domain: 'qa/.fpkrk.pl', // it is recommended to set your domain, for cookies to work properly
   },
   palette: {
     popup: {
@@ -79,10 +80,9 @@ const cookieConfig: NgcCookieConsentConfig = {
   elements: {
     messagelink: `
     <span id="cookieconsent:desc" class="cc-message">{{message}} 
-      <a _ngcontent-xmk-c153="" ng-reflect-router-link="zp" href="/zp/#cookiesInfo">{{cookiePolicyLink}}</a>,
-      <a _ngcontent-xmk-c153="" ng-reflect-router-link="zp" href="/zp">Zasadami prywatności</a> oraz 
-      <a _ngcontent-xmk-c153="" ng-reflect-router-link="zp" href="/regulamin">{{statuteLink}}</a>    
-
+    <a _ngcontent-xmk-c153="" ng-reflect-router-link="zp/#cookiesInfo" href="/#/zp/#cookiesInfo">{{cookiePolicyLink}}</a>,
+    <a _ngcontent-xmk-c153="" ng-reflect-router-link="zp" href="/#/zp">Zasadami prywatności</a> oraz 
+    <a _ngcontent-utu-c153="" ng-reflect-router-link="regulamin" href="/#/regulamin">{{statuteLink}} </a>
     </span>
     `,
     myCompliance: `<div class="btn-group btn-group-sm" role="group" aria-label="...">
@@ -126,7 +126,10 @@ const cookieConfig: NgcCookieConsentConfig = {
     BrowserModule,
     FormsModule,
     ReactiveFormsModule,
-    RouterModule.forRoot(appRoutes, { relativeLinkResolution: 'legacy' }),
+    RouterModule.forRoot(appRoutes, {
+      relativeLinkResolution: 'legacy',
+      useHash: true,
+    }),
     HttpClientModule,
     BsDropdownModule.forRoot(),
     MatAutocompleteModule,
