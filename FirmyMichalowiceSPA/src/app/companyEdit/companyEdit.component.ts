@@ -242,8 +242,9 @@ export class CompanyEditComponent implements OnInit {
       width: '250px',
       data: { id: id, name: name, price: price },
     });
-    debugger;
-    this.ngOnInit();
+    const sub = dialogRef.componentInstance.refreshTable.subscribe(() => {
+      this.refreshTable();
+    });
   }
   refreshTable() {
     this.companyService
