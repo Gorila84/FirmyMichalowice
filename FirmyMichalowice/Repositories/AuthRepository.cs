@@ -64,7 +64,7 @@ namespace FirmyMichalowice.Repositories
                 user.PasswordHash = passwordHash;
                 user.PasswordSalt = passwordSalt;
                 user.IsActive = true;
-
+                user.IsAdmin = false;
                 await _context.Users.AddAsync(user);
                 await _context.SaveChangesAsync();
                 return user;

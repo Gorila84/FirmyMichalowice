@@ -13,5 +13,7 @@ namespace FirmyMichalowice.Repositories
         Task<User> GetCompany(int id, bool isForEdit);
         Task<bool> SaveAll();
         Task<IList<string>> GetCompanyTypes();
+        Task<List<User>> GetCompaniesForAdmin();
+
     }
 }

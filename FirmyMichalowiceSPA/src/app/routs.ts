@@ -1,5 +1,6 @@
 import { Routes } from '@angular/router';
 import { AboutComponent } from './about/about.component';
+import { AdminComponent } from './admin/admin.component';
 import { ChangePasswordComponent } from './change-password/change-password.component';
 import { CompanyDetailComponent } from './companyDetail/companyDetail.component';
 import { CompanyEditComponent } from './companyEdit/companyEdit.component';
@@ -14,6 +15,7 @@ import { PreventUnsavedChanges } from './_guard/prevent-unsaved-changes.guard';
 import { CompanyDetailResolver } from './_resolvers/company_details_resolver';
 import { CompanyEditlResolver } from './_resolvers/company_edit_resolver';
 import { CompanyListResolver } from './_resolvers/company_list_resolver';
+
 
 
 export const appRoutes: Routes = [
@@ -33,4 +35,5 @@ export const appRoutes: Routes = [
         {path: 'zp', component: Polityka_prywatnosciComponent},
         {path: 'regulamin', component: StatuteComponent},
         {path: 'onas', component: AboutComponent},
+        {path: 'admin', component: AdminComponent}
     ];

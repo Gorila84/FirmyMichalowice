@@ -126,7 +126,29 @@ namespace FirmyMichalowice.Repositories
             return await PageList<User>.CreateListAsync(users, userParams.PageNumber, userParams.PageSize);
         }
 
- 
+        public async Task<List<User>> GetCompaniesForAdmin()
+        {
+            var users = _context.Users.ToList();
+
+            //if (userParams.CompanyName != null)
+            //{
+            //    users = users.Where(u => u.CompanyName.Contains(userParams.CompanyName));
+            //}
+            //if (userParams.CompanyType != null)
+            //{
+            //    users = users.Where(u => u.CompanyType == userParams.CompanyType);
+            //}
+            //if (userParams.City != null)
+            //{
+            //    users = users.Where(u => u.City == userParams.City);
+            //}
+
+            var cos = users.Count();
+
+            return users;
+        }
+
+
 
         public async Task<bool> SaveAll()
         {

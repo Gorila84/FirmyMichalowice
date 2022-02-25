@@ -60,4 +60,9 @@ export class NavComponent implements OnInit, AfterViewInit {
     this.alertifyService.message('Zostałeś wylogowany');
     this.router.navigate(['']);
   }
+
+  // isAdmin(){
+  //   return this.company.isAdmin;
+  // }
+  
 }
