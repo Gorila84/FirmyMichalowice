@@ -23,4 +23,10 @@ export class AdminService {
     return this.http.get<Company[]>(this.baseUrl + 'admin/getUsersForAdmin', {headers});
   }
 
+  editUserForAdmin(id: number, company: Company) {
+    const headers = this.client.addBearer();
+    return this.http.put(this.baseUrl + 'admin/uzytkownicy/' + id, company, {
+      headers,
+    });
+  }
 }

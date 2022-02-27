@@ -6,6 +6,7 @@ using AutoMapper;
 using FirmyMichalowice.Dto_s;
 using FirmyMichalowice.Helpers;
 using FirmyMichalowice.Repositories;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -50,5 +51,34 @@ namespace FirmyMichalowice.Controllers
             }
 
         }
+
+        [HttpGet("admin/getUser/{id}/{isForEdit}")]
+        public async Task<IActionResult> GetUserForAdmin(int id, bool isForEdit)
+        {
+            var user = await _companyRepository.GetCompany(id, isForEdit);
+
+            var userToReturn = _mapper.Map<CompaniesForAdminDTO>(user);
+            
+            return Ok(userToReturn);
+        }
+
+       
+        [HttpPut("admin/uzytkownicy/{id}")]
+
+        public async Task<IActionResult> UpdateCompanyForAdmin(int id, CompaniesForAdminDTO companiesForAdminDTO)
+        {
+
+            var comapnyFromRepository = await _companyRepository.GetCompany(id, true);
+
+            _mapper.Map(companiesForAdminDTO, comapnyFromRepository);
+            comapnyFromRepository.Modify = DateTime.Now;
+
+            if (await _companyRepository.SaveAll())
+                return NoContent();
+
+            throw new Exception($"Aktualizacja użytkownika o id: {id} nie powiodła sie przy zapisywaniu do bazy");
+        }
     }
+
+  
 }

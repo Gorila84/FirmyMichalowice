@@ -1,5 +1,6 @@
 import { Routes } from '@angular/router';
 import { AboutComponent } from './about/about.component';
+import { AdminUsersComponent } from './admin/admin-users/admin-users/admin-users.component';
 import { AdminComponent } from './admin/admin.component';
 import { ChangePasswordComponent } from './change-password/change-password.component';
 import { CompanyDetailComponent } from './companyDetail/companyDetail.component';
@@ -35,5 +36,6 @@ export const appRoutes: Routes = [
         {path: 'zp', component: Polityka_prywatnosciComponent},
         {path: 'regulamin', component: StatuteComponent},
         {path: 'onas', component: AboutComponent},
-        {path: 'admin', component: AdminComponent}
+        {path: 'admin', component: AdminComponent},
+        {path: 'admin/uzytkownicy', component: AdminUsersComponent},
     ];

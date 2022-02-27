@@ -23,6 +23,7 @@ namespace FirmyMichalowice.Helpers
             CreateMap<OfferForEditDTO, Offer>();
             CreateMap<CompaniesForAdminDTO, User>();
             CreateMap<User, CompaniesForAdminDTO>();
+         
         }
     }
 }

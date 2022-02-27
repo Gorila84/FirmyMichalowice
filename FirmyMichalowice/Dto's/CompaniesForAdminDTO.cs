@@ -7,6 +7,7 @@ namespace FirmyMichalowice.Dto_s
 {
     public class CompaniesForAdminDTO
     {
+        public int Id { get; set; }
         public string CompanyName { get; set; }
         public string PhoneNumber { get; set; }
         public string WebSite { get; set; }

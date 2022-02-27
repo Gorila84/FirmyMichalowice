@@ -58,7 +58,9 @@ import { StatuteComponent } from './statute/statute.component';
 import { AboutComponent } from './about/about.component';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { AdminComponent } from './admin/admin.component';
-import { AdminMenuComponent } from './admin/admin-menu/admin-menu.component'; // <-- import the module
+import { AdminMenuComponent } from './admin/admin-menu/admin-menu.component';
+import { AdminUsersComponent } from './admin/admin-users/admin-users/admin-users.component';
+import { AdminEditUserComponent } from './admin/admin-edit-user/admin-edit-user/admin-edit-user.component'; // <-- import the module
 
 
 
@@ -128,6 +130,8 @@ const cookieConfig: NgcCookieConsentConfig = {
     AboutComponent,
     AdminComponent,
     AdminMenuComponent,
+    AdminUsersComponent,
+    AdminEditUserComponent,
   ],
   imports: [
  
