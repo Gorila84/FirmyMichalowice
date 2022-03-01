@@ -53,9 +53,12 @@ namespace FirmyMichalowice.Controllers
         {
             try
             {
+                var rnd = new Random();
 
                 var users = await _userRepository.GetCompanies(userParams);
-                var usersToReturn = _mapper.Map<IEnumerable<CompaniesForListDTO>>(users);
+                var result = users.OrderBy(x => rnd.Next());
+                var usersToReturn = _mapper.Map<IEnumerable<CompaniesForListDTO>>(result);
+
                 Response.AddPagination(users.CurrentPage, users.PageSize, users.TotalCount, users.TotalPages);
 
                 return Ok(usersToReturn);
