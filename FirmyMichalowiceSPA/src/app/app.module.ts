@@ -61,7 +61,7 @@ import { NgxPaginationModule } from 'ngx-pagination'; // <-- import the module
 const cookieConfig: NgcCookieConsentConfig = {
   cookie: {
     //domain: 'localhost', // it is recommended to set your domain, for cookies to work properly
-    domain: 'qa/.fpkrk.pl', // it is recommended to set your domain, for cookies to work properly
+    domain: 'fp-krk.pl', // it is recommended to set your domain, for cookies to work properly
   },
   palette: {
     popup: {
