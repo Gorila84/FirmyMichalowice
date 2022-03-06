@@ -16,11 +16,12 @@ import { PreventUnsavedChanges } from './_guard/prevent-unsaved-changes.guard';
 import { CompanyDetailResolver } from './_resolvers/company_details_resolver';
 import { CompanyEditlResolver } from './_resolvers/company_edit_resolver';
 import { CompanyListResolver } from './_resolvers/company_list_resolver';
+import { MunicipalitieResolver } from './_resolvers/municipality_list_resolver';
 
 
 
 export const appRoutes: Routes = [
-        {path: '', component: CompanyListComponent, resolve: {companies: CompanyListResolver}},
+        {path: '', component: CompanyListComponent, resolve: {companies: CompanyListResolver, municipalities: MunicipalitieResolver}},
         {path: 'firma/:id', component: CompanyDetailComponent, resolve: {company: CompanyDetailResolver}},
         {path: 'logowanie', component: LoginComponent},
         {path: 'rodo', component: Polityka_prywatnosciComponent},

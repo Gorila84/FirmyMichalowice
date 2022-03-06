@@ -41,10 +41,11 @@
               (ngSubmit)="loadCompanies()"
               class=""
             >
+            <div class="text-center">
+              <h2>Wyszukaj:</h2>
+            </div>
               <div class="row d-flex align-items-end">
-                <div class="col-md-2 d-flex justify-content-end searcher">
-                  <h2>Wyszukaj:</h2>
-                </div>
+                
                 <div class="col-md-3 d-flex justify-content-end searcher">
                   <mat-form-field
                     class="example-full-width companyName"
@@ -92,13 +93,44 @@
                       style="width: 600px"
                     />
                   </mat-form-field>
+                  
                 </div>
-                <div form="editForm" class="search-button mr-3 d-flex">
+                <div class="col-md-3 d-flex justify-content-end searcher">
+                  <mat-form-field
+                    class="example-full-width companyName"
+                    appearance="fill"
+                  >
+                    <mat-label>Gmina</mat-label>
+                    <mat-select  [(ngModel)]="companyParams.Municipalitie" 
+                                  id="municipalitie" 
+                                  name="municipalitie"
+                                  >
+                      <mat-option (click)="unselect()"
+                                 >
+                       Wszystkie gminy
+                      </mat-option>
+                      <mat-option *ngFor="let municipalitie of municipalities" 
+                                  [value]="municipalitie"
+                                 >
+                        {{municipalitie}}
+                      </mat-option>
+                    </mat-select>
+                    <!-- <input
+                      matInput
+                      name="municipalitie"
+                      id="municipalitie"
+                      [(ngModel)]="companyParams.municipalitie"
+                      style="width: 600px"
+                    /> -->
+                  </mat-form-field>
+                  
+                </div>
+                <div form="editForm" class="search-button mr-3 d-flex justify-content-center">
                   <button
                   mat-raised-button
                     (click)="clearFiltrFileds()"
                     type="button"
-                    class="card-detail-button ml-auto danger"
+                    class="card-detail-button danger"
                   >
                     Usuń filtry
                   </button>

@@ -61,6 +61,7 @@ import { AdminComponent } from './admin/admin.component';
 import { AdminMenuComponent } from './admin/admin-menu/admin-menu.component';
 import { AdminUsersComponent } from './admin/admin-users/admin-users/admin-users.component';
 import { AdminEditUserComponent } from './admin/admin-edit-user/admin-edit-user/admin-edit-user.component'; // <-- import the module
+import { MunicipalitieResolver } from './_resolvers/municipality_list_resolver';
 
 
 
@@ -178,6 +179,7 @@ const cookieConfig: NgcCookieConsentConfig = {
     CompanyListResolver,
     CompanyDetailResolver,
     CompanyEditlResolver,
+    MunicipalitieResolver,
     PreventUnsavedChanges,
     {
       provide: MAT_CHECKBOX_DEFAULT_OPTIONS,
