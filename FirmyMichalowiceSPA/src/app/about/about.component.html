@@ -8,19 +8,42 @@
       <div class="row">
         <div class="col-12 mb-2 card company-card text-center">
           <div class="card-header">
+            <h3><b>Czym jest FPK?</b></h3>
+          </div>
+          <div class="card-body">
+            <b>FPK Firmy Północy Krakowa </b>- to aplikacja napisana pod wpływem
+            ostatnich wydarzeń globalnych, geopolitycznych, makro i
+            mikroekonomicznych które z dużą siła oddziaływują na nasze lokalne
+            społeczności. <b>FPK</b> ma być pomocą dla przedsiębiorców ale i
+            każdego kto chciałby wesprzeć lokalnych przedsiebiorców, nierzadko
+            swoich sąsiadów, bliższych lub dalszych. <br />
+            Rejestrować się w aplikacji mogą wszyscy przedsiebiorcy (nie ważne
+            czy posiadają już własne strony www czy reklamują się w innych
+            serwisach) jedynym warunkiem jest wpis do CEIDG a firma
+            zarejestrowana jest na terenie jednej z gmin:
+            <ul>
+              <li *ngFor="let item of municipalitieList">
+                <b> {{ item }} </b>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="col-12 mb-2 card company-card text-center">
+          <div class="card-header">
             <h3><b>Kim jesteśmy?</b></h3>
           </div>
           <div class="card-body">
             Jesteśmy dwoma kolegami z pracy, którzy postanowili skorzystać ze
             swoich umiejętności i stworzyć coś praktycznego dla każdego. Jeden z
-            nas to doświadczony developer aplikacji Webowych, drugi bawi się
-            programowaniem od jakiegoś czasu ale nie jest zawodowcem ;).
-            Prywatnie jesteśmy ojcami, mężami, synami z mnóstwem obowiązków,
-            którym musi sprostać każdy normalny człowiek. Nie przeszkadza nam to
-            jednak w poświęcaniu czasu swojej pasji, którą jest programowanie
-            aplikacji webowych. W każdej wolnej chwili siadamy do komputerów i
-            dopisujemy kolejne elementy naszej układanki, którą jest aplikacja z
-            której właśnie korzystasz.
+            nas to developer aplikacji Webowych, drugi bawi się programowaniem
+            od jakiegoś czasu ale nie jest zawodowcem ;). Prywatnie jesteśmy
+            ojcami, mężami, synami z mnóstwem obowiązków, którym musi sprostać
+            każdy normalny człowiek. Nie przeszkadza nam to jednak w poświęcaniu
+            czasu swojej pasji, którą jest programowanie aplikacji webowych. W
+            każdej wolnej chwili siadamy do komputerów i dopisujemy kolejne
+            elementy naszej układanki, którą jest aplikacja z której właśnie
+            korzystasz.
           </div>
         </div>
 

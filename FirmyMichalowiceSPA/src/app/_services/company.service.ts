@@ -9,6 +9,7 @@ import { map, catchError } from 'rxjs/operators';
 import { CompanyType } from '../_models/companyTypes';
 import { identifierName } from '@angular/compiler';
 import { Offer } from '../_models/offer';
+import { Municipalitie } from '../_models/municipalitie';
 
 @Injectable({
   providedIn: 'root',
@@ -38,6 +39,7 @@ export class CompanyService {
       params = params.append('companyName', userParams.CompanyName);
       params = params.append('companyType', userParams.CompanyType);
       params = params.append('city', userParams.City);
+      params = params.append('municipalitie', userParams.Municipalitie);
     }
     return this.http
       .get<Company[]>(this.baseUrl + 'company', { observe: 'response', params })
@@ -95,5 +97,9 @@ export class CompanyService {
     return this.http.put(this.baseUrl + 'company/editOffer/' + id, offer, {
       headers,
     });
+  }
+
+  getMunicipalitie(): Observable<Municipalitie[]> {
+    return this.http.get<Municipalitie[]>(this.baseUrl + 'company/gminy/');
   }
 }

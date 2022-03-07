@@ -22,6 +22,7 @@ namespace FirmyMichalowice.Helpers
 		public string CompanyName { get; set; }
 		public string CompanyType { get; set; }
 		public string City { get; set; }
+		public string Municipalitie { get; set; }
 
 	}
 }

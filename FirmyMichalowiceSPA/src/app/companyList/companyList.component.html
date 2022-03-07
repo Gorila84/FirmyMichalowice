@@ -1,14 +1,7 @@
 <header>
   <div class="hero-shadow"></div>
   <div
-    class="
-      baner
-      d-flex
-      flex-column
-      justify-content-center
-      jutify-content-md-center
-      align-items-center
-    "
+    class="baner d-flex flex-column justify-content-center jutify-content-md-center align-items-center"
   >
     <div class="div-img-banner">
       <img class="baner-img" src="../../assets/baner.jpg" alt="" />
@@ -17,6 +10,15 @@
       <p class="display-2 slogan text-light">Popraw swoje wyniki</p>
       <p class="second-slogan text-light">
         Zarejestruj się i zdobywaj nowych klientów z nami !!!
+      </p>
+
+      <p class="second-slogan custom_slogan text-light">
+        Jeśli jesteś przedsiębiorcą zarejestrowanym w <b>CEIDG</b> a siedziba
+        Twojej firmy znajduję się na terenie jednej z podkrakowich gmin
+        <span *ngFor="let item of municipalities">
+          <b> {{ item }},</b>
+        </span>
+        ta aplikacja jest dla Ciebie.
       </p>
     </div>
   </div>
@@ -41,10 +43,10 @@
               (ngSubmit)="loadCompanies()"
               class=""
             >
+              <div class="text-center">
+                <h2>Wyszukaj:</h2>
+              </div>
               <div class="row d-flex align-items-end">
-                <div class="col-md-2 d-flex justify-content-end searcher">
-                  <h2>Wyszukaj:</h2>
-                </div>
                 <div class="col-md-3 d-flex justify-content-end searcher">
                   <mat-form-field
                     class="example-full-width companyName"
@@ -93,12 +95,45 @@
                     />
                   </mat-form-field>
                 </div>
-                <div form="editForm" class="search-button mr-3 d-flex">
+                <div class="col-md-3 d-flex justify-content-end searcher">
+                  <mat-form-field
+                    class="example-full-width companyName"
+                    appearance="fill"
+                  >
+                    <mat-label>Gmina</mat-label>
+                    <mat-select
+                      [(ngModel)]="companyParams.Municipalitie"
+                      id="municipalitie"
+                      name="municipalitie"
+                    >
+                      <mat-option (click)="unselect()">
+                        Wszystkie gminy
+                      </mat-option>
+                      <mat-option
+                        *ngFor="let municipalitie of municipalities"
+                        [value]="municipalitie"
+                      >
+                        {{ municipalitie }}
+                      </mat-option>
+                    </mat-select>
+                    <!-- <input
+                      matInput
+                      name="municipalitie"
+                      id="municipalitie"
+                      [(ngModel)]="companyParams.municipalitie"
+                      style="width: 600px"
+                    /> -->
+                  </mat-form-field>
+                </div>
+                <div
+                  form="editForm"
+                  class="search-button mr-3 d-flex justify-content-center"
+                >
                   <button
-                  mat-raised-button
+                    mat-raised-button
                     (click)="clearFiltrFileds()"
                     type="button"
-                    class="card-detail-button ml-auto danger"
+                    class="card-detail-button danger"
                   >
                     Usuń filtry
                   </button>
@@ -117,7 +152,10 @@
       </div>
       <div class="col-12">
         <div class="row">
-          <div *ngFor="let company of companies" class="company-card-list col-md-12">
+          <div
+            *ngFor="let company of companies"
+            class="company-card-list col-md-12"
+          >
             <app-CompanyCard [company]="company"></app-CompanyCard>
           </div>
         </div>

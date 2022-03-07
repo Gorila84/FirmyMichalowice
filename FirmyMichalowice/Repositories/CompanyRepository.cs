@@ -120,13 +120,20 @@ namespace FirmyMichalowice.Repositories
             {
                 users = users.Where(u => u.City == userParams.City);
             }
+            if (userParams.Municipalitie != null)
+            {
+                users = users.Where(u => u.Municipalitie == userParams.Municipalitie);
+            }
 
             var cos = users.Count();
 
             return await PageList<User>.CreateListAsync(users, userParams.PageNumber, userParams.PageSize);
         }
 
- 
+        public async Task<IList<string>> GetMunicipalieties()
+        {
+            return await _context.Municipalities.Select(x => x.Name).ToListAsync();
+        }
 
         public async Task<bool> SaveAll()
         {

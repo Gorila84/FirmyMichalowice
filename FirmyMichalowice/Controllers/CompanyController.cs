@@ -177,6 +177,22 @@ namespace FirmyMichalowice.Controllers
             
         }
 
-  
+        [HttpGet("gminy")]
+        public async Task<IList<string>> GetMunicipalitie()
+        {
+            try
+            {
+                var municipalieties = await _userRepository.GetMunicipalieties();
+                return municipalieties;
+            }
+            catch (Exception ex)
+            {
+                _logger.LogInformation(ex.Message);
+                return null;
+            }
+
+
+        }
+
     }
 }

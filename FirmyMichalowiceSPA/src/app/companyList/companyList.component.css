@@ -62,7 +62,11 @@ header {
 .card-detail-button {
   border: 1px solid;
 }
-
+.custom_slogan {
+  padding-top: 25px;
+  letter-spacing: 1px;
+  line-height: 2em;
+}
 @media only screen and (max-width: 600px) {
   .searcher {
     display: flex !important;
@@ -73,5 +77,11 @@ header {
     text-align: center !important;
     display: block !important;
     margin-right: 0 !important;
+  }
+  .custom_slogan {
+    font-size: smaller;
+    padding-top: 0cm;
+    letter-spacing: normal;
+    line-height: normal;
   }
 }
