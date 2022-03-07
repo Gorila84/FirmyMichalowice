@@ -29,7 +29,7 @@ namespace FirmyMichalowice.Controllers
             if (ModelState.IsValid && message.IsEmailValid()) {
                 MimeMessage message2 = new MimeMessage();
 
-                MailboxAddress from = new MailboxAddress("Admin FPK", "admin@firmymichalowiceapi.berg-dev.eu");
+                MailboxAddress from = new MailboxAddress("Admin FPK", _smtpManager.User);
                 message2.From.Add(from);
 
                 MailboxAddress to = new MailboxAddress("User", message.Username);
