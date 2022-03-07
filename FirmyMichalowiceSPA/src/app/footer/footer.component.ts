@@ -1,16 +1,15 @@
 import { Component, OnInit } from '@angular/core';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-footer',
   templateUrl: './footer.component.html',
-  styleUrls: ['./footer.component.css']
+  styleUrls: ['./footer.component.css'],
 })
 export class FooterComponent implements OnInit {
+  appVersion = environment.appVersion;
+  year = new Date().getFullYear();
+  constructor() {}
 
-  year = new Date().getFullYear()
-  constructor() { }
-
-  ngOnInit() {
-  }
-
+  ngOnInit() {}
 }

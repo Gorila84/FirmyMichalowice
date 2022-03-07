@@ -12,6 +12,7 @@ export const environment = {
   recaptcha: {
     siteKey: '6LcCILYdAAAAAEJ9aoyjK0_2Jkc20hGkb2QgOUgA',
   },
+  appVersion: '1.0',
 };
 
 /*
