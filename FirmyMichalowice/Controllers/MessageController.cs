@@ -32,7 +32,7 @@ namespace FirmyMichalowice.Controllers
                 MailboxAddress from = new MailboxAddress("Admin FPK", _smtpManager.User);
                 message2.From.Add(from);
 
-                MailboxAddress to = new MailboxAddress("User", message.Username);
+                MailboxAddress to = new MailboxAddress("User", _smtpManager.User);
                 message2.To.Add(to);
 
                 message2.Subject = message.Subject;
