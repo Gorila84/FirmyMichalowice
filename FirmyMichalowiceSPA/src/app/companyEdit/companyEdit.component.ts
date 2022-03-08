@@ -6,7 +6,7 @@ import {
   ViewChild,
 } from '@angular/core';
 import { Form, FormControl, NgForm, Validators } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { Company } from '../_models/company';
 import { AlertifyService } from '../_services/alertify.service';
@@ -63,6 +63,7 @@ export class CompanyEditComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
+    private router:Router,
     private alertify: AlertifyService,
     private authService: AuthService,
     private companyService: CompanyService,
@@ -109,17 +110,20 @@ export class CompanyEditComponent implements OnInit {
   }
   // tslint:disable-next-line:typedef
   updateCompany() {
+    
     this.companyService
       .updateCompany(this.authService.decotedToken.nameid, this.company)
       .subscribe(
         (next) => {
           this.alertify.success('Twoje dane zostały pomyślnie zaktualizowane.');
-          this.editForm.reset(this.company);
+          
+          this.getCompanyTypes();
         },
         (error) => {
           this.alertify.error(error);
         }
       );
+      
   }
   // tslint:disable-next-line:typedef
   uploadFile = (files) => {
@@ -227,6 +231,10 @@ export class CompanyEditComponent implements OnInit {
     this.companyService.addOffer(this.model).subscribe((data) => {
       debugger;
       this.refreshTable();
+       this.getCompanyTypes();
+
+       this.model.name ='';
+       this.model.price ='';
     });
   }
 
@@ -253,4 +261,6 @@ export class CompanyEditComponent implements OnInit {
         this.company = data;
       });
   }
+
+
 }
