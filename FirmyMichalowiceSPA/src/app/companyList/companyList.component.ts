@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { MatSelect } from '@angular/material/select';
 import { ActivatedRoute } from '@angular/router';
 import { Company } from '../_models/company';
 import { CompanyType } from '../_models/companyTypes';
@@ -12,12 +13,13 @@ import { CompanyService } from '../_services/company.service';
   templateUrl: './companyList.component.html',
   styleUrls: ['./companyList.component.css'],
 })
+
 export class CompanyListComponent implements OnInit {
   companies: Company[];
   companyTypes: CompanyType[];
   pagination: Pagination;
   municipalities: Municipalitie[];
-
+  @ViewChild('municipaliteSelect') municipaliteSelect: MatSelect;
   constructor(
     private route: ActivatedRoute,
     private companyService: CompanyService,
@@ -65,14 +67,16 @@ export class CompanyListComponent implements OnInit {
     var name = <HTMLInputElement>document.getElementById('companyName');
     var category = <HTMLInputElement>document.getElementById('companyName');
     var city = <HTMLInputElement>document.getElementById('companyName');
+    var municipalitie = <HTMLSelectElement>document.getElementById('municipalitie');
     name.value = '';
     category.value = '';
     city.value = '';
-
+    municipalitie.selectedIndex = 0;
+    
     this.companyParams.CompanyType = '';
     this.companyParams.CompanyName = '';
     this.companyParams.City = '';
-
+    this.companyParams.Municipalitie = '';
     this.loadCompanies();
   }
 
