@@ -155,6 +155,7 @@ export class CompanyEditComponent implements OnInit {
           if (event.type === HttpEventType.UploadProgress) {
           } else if (event.type === HttpEventType.Response) {
             this.alertify.success('Dodano logo.');
+            this.refreshTable();
             // this.getImage();
             // window.location.reload();
             const fileReader = new FileReader();
@@ -166,6 +167,7 @@ export class CompanyEditComponent implements OnInit {
             };
             fileReader.readAsDataURL(files[0]);
           }
+          
         },
         (err) => {
           const userId = this.authService.decotedToken.nameid;
@@ -177,6 +179,7 @@ export class CompanyEditComponent implements OnInit {
           this.alertify.error('Błąd. Nie udało się wysłać pliku');
         }
       );
+      
   };
 
   private _filter(value: string): string[] {
