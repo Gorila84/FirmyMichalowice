@@ -1,4 +1,5 @@
-﻿using FirmyMichalowice.Dto_s;
+﻿using FirmyMichalowice.Data;
+using FirmyMichalowice.Dto_s;
 using FirmyMichalowice.Model;
 using FirmyMichalowice.Repositories;
 using Microsoft.AspNetCore.Authorization;
@@ -21,14 +22,13 @@ namespace FirmyMichalowice.Controllers
     {
         private readonly IAuthRepository _repository;
         private readonly IConfiguration _config;
-       
+        private readonly CeidgService _ceidgService;
 
-        public AuthController(IAuthRepository repository, IConfiguration config)
+        public AuthController(IAuthRepository repository, IConfiguration config, CeidgService ceidgService)
         {
             _repository = repository;
             _config = config;
-          
-           
+            _ceidgService = ceidgService;
         }
         [HttpPost("register")]
         public async Task<IActionResult> Register(UserForRegisterDTO userRegisterDto)
@@ -37,7 +37,7 @@ namespace FirmyMichalowice.Controllers
             {
                 return BadRequest("Logowanie możliwe tylko za pomocą adresu email");
             }
-
+            var firma = await _ceidgService.GetData(userRegisterDto.NIP);
             userRegisterDto.UserName = userRegisterDto.UserName.ToLower();
             var validationResult = await _repository.UserValidation(userRegisterDto.UserName, userRegisterDto.NIP);
             if (validationResult.Item1)
@@ -48,7 +48,13 @@ namespace FirmyMichalowice.Controllers
                 Username = userRegisterDto.UserName,
                 NIP = userRegisterDto.NIP,
                 Created = DateTime.Now,
-                Municipalitie = validationResult.Item3
+                Municipalitie = validationResult.Item3,
+                CompanyName =firma.nazwa,
+                City = firma.adresDzialanosci.miasto,
+                Street = firma.adresKorespondencyjny.ulica,
+                PostalCode = firma.adresDzialanosci.kod,
+                OfficeMunicipalitie = firma.adresDzialanosci.gmina
+
             };
 
             var createdUser = await _repository.Register(userToCreate, userRegisterDto.Password);
