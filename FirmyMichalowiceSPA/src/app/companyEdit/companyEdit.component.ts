@@ -63,7 +63,7 @@ export class CompanyEditComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
-    private router:Router,
+    private router: Router,
     private alertify: AlertifyService,
     private authService: AuthService,
     private companyService: CompanyService,
@@ -110,20 +110,18 @@ export class CompanyEditComponent implements OnInit {
   }
   // tslint:disable-next-line:typedef
   updateCompany() {
-    
     this.companyService
       .updateCompany(this.authService.decotedToken.nameid, this.company)
       .subscribe(
         (next) => {
           this.alertify.success('Twoje dane zostały pomyślnie zaktualizowane.');
-          
+
           this.getCompanyTypes();
         },
         (error) => {
           this.alertify.error(error);
         }
       );
-      
   }
   // tslint:disable-next-line:typedef
   uploadFile = (files) => {
@@ -167,7 +165,6 @@ export class CompanyEditComponent implements OnInit {
             };
             fileReader.readAsDataURL(files[0]);
           }
-          
         },
         (err) => {
           const userId = this.authService.decotedToken.nameid;
@@ -179,7 +176,6 @@ export class CompanyEditComponent implements OnInit {
           this.alertify.error('Błąd. Nie udało się wysłać pliku');
         }
       );
-      
   };
 
   private _filter(value: string): string[] {
@@ -232,18 +228,16 @@ export class CompanyEditComponent implements OnInit {
   addOffer() {
     this.model.userId = this.authService.decotedToken.nameid;
     this.companyService.addOffer(this.model).subscribe((data) => {
-      debugger;
       this.refreshTable();
-       this.getCompanyTypes();
+      this.getCompanyTypes();
 
-       this.model.name ='';
-       this.model.price ='';
+      this.model.name = '';
+      this.model.price = '';
     });
   }
 
   removeOffer(id: number) {
     this.companyService.removeOffer(id).subscribe((data) => {
-      debugger;
       this.refreshTable();
     });
   }
@@ -264,6 +258,4 @@ export class CompanyEditComponent implements OnInit {
         this.company = data;
       });
   }
-
-
 }

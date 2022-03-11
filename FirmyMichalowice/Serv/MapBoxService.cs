@@ -44,7 +44,7 @@ namespace FirmyMichalowice.Serv
                 else
                 {
                     var searchingAdress = adress.Split(",").First().Split(".").Last().ToLower();
-                    searchingGeo = geoLocCompanies.Where(y => y.adminArea1 == "PL" && y.adminArea3 == "Lesser Poland Voivodeship" && y.adminArea4 == "gmina " + gmina && (adress.Split(",").First().ToLower().Contains(y.street.ToLower()))).FirstOrDefault();
+                    searchingGeo = geoLocCompanies.Where(y => y.adminArea1 == "PL" && (y.adminArea3 == "Lesser Poland Voivodeship" || y.adminArea3 == "Małopolskie" ) && y.adminArea4 == "gmina " + gmina && (adress.Split(",").First().ToLower().Contains(y.street.ToLower()))).FirstOrDefault();
                 }
                
                 string geolocationUrl = string.Empty;

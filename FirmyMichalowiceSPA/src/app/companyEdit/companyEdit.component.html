@@ -114,7 +114,8 @@
         class="change-photo-btn"
         (click)="file.click()"
         #tooltip="matTooltip"
-        matTooltip="Dozwolone rozszerzenia: PNG, JPG, JPEG"
+        matTooltip="Dozwolone rozszerzenia: PNG, JPG, JPEG.
+        Preferowana wielkość Logo 200x200px"
       >
         Dodaj Logo
       </button>
@@ -248,7 +249,6 @@
               id="adress"
               name="adress"
               [checked]="company.additionalAddress"
-             
               [(ngModel)]="company.additionalAddress"
             />
             <label for="adress">Chcę dodać inny adres firmy</label>

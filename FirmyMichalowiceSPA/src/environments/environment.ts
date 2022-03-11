@@ -9,6 +9,7 @@ export const environment = {
   //apiUrl: 'https://fpkrkprodapi.berg-dev.eu/api/',
   showArms: false,
   useGeoportal: false,
+  useGoggleMaps: true,
   recaptcha: {
     siteKey: '6LcCILYdAAAAAEJ9aoyjK0_2Jkc20hGkb2QgOUgA',
   },

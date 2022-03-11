@@ -24,22 +24,25 @@ namespace FirmyMichalowice.Repositories
         private readonly MapBoxService _mapBoxService;
         private readonly IConfiguration _configuration;
         private readonly ILoggerManager _logger;
+        private readonly IGoogleGeolocationService _gelocationService;
+      
 
-        public CompanyRepository(DataContext context, CeidgService ceidgService,  IConfiguration configuration, MapBoxService mapBoxService, ILoggerManager logger) : base(context)
+        public CompanyRepository(DataContext context, CeidgService ceidgService,  IConfiguration configuration, MapBoxService mapBoxService, ILoggerManager logger, IGoogleGeolocationService geolocationService) : base(context)
         {
             _context = context;
             _ceidgService = ceidgService;
             _configuration = configuration;
             _mapBoxService = mapBoxService;
             _logger = logger;
-
+            _gelocationService = geolocationService;
+         
         }
 
         public async Task<User> GetCompany(int id, bool isForEdit)
         {
             try
             {
-                var user = await _context.Users.Include(x => x.Photo).Include(x=>x.Offers).FirstOrDefaultAsync(u => u.Id == id);
+                var user = await _context.Users.Include(x => x.Photo).Include(x=>x.Offers).Include(x=>x.UserSettings).FirstOrDefaultAsync(u => u.Id == id);
                 if (user != null)
                 {
                     var firma = await _ceidgService.GetData(user.NIP);
@@ -57,11 +60,37 @@ namespace FirmyMichalowice.Repositories
                     if (!isForEdit)
                     {
                         string adress = string.Format("{0} {1}, {2} {3}", firma.adresDzialanosci.ulica, firma.adresDzialanosci.budynek, firma.adresDzialanosci.miasto, firma.adresDzialanosci.kod);
-                        user.GeolocationUrl = await _mapBoxService.GetGeolocationURL(adress, firma.adresDzialanosci.gmina, false);
+                        bool userHasOwnSetting = false; ;
+                        if(user.UserSettings != null)
+                        {
+                            userHasOwnSetting = true;
+                        }                      
+                        if (userHasOwnSetting && user.UserSettings.UsingGoggleMaps)
+                        {
+                            var geo = await _gelocationService.GetGeolocations(adress);
+                            user.Geometry = geo.geometry;
+                        }
+                        else
+                        {
+                            user.GeolocationUrl = await _mapBoxService.GetGeolocationURL(adress, firma.adresDzialanosci.gmina, false);
+                        }
+                     
                         if (!string.IsNullOrEmpty(user.OfficeCity) && !string.IsNullOrEmpty(user.OfficeStreet) && !string.IsNullOrEmpty(user.OfficePostalCode))
                         {
-                            string adress2 = ValidateOfficeAdress(user.OfficeCity, user.OfficeStreet, user.OfficePostalCode);  
-                            user.Geolocation2Url = await _mapBoxService.GetGeolocationURL(adress2, user.OfficeMunicipalitie, true);
+                            string adress2 = ValidateOfficeAdress(user.OfficeCity, user.OfficeStreet, user.OfficePostalCode);
+
+                            if (userHasOwnSetting && user.UserSettings.UsingGoggleMaps)
+                            {
+                                var geo = await _gelocationService.GetGeolocations(adress2);
+                                user.Geometry2 = geo.geometry;
+                                user.Geolocation2Url = "Only for the fulfillment of the condition";
+                            }
+                            else
+                            {
+                                
+                                user.Geolocation2Url = await _mapBoxService.GetGeolocationURL(adress2, user.OfficeMunicipalitie, true);
+                            }
+                            
                         }
                     }
                     user.StatusFromCeidg = firma.status;

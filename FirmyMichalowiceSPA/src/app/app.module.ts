@@ -58,6 +58,9 @@ import { StatuteComponent } from './statute/statute.component';
 import { AboutComponent } from './about/about.component';
 import { NgxPaginationModule } from 'ngx-pagination'; // <-- import the module
 import { MunicipalitieResolver } from './_resolvers/municipality_list_resolver';
+import { GoogleMapComponent } from './google-map/google-map.component';
+import { GoogleMapsModule } from '@angular/google-maps';
+import { HttpClientJsonpModule } from '@angular/common/http';
 
 const cookieConfig: NgcCookieConsentConfig = {
   cookie: {
@@ -122,6 +125,7 @@ const cookieConfig: NgcCookieConsentConfig = {
     EditOfferDialogComponent,
     StatuteComponent,
     AboutComponent,
+    GoogleMapComponent,
   ],
   imports: [
     BrowserModule,
@@ -161,7 +165,10 @@ const cookieConfig: NgcCookieConsentConfig = {
     RecaptchaV3Module,
     NgcCookieConsentModule.forRoot(cookieConfig),
     NgxPaginationModule,
+    GoogleMapsModule,
+    HttpClientJsonpModule,
   ],
+  exports: [GoogleMapComponent],
   providers: [
     CompanyListResolver,
     CompanyDetailResolver,

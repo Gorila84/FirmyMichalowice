@@ -55,6 +55,10 @@ namespace FirmyMichalowice.Dto_s
         public DateTime Created { get; set; }
         public DateTime Modify { get; set; }
         public IList<Offer> Offers { get; set; }
+        public Geometry Geometry { get; set; }
+        public Geometry Geometry2 { get; set; }
+
+        public UserSettings UserSettings { get; set; }
 
     }
 }

@@ -34,6 +34,7 @@ namespace FirmyMichalowice.Model
         public DateTime Modify { get; set; }
 
         public Photo Photo { get; set; }
+        public UserSettings UserSettings { get;set;}
 
         public string CompanyType { get; set; }
 
@@ -63,7 +64,11 @@ namespace FirmyMichalowice.Model
 
         public IList<Offer> Offers { get; set; }
 
-     
+        [NotMapped]
+        public Geometry Geometry { get; set; }
+
+        [NotMapped]
+        public Geometry Geometry2 { get; set; }
 
     }
 }

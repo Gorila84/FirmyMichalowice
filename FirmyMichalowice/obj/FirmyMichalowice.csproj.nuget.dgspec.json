@@ -1,24 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "C:\\firmy\\FirmyMichalowice\\FirmyMichalowice\\FirmyMichalowice.csproj": {}
+    "F:\\src\\repos\\FirmyMichalowice\\FirmyMichalowice\\FirmyMichalowice\\FirmyMichalowice.csproj": {}
   },
   "projects": {
-    "C:\\firmy\\FirmyMichalowice\\FirmyMichalowice\\FirmyMichalowice.csproj": {
+    "F:\\src\\repos\\FirmyMichalowice\\FirmyMichalowice\\FirmyMichalowice\\FirmyMichalowice.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\firmy\\FirmyMichalowice\\FirmyMichalowice\\FirmyMichalowice.csproj",
+        "projectUniqueName": "F:\\src\\repos\\FirmyMichalowice\\FirmyMichalowice\\FirmyMichalowice\\FirmyMichalowice.csproj",
         "projectName": "FirmyMichalowice",
-        "projectPath": "C:\\firmy\\FirmyMichalowice\\FirmyMichalowice\\FirmyMichalowice.csproj",
-        "packagesPath": "C:\\Users\\Maciek\\.nuget\\packages\\",
-        "outputPath": "C:\\firmy\\FirmyMichalowice\\FirmyMichalowice\\obj\\",
+        "projectPath": "F:\\src\\repos\\FirmyMichalowice\\FirmyMichalowice\\FirmyMichalowice\\FirmyMichalowice.csproj",
+        "packagesPath": "C:\\Users\\user\\.nuget\\packages\\",
+        "outputPath": "F:\\src\\repos\\FirmyMichalowice\\FirmyMichalowice\\FirmyMichalowice\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
-          "C:\\Program Files (x86)\\Microsoft\\Xamarin\\NuGet\\",
-          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+          "C:\\Program Files (x86)\\Microsoft\\Xamarin\\NuGet\\"
         ],
         "configFilePaths": [
-          "C:\\Users\\Maciek\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\user\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
         ],
@@ -144,7 +143,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.405\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.400\\RuntimeIdentifierGraph.json"
         }
       }
     }
