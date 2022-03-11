@@ -58,11 +58,13 @@ export class CompanyDetailComponent implements OnInit, AfterViewInit {
       this.company = data.company;
     });
     this.isCompanyActive = this.company.statusFromCeidg == 'AKTYWNY';
-    let isNull = this.company.geolocation2Url ?? true;
+    let isNull = false;
+    if (this.company.geolocation2Url == null) {
+      isNull = true;
+    }
     isNull
-      ? (this.isEnabledGeolocation2Url = true)
-      : (this.isEnabledGeolocation2Url =
-          this.company.geolocation2Url.length == 0);
+      ? (this.isEnabledGeolocation2Url = false)
+      : (this.isEnabledGeolocation2Url = true);
     this.showArms = environment.showArms && this.company.armsUrl ? true : false;
     this.dataSource = new MatTableDataSource(this.company.offers);
     this.collection = this.company.pkds;
