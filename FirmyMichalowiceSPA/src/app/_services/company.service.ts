@@ -24,6 +24,7 @@ export class CompanyService {
     userParams?,
     likesParam?
   ): Observable<PaginationResult<Company[]>> {
+    debugger
     const paginationResult: PaginationResult<Company[]> = new PaginationResult<
       Company[]
     >();
@@ -38,6 +39,7 @@ export class CompanyService {
       params = params.append('companyName', userParams.CompanyName);
       params = params.append('companyType', userParams.CompanyType);
       params = params.append('city', userParams.City);
+      params = params.append('municipalitie', userParams.Municipalitie);
     }
     return this.http
       .get<Company[]>(this.baseUrl + 'company', { observe: 'response', params })
