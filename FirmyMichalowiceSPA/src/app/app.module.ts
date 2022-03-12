@@ -57,6 +57,7 @@ import { EditOfferDialogComponent } from './edit-offer-dialog/edit-offer-dialog.
 import { StatuteComponent } from './statute/statute.component';
 import { AboutComponent } from './about/about.component';
 import { NgxPaginationModule } from 'ngx-pagination'; // <-- import the module
+import { MunicipalitieResolver } from './_resolvers/municipality_list_resolver';
 
 const cookieConfig: NgcCookieConsentConfig = {
   cookie: {
@@ -166,6 +167,7 @@ const cookieConfig: NgcCookieConsentConfig = {
     CompanyDetailResolver,
     CompanyEditlResolver,
     PreventUnsavedChanges,
+    MunicipalitieResolver,
     {
       provide: MAT_CHECKBOX_DEFAULT_OPTIONS,
       useValue: { clickAction: 'noop' } as MatCheckboxDefaultOptions,

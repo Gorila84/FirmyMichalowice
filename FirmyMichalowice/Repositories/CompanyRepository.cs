@@ -137,7 +137,10 @@ namespace FirmyMichalowice.Repositories
         {
             return _context.Trade.OrderBy(x => x.Name).Select(x => x.Name).ToList();
         }
+        public async Task<IList<string>> GetMunicipaliety()
+        {
+            return await _context.Municipalities.Select(x => x.Name).ToListAsync();
+        }
 
-      
     }
 }

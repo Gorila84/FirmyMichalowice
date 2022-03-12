@@ -7,6 +7,6 @@ namespace FirmyMichalowice.Data
 {
     public interface ICategoryRepository
     {
-        Task<IList<string>> GetCategories();
+        Task<IList<string>> GetCategory();
     }
 }

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace FirmyMichalowice.Repositories
 {
-    public class CategoryRepository
+    public class CategoryRepository : ICategoryRepository
     {
         private readonly DataContext _context;
 
@@ -15,7 +15,7 @@ namespace FirmyMichalowice.Repositories
             _context = context;
         }
 
-        public async Task<IList<string>> GetCategories()
+        public async Task<IList<string>> GetCategory()
         {
             return _context.Categories.OrderBy(x => x.CategoryName).Select(x => x.CategoryName).ToList();
         }

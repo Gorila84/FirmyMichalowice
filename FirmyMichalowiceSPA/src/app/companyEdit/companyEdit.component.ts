@@ -5,7 +5,7 @@ import {
   Output,
   ViewChild,
 } from '@angular/core';
-import { Form, FormControl, NgForm, Validators } from '@angular/forms';
+import { Form, FormControl, FormGroupDirective, NgForm, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
 import { Company } from '../_models/company';
@@ -28,6 +28,15 @@ import { MatPaginator } from '@angular/material/paginator';
 import { EditOfferDialogComponent } from '../edit-offer-dialog/edit-offer-dialog.component';
 import { MatDialog } from '@angular/material/dialog';
 import { MatTableDataSource } from '@angular/material/table';
+import { Category } from '../_models/category';
+import { ErrorStateMatcher } from '@angular/material/core';
+
+export class MyErrorStateMatcher implements ErrorStateMatcher {
+  isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
+    const isSubmitted = form && form.submitted;
+    return !!(control && control.invalid && (control.dirty || control.touched || isSubmitted));
+  }
+}
 
 interface Item {
   value: string;
@@ -58,6 +67,7 @@ export class CompanyEditComponent implements OnInit {
   shown: any;
   dataSource: any;
   trade: FormControl;
+  categories: Category[];
 
   @ViewChild('editForm') editForm: NgForm;
 
@@ -74,12 +84,17 @@ export class CompanyEditComponent implements OnInit {
 
   // tslint:disable-next-line:typedef
   ngOnInit() {
+    this.refreshTable();
     this.getCompanyTypes();
+    this.getCategories();
     this.route.data.subscribe((data) => {
       this.company = data.company;
       this.offers = data.company.offers;
+      this.categories = data.category;
       this.trade = new FormControl(this.company.companyType);
     });
+
+ 
     // this.getImage(this.authService.decotedToken.nameid);
     // this.getImage();
 
@@ -109,6 +124,7 @@ export class CompanyEditComponent implements OnInit {
   }
   // tslint:disable-next-line:typedef
   updateCompany() {
+    
     this.companyService
       .updateCompany(this.authService.decotedToken.nameid, this.company)
       .subscribe(
@@ -253,4 +269,12 @@ export class CompanyEditComponent implements OnInit {
         this.company = data;
       });
   }
+
+  getCategories(){
+
+    this.companyService.getCategories().subscribe((data) =>{
+      this.categories = data;
+    } );
+  }
+
 }
