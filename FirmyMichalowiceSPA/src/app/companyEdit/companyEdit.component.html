@@ -248,7 +248,6 @@
               id="adress"
               name="adress"
               [checked]="company.additionalAddress"
-             
               [(ngModel)]="company.additionalAddress"
             />
             <label for="adress">Chcę dodać inny adres firmy</label>
@@ -256,6 +255,17 @@
           <div class="row">
             <div class="col-12 pt-2 pb-2">
               <div [hidden]="!rodoCheck.checked">
+                <mat-form-field class="full-width" appearance="legacy">
+                  <mat-label>Kod pocztowy </mat-label>
+                  <input
+                    matInput
+                    class="form-control"
+                    type="text"
+                    name="officePostalCode"
+                    [(ngModel)]="company.officePostalCode"
+                    (input)="onChangePostalCode($event)"
+                  />
+                </mat-form-field>
                 <mat-form-field class="full-width" appearance="legacy">
                   <mat-label>ul. </mat-label>
                   <input
@@ -275,18 +285,19 @@
                     type="text"
                     name="officeCity"
                     [(ngModel)]="company.officeCity"
+                    [matAutocomplete]="autoNationality"
+                    [formControl]="myControl2"
                   />
+                  <mat-autocomplete #autoNationality="matAutocomplete">
+                    <mat-option
+                      *ngFor="let option of options2"
+                      [value]="option"
+                    >
+                      {{ option }}
+                    </mat-option>
+                  </mat-autocomplete>
                 </mat-form-field>
-                <mat-form-field class="full-width" appearance="legacy">
-                  <mat-label>Kod pocztowy </mat-label>
-                  <input
-                    matInput
-                    class="form-control"
-                    type="text"
-                    name="officePostalCode"
-                    [(ngModel)]="company.officePostalCode"
-                  />
-                </mat-form-field>
+
                 <mat-form-field class="full-width" appearance="legacy">
                   <mat-label>Gmina </mat-label>
                   <input

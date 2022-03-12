@@ -14,7 +14,7 @@ import { AuthService } from '../_services/auth.service';
 import { CompanyService } from '../_services/company.service';
 import { UploadPhotoService } from '../_services/uploadPhoto.service';
 import { environment } from 'src/environments/environment';
-import { HttpEventType } from '@angular/common/http';
+import { HttpClient, HttpEventType } from '@angular/common/http';
 import { NGXLogger } from 'ngx-logger';
 import { map, startWith } from 'rxjs/operators';
 import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
@@ -43,6 +43,7 @@ interface Item {
 export class CompanyEditComponent implements OnInit {
   myControl = new FormControl();
   options: string[] = [];
+  options2: string[] = [];
   displayedColumns: string[] = ['name', 'price', 'buttons'];
   rowofferItems: Offer[];
   filteredOptions: Observable<string[]>;
@@ -58,19 +59,21 @@ export class CompanyEditComponent implements OnInit {
   shown: any;
   dataSource: any;
   trade: FormControl;
+  myControl2 = new FormControl();
 
   @ViewChild('editForm') editForm: NgForm;
 
   constructor(
     private route: ActivatedRoute,
-    private router:Router,
+    private router: Router,
     private alertify: AlertifyService,
     private authService: AuthService,
     private companyService: CompanyService,
     private uploadPhotoService: UploadPhotoService,
     private logger: NGXLogger,
     private companyTypeService: CompanyTypeService,
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    private http: HttpClient
   ) {}
 
   // tslint:disable-next-line:typedef
@@ -110,20 +113,18 @@ export class CompanyEditComponent implements OnInit {
   }
   // tslint:disable-next-line:typedef
   updateCompany() {
-    
     this.companyService
       .updateCompany(this.authService.decotedToken.nameid, this.company)
       .subscribe(
         (next) => {
           this.alertify.success('Twoje dane zostały pomyślnie zaktualizowane.');
-          
+
           this.getCompanyTypes();
         },
         (error) => {
           this.alertify.error(error);
         }
       );
-      
   }
   // tslint:disable-next-line:typedef
   uploadFile = (files) => {
@@ -167,7 +168,6 @@ export class CompanyEditComponent implements OnInit {
             };
             fileReader.readAsDataURL(files[0]);
           }
-          
         },
         (err) => {
           const userId = this.authService.decotedToken.nameid;
@@ -179,7 +179,6 @@ export class CompanyEditComponent implements OnInit {
           this.alertify.error('Błąd. Nie udało się wysłać pliku');
         }
       );
-      
   };
 
   private _filter(value: string): string[] {
@@ -234,10 +233,10 @@ export class CompanyEditComponent implements OnInit {
     this.companyService.addOffer(this.model).subscribe((data) => {
       debugger;
       this.refreshTable();
-       this.getCompanyTypes();
+      this.getCompanyTypes();
 
-       this.model.name ='';
-       this.model.price ='';
+      this.model.name = '';
+      this.model.price = '';
     });
   }
 
@@ -265,5 +264,20 @@ export class CompanyEditComponent implements OnInit {
       });
   }
 
-
+  onChangePostalCode(event: Event) {
+    let value = (event.target as HTMLInputElement).value;
+    if (value.length > 5) {
+      this.options2 = [];
+      this.http
+        .get<Array<any>>('http://kodpocztowy.intami.pl/api/' + value)
+        .subscribe((data) => {
+          this.company.officeMunicipalitie = '';
+          this.company.officeCity = '';
+          data.forEach((x) => {
+            this.options2.push(x.miejscowosc);
+          });
+          this.company.officeMunicipalitie = data[0].gmina;
+        });
+    }
+  }
 }
