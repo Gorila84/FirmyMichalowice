@@ -16,5 +16,8 @@ namespace FirmyMichalowice.Dto_s
         [Required(ErrorMessage = "NIP jest wymagane")]
         [StringLength(10)]
         public string NIP { get; set; }
+        [Required(ErrorMessage = "Krótki opis jest wymagany")]
+        [StringLength(255)]
+        public string ShortDescription { get; set; }
     }
 }

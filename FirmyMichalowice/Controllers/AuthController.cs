@@ -47,13 +47,15 @@ namespace FirmyMichalowice.Controllers
             {
                 Username = userRegisterDto.UserName,
                 NIP = userRegisterDto.NIP,
+                ShortDescription = userRegisterDto.ShortDescription,
                 Created = DateTime.Now,
                 Municipalitie = validationResult.Item3,
                 CompanyName =firma.nazwa,
                 City = firma.adresDzialanosci.miasto,
                 Street = firma.adresKorespondencyjny.ulica,
                 PostalCode = firma.adresDzialanosci.kod,
-                OfficeMunicipalitie = firma.adresDzialanosci.gmina
+                OfficeMunicipalitie = firma.adresDzialanosci.gmina,
+                EmailAddress = userRegisterDto.UserName
 
             };
 

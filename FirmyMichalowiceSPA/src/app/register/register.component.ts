@@ -54,6 +54,11 @@ export class RegisterComponent implements OnInit {
     Validators.required,
     Validators.minLength(6),
   ]);
+
+  shortDescriptionFormControl = new FormControl('', [
+    Validators.required,
+    Validators.maxLength(255)
+  ]);
   matcher = new MyErrorStateMatcher();
 
 
@@ -70,7 +75,7 @@ export class RegisterComponent implements OnInit {
     }
     let element = <HTMLInputElement> document.getElementById("rodoCheckBox");
 
-    if (this.emailFormControl.invalid || this.passwordFormControl.invalid || this.nipFormControl.invalid || !element.checked) {
+    if (this.emailFormControl.invalid || this.passwordFormControl.invalid || this.nipFormControl.invalid || !element.checked || this.shortDescriptionFormControl.invalid) {
       return;
   }
   this.recaptchaV3Service.execute('importantAction')

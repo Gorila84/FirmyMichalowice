@@ -93,6 +93,29 @@
               Za długi
             </mat-error>
           </mat-form-field>
+          <mat-form-field class="example-full-width" appearance="fill">
+            <mat-label>Krótki opis działalności</mat-label>
+            <textarea
+              matInput
+              #shortDescriptio
+              [formControl]="shortDescriptionFormControl"
+              [errorStateMatcher]="matcher"
+              class="form-control"
+              name="companyDescription"
+              name="shortDescription"
+              [(ngModel)]="model.shortDescription"
+              id="shortDescriptionTextArea"
+              cols="150"
+              rows="10"
+              maxlength="256"
+            ></textarea>
+            <mat-hint align="end"
+              >{{ shortDescriptio.value.length }} / 256</mat-hint
+            >
+            <mat-error *ngIf="shortDescriptionFormControl.hasError('required')">
+              Krótki opis jest <strong>obowiązkowy</strong>
+            </mat-error>
+          </mat-form-field>
 
           <br /><br />
 

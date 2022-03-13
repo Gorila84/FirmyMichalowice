@@ -28,13 +28,13 @@
           <h2>{{ company.companyName }}</h2>
           <p>{{ company.shortDescription }}</p>
           <div class="row d-flex justify-content-between">
-            <div class="col-md-4 text-center">
+            <div *ngIf="company.emailAddress !== null" class="col-md-4 text-center">
               <p><i class="fa fa-at mr-2"></i>{{ company.emailAddress }}</p>
             </div>
-            <div class="col-md-3 text-center">
+            <div *ngIf="company.phoneNumber !== null" class="col-md-3 text-center">
               <p><i class="fa fa-phone mr-2"></i>{{ company.phoneNumber }}</p>
             </div>
-            <div class="col-md-5 text-center">
+            <div *ngIf="company.webSite !== null" class="col-md-5 text-center">
               <p><i class="fa fa-globe pr-2"></i>{{ company.webSite }}</p>
             </div>
           </div>
