@@ -1,5 +1,13 @@
 <div class="container pt-2">
   <div class="col">
+    <div class="alert alert-info">
+      <strong>Informacja:</strong> Pobranie danych z CEIDG spowoduje, że
+      użytkownicy będą mieli do dyspozycji mapę z siedzibą Twojej firmy. <br />
+      <small
+        >W związku z ograniczeniami darmowego serwisu geolokacyjnego niektóre
+        lokalizacje mogą nie działać</small
+      >
+    </div>
     <div *ngIf="editForm.dirty" class="alert alert-info">
       <strong>Informacja:</strong>W formularzu zostały wprowadzone zmiany.
       Wszelkie niezapisane zmiany zostaną utracone!
@@ -257,6 +265,17 @@
             <div class="col-12 pt-2 pb-2">
               <div [hidden]="!rodoCheck.checked">
                 <mat-form-field class="full-width" appearance="legacy">
+                  <mat-label>Kod pocztowy </mat-label>
+                  <input
+                    matInput
+                    class="form-control"
+                    type="text"
+                    name="officePostalCode"
+                    [(ngModel)]="company.officePostalCode"
+                    (input)="onChangePostalCode($event)"
+                  />
+                </mat-form-field>
+                <mat-form-field class="full-width" appearance="legacy">
                   <mat-label>ul. </mat-label>
                   <input
                     matInput
@@ -275,18 +294,19 @@
                     type="text"
                     name="officeCity"
                     [(ngModel)]="company.officeCity"
+                    [matAutocomplete]="autoNationality"
+                    [formControl]="myControl2"
                   />
+                  <mat-autocomplete #autoNationality="matAutocomplete">
+                    <mat-option
+                      *ngFor="let option of options2"
+                      [value]="option"
+                    >
+                      {{ option }}
+                    </mat-option>
+                  </mat-autocomplete>
                 </mat-form-field>
-                <mat-form-field class="full-width" appearance="legacy">
-                  <mat-label>Kod pocztowy </mat-label>
-                  <input
-                    matInput
-                    class="form-control"
-                    type="text"
-                    name="officePostalCode"
-                    [(ngModel)]="company.officePostalCode"
-                  />
-                </mat-form-field>
+
                 <mat-form-field class="full-width" appearance="legacy">
                   <mat-label>Gmina </mat-label>
                   <input
