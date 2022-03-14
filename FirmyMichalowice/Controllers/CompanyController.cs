@@ -68,13 +68,13 @@ namespace FirmyMichalowice.Controllers
 
 
         }
-        [HttpGet("getUser/{id}/{isForEdit}")]
-        public async Task<IActionResult> GetUser(int id, bool isForEdit)
+        [HttpGet("getUser/{id}")]
+        public async Task<IActionResult> GetUser(int id)
          {
-            var user = await _userRepository.GetCompany(id, isForEdit);
+            var user = await _userRepository.GetCompany(id);
 
             var userToReturn = _mapper.Map<CompanyForDateilDTO>(user);
-            userToReturn.ArmsUrl = _municipalitieRepository.GetMunicipalities().Result.Where(x => x.Name == user.Municipalitie).Select(x => x.Path).FirstOrDefault();
+            userToReturn.ArmsUrl =  _municipalitieRepository.GetMunicipalities().Result.Where(x => x.Name == user.Municipalitie).Select(x => x.Path).FirstOrDefault();
 
             return Ok(userToReturn);
         }
@@ -85,12 +85,12 @@ namespace FirmyMichalowice.Controllers
         public async Task<IActionResult> UpdateCompany(int id, CompaniesForEditDTO companiesForEditDTO)
         {
 
-            var comapnyFromRepository = await _userRepository.GetCompany(id, true);
+            var comapnyFromRepository = await _userRepository.GetCompany(id);
 
             _mapper.Map(companiesForEditDTO, comapnyFromRepository);
             comapnyFromRepository.Modify = DateTime.Now;
 
-            if (await _userRepository.SaveAll())
+            if (await _userRepository.UpdateUser(comapnyFromRepository))
                 return NoContent();
 
             throw new Exception($"Aktualizacja użytkownika o id: {id} nie powiodła sie przy zapisywaniu do bazy");

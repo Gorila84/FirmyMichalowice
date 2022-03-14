@@ -52,7 +52,7 @@ namespace FirmyMichalowice.Model
 
     public class latLng
     {
-        public decimal lat { get; set; }
-        public decimal lng { get; set; }
+        public decimal? lat { get; set; }
+        public decimal? lng { get; set; }
     }
 }

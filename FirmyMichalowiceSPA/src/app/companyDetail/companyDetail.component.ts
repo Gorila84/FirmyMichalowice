@@ -74,9 +74,9 @@ export class CompanyDetailComponent implements OnInit, AfterViewInit {
     this.showArms = environment.showArms && this.company.armsUrl ? true : false;
     this.dataSource = new MatTableDataSource(this.company.offers);
     this.collection = this.company.pkds;
-    if (this.company.userSettings != null) {
-      this.useGoggleMaps = this.company.userSettings.usingGoggleMaps;
-    }
+    debugger;
+    this.useGoggleMaps =
+      this.company.geometries != undefined && this.company.geometries != [];
   }
 
   ngAfterViewInit(): void {

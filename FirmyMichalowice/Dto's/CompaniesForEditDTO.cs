@@ -44,7 +44,7 @@ namespace FirmyMichalowice.Dto_s
         public string OfficeMunicipalitie { get; set; }
 
 
-        public UserSettings UserSettings { get; set; }
+        public IList<UserSettings> UserSettings { get; set; }
 
 
     }

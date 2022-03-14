@@ -63,7 +63,7 @@ namespace FirmyMichalowice.Model
     {
         public string ulica { get; set; }
         public string budynek { get; set; }
-        public string localo { get; set; }
+        public string local { get; set; }
         public string miasto { get; set; }
         public string wojewodztwo { get; set; }
         public string powiat { get; set; }

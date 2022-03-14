@@ -33,8 +33,7 @@ export interface Company {
   created?: Date;
   modify?: Date;
   offers: Offer[];
-  geometry: Geometry;
-  geometry2: Geometry;
+  geometries: GoggleMapsGeometry[];
   userSettings: CompanySettings;
 }
 
@@ -43,14 +42,13 @@ export interface PKD {
   nazwa: string;
 }
 
-export interface Geometry {
-  location: latLng;
-}
-export interface latLng {
+export interface GoggleMapsGeometry {
+  type: number;
   lat: any;
   lng: any;
 }
+
 export interface CompanySettings {
-  usingGoggleMaps: boolean;
-  usingActiveLink: boolean;
+  settingsTemplateId: number;
+  subscriptionEndDate: Date;
 }

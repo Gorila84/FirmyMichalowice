@@ -58,7 +58,7 @@ namespace FirmyMichalowice.Dto_s
         public Geometry Geometry { get; set; }
         public Geometry Geometry2 { get; set; }
 
-        public UserSettings UserSettings { get; set; }
+        public IList<UserSettings> UserSettings { get; set; }
 
     }
 }

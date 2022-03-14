@@ -1,13 +1,13 @@
 import { TestBed } from '@angular/core/testing';
 
-import { RecaptchaServiceService } from './recaptcha-service.service';
+import { RecaptchaService } from './recaptcha-service.service';
 
 describe('RecaptchaServiceService', () => {
-  let service: RecaptchaServiceService;
+  let service: RecaptchaService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
-    service = TestBed.inject(RecaptchaServiceService);
+    service = TestBed.inject(RecaptchaService);
   });
 
   it('should be created', () => {

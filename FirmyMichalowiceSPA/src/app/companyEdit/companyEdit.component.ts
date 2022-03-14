@@ -253,7 +253,7 @@ export class CompanyEditComponent implements OnInit {
   }
   refreshTable() {
     this.companyService
-      .getUser(this.authService.decotedToken.nameid, true)
+      .getUser(this.authService.decotedToken.nameid)
       .subscribe((data) => {
         this.company = data;
       });
