@@ -37,6 +37,7 @@ export class CompanyDetailComponent implements OnInit, AfterViewInit {
   offer: Offer[] = [];
   p: number = 1;
   collection: any[];
+  showMaps: boolean;
 
   @HostListener('window:resize', ['$event'])
   getScreenSize(event?) {
@@ -68,6 +69,7 @@ export class CompanyDetailComponent implements OnInit, AfterViewInit {
     this.showArms = environment.showArms && this.company.armsUrl ? true : false;
     this.dataSource = new MatTableDataSource(this.company.offers);
     this.collection = this.company.pkds;
+    this.showMaps = this.company.city && this.company.street ? true : false;
   }
 
   ngAfterViewInit(): void {
