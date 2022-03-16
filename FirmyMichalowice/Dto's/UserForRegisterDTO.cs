@@ -19,5 +19,7 @@ namespace FirmyMichalowice.Dto_s
         [Required(ErrorMessage = "Krótki opis jest wymagany")]
         [StringLength(255)]
         public string ShortDescription { get; set; }
+
+        public string CompanyType { get; set; }
     }
 }

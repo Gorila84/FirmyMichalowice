@@ -116,7 +116,35 @@
               Krótki opis jest <strong>obowiązkowy</strong>
             </mat-error>
           </mat-form-field>
-
+          <mat-form-field
+                    class="example-full-width companyName"
+                    appearance="fill"
+                  >
+                    <mat-label>Kategoria</mat-label>
+                    <mat-select
+                      matInput
+                      
+                      [formControl]="categoryFormControl"
+                      [errorStateMatcher]="matcher"
+                      [(ngModel)]="model.CompanyType"
+                      id="municipalitie"
+                      name="municipalitie"
+                    >
+                    <mat-option>
+                      
+                    </mat-option>
+                    <mat-option 
+                      *ngFor="let companyType of categories"
+                      [value]="companyType"
+                    >
+                      {{ companyType }}
+                    </mat-option>
+                    
+                    </mat-select>
+                    <mat-error *ngIf="categoryFormControl.hasError('required')">
+                      Kategoria jest <strong>obowiązkowa</strong>
+                    </mat-error>
+               </mat-form-field>
           <br /><br />
 
           <div class="mb-3 form-check">

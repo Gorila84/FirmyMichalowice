@@ -55,8 +55,8 @@ namespace FirmyMichalowice.Controllers
                 Street = firma.adresKorespondencyjny.ulica,
                 PostalCode = firma.adresDzialanosci.kod,
                 OfficeMunicipalitie = firma.adresDzialanosci.gmina,
-                EmailAddress = userRegisterDto.UserName
-
+                EmailAddress = userRegisterDto.UserName, 
+                CompanyType = userRegisterDto.CompanyType
             };
 
             var createdUser = await _repository.Register(userToCreate, userRegisterDto.Password);
