@@ -34,8 +34,9 @@ namespace FirmyMichalowice.Controllers
         private readonly IConfiguration _configuration;
         private readonly CeidgService _cEIDGmanger;
         private readonly IMunicipalitieRepository _municipalitieRepository;
+        private readonly ICategoryRepository _categoryRepository;
 
-        public CompanyController(IOfferRepository offerRepository, ICompanyRepository userRepository, IMapper mapper, ILoggerManager logger, IConfiguration configuration, CeidgService cEIDGmanager, IMunicipalitieRepository municipalitieRepository)
+        public CompanyController(IOfferRepository offerRepository, ICompanyRepository userRepository, IMapper mapper, ILoggerManager logger, IConfiguration configuration, CeidgService cEIDGmanager, IMunicipalitieRepository municipalitieRepository, ICategoryRepository categoryRepository)
         {
             
             _offerRepository = offerRepository;
@@ -46,6 +47,7 @@ namespace FirmyMichalowice.Controllers
             _configuration = configuration;
             _cEIDGmanger = cEIDGmanager;
             _municipalitieRepository = municipalitieRepository;
+            _categoryRepository = categoryRepository;
         }
 
         [HttpGet]
@@ -188,6 +190,22 @@ namespace FirmyMichalowice.Controllers
             {
                 var municipalieties = await _userRepository.GetMunicipalieties();
                 return municipalieties;
+            }
+            catch (Exception ex)
+            {
+                _logger.LogInformation(ex.Message);
+                return null;
+            }
+
+
+        }
+        [HttpGet("categories")]
+        public async Task<IList<string>> GetCategories()
+        {
+            try
+            {
+                var categories = await _categoryRepository.GetCategory();
+                return categories;
             }
             catch (Exception ex)
             {

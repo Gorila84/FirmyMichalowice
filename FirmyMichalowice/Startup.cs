@@ -65,6 +65,7 @@ namespace FirmyMichalowice
             services.AddScoped<IPhotoRepository, PhotoRepository>();
             services.AddScoped<ICookieConsentRepository, CookieConsentRepository>();
             services.AddScoped<IMunicipalitieRepository, MunicipalitieRepository>();
+            services.AddScoped<ICategoryRepository, CategoryRepository>();
             services.AddScoped<IOfferRepository, OfferRepository>();
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
                 .AddJwtBearer(options =>
