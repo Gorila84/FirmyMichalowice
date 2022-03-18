@@ -10,6 +10,7 @@ import { CompanyType } from '../_models/companyTypes';
 import { identifierName } from '@angular/compiler';
 import { Offer } from '../_models/offer';
 import { Municipalitie } from '../_models/municipalitie';
+import { Category } from '../_models/category';
 
 @Injectable({
   providedIn: 'root',
@@ -102,4 +103,7 @@ export class CompanyService {
   getMunicipalitie(): Observable<Municipalitie[]> {
     return this.http.get<Municipalitie[]>(this.baseUrl + 'company/gminy/');
   }
+  getCategories(): Observable<Category[]> {
+    return this.http.get<Category[]>(this.baseUrl + 'company/categories/');
+}
 }

@@ -93,7 +93,58 @@
               Za długi
             </mat-error>
           </mat-form-field>
-
+          <mat-form-field class="example-full-width" appearance="fill">
+            <mat-label>Krótki opis działalności</mat-label>
+            <textarea
+              matInput
+              #shortDescriptio
+              [formControl]="shortDescriptionFormControl"
+              [errorStateMatcher]="matcher"
+              class="form-control"
+              name="companyDescription"
+              name="shortDescription"
+              [(ngModel)]="model.shortDescription"
+              id="shortDescriptionTextArea"
+              cols="150"
+              rows="10"
+              maxlength="256"
+            ></textarea>
+            <mat-hint align="end"
+              >{{ shortDescriptio.value.length }} / 256</mat-hint
+            >
+            <mat-error *ngIf="shortDescriptionFormControl.hasError('required')">
+              Krótki opis jest <strong>obowiązkowy</strong>
+            </mat-error>
+          </mat-form-field>
+          <mat-form-field
+                    class="example-full-width companyName"
+                    appearance="fill"
+                  >
+                    <mat-label>Kategoria</mat-label>
+                    <mat-select
+                      matInput
+                      
+                      [formControl]="categoryFormControl"
+                      [errorStateMatcher]="matcher"
+                      [(ngModel)]="model.CompanyType"
+                      id="municipalitie"
+                      name="municipalitie"
+                    >
+                    <mat-option>
+                      
+                    </mat-option>
+                    <mat-option 
+                      *ngFor="let companyType of categories"
+                      [value]="companyType"
+                    >
+                      {{ companyType }}
+                    </mat-option>
+                    
+                    </mat-select>
+                    <mat-error *ngIf="categoryFormControl.hasError('required')">
+                      Kategoria jest <strong>obowiązkowa</strong>
+                    </mat-error>
+               </mat-form-field>
           <br /><br />
 
           <div class="mb-3 form-check">
@@ -110,10 +161,21 @@
               <a [routerLink]="['zp']">Zasad prywatności i RODO</a>
             </label>
           </div>
-
+          <div class="mb-3 form-check">
+            <input
+              #mailCheck
+              type="checkbox"
+              class="form-check-input"
+              id="mailCheckBox"
+              (change)="(0)"
+            />
+            <label class="form-check-label" for="exampleCheck1"
+              >* Wyrażam zgoe na przesyłanie wiadomości email przez administratora.
+            </label>
+          </div>
           <div class="my-mat-basic">
             <button
-              [disabled]="!rodoCheck.checked"
+              [disabled]="!rodoCheck.checked || !mailCheck.checked"
               type="submit"
               mat-raised-button
               color="basic"
