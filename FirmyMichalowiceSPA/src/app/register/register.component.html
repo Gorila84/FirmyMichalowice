@@ -156,15 +156,27 @@
               (change)="(0)"
             />
             <label class="form-check-label" for="exampleCheck1"
-              >Akceptuje warunki 
+              >* Akceptuje warunki 
               <a [routerLink]="['regulamin']">Reguliaminu, </a>
               <a [routerLink]="['zp']">Zasad prywatności i RODO</a>
+            </label>
+          </div>
+          <div class="mb-3 form-check">
+            <input
+              #mailCheck
+              type="checkbox"
+              class="form-check-input"
+              id="mailCheckBox"
+              (change)="(0)"
+            />
+            <label class="form-check-label" for="exampleCheck1"
+              >* Wyrażam zgodę na przesyłanie wiadomości email przez administratora.
             </label>
           </div>
 
           <div class="my-mat-basic">
             <button
-              [disabled]="!rodoCheck.checked"
+              [disabled]="!rodoCheck.checked || !mailCheck.checked"
               type="submit"
               mat-raised-button
               color="basic"
@@ -181,6 +193,7 @@
               (click)="login.value = ''"
               (click)="nip.value = ''"
               (click)="rodoCheck.value = false"
+              (click)="mailCheck.value = false"
               style="margin-left: 15px"
             >
               Anuluj

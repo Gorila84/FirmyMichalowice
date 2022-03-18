@@ -116,6 +116,8 @@ export class RegisterComponent implements OnInit {
     this.cancelRegister.emit(false);
     this.registerForm.reset(this.model);
     let element = <HTMLInputElement> document.getElementById("rodoCheckBox");
+    let mailCheckBox = <HTMLInputElement> document.getElementById("mailCheckBox");
+    mailCheckBox.checked =false;
     element.checked=false;
     }
   
