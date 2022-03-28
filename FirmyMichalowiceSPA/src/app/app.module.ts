@@ -15,7 +15,7 @@ import { CommonModule } from '@angular/common';
 import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatDialogModule } from '@angular/material/dialog';
-
+import { MatSidenavModule } from '@angular/material/sidenav';
 import { AppComponent } from './app.component';
 import { NavComponent } from './nav/nav.component';
 import { LoginComponent } from './login/login.component';
@@ -61,6 +61,15 @@ import { MunicipalitieResolver } from './_resolvers/municipality_list_resolver';
 import { GoogleMapComponent } from './google-map/google-map.component';
 import { GoogleMapsModule } from '@angular/google-maps';
 import { HttpClientJsonpModule } from '@angular/common/http';
+import { AdminComponent } from './admin/admin.component';
+import { AdminMenuComponent } from './admin/admin-menu/admin-menu.component';
+import { AdminUsersComponent } from './admin/admin-users/admin-users/admin-users.component';
+import { AdminEditUserComponent } from './admin/admin-edit-user/admin-edit-user/admin-edit-user.component';
+import { ShopComponent } from './shop/shop.component'; // <-- import the module
+import { MatGridListModule } from '@angular/material/grid-list';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { SnackbarComponent } from './snackbar/snackbar.component';
+import { MatIconModule } from '@angular/material/icon';
 
 const cookieConfig: NgcCookieConsentConfig = {
   cookie: {
@@ -126,6 +135,12 @@ const cookieConfig: NgcCookieConsentConfig = {
     StatuteComponent,
     AboutComponent,
     GoogleMapComponent,
+    AdminComponent,
+    AdminMenuComponent,
+    AdminUsersComponent,
+    AdminEditUserComponent,
+    ShopComponent,
+    SnackbarComponent,
   ],
   imports: [
     BrowserModule,
@@ -151,6 +166,7 @@ const cookieConfig: NgcCookieConsentConfig = {
     MatCardModule,
     MatCheckboxModule,
     MatDialogModule,
+    MatSidenavModule,
     AccordionModule.forRoot(),
     CommonModule,
     // tslint:disable-next-line:max-line-length
@@ -167,6 +183,9 @@ const cookieConfig: NgcCookieConsentConfig = {
     NgxPaginationModule,
     GoogleMapsModule,
     HttpClientJsonpModule,
+    MatGridListModule,
+    MatSnackBarModule,
+    MatIconModule,
   ],
   exports: [GoogleMapComponent],
   providers: [

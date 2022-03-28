@@ -53,9 +53,7 @@ namespace FirmyMichalowice.Controllers
         {
             try
             {
-
                 var rnd = new Random();
-
                 var users = await _userRepository.GetCompanies(userParams);
                 var result = users.OrderBy(x => rnd.Next());
                 var usersToReturn = _mapper.Map<IEnumerable<CompaniesForListDTO>>(result);

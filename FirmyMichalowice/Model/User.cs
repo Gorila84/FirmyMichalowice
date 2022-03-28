@@ -33,6 +33,7 @@ namespace FirmyMichalowice.Model
         public string Rodo { get; set; }
         public DateTime Created { get; set; }
         public DateTime Modify { get; set; }
+   
 
         public Photo Photo { get; set; }
         public IList<UserSettings> UserSettings { get;set;}
@@ -49,7 +50,7 @@ namespace FirmyMichalowice.Model
         public IList<PKD> PKDS { get; set; }
        
         public string GeolocationUrl { get; set; }
-        
+        public bool IsAdmin { get; set; }
         public bool IsActive { get; set; }
         public bool AdditionalAddress { get; set; }
         public string OfficeCity { get; set; }

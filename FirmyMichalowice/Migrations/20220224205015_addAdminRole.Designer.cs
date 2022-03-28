@@ -3,14 +3,16 @@ using System;
 using FirmyMichalowice.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace FirmyMichalowice.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20220224205015_addAdminRole")]
+    partial class addAdminRole
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -32,31 +34,6 @@ namespace FirmyMichalowice.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("CookieConsents");
-                });
-
-            modelBuilder.Entity("FirmyMichalowice.Model.GoggleMapsGeometry", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    b.Property<int>("Type")
-                        .HasColumnType("int");
-
-                    b.Property<int>("UserId")
-                        .HasColumnType("int");
-
-                    b.Property<decimal?>("lat")
-                        .HasColumnType("decimal(65,30)");
-
-                    b.Property<decimal?>("lng")
-                        .HasColumnType("decimal(65,30)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("GoggleMapsGeometry");
                 });
 
             modelBuilder.Entity("FirmyMichalowice.Model.Municipalitie", b =>
@@ -147,38 +124,6 @@ namespace FirmyMichalowice.Migrations
                     b.ToTable("Photo");
                 });
 
-            modelBuilder.Entity("FirmyMichalowice.Model.SettingsTemplate", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    b.Property<DateTime>("AddedDate")
-                        .HasColumnType("datetime");
-
-                    b.Property<decimal>("Cost")
-                        .HasColumnType("decimal(65,30)");
-
-                    b.Property<string>("CreatorUser")
-                        .HasColumnType("longtext");
-
-                    b.Property<string>("Description")
-                        .HasColumnType("longtext");
-
-                    b.Property<int>("LengthService")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime?>("UpdateDate")
-                        .HasColumnType("datetime");
-
-                    b.Property<string>("UpdateUser")
-                        .HasColumnType("longtext");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("SettingsTemplates");
-                });
-
             modelBuilder.Entity("FirmyMichalowice.Model.Trade", b =>
                 {
                     b.Property<int>("Id")
@@ -218,12 +163,6 @@ namespace FirmyMichalowice.Migrations
                         .HasColumnType("datetime");
 
                     b.Property<string>("EmailAddress")
-                        .HasColumnType("longtext");
-
-                    b.Property<string>("Geolocation2Url")
-                        .HasColumnType("longtext");
-
-                    b.Property<string>("GeolocationUrl")
                         .HasColumnType("longtext");
 
                     b.Property<bool>("IsActive")
@@ -295,44 +234,6 @@ namespace FirmyMichalowice.Migrations
                     b.ToTable("Users");
                 });
 
-            modelBuilder.Entity("FirmyMichalowice.Model.UserSettings", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    b.Property<DateTime>("AddedDate")
-                        .HasColumnType("datetime");
-
-                    b.Property<int>("SettingsTemplateId")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime>("SubscriptionEndDate")
-                        .HasColumnType("datetime");
-
-                    b.Property<int>("UserId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("SettingsTemplateId");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("UserSettings");
-                });
-
-            modelBuilder.Entity("FirmyMichalowice.Model.GoggleMapsGeometry", b =>
-                {
-                    b.HasOne("FirmyMichalowice.Model.User", "User")
-                        .WithMany("Geometries")
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("User");
-                });
-
             modelBuilder.Entity("FirmyMichalowice.Model.Offer", b =>
                 {
                     b.HasOne("FirmyMichalowice.Model.User", "User")
@@ -353,34 +254,11 @@ namespace FirmyMichalowice.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("FirmyMichalowice.Model.UserSettings", b =>
-                {
-                    b.HasOne("FirmyMichalowice.Model.SettingsTemplate", "SettingsTemplate")
-                        .WithMany()
-                        .HasForeignKey("SettingsTemplateId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("FirmyMichalowice.Model.User", "User")
-                        .WithMany("UserSettings")
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("SettingsTemplate");
-
-                    b.Navigation("User");
-                });
-
             modelBuilder.Entity("FirmyMichalowice.Model.User", b =>
                 {
-                    b.Navigation("Geometries");
-
                     b.Navigation("Offers");
 
                     b.Navigation("Photo");
-
-                    b.Navigation("UserSettings");
                 });
 #pragma warning restore 612, 618
         }

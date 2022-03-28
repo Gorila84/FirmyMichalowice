@@ -44,18 +44,16 @@ table {
   .rmr {
     margin-left: 15px !important;
     margin-right: 15px !important;
-    
   }
-
 }
-.service-name{
+.service-name {
   width: 60vw;
 }
 
-.price-column{
+.price-column {
   width: 20vw;
 }
 
-.buttons-column{
+.buttons-column {
   width: 20vw;
 }

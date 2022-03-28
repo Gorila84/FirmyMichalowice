@@ -1,0 +1,20 @@
+<h1 mat-dialog-title [(ngModel)]="data.companyName">Edycja użytkownika {{data.companyName}}</h1>
+<h3  mat-dialog-title [(ngModel)]="data.id">Id użytkownika {{data.id}}</h3>
+<div mat-dialog-content>
+  <p>Aktywność</p>
+ 
+    <mat-checkbox matInput class="example-margin" [checked]="checked"
+    (click)="change()" [(ngModel)]="data.isActive"></mat-checkbox>
+
+  
+</div>
+<div mat-dialog-content>
+    <p>Admin</p>
+
+        <mat-checkbox  matInput class="example-margin"   [(ngModel)]="data.isAdmin"></mat-checkbox>
+   
+  </div>
+<div mat-dialog-actions>
+  <button mat-raised-button class="save-button" (click)="closeEditDialog()">Anuluj</button>
+  <button mat-raised-button class="save-button" (click)=" editUserForAdmin()" cdkFocusInitial>Zapisz</button>
+</div>
