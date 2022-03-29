@@ -53,6 +53,7 @@ openDialog(id: number, name: string, isActive: boolean, isAdmin: boolean): void 
     width: '300px',
     height: '400px',
     data: { id: id, name: name, isActive: isActive, isAdmin: isAdmin  },
+   
   });
   debugger
   const sub = dialogRef.componentInstance.getDatas.subscribe(() => {

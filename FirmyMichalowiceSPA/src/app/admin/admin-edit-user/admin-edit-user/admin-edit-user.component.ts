@@ -8,6 +8,7 @@ import {
 import { Company } from 'src/app/_models/company';
 import { AdminService } from 'src/app/_services/admin.service';
 import { AlertifyService } from 'src/app/_services/alertify.service';
+import { CompanyService } from 'src/app/_services/company.service';
 
 @Component({
   selector: 'app-admin-edit-user',
@@ -17,13 +18,15 @@ import { AlertifyService } from 'src/app/_services/alertify.service';
 export class AdminEditUserComponent implements OnInit {
   @Output() getDatas: EventEmitter<boolean> = new EventEmitter();
   checked:boolean;
-
+  companies : Company;
   constructor(public dialogRef: MatDialogRef<AdminEditUserComponent>,
     @Inject(MAT_DIALOG_DATA) public data: Company,
     private adminService: AdminService,
+    private companyService: CompanyService,
     private alertifyService: AlertifyService) { }
 
   ngOnInit(): void {
+    this.getCompanyForEdit();
   }
 
   editUserForAdmin() {
@@ -50,6 +53,13 @@ export class AdminEditUserComponent implements OnInit {
     
     this.data.isActive = (this.data.isActive)?false:true;
 
+    }
+    getCompanyForEdit() {
+      
+      this.companyService.getUser(this.data.id, true)
+        .subscribe((data) => {
+          this.companies = data;
+        });
     }
 
 }
