@@ -15,7 +15,7 @@ import { AlertifyService } from 'src/app/_services/alertify.service';
   styleUrls: ['./admin-edit-user.component.css']
 })
 export class AdminEditUserComponent implements OnInit {
-  @Output() refreshTable: EventEmitter<boolean> = new EventEmitter();
+  @Output() getDatas: EventEmitter<boolean> = new EventEmitter();
   checked:boolean;
 
   constructor(public dialogRef: MatDialogRef<AdminEditUserComponent>,
@@ -27,26 +27,28 @@ export class AdminEditUserComponent implements OnInit {
   }
 
   editUserForAdmin() {
-    this.adminService.editUserForAdmin(this.data.id, this.data).subscribe(
+    debugger
+    this.adminService.editUserForAdmin(this.data).subscribe(
       (next) => {
         this.alertifyService.success(
           'Twoja oferta ' + this.data.companyName + ' została zmieniona.'
         );
-        this.refreshTable.emit(true);
+        this.getDatas.emit(true);
       },
       (error) => {
         this.alertifyService.error(error);
       }
     );
-    debugger
+    
     this.closeEditDialog();
+    
   }
   closeEditDialog(): void {
     this.dialogRef.close();
   }
   change(){
     
-    this.checked = (this.checked)?false:true;
+    this.data.isActive = (this.data.isActive)?false:true;
 
     }
 

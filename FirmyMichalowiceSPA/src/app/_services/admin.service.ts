@@ -5,6 +5,7 @@ import { map } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 import { ApiClient } from '../helpers/apiClient';
 import { Company } from '../_models/company';
+import { CompanyForEditByAdmin } from '../_models/companyForEditByAdmin';
 import { PaginationResult } from '../_models/pagination';
 
 @Injectable({
@@ -23,10 +24,9 @@ export class AdminService {
     return this.http.get<Company[]>(this.baseUrl + 'admin/getUsersForAdmin', {headers});
   }
 
-  editUserForAdmin(id: number, company: Company) {
-    const headers = this.client.addBearer();
-    return this.http.put(this.baseUrl + 'admin/uzytkownicy/' + id, company, {
-      headers,
-    });
+  editUserForAdmin(company: CompanyForEditByAdmin) {
+    // const headers = this.client.addBearer();
+    debugger
+    return this.http.put(this.baseUrl + 'admin/uzytkownicy/', company);
   }
 }

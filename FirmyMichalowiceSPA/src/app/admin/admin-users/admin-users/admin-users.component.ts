@@ -55,11 +55,12 @@ openDialog(id: number, name: string, isActive: boolean, isAdmin: boolean): void 
     data: { id: id, name: name, isActive: isActive, isAdmin: isAdmin  },
   });
   debugger
-  const sub = dialogRef.componentInstance.refreshTable.subscribe(() => {
-    this.refreshTable();
+  const sub = dialogRef.componentInstance.getDatas.subscribe(() => {
+    this.getDatas();
   });
 }
-refreshTable() {
+refreshAdminTable() {
+  debugger
   this.adminService.getCompaniesForAdmin()
     .subscribe((data) => {
       this.companies = data;

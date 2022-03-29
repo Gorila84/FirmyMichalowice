@@ -63,20 +63,20 @@ namespace FirmyMichalowice.Controllers
         }
 
        
-        [HttpPut("admin/uzytkownicy/{id}")]
+        [HttpPut("uzytkownicy")]
 
-        public async Task<IActionResult> UpdateCompanyForAdmin(int id, CompaniesForAdminDTO companiesForAdminDTO)
+        public async Task<IActionResult> UpdateCompanyForAdmin(CompaniesForEditAdminDTO companiesForEditAdminDTO)
         {
 
-            var comapnyFromRepository = await _companyRepository.GetCompany(id, true);
+            var comapnyFromRepository = await _companyRepository.GetCompany(companiesForEditAdminDTO.Id, true);
 
-            _mapper.Map(companiesForAdminDTO, comapnyFromRepository);
+            _mapper.Map(companiesForEditAdminDTO, comapnyFromRepository);
             comapnyFromRepository.Modify = DateTime.Now;
 
             if (await _companyRepository.SaveAll())
                 return NoContent();
 
-            throw new Exception($"Aktualizacja użytkownika o id: {id} nie powiodła sie przy zapisywaniu do bazy");
+            throw new Exception($"Aktualizacja użytkownika o id: {companiesForEditAdminDTO.Id} nie powiodła sie przy zapisywaniu do bazy");
         }
     }
 
