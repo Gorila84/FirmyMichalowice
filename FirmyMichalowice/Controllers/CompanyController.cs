@@ -99,6 +99,20 @@ namespace FirmyMichalowice.Controllers
             throw new Exception($"Aktualizacja użytkownika o id: {id} nie powiodła sie przy zapisywaniu do bazy");
         }
 
+        [HttpPut("addEntry")]
+        public async Task<IActionResult> AddEntryOnUser(CountEntryDTO countEntryDTO)
+        {
+            var comapnyFromRepository = await _userRepository.GetCompany(countEntryDTO.Id, true);
+            //var entryValue = await _userRepository.GetEntryValue(countEntryDTO.Id);
+            //countEntryDTO.EntryCount = (entryValue++);
+
+           // _mapper.Map(countEntryDTO, comapnyFromRepository);
+            comapnyFromRepository.EntryCount++;
+            if (await _userRepository.SaveAll())
+                return NoContent();
+            throw new Exception($"Aktualizacja użytkownika o id: {countEntryDTO.Id} nie powiodła sie przy zapisywaniu do bazy");
+        }
+
         [HttpGet("getdatafromceidg/{nip}")]
         public async Task<JsonResult> GetDataFromCeidg(string nip)
         {

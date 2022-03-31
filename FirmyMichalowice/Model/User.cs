@@ -63,7 +63,9 @@ namespace FirmyMichalowice.Model
 
         public IList<Offer> Offers { get; set; }
 
-     
+        public int EntryCount { get; set; }
+
+
 
     }
 }

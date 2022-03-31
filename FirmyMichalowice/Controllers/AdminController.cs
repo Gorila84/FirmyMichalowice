@@ -78,6 +78,8 @@ namespace FirmyMichalowice.Controllers
 
             throw new Exception($"Aktualizacja użytkownika o id: {companiesForEditAdminDTO.Id} nie powiodła sie przy zapisywaniu do bazy");
         }
+
+     
     }
 
   

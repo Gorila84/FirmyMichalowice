@@ -20,7 +20,6 @@ namespace FirmyMichalowice.Data
         public DbSet<PKD> PKD { get; set; }
         public DbSet<CookieConsent> CookieConsents { get; set; }
         public DbSet<Offer> Offers { get; set; }
-
         public DbSet<Trade> Trade { get; set; }
     }
 }

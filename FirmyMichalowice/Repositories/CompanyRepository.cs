@@ -151,7 +151,11 @@ namespace FirmyMichalowice.Repositories
             return users;
         }
 
-
+        public async Task<int> GetEntryValue(int id)
+        {
+            int entryValue = _context.Users.Where(u => u.Id == id).Select(x => x.EntryCount).FirstOrDefault();
+            return entryValue;
+        }
 
         public async Task<bool> SaveAll()
         {
