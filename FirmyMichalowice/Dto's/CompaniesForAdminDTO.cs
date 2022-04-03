@@ -21,5 +21,6 @@ namespace FirmyMichalowice.Dto_s
         public string CompanyType { get; set; }
         public bool IsAdmin { get; set; }
         public bool IsActive { get; set; }
+        public int EntryCount { get; set; }
     }
 }

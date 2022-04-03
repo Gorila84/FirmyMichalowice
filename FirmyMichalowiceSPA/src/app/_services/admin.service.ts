@@ -29,4 +29,14 @@ export class AdminService {
     debugger
     return this.http.put(this.baseUrl + 'admin/uzytkownicy/', company);
   }
+
+  getTopFive(){
+    const headers = this.client.addBearer();
+    return this.http.get<Company[]>(this.baseUrl + 'admin/topfive', {headers});
+  }
+
+  getLastFive(){
+    const headers = this.client.addBearer();
+    return this.http.get<Company[]>(this.baseUrl + 'admin/lastfive', {headers});
+  }
 }

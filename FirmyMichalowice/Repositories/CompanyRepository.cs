@@ -172,6 +172,26 @@ namespace FirmyMichalowice.Repositories
             return _context.Municipalities.Select(x => x.Name).ToList();
         }
 
+        public async Task<IList<UsersForStatistics>> GetTopFiveUsers()
+        {
+            var users =  _context.Users.Select(x => new UsersForStatistics { Id = x.Id, 
+                                                                             EntryCount = x.EntryCount, 
+                                                                             UserName = x.CompanyName })
+                                       .OrderByDescending(y=>y.EntryCount).Take(2).ToList();
+            return  users;
+        }
+
+        public async Task<IList<UsersForStatistics>> GetLastFiveUsers()
+        {
+            var users = _context.Users.Select(x => new UsersForStatistics{
+                                                                            Id = x.Id,
+                                                                            EntryCount = x.EntryCount,
+                                                                            UserName = x.CompanyName
+                                                                          })
+                                       .OrderBy(y => y.EntryCount).Take(2).ToList();
+            return users;
+        }
+
 
     }
 }

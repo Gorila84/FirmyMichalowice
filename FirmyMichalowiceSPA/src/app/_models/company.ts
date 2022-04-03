@@ -35,7 +35,7 @@ export interface Company {
         created?:Date;
         modify?:Date;
         offers: Offer[];
-
+        entryCount: string;
 }
 
 export interface PKD {

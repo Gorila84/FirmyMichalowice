@@ -2,6 +2,7 @@ import { Routes } from '@angular/router';
 import { AboutComponent } from './about/about.component';
 import { AdminUsersComponent } from './admin/admin-users/admin-users/admin-users.component';
 import { AdminComponent } from './admin/admin.component';
+import { StatsComponent } from './admin/stats/stats.component';
 import { ChangePasswordComponent } from './change-password/change-password.component';
 import { CompanyDetailComponent } from './companyDetail/companyDetail.component';
 import { CompanyEditComponent } from './companyEdit/companyEdit.component';
@@ -39,4 +40,5 @@ export const appRoutes: Routes = [
         {path: 'onas', component: AboutComponent},
         {path: 'admin', component: AdminComponent},
         {path: 'admin/uzytkownicy', component: AdminUsersComponent},
+        {path: 'admin/statystyki', component: StatsComponent},
     ];

@@ -16,7 +16,8 @@ namespace FirmyMichalowice.Repositories
         Task<List<User>> GetCompaniesForAdmin();
         Task<IList<string>> GetMunicipalieties();
         Task<int> GetEntryValue(int id);
-
+        Task<IList<UsersForStatistics>> GetTopFiveUsers();
+        Task<IList<UsersForStatistics>> GetLastFiveUsers();
 
     }
 }

@@ -1,0 +1,77 @@
+<div class="container text-center pt-3">
+    <h1>Statystyki</h1>
+    <hr>
+  </div>
+  <div class="row">
+      <div class="col-2">
+          <app-admin-menu></app-admin-menu>
+      </div>
+      
+      <div class="mat-elevation-z8 mb-2 col-4 text-center mr-4">
+        <h3 class="pt-3">Top 5</h3>
+          <table mat-table [dataSource]="firstFiveData" matSort class="text-center">
+            <!-- Position Column -->
+            <ng-container matColumnDef="id">
+                <th mat-header-cell *matHeaderCellDef class="text-center">Id</th>
+                <td mat-cell *matCellDef="let element" class="service-name">
+                  {{ element.id}} 
+                </td>
+              </ng-container>
+            <ng-container matColumnDef="companyName">
+              <th mat-header-cell *matHeaderCellDef class="text-center">Nazwa</th>
+              <td mat-cell *matCellDef="let element" class="service-name">
+                {{ element.userName }} 
+              </td>
+            </ng-container>
+      
+         
+            <ng-container matColumnDef="entryCount">
+              <th mat-header-cell *matHeaderCellDef class="text-center">Ilość wejść</th>
+              <td mat-cell *matCellDef="let element" class="entryCount">
+                {{ element.entryCount }}
+              </td>
+            </ng-container>
+       
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+          </table>
+      
+      
+      
+        </div>
+        <div class="mat-elevation-z8 mb-2 col-4 text-center">
+          <h3 class="pt-3">Last 5</h3>
+            <table mat-table [dataSource]="lastFiveData" matSort class="text-center">
+              <!-- Position Column -->
+              <ng-container matColumnDef="id">
+                  <th mat-header-cell *matHeaderCellDef class="text-center">Id</th>
+                  <td mat-cell *matCellDef="let element" class="service-name">
+                    {{ element.id}} 
+                  </td>
+                </ng-container>
+              <ng-container matColumnDef="companyName">
+                <th mat-header-cell *matHeaderCellDef class="text-center">Nazwa</th>
+                <td mat-cell *matCellDef="let element" class="service-name">
+                  {{ element.userName }} 
+                </td>
+              </ng-container>
+        
+           
+              <ng-container matColumnDef="entryCount">
+                <th mat-header-cell *matHeaderCellDef class="text-center">Ilość wejść</th>
+                <td mat-cell *matCellDef="let element" class="entryCount">
+                  {{ element.entryCount }}
+                </td>
+              </ng-container>
+         
+              <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+              <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+            </table>
+        
+        
+        
+          </div>
+  </div>
+  
+  
+  

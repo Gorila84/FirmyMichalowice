@@ -79,7 +79,23 @@ namespace FirmyMichalowice.Controllers
             throw new Exception($"Aktualizacja użytkownika o id: {companiesForEditAdminDTO.Id} nie powiodła sie przy zapisywaniu do bazy");
         }
 
-     
+
+        [HttpGet("topfive")]
+        public async Task<IActionResult> GetTopFiveCompanies()
+        {
+            var firstFiveUsers = await  _companyRepository.GetTopFiveUsers();
+           // var usersToReturn = _mapper.Map<IEnumerable<CompaniesForAdminDTO>>(firstFiveUsers);
+            return Ok(firstFiveUsers);
+        }
+
+        [HttpGet("lastfive")]
+        public async Task<IActionResult> GetLAstFiveCompanies()
+        {
+            var lastFirstFiveUsers = await _companyRepository.GetLastFiveUsers();
+            // var usersToReturn = _mapper.Map<IEnumerable<CompaniesForAdminDTO>>(firstFiveUsers);
+            return Ok(lastFirstFiveUsers);
+        }
+
     }
 
   
