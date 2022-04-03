@@ -105,5 +105,10 @@ export class CompanyService {
    
   }
 
+  addEntry(id:number){
+    const headers = this.client.addBearer();
+    return this.http.put(this.baseUrl + 'company/addEntry/' + id, { headers });
+  }
+
 }
  

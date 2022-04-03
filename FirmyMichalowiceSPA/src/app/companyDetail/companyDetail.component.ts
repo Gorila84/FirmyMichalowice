@@ -66,6 +66,7 @@ export class CompanyDetailComponent implements OnInit, AfterViewInit {
     this.showArms = environment.showArms && this.company.armsUrl ? true : false;
     this.dataSource = new MatTableDataSource(this.company.offers);
     this.collection = this.company.pkds;
+    this.addEntryValue();
   }
 
   ngAfterViewInit(): void {
@@ -124,6 +125,11 @@ export class CompanyDetailComponent implements OnInit, AfterViewInit {
   getOffers() {
     const rowoferItems = this.companyService.getOffers(this.company.id);
     return rowoferItems;
+  }
+
+  addEntryValue(){
+    debugger
+    this.companyService.addEntry(this.company.id).subscribe();
   }
 }
 // function searchAdr(idx: Number, company: Company) {

@@ -99,10 +99,10 @@ namespace FirmyMichalowice.Controllers
             throw new Exception($"Aktualizacja użytkownika o id: {id} nie powiodła sie przy zapisywaniu do bazy");
         }
 
-        [HttpPut("addEntry")]
-        public async Task<IActionResult> AddEntryOnUser(CountEntryDTO countEntryDTO)
+        [HttpPut("addEntry/{id}")]
+        public async Task<IActionResult> AddEntryOnUser(int id)
         {
-            var comapnyFromRepository = await _userRepository.GetCompany(countEntryDTO.Id, true);
+            var comapnyFromRepository = await _userRepository.GetCompany(id, true);
             //var entryValue = await _userRepository.GetEntryValue(countEntryDTO.Id);
             //countEntryDTO.EntryCount = (entryValue++);
 
@@ -110,7 +110,7 @@ namespace FirmyMichalowice.Controllers
             comapnyFromRepository.EntryCount++;
             if (await _userRepository.SaveAll())
                 return NoContent();
-            throw new Exception($"Aktualizacja użytkownika o id: {countEntryDTO.Id} nie powiodła sie przy zapisywaniu do bazy");
+            throw new Exception($"Aktualizacja użytkownika o id: {id} nie powiodła sie przy zapisywaniu do bazy");
         }
 
         [HttpGet("getdatafromceidg/{nip}")]
