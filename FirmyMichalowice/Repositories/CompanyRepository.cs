@@ -176,7 +176,7 @@ namespace FirmyMichalowice.Repositories
         {
             var users =  _context.Users.Select(x => new UsersForStatistics { Id = x.Id, 
                                                                              EntryCount = x.EntryCount, 
-                                                                             UserName = x.CompanyName })
+                                                                             CompanyName = x.CompanyName })
                                        .OrderByDescending(y=>y.EntryCount).Take(2).ToList();
             return  users;
         }
@@ -186,7 +186,7 @@ namespace FirmyMichalowice.Repositories
             var users = _context.Users.Select(x => new UsersForStatistics{
                                                                             Id = x.Id,
                                                                             EntryCount = x.EntryCount,
-                                                                            UserName = x.CompanyName
+                                                                            CompanyName = x.CompanyName
                                                                           })
                                        .OrderBy(y => y.EntryCount).Take(2).ToList();
             return users;

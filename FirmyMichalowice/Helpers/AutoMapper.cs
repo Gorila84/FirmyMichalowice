@@ -27,6 +27,8 @@ namespace FirmyMichalowice.Helpers
             CreateMap<CompaniesForEditAdminDTO, User>();
             CreateMap<User, CountEntryDTO>();
             CreateMap<CountEntryDTO, User>();
+            CreateMap<AppConfiguration, AddConfigurationForDTO>();
+            CreateMap<AddConfigurationForDTO, AppConfiguration>();
         }
     }
 }

@@ -3,8 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
+using FirmyMichalowice.Data;
 using FirmyMichalowice.Dto_s;
 using FirmyMichalowice.Helpers;
+using FirmyMichalowice.Model;
 using FirmyMichalowice.Repositories;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
@@ -12,6 +14,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace FirmyMichalowice.Controllers
 {
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class AdminController : ControllerBase
@@ -19,12 +22,20 @@ namespace FirmyMichalowice.Controllers
         private readonly ICompanyRepository _companyRepository;
         private readonly IMapper _mapper;
         private readonly ILoggerManager _logger;
+        private readonly IAdminRepository _adminRepository;
+        private readonly IGenericRepository _genericRepository;
 
-        public AdminController(ICompanyRepository companyRepository, IMapper mapper, ILoggerManager logger)
+        public AdminController(ICompanyRepository companyRepository, 
+                               IMapper mapper, 
+                               ILoggerManager logger,
+                               IAdminRepository adminRepository,
+                               IGenericRepository genericRepository)
         {
             _companyRepository = companyRepository;
             _mapper = mapper;
             _logger = logger;
+            _adminRepository = adminRepository;
+            _genericRepository = genericRepository;
         }
 
         public IMapper Mapper { get; }
@@ -94,6 +105,47 @@ namespace FirmyMichalowice.Controllers
             var lastFirstFiveUsers = await _companyRepository.GetLastFiveUsers();
             // var usersToReturn = _mapper.Map<IEnumerable<CompaniesForAdminDTO>>(firstFiveUsers);
             return Ok(lastFirstFiveUsers);
+        }
+
+        
+        [HttpPost("addKey")]
+        public async Task<IActionResult> AddConfigurationKey([FromBody]AddConfigurationForDTO addConfigurationForDTO)
+        {
+            try
+            {
+                AppConfiguration appConfiguration = _mapper.Map<AppConfiguration>(addConfigurationForDTO);
+                var key = _adminRepository.AddConfiguration(appConfiguration);
+                return Ok(addConfigurationForDTO);
+            }
+            catch (Exception e)
+            {
+
+                _logger.LogInformation(e.Message);
+                return StatusCode(400, e.Message);
+            }
+            
+        }
+
+        [HttpPost("updateKey")]
+        public async Task<IActionResult> UpdateConfigurationKey(int id, AddConfigurationForDTO addConfigurationForDTO)
+        {
+
+
+            var keyForUpdate = await _adminRepository.GetAppConfigurationForEdit(id);
+                _mapper.Map(addConfigurationForDTO, keyForUpdate);
+                keyForUpdate.Update = DateTime.Now;
+                if (await _genericRepository.SaveAll())
+                    return NoContent();
+
+                throw new Exception($"Aktualizacja oferty o id: {id} nie powiodła sie przy zapisywaniu do bazy");
+
+        }
+
+        [HttpGet("configurationKey")]
+        public async Task<IActionResult> GetConfigurationKeys()
+        {
+            var keys = await _adminRepository.GetAppConfigurationKeys();
+            return  Ok(keys);
         }
 
     }
