@@ -14,7 +14,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace FirmyMichalowice.Controllers
 {
-    [Authorize]
+    
     [Route("api/[controller]")]
     [ApiController]
     public class AdminController : ControllerBase
@@ -109,7 +109,7 @@ namespace FirmyMichalowice.Controllers
 
         
         [HttpPost("addKey")]
-        public async Task<IActionResult> AddConfigurationKey([FromBody]AddConfigurationForDTO addConfigurationForDTO)
+        public async Task<IActionResult> AddConfigurationKey(AddConfigurationForDTO addConfigurationForDTO)
         {
             try
             {
@@ -126,7 +126,7 @@ namespace FirmyMichalowice.Controllers
             
         }
 
-        [HttpPost("updateKey")]
+        [HttpPut("updateKey")]
         public async Task<IActionResult> UpdateConfigurationKey(int id, AddConfigurationForDTO addConfigurationForDTO)
         {
 
