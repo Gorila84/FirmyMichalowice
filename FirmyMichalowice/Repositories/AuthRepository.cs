@@ -78,12 +78,12 @@ namespace FirmyMichalowice.Repositories
 
 
 
-            public async Task<Tuple<bool, string, string>> UserValidation(string userName, string nip)
+            public async Task<Tuple<bool, string, string>> UserValidation(string userName, string nip, string municipalitie)
         {
 
             bool isError = false;
             string errorMessage = string.Empty;
-            string municipalitie = string.Empty;
+         
 
             try
             {
@@ -102,7 +102,7 @@ namespace FirmyMichalowice.Repositories
                     errorMessage = "Użytkownik o podanym NIPie juz istnieje! Sprawdź NIP";
 
                 }
-                if (isError == false && string.IsNullOrEmpty(errorMessage)) CheckMunicipalitie(ref isError, ref errorMessage, ref municipalitie, nip);
+                if (isError == false && string.IsNullOrEmpty(errorMessage)) CheckMunicipalitie(ref isError, ref errorMessage, municipalitie);
 
             }
             catch (Exception ex)
@@ -115,15 +115,15 @@ namespace FirmyMichalowice.Repositories
             return Tuple.Create(isError, errorMessage, municipalitie);
         }
 
-        private void CheckMunicipalitie(ref bool isError, ref string errorMessage, ref string municipalitie, string nip)
+        private void CheckMunicipalitie(ref bool isError, ref string errorMessage, string municipalitie)
         {
 
-            var firma = _cEIDGmanger.GetData(nip).Result;
+     
             IQueryable<string> listOfAllowedMunicipalities = _context.Municipalities.Select(x => x.Name);
 
-            municipalitie = firma.adresDzialanosci.gmina;
+          
 
-            if (!listOfAllowedMunicipalities.Contains(firma.adresDzialanosci.gmina))
+            if (!listOfAllowedMunicipalities.Contains(municipalitie))
             {
                 isError = true;
                 errorMessage = "Firma zarejestrowana poza dozwolonymi gminami";

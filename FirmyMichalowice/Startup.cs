@@ -59,6 +59,8 @@ namespace FirmyMichalowice
             services.AddTransient<MapQuestService>();
             services.AddTransient<MapBoxService>();
             services.AddTransient<RecaptchaService>();
+            services.AddTransient<RegonServiceHelper>();
+            services.AddScoped<IRegonService, RegonService>();
             services.AddScoped<IAuthRepository, AuthRepository>();
             services.AddScoped<IGenericRepository, GenericRepository>();
             services.AddScoped<ICompanyRepository, CompanyRepository>();

@@ -16,6 +16,10 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using Microsoft.Extensions.Configuration;
 using FirmyMichalowice.Data;
+using ServiceReference1;
+using System.ServiceModel;
+using System.ServiceModel.Channels;
+using System.Xml;
 
 namespace FirmyMichalowice.Controllers
 {
@@ -33,9 +37,11 @@ namespace FirmyMichalowice.Controllers
         private readonly HttpClient _httpClient;
         private readonly IConfiguration _configuration;
         private readonly CeidgService _cEIDGmanger;
+        private readonly IRegonService _regonService;
         private readonly IMunicipalitieRepository _municipalitieRepository;
 
-        public CompanyController(IOfferRepository offerRepository, ICompanyRepository userRepository, IMapper mapper, ILoggerManager logger, IConfiguration configuration, CeidgService cEIDGmanager, IMunicipalitieRepository municipalitieRepository)
+        public CompanyController(IOfferRepository offerRepository, ICompanyRepository userRepository, IMapper mapper, ILoggerManager logger, IConfiguration configuration, 
+                                 CeidgService cEIDGmanager, IMunicipalitieRepository municipalitieRepository, IRegonService regonService)
         {
             
             _offerRepository = offerRepository;
@@ -46,6 +52,8 @@ namespace FirmyMichalowice.Controllers
             _configuration = configuration;
             _cEIDGmanger = cEIDGmanager;
             _municipalitieRepository = municipalitieRepository;
+            _regonService = regonService;
+
         }
 
         [HttpGet]
@@ -104,6 +112,43 @@ namespace FirmyMichalowice.Controllers
             var data = await _cEIDGmanger.GetData(nip);
             var result = new JsonResult(data);
             return result;
+        }
+
+
+        [HttpGet("getdatafromregon/{nip}")]
+        public async Task<JsonResult> GetDataFromRegon(string nip)
+        {
+            UslugaBIRzewnPublClient client = new UslugaBIRzewnPublClient();
+            RegonServiceHelper serviceHelper = new RegonServiceHelper(_configuration);
+            serviceHelper.SetupBinding(ref client);
+
+            string apiKey = _configuration.GetSection("API_REGON:ApiKey").Value;
+            var isLogin = await client.ZalogujAsync(apiKey);
+            var sessionId = isLogin.ZalogujResult;
+
+            OperationContextScope scope = new OperationContextScope(client.InnerChannel);
+
+            HttpRequestMessageProperty requestProperties = new HttpRequestMessageProperty();
+            requestProperties.Headers.Add("sid", sessionId);
+            OperationContext.Current.OutgoingMessageProperties[HttpRequestMessageProperty.Name] = requestProperties;
+
+            var regonData = await client.DaneSzukajPodmiotyAsync(new ParametryWyszukiwania() { Nip = nip });
+            try
+            {
+                XmlDocument doc = new XmlDocument();
+                doc.LoadXml(regonData.DaneSzukajPodmiotyResult);
+                string jsonText = JsonConvert.SerializeXmlNode(doc);
+                var result2 = serviceHelper.ParseDataToFirmaEntity(jsonText); // tutaj mamy nasz objekt
+                await client.WylogujAsync(sessionId);
+
+                var result = new JsonResult(result2);
+                return result;
+            }
+            catch (Exception ex)
+            {
+                _logger.LogInformation(ex.Message);
+            }
+            return null;
         }
 
         [Authorize]

@@ -23,12 +23,14 @@ namespace FirmyMichalowice.Controllers
         private readonly IAuthRepository _repository;
         private readonly IConfiguration _config;
         private readonly CeidgService _ceidgService;
+        private readonly IRegonService _regonService;
 
-        public AuthController(IAuthRepository repository, IConfiguration config, CeidgService ceidgService)
+        public AuthController(IAuthRepository repository, IConfiguration config, CeidgService ceidgService, IRegonService regonService)
         {
             _repository = repository;
             _config = config;
             _ceidgService = ceidgService;
+            _regonService = regonService;
         }
         [HttpPost("register")]
         public async Task<IActionResult> Register(UserForRegisterDTO userRegisterDto)
@@ -37,11 +39,27 @@ namespace FirmyMichalowice.Controllers
             {
                 return BadRequest("Logowanie możliwe tylko za pomocą adresu email");
             }
-            var firma = await _ceidgService.GetData(userRegisterDto.NIP);
+            //var firma = await _ceidgService.GetData(userRegisterDto.NIP);
+            var firmaRs = await _regonService.GetData(userRegisterDto.NIP);
+
             userRegisterDto.UserName = userRegisterDto.UserName.ToLower();
-            var validationResult = await _repository.UserValidation(userRegisterDto.UserName, userRegisterDto.NIP);
+            
+
+            var validationResult = await _repository.UserValidation(userRegisterDto.UserName, userRegisterDto.NIP, firmaRs.Gmina);
             if (validationResult.Item1)
                 return BadRequest(validationResult.Item2);
+
+            string companyAddress;
+
+                if (!string.IsNullOrEmpty(firmaRs.NrLokalu))
+                {
+                    companyAddress = string.Format("{0} {1}/{2}", firmaRs.Ulica, firmaRs.NrNieruchomosci, firmaRs.NrLokalu);
+                }
+                else
+                {
+                    companyAddress = string.Format("{0} {1}", firmaRs.Ulica, firmaRs.NrNieruchomosci);
+                }
+            
 
             var userToCreate = new User
             {
@@ -49,15 +67,15 @@ namespace FirmyMichalowice.Controllers
                 NIP = userRegisterDto.NIP,
                 Created = DateTime.Now,
                 Municipalitie = validationResult.Item3,
-                CompanyName = firma.nazwa,
-                City = firma.adresDzialanosci.miasto,
-                Street = firma.adresKorespondencyjny.ulica,
-                PostalCode = firma.adresDzialanosci.kod,
-                OfficeMunicipalitie = firma.adresDzialanosci.gmina
+                CompanyName =   firmaRs.Nazwa,
+                City =  firmaRs.Miejscowosc,
+                Street = companyAddress,
+                PostalCode =  firmaRs.KodPocztowy,
+                OfficeMunicipalitie =  firmaRs.Gmina
 
             };
 
-            var createdUser = await _repository.Register(userToCreate, userRegisterDto.Password);
+             await _repository.Register(userToCreate, userRegisterDto.Password);
 
 
 
