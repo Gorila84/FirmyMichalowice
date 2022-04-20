@@ -19,14 +19,14 @@ namespace FirmyMichalowice.Repositories
             _logger = logger;
         }
 
-        public async Task<bool> AddConfiguration(AppConfiguration appConfiguration)
+        public async Task<bool> AddConfigurations(AppConfiguration appConfiguration)
         {
             try
             {
                 appConfiguration.Create = DateTime.Now;
                 appConfiguration.Update = DateTime.Now;
-                _context.AppConfigurations.Add(appConfiguration);
-                _context.SaveChangesAsync();
+                _context.Add(appConfiguration);
+                await _context.SaveChangesAsync();
                 return true;
             }
             catch (Exception ex)
@@ -47,6 +47,12 @@ namespace FirmyMichalowice.Repositories
         {
             var keys = _context.AppConfigurations.ToList();
             return keys;
+        }
+
+        public async Task<bool> GetAppConfigurationValue(string keyName)
+        {
+            var keyValue =   _context.AppConfigurations.Where(x => x.KeyName == keyName).Select(y=>y.IsActive).FirstOrDefault();
+            return keyValue;
         }
     }
 }

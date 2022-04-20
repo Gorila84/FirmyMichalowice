@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace FirmyMichalowice.Migrations
 {
-    public partial class configuration : Migration
+    public partial class appConfigurations : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {

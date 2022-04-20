@@ -114,7 +114,7 @@ namespace FirmyMichalowice.Controllers
             try
             {
                 AppConfiguration appConfiguration = _mapper.Map<AppConfiguration>(addConfigurationForDTO);
-                var key = _adminRepository.AddConfiguration(appConfiguration);
+                var key = await _adminRepository.AddConfigurations(appConfiguration);
                 return Ok(addConfigurationForDTO);
             }
             catch (Exception e)
@@ -146,6 +146,13 @@ namespace FirmyMichalowice.Controllers
         {
             var keys = await _adminRepository.GetAppConfigurationKeys();
             return  Ok(keys);
+        }
+
+        [HttpGet("keyValue")]
+        public async Task<IActionResult> GetKeyValue(AddConfigurationForDTO addConfigurationForDTO)
+        {
+            var keyValue = await _adminRepository.GetAppConfigurationValue(addConfigurationForDTO.KeyName);
+            return Ok(keyValue);
         }
 
     }

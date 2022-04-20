@@ -9,8 +9,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FirmyMichalowice.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20220404201858_configuration")]
-    partial class configuration
+    [Migration("20220409202112_appConfigurations")]
+    partial class appConfigurations
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

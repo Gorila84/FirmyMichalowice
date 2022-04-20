@@ -8,9 +8,11 @@ namespace FirmyMichalowice.Data
 {
     public interface IAdminRepository
     {
-        Task<bool> AddConfiguration(AppConfiguration appConfiguration);
+        Task<bool> AddConfigurations(AppConfiguration appConfiguration);
         Task<AppConfiguration> GetAppConfigurationForEdit(int id);
         Task<List<AppConfiguration>> GetAppConfigurationKeys();
+
+        Task<bool> GetAppConfigurationValue(string keyName);
 
 
     }
