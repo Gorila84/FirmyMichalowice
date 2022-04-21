@@ -16,6 +16,10 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using Microsoft.Extensions.Configuration;
 using FirmyMichalowice.Data;
+using ServiceReference1;
+using System.ServiceModel;
+using System.ServiceModel.Channels;
+using System.Xml;
 
 namespace FirmyMichalowice.Controllers
 {
@@ -34,9 +38,11 @@ namespace FirmyMichalowice.Controllers
         private readonly IConfiguration _configuration;
         private readonly CeidgService _cEIDGmanger;
         private readonly IMunicipalitieRepository _municipalitieRepository;
+        private readonly IRegonService _regonService;
         private readonly ICategoryRepository _categoryRepository;
 
-        public CompanyController(IOfferRepository offerRepository, ICompanyRepository userRepository, IMapper mapper, ILoggerManager logger, IConfiguration configuration, CeidgService cEIDGmanager, IMunicipalitieRepository municipalitieRepository, ICategoryRepository categoryRepository)
+        public CompanyController(IOfferRepository offerRepository, ICompanyRepository userRepository, IMapper mapper, ILoggerManager logger, IConfiguration configuration,
+                           CeidgService cEIDGmanager, IMunicipalitieRepository municipalitieRepository, IRegonService regonService, ICategoryRepository categoryRepository)
         {
             
             _offerRepository = offerRepository;
@@ -47,6 +53,7 @@ namespace FirmyMichalowice.Controllers
             _configuration = configuration;
             _cEIDGmanger = cEIDGmanager;
             _municipalitieRepository = municipalitieRepository;
+            _regonService = regonService;
             _categoryRepository = categoryRepository;
         }
 
@@ -106,6 +113,15 @@ namespace FirmyMichalowice.Controllers
         public async Task<JsonResult> GetDataFromCeidg(string nip)
         {
             var data = await _cEIDGmanger.GetData(nip);
+            var result = new JsonResult(data);
+            return result;
+        }
+
+
+        [HttpGet("getdatafromregon/{nip}")]
+        public async Task<JsonResult> GetDataFromRegon(string nip)
+        {
+            var data = await _regonService.GetData(nip);
             var result = new JsonResult(data);
             return result;
         }
