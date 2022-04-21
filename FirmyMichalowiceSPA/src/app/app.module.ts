@@ -70,6 +70,9 @@ import { MatGridListModule } from '@angular/material/grid-list';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { SnackbarComponent } from './snackbar/snackbar.component';
 import { MatIconModule } from '@angular/material/icon';
+import { MatDividerModule } from '@angular/material/divider';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { MatListModule } from '@angular/material/list';
 
 const cookieConfig: NgcCookieConsentConfig = {
   cookie: {
@@ -186,6 +189,9 @@ const cookieConfig: NgcCookieConsentConfig = {
     MatGridListModule,
     MatSnackBarModule,
     MatIconModule,
+    MatDividerModule,
+    MatProgressBarModule,
+    MatListModule,
   ],
   exports: [GoogleMapComponent],
   providers: [
