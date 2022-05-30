@@ -22,5 +22,7 @@ namespace FirmyMichalowice.Data
         public DbSet<Offer> Offers { get; set; }
         public DbSet<Trade> Trade { get; set; }
         public DbSet<AppConfiguration> AppConfigurations { get; set; }
+
+        public DbSet<CompanySetting> CompanySettings { get; set; }
     }
 }

@@ -54,5 +54,22 @@ namespace FirmyMichalowice.Repositories
             var keyValue =   _context.AppConfigurations.Where(x => x.KeyName == keyName).Select(y=>y.IsActive).FirstOrDefault();
             return keyValue;
         }
+
+        public async Task<bool> GetLinkVisibility(int userId)
+        {
+            var linkVisibility = _context.CompanySettings.Where(x => x.UserId == userId).Select(y => y.LinkVisibility).FirstOrDefault();
+            return linkVisibility;
+        }
+
+        public async Task<bool> GetPKDisibility(int userId)
+        {
+            var linkVisibility = _context.CompanySettings.Where(x => x.UserId == userId).Select(y => y.PKDVisibility).FirstOrDefault();
+            return linkVisibility;
+        }
+        public async Task<bool> GetOfferisibility(int userId)
+        {
+            var linkVisibility = _context.CompanySettings.Where(x => x.UserId == userId).Select(y => y.OfferVisibility).FirstOrDefault();
+            return linkVisibility;
+        }
     }
 }
