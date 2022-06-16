@@ -38,13 +38,13 @@
     "zone.js": "~0.11.4"
   },
   "devDependencies": {
-    "@angular-devkit/build-angular": "^13.2.6",
-    "@angular/cli": "^12.2.12",
+    "@angular-devkit/build-angular": "~0.1102.3",
+    "@angular/cli": "^14.0.2",
     "@angular/compiler-cli": "~12.2.12",
     "@types/jasmine": "~3.5.0",
     "@types/jasminewd2": "^2.0.10",
     "@types/node": "^12.20.33",
-    "codelyzer": "^6.0.2",
+    "codelyzer": "^0.0.28",
     "jasmine-core": "~3.6.0",
     "jasmine-spec-reporter": "~5.0.0",
     "karma": "^6.3.6",
