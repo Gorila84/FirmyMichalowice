@@ -71,5 +71,11 @@ namespace FirmyMichalowice.Repositories
             var linkVisibility = _context.CompanySettings.Where(x => x.UserId == userId).Select(y => y.OfferVisibility).FirstOrDefault();
             return linkVisibility;
         }
+
+        public async Task<bool> AddKey(CompanySetting companySetting)
+        {
+            _context.Add(companySetting);
+            await _context.SaveChanges();
+        }
     }
 }
