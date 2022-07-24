@@ -36,7 +36,25 @@ namespace FirmyMichalowice.Repositories
                 return false;
             }
         }
+        public async Task<bool> CompanyConfigurations(CompanySetting companySetting)
+        {
+            try
+            {
+                companySetting.LinkVisibility = false;
+                companySetting.PKDVisibility = false;
+                companySetting.OfferVisibility = false;
 
+                _context.Add(companySetting);
+                await _context.SaveChangesAsync();
+                return true;
+            }
+            catch (Exception ex)
+            {
+
+                _logger.LogInformation(ex.Message);
+                return false;
+            }
+        }
         public async Task<AppConfiguration> GetAppConfigurationForEdit(int id)
         {
             var key = _context.AppConfigurations.Where(x => x.Id == id).FirstOrDefault();
@@ -63,19 +81,20 @@ namespace FirmyMichalowice.Repositories
 
         public async Task<bool> GetPKDisibility(int userId)
         {
-            var linkVisibility = _context.CompanySettings.Where(x => x.UserId == userId).Select(y => y.PKDVisibility).FirstOrDefault();
-            return linkVisibility;
+            var pkdVisibility = _context.CompanySettings.Where(x => x.UserId == userId).Select(y => y.PKDVisibility).FirstOrDefault();
+            return pkdVisibility;
         }
         public async Task<bool> GetOfferisibility(int userId)
         {
-            var linkVisibility = _context.CompanySettings.Where(x => x.UserId == userId).Select(y => y.OfferVisibility).FirstOrDefault();
-            return linkVisibility;
+            var offerVisibility = _context.CompanySettings.Where(x => x.UserId == userId).Select(y => y.OfferVisibility).FirstOrDefault();
+            return offerVisibility;
         }
 
         public async Task<bool> AddKey(CompanySetting companySetting)
         {
             _context.Add(companySetting);
-            await _context.SaveChanges();
+            await _context.SaveChangesAsync();
+            return true;
         }
     }
 }
