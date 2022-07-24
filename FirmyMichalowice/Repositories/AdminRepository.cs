@@ -36,15 +36,12 @@ namespace FirmyMichalowice.Repositories
                 return false;
             }
         }
-        public async Task<bool> CompanyConfigurations(CompanySetting companySetting)
+        public async Task<bool> AddCompanyConfigurations(CompanySetting companySetting)
         {
             try
             {
-                companySetting.LinkVisibility = false;
-                companySetting.PKDVisibility = false;
-                companySetting.OfferVisibility = false;
 
-                _context.Add(companySetting);
+                _context.CompanySettings.Add(companySetting);
                 await _context.SaveChangesAsync();
                 return true;
             }

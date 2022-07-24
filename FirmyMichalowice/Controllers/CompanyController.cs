@@ -25,7 +25,7 @@ namespace FirmyMichalowice.Controllers
 
     public class CompanyController : ControllerBase
     {
-        
+
         private readonly IOfferRepository _offerRepository;
         private readonly ICompanyRepository _userRepository;
         private readonly IMapper _mapper;
@@ -34,10 +34,18 @@ namespace FirmyMichalowice.Controllers
         private readonly IConfiguration _configuration;
         private readonly CeidgService _cEIDGmanger;
         private readonly IMunicipalitieRepository _municipalitieRepository;
+        private readonly IAdminRepository _adminRepository;
 
-        public CompanyController(IOfferRepository offerRepository, ICompanyRepository userRepository, IMapper mapper, ILoggerManager logger, IConfiguration configuration, CeidgService cEIDGmanager, IMunicipalitieRepository municipalitieRepository)
+        public CompanyController(IOfferRepository offerRepository,
+                                 ICompanyRepository userRepository, 
+                                 IMapper mapper, 
+                                 ILoggerManager logger, 
+                                 IConfiguration configuration, 
+                                 CeidgService cEIDGmanager, 
+                                 IMunicipalitieRepository municipalitieRepository,
+                                 IAdminRepository adminRepository)
         {
-            
+
             _offerRepository = offerRepository;
             _userRepository = userRepository;
             _mapper = mapper;
@@ -46,6 +54,7 @@ namespace FirmyMichalowice.Controllers
             _configuration = configuration;
             _cEIDGmanger = cEIDGmanager;
             _municipalitieRepository = municipalitieRepository;
+            _adminRepository = adminRepository;
         }
 
         [HttpGet]
@@ -73,7 +82,7 @@ namespace FirmyMichalowice.Controllers
         }
         [HttpGet("getUser/{id}/{isForEdit}")]
         public async Task<IActionResult> GetUser(int id, bool isForEdit)
-         {
+        {
             var user = await _userRepository.GetCompany(id, isForEdit);
 
             var userToReturn = _mapper.Map<CompanyForDateilDTO>(user);
@@ -106,7 +115,7 @@ namespace FirmyMichalowice.Controllers
             //var entryValue = await _userRepository.GetEntryValue(countEntryDTO.Id);
             //countEntryDTO.EntryCount = (entryValue++);
 
-           // _mapper.Map(countEntryDTO, comapnyFromRepository);
+            // _mapper.Map(countEntryDTO, comapnyFromRepository);
             comapnyFromRepository.EntryCount++;
             if (await _userRepository.SaveAll())
                 return NoContent();
@@ -123,13 +132,13 @@ namespace FirmyMichalowice.Controllers
 
         [Authorize]
         [HttpPost("addOffer")]
-        public async Task<IActionResult> AddOffer([FromBody]OfferDTO offerDto)
+        public async Task<IActionResult> AddOffer([FromBody] OfferDTO offerDto)
         {
 
             try
             {
                 Offer offer = _mapper.Map<Offer>(offerDto);
-               var result = await _offerRepository.AddOffer(offer);
+                var result = await _offerRepository.AddOffer(offer);
                 return Ok(offerDto);
             }
             catch (Exception e)
@@ -138,7 +147,7 @@ namespace FirmyMichalowice.Controllers
                 _logger.LogInformation(e.Message);
                 return StatusCode(400, e.Message);
             }
-          
+
         }
 
 
@@ -158,7 +167,7 @@ namespace FirmyMichalowice.Controllers
         {
             try
             {
-                var companyTypes =  await _userRepository.GetCompanyTypes();
+                var companyTypes = await _userRepository.GetCompanyTypes();
                 return companyTypes;
             }
             catch (Exception ex)
@@ -191,7 +200,7 @@ namespace FirmyMichalowice.Controllers
                 return NoContent();
 
             throw new Exception($"Aktualizacja oferty o id: {id} nie powiodła sie przy zapisywaniu do bazy");
-            
+
         }
 
         [HttpGet("gminy")]
@@ -210,6 +219,14 @@ namespace FirmyMichalowice.Controllers
 
 
         }
+
+        [HttpGet ("linkVisibility/{id}")]
+        public async Task<bool>GetLinkVisibility(int id)
+        {
+            var linkVisibility = await _adminRepository.GetLinkVisibility(id);
+            return linkVisibility;
+        }
+
 
 
     }

@@ -37,6 +37,7 @@ export class CompanyDetailComponent implements OnInit, AfterViewInit {
   offer: Offer[] = [];
   p: number = 1;
   collection: any[];
+  linkVisibilityValue: any;
 
   @HostListener('window:resize', ['$event'])
   getScreenSize(event?) {
@@ -67,6 +68,7 @@ export class CompanyDetailComponent implements OnInit, AfterViewInit {
     this.dataSource = new MatTableDataSource(this.company.offers);
     this.collection = this.company.pkds;
     this.addEntryValue();
+    this.linkVisibility();
   }
 
   ngAfterViewInit(): void {
@@ -81,6 +83,12 @@ export class CompanyDetailComponent implements OnInit, AfterViewInit {
   showMapFn($event) {
     // if(this.useGeoportal)
     // this.initMap($event.index, this.company)
+  }
+
+  linkVisibility(){
+    
+    this.companyService.getLinkVisibility(this.company.id);
+    
   }
 
   //  initMap(index:number, company: Company) {

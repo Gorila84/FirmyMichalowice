@@ -1,4 +1,5 @@
-﻿using FirmyMichalowice.Dto_s;
+﻿using FirmyMichalowice.Data;
+using FirmyMichalowice.Dto_s;
 using FirmyMichalowice.Model;
 using FirmyMichalowice.Repositories;
 using Microsoft.AspNetCore.Authorization;
@@ -21,14 +22,13 @@ namespace FirmyMichalowice.Controllers
     {
         private readonly IAuthRepository _repository;
         private readonly IConfiguration _config;
-       
+        private readonly IAdminRepository _adminRepository;
 
-        public AuthController(IAuthRepository repository, IConfiguration config)
+        public AuthController(IAuthRepository repository, IConfiguration config, IAdminRepository adminRepository)
         {
             _repository = repository;
             _config = config;
-          
-           
+            _adminRepository = adminRepository;
         }
         [HttpPost("register")]
         public async Task<IActionResult> Register(UserForRegisterDTO userRegisterDto)
@@ -53,7 +53,15 @@ namespace FirmyMichalowice.Controllers
 
             var createdUser = await _repository.Register(userToCreate, userRegisterDto.Password);
 
-           
+            var companySettingsCreate = new CompanySetting
+            {
+                UserId = userToCreate.Id,
+                LinkVisibility = false,
+                PKDVisibility = false,
+                OfferVisibility = false
+            };
+
+            await _adminRepository.AddCompanyConfigurations(companySettingsCreate);
 
             return StatusCode(201);
 

@@ -110,5 +110,10 @@ export class CompanyService {
     return this.http.put(this.baseUrl + 'company/addEntry/' + id, { headers });
   }
 
+  getLinkVisibility(id:number){
+    const headers = this.client.addBearer();
+    return this.http.put(this.baseUrl + 'company/linkVisibility/' + id, { headers });
+  }
+
 }
  

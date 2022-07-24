@@ -13,6 +13,11 @@ namespace FirmyMichalowice.Data
         Task<List<AppConfiguration>> GetAppConfigurationKeys();
 
         Task<bool> GetAppConfigurationValue(string keyName);
+        Task<bool> AddCompanyConfigurations(CompanySetting companySetting);
+        Task<bool> GetLinkVisibility(int userId);
+        Task<bool> GetPKDisibility(int userId);
+        Task<bool> GetOfferisibility(int userId);
+
 
 
     }
