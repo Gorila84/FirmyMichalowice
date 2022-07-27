@@ -220,11 +220,11 @@ namespace FirmyMichalowice.Controllers
 
         }
 
-        [HttpGet ("linkVisibility/{id}")]
-        public async Task<bool>GetLinkVisibility(int id)
+        [HttpGet("companySettings/{id}")]
+        public async Task<IActionResult> GetLinkVisibility(int id)
         {
-            var linkVisibility = await _adminRepository.GetLinkVisibility(id);
-            return linkVisibility;
+            var linkVisibility = await _adminRepository.GetCompanySettingsKeys(id);
+            return Ok(linkVisibility);
         }
 
 

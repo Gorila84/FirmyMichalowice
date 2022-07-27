@@ -10,6 +10,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 
 import { Offer } from '../_models/offer';
+import { CompanySettings } from '../_models/companySettings';
 
 declare var $: any;
 
@@ -23,7 +24,8 @@ export class CompanyDetailComponent implements OnInit, AfterViewInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
   company: Company;
-  isCompanyActive: boolean;
+  companySettings: CompanySettings;
+  isCompanyActive: boolean; 
   isEnabledGeolocation2Url: boolean;
   id: number;
   showArms: boolean;
@@ -87,7 +89,9 @@ export class CompanyDetailComponent implements OnInit, AfterViewInit {
 
   linkVisibility(){
     
-    this.companyService.getLinkVisibility(this.company.id);
+    this.companyService.getCompanySettings(this.company.id);
+    return this.companySettings.linkVisibility
+
     
   }
 

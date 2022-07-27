@@ -26,7 +26,7 @@
           > <a href= "http://{{ company.webSite }}" target="_blank"> {{ company.webSite }}</a> 
          
         </li>
-        <li class="py-2" #elseblock>
+        <li class="py-2" *ngIf="!linkVisibility()">
           <b>strona www: </b>{{ company.webSite }}
         </li>
        

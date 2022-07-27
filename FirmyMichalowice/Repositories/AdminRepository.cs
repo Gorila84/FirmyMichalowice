@@ -87,6 +87,12 @@ namespace FirmyMichalowice.Repositories
             return offerVisibility;
         }
 
+        public async Task<CompanySetting> GetCompanySettingsKeys(int userId)
+        {
+            var companySettingsKeys = _context.CompanySettings.Where(x => x.UserId == userId).FirstOrDefault();
+            return companySettingsKeys;
+        }
+
         public async Task<bool> AddKey(CompanySetting companySetting)
         {
             _context.Add(companySetting);

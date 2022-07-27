@@ -11,7 +11,7 @@ namespace FirmyMichalowice.Data
         Task<bool> AddConfigurations(AppConfiguration appConfiguration);
         Task<AppConfiguration> GetAppConfigurationForEdit(int id);
         Task<List<AppConfiguration>> GetAppConfigurationKeys();
-
+        Task<CompanySetting> GetCompanySettingsKeys(int userId);
         Task<bool> GetAppConfigurationValue(string keyName);
         Task<bool> AddCompanyConfigurations(CompanySetting companySetting);
         Task<bool> GetLinkVisibility(int userId);
