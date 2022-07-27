@@ -1,8 +1,8 @@
-export interface CompanySettings {
+export interface CompanySetting {
     id:number;
     userId:number;
     linkVisibility: boolean;
-    pKDVisibility: boolean;
+    PKDVisibility: boolean;
     offerVisibility: boolean;
     
 }

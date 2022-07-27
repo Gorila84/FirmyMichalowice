@@ -10,7 +10,7 @@ import { CompanyType } from '../_models/companyTypes';
 import { identifierName } from '@angular/compiler';
 import { Offer } from '../_models/offer';
 import { Municipalitie } from '../_models/municipalitie';
-import { CompanySettings } from '../_models/companySettings';
+import { CompanySetting } from '../_models/companySettings';
 
 @Injectable({
   providedIn: 'root',
@@ -111,9 +111,9 @@ export class CompanyService {
     return this.http.put(this.baseUrl + 'company/addEntry/' + id, { headers });
   }
 
-  getCompanySettings(id:number):Observable<CompanySettings>{
+  getCompanySettings(id:number){
    
-    return this.http.get<CompanySettings>(this.baseUrl + 'company/companySettings/' + id);
+    return this.http.get<CompanySetting>(this.baseUrl + 'company/companySettings/' + id);
   }
 
 }

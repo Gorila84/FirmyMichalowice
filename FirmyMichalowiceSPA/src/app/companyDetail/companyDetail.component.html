@@ -21,12 +21,12 @@
         <b><u>Kontakt:</u></b>
       </p>
       <ul>
-        <li class="py-2" *ngIf="linkVisibility()">
+        <li class="py-2" *ngIf="companySetting?.linkVisibility">
           <b>strona www: </b
           > <a href= "http://{{ company.webSite }}" target="_blank"> {{ company.webSite }}</a> 
          
         </li>
-        <li class="py-2" *ngIf="!linkVisibility()">
+        <li class="py-2" *ngIf="!companySetting?.linkVisibility">
           <b>strona www: </b>{{ company.webSite }}
         </li>
        
@@ -65,7 +65,7 @@
       <br />
     </div>
 
-    <div class="col-md-4 text-center contact">
+    <div class="col-md-4 text-center contact" >
       <p>
         <b><u>Kody PKD według danych z CEIDG:</u></b>
       </p>
@@ -105,7 +105,7 @@
   </div>
   <br />
   <hr />
-  <div class="description text-center">
+  <div class="description text-center" *ngIf="companySetting?.offerVisibility">
     <h3>
       <b><u>Oferta</u></b>
     </h3>
