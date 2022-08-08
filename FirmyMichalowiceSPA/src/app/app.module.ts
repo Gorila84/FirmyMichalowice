@@ -63,6 +63,7 @@ import { AdminUsersComponent } from './admin/admin-users/admin-users/admin-users
 import { AdminEditUserComponent } from './admin/admin-edit-user/admin-edit-user/admin-edit-user.component'; // <-- import the module
 import { MunicipalitieResolver } from './_resolvers/municipality_list_resolver';
 import { StatsComponent } from './admin/stats/stats.component';
+import { AdditionalOptionsDialogComponent } from './additional-options-dialog/additional-options-dialog.component';
 
 
 
@@ -135,6 +136,7 @@ const cookieConfig: NgcCookieConsentConfig = {
     AdminUsersComponent,
     AdminEditUserComponent,
     StatsComponent,
+    AdditionalOptionsDialogComponent,
   ],
   imports: [
  

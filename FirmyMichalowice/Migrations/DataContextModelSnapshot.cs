@@ -49,11 +49,29 @@ namespace FirmyMichalowice.Migrations
                     b.Property<bool>("LinkVisibility")
                         .HasColumnType("tinyint(1)");
 
+                    b.Property<DateTime>("LinkVisibilityEnd")
+                        .HasColumnType("datetime");
+
+                    b.Property<DateTime>("LinkVisibilityStart")
+                        .HasColumnType("datetime");
+
                     b.Property<bool>("OfferVisibility")
                         .HasColumnType("tinyint(1)");
 
+                    b.Property<DateTime>("OfferVisibilityEnd")
+                        .HasColumnType("datetime");
+
+                    b.Property<DateTime>("OfferVisibilityStart")
+                        .HasColumnType("datetime");
+
                     b.Property<bool>("PKDVisibility")
                         .HasColumnType("tinyint(1)");
+
+                    b.Property<DateTime>("PKDVisibilityEnd")
+                        .HasColumnType("datetime");
+
+                    b.Property<DateTime>("PKDVisibilityStart")
+                        .HasColumnType("datetime");
 
                     b.Property<int>("UserId")
                         .HasColumnType("int");

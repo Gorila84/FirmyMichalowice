@@ -28,6 +28,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { EditOfferDialogComponent } from '../edit-offer-dialog/edit-offer-dialog.component';
 import { MatDialog } from '@angular/material/dialog';
 import { MatTableDataSource } from '@angular/material/table';
+import { AdditionalOptionsDialogComponent } from '../additional-options-dialog/additional-options-dialog.component';
 
 interface Item {
   value: string;
@@ -74,6 +75,7 @@ export class CompanyEditComponent implements OnInit {
 
   // tslint:disable-next-line:typedef
   ngOnInit() {
+    this. openAdditionalSettings();
     this.getCompanyTypes();
     this.route.data.subscribe((data) => {
       this.company = data.company;
@@ -246,6 +248,15 @@ export class CompanyEditComponent implements OnInit {
       this.refreshTable();
     });
   }
+
+  openAdditionalSettings():void{
+    const additionalSettingsDialog = this.dialog.open(AdditionalOptionsDialogComponent,{
+      width: '900px',
+      height: '350px'
+
+    })
+  }
+
   refreshTable() {
     this.companyService
       .getUser(this.authService.decotedToken.nameid, true)
