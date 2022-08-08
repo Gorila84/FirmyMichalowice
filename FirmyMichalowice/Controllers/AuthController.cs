@@ -58,7 +58,14 @@ namespace FirmyMichalowice.Controllers
                 UserId = userToCreate.Id,
                 LinkVisibility = false,
                 PKDVisibility = false,
-                OfferVisibility = false
+                OfferVisibility = false,
+                LinkVisibilityStart = DateTime.MinValue,
+                LinkVisibilityEnd = DateTime.MinValue,
+                PKDVisibilityStart = DateTime.MinValue,
+                PKDVisibilityEnd = DateTime.MinValue,
+                OfferVisibilityStart = DateTime.MinValue,
+                OfferVisibilityEnd = DateTime.MinValue
+
             };
 
             await _adminRepository.AddCompanyConfigurations(companySettingsCreate);

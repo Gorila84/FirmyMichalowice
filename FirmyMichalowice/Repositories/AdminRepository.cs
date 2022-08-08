@@ -70,23 +70,7 @@ namespace FirmyMichalowice.Repositories
             return keyValue;
         }
 
-        public async Task<bool> GetLinkVisibility(int userId)
-        {
-            var linkVisibility = _context.CompanySettings.Where(x => x.UserId == userId).Select(y => y.LinkVisibility).FirstOrDefault();
-            return linkVisibility;
-        }
-
-        public async Task<bool> GetPKDisibility(int userId)
-        {
-            var pkdVisibility = _context.CompanySettings.Where(x => x.UserId == userId).Select(y => y.PKDVisibility).FirstOrDefault();
-            return pkdVisibility;
-        }
-        public async Task<bool> GetOfferisibility(int userId)
-        {
-            var offerVisibility = _context.CompanySettings.Where(x => x.UserId == userId).Select(y => y.OfferVisibility).FirstOrDefault();
-            return offerVisibility;
-        }
-
+   
         public async Task<CompanySetting> GetCompanySettingsKeys(int userId)
         {
             var companySettingsKeys = _context.CompanySettings.Where(x => x.UserId == userId).FirstOrDefault();

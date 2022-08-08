@@ -203,6 +203,37 @@ namespace FirmyMichalowice.Controllers
 
         }
 
+        [HttpPut("editSettings/{id}")]
+
+        public async Task<IActionResult> UpdateSettings(int id, UpdateCompanySettingDTO updateCompanySettingDTO)
+        {
+
+            var settings = await _adminRepository.GetCompanySettingsKeys(id);
+            _mapper.Map(updateCompanySettingDTO, settings);
+            if(updateCompanySettingDTO.LinkVisibility != false)
+            {
+                settings.LinkVisibilityStart = DateTime.Now;
+                settings.LinkVisibilityEnd = DateTime.Now.AddMonths(3);
+            }
+            if (updateCompanySettingDTO.OfferVisibility != false)
+            {
+                settings.OfferVisibilityStart = DateTime.Now;
+                settings.OfferVisibilityEnd = DateTime.Now.AddMonths(3);
+            }
+            if (updateCompanySettingDTO.PKDVisibility != false)
+            {
+                settings.PKDVisibilityStart = DateTime.Now;
+                settings.PKDVisibilityEnd = DateTime.Now.AddMonths(3);
+            }
+
+
+            if (await _offerRepository.SaveAll())
+                return NoContent();
+
+            throw new Exception($"Aktualizacja oferty o id: {id} nie powiodła sie przy zapisywaniu do bazy");
+
+        }
+
         [HttpGet("gminy")]
         public async Task<IList<string>> GetMunicipalitie()
         {

@@ -14,9 +14,7 @@ namespace FirmyMichalowice.Data
         Task<CompanySetting> GetCompanySettingsKeys(int userId);
         Task<bool> GetAppConfigurationValue(string keyName);
         Task<bool> AddCompanyConfigurations(CompanySetting companySetting);
-        Task<bool> GetLinkVisibility(int userId);
-        Task<bool> GetPKDisibility(int userId);
-        Task<bool> GetOfferisibility(int userId);
+      
 
 
 
