@@ -13,7 +13,7 @@ import * as $ from 'jquery';
   templateUrl: './nav.component.html',
   styleUrls: ['./nav.component.css'],
 })
-export class NavComponent implements OnInit, AfterViewInit {
+export class NavComponent implements OnInit {
   @Input() loginInformation: any;
   company: Company;
   armsUrls: any;
@@ -26,14 +26,9 @@ export class NavComponent implements OnInit, AfterViewInit {
     private router: Router,
     private http: HttpClient
   ) {}
-  ngAfterViewInit(): void {
-    $('.nav-link').click(($event) => {
-      $('.nav-link').removeClass('active');
-      $($event.currentTarget).addClass('active');
-    });
-    $('img').click(() => {
-      $('.nav-link').removeClass('active');
-    });
+  changeToActive($event): void {
+    $('.nav-link').removeClass('active');
+    $($event.currentTarget).addClass('active');
   }
 
   ngOnInit() {
@@ -64,5 +59,4 @@ export class NavComponent implements OnInit, AfterViewInit {
   // isAdmin(){
   //   return this.company.isAdmin;
   // }
-  
 }

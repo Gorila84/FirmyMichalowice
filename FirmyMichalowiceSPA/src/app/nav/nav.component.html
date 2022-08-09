@@ -7,6 +7,7 @@
         height="80"
         class="align-top"
         alt="FPK_Logo"
+        (click)="changeToActive($event)"
       />
     </a>
     <div *ngIf="showArms" class="d-flex justify-content-center bd-highlight">
@@ -49,18 +50,37 @@
     >
       <ul class="navbar-nav ml-auto mb-2 mb-lg-0">
         <li class="nav-item">
-          <a class="nav-link" aria-current="page" [routerLink]="['/logowanie/']"
+          <a
+            class="nav-link"
+            aria-current="page"
+            [routerLink]="['/logowanie/']"
+            (click)="changeToActive($event)"
             >Zaloguj</a
           >
         </li>
         <li class="nav-item">
-          <a class="nav-link" [routerLink]="['/rejestracja/']">Zarejstruj</a>
+          <a
+            class="nav-link"
+            [routerLink]="['/rejestracja/']"
+            (click)="changeToActive($event)"
+            >Zarejstruj</a
+          >
         </li>
         <li class="nav-item">
-          <a class="nav-link" [routerLink]="['/kontakt/']">Kontakt</a>
+          <a
+            class="nav-link"
+            [routerLink]="['/kontakt/']"
+            (click)="changeToActive($event)"
+            >Kontakt</a
+          >
         </li>
         <li class="nav-item">
-          <a class="nav-link" [routerLink]="['/onas/']">O Nas</a>
+          <a
+            class="nav-link"
+            [routerLink]="['/onas/']"
+            (click)="changeToActive($event)"
+            >O Nas</a
+          >
         </li>
       </ul>
     </div>
@@ -78,6 +98,7 @@
             class="nav-link"
             aria-current="page"
             [routerLink]="['/edycja/', getUserId()]"
+            (click)="changeToActive($event)"
           >
             <!--<i class="fa fa-user pr-2"></i> -->
             Edytuj profil</a
@@ -90,13 +111,28 @@
           >
         </li>
         <li class="nav-item">
-          <a class="nav-link" [routerLink]="['/kontakt/']">Kontakt</a>
+          <a
+            class="nav-link"
+            [routerLink]="['/kontakt/']"
+            (click)="changeToActive($event)"
+            >Kontakt</a
+          >
         </li>
         <li class="nav-item">
-          <a class="nav-link" [routerLink]="['/onas/']">O Nas</a>
+          <a
+            class="nav-link"
+            [routerLink]="['/onas/']"
+            (click)="changeToActive($event)"
+            >O Nas</a
+          >
         </li>
         <li class="nav-item">
-          <a class="nav-link" [routerLink]="['/admin/']">Admin</a>
+          <a
+            class="nav-link"
+            [routerLink]="['/admin/']"
+            (click)="changeToActive($event)"
+            >Admin</a
+          >
         </li>
         <!-- <li class="nav-item" *ngIf="isAdmin()">
           <a class="nav-link" [routerLink]="['/onas/']">Admin</a>
