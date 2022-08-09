@@ -39,7 +39,6 @@ namespace FirmyMichalowice.Controllers
         private readonly CeidgService _cEIDGmanger;
         private readonly IRegonService _regonService;
         private readonly IMunicipalitieRepository _municipalitieRepository;
-        private readonly IRegonService _regonService;
         private readonly ICategoryRepository _categoryRepository;
 
         public CompanyController(IOfferRepository offerRepository, ICompanyRepository userRepository, IMapper mapper, ILoggerManager logger, IConfiguration configuration,
