@@ -192,23 +192,39 @@
       >
         <mat-tab label="Adres rejestracji">
           <br />
-
-          <img
-            *ngIf="!useGeoportal"
-            [src]="company.geolocationUrl"
-            class="geolocation"
-            title="Mapa z lokalizacja firmy"
-          />
+          <div *ngIf="useGoggleMaps; else elseBlock">
+            <app-google-map
+              class="geolocation"
+              [item]="company.geometry"
+              [companyName]="company.companyName"
+            ></app-google-map>
+          </div>
+          <ng-template #elseBlock>
+            <img
+              *ngIf="!useGeoportal"
+              class="geolocation"
+              title="Mapa z lokalizacja firmy"
+              [src]="company.geolocationUrl"
+            />
+          </ng-template>
         </mat-tab>
         <mat-tab label="Adres biura" [disabled]="!isEnabledGeolocation2Url">
           <br />
-
-          <img
-            *ngIf="!useGeoportal"
-            [src]="company.geolocation2Url"
-            class="geolocation"
-            title="Mapa z lokalizacja biura firmy"
-          />
+          <div *ngIf="useGoggleMaps; else elseBlock2">
+            <app-google-map
+              class="geolocation"
+              [item]="company.geometry2"
+              [companyName]="company.companyName"
+            ></app-google-map>
+          </div>
+          <ng-template #elseBlock2>
+            <img
+              *ngIf="!useGeoportal"
+              [src]="company.geolocation2Url"
+              class="geolocation"
+              title="Mapa z lokalizacja biura firmy"
+            />
+          </ng-template>
         </mat-tab>
       </mat-tab-group>
       <div *ngIf="useGeoportal">

@@ -8,8 +8,11 @@ import { HostListener } from '@angular/core';
 import { AuthService } from '../_services/auth.service';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
-
+import { DomSanitizer, SafeStyle } from '@angular/platform-browser';
 import { Offer } from '../_models/offer';
+import { HttpClient } from '@angular/common/http';
+import { catchError, map } from 'rxjs/operators';
+import { Observable, of } from 'rxjs';
 
 declare var $: any;
 
@@ -27,6 +30,7 @@ export class CompanyDetailComponent implements OnInit, AfterViewInit {
   isEnabledGeolocation2Url: boolean;
   id: number;
   showArms: boolean;
+  useGoggleMaps: boolean = false;
   isConsentToUseMA: boolean;
   useGeoportal = environment.useGeoportal;
   scrHeight: any;
@@ -37,6 +41,7 @@ export class CompanyDetailComponent implements OnInit, AfterViewInit {
   offer: Offer[] = [];
   p: number = 1;
   collection: any[];
+  apiLoaded: Observable<boolean>;
   showMaps: boolean;
 
   @HostListener('window:resize', ['$event'])
@@ -48,7 +53,8 @@ export class CompanyDetailComponent implements OnInit, AfterViewInit {
   constructor(
     private route: ActivatedRoute,
     private companyService: CompanyService,
-    private authService: AuthService
+    private authService: AuthService,
+    private httpClient: HttpClient
   ) {
     this.getScreenSize();
   }
@@ -69,6 +75,8 @@ export class CompanyDetailComponent implements OnInit, AfterViewInit {
     this.showArms = environment.showArms && this.company.armsUrl ? true : false;
     this.dataSource = new MatTableDataSource(this.company.offers);
     this.collection = this.company.pkds;
+    this.useGoggleMaps =
+      this.company.geometries != undefined && this.company.geometries != [];
     this.showMaps = this.company.city && this.company.street ? true : false;
   }
 

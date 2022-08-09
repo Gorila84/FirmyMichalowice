@@ -57,10 +57,8 @@ export class CompanyService {
       );
   }
 
-  getUser(id: number, isForEdit: boolean): Observable<Company> {
-    return this.http.get<Company>(
-      this.baseUrl + 'company/GetUser/' + id + '/' + isForEdit
-    );
+  getUser(id: number): Observable<Company> {
+    return this.http.get<Company>(this.baseUrl + 'company/GetUser/' + id);
   }
 
   // tslint:disable-next-line:typedef

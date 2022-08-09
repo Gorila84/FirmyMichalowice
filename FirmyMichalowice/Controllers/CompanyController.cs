@@ -37,12 +37,14 @@ namespace FirmyMichalowice.Controllers
         private readonly HttpClient _httpClient;
         private readonly IConfiguration _configuration;
         private readonly CeidgService _cEIDGmanger;
+        private readonly IRegonService _regonService;
         private readonly IMunicipalitieRepository _municipalitieRepository;
         private readonly IRegonService _regonService;
         private readonly ICategoryRepository _categoryRepository;
 
         public CompanyController(IOfferRepository offerRepository, ICompanyRepository userRepository, IMapper mapper, ILoggerManager logger, IConfiguration configuration,
                            CeidgService cEIDGmanager, IMunicipalitieRepository municipalitieRepository, IRegonService regonService, ICategoryRepository categoryRepository)
+
         {
             
             _offerRepository = offerRepository;
@@ -55,6 +57,7 @@ namespace FirmyMichalowice.Controllers
             _municipalitieRepository = municipalitieRepository;
             _regonService = regonService;
             _categoryRepository = categoryRepository;
+
         }
 
         [HttpGet]
@@ -63,7 +66,6 @@ namespace FirmyMichalowice.Controllers
             try
             {
                 var rnd = new Random();
-
                 var users = await _userRepository.GetCompanies(userParams);
                 var result = users.OrderBy(x => rnd.Next());
                 var usersToReturn = _mapper.Map<IEnumerable<CompaniesForListDTO>>(result);
@@ -80,13 +82,13 @@ namespace FirmyMichalowice.Controllers
 
 
         }
-        [HttpGet("getUser/{id}/{isForEdit}")]
-        public async Task<IActionResult> GetUser(int id, bool isForEdit)
+        [HttpGet("getUser/{id}")]
+        public async Task<IActionResult> GetUser(int id)
          {
-            var user = await _userRepository.GetCompany(id, isForEdit);
+            var user = await _userRepository.GetCompany(id);
 
             var userToReturn = _mapper.Map<CompanyForDateilDTO>(user);
-            userToReturn.ArmsUrl = _municipalitieRepository.GetMunicipalities().Result.Where(x => x.Name == user.Municipalitie).Select(x => x.Path).FirstOrDefault();
+            userToReturn.ArmsUrl =  _municipalitieRepository.GetMunicipalities().Result.Where(x => x.Name == user.Municipalitie).Select(x => x.Path).FirstOrDefault();
 
             return Ok(userToReturn);
         }
@@ -97,12 +99,12 @@ namespace FirmyMichalowice.Controllers
         public async Task<IActionResult> UpdateCompany(int id, CompaniesForEditDTO companiesForEditDTO)
         {
 
-            var comapnyFromRepository = await _userRepository.GetCompany(id, true);
+            var comapnyFromRepository = await _userRepository.GetCompany(id);
 
             _mapper.Map(companiesForEditDTO, comapnyFromRepository);
             comapnyFromRepository.Modify = DateTime.Now;
 
-            if (await _userRepository.SaveAll())
+            if (await _userRepository.UpdateUser(comapnyFromRepository))
                 return NoContent();
 
             throw new Exception($"Aktualizacja użytkownika o id: {id} nie powiodła sie przy zapisywaniu do bazy");
@@ -120,9 +122,43 @@ namespace FirmyMichalowice.Controllers
         [HttpGet("getdatafromregon/{nip}")]
         public async Task<JsonResult> GetDataFromRegon(string nip)
         {
+
             var data = await _regonService.GetData(nip);
             var result = new JsonResult(data);
             return result;
+        
+            // UslugaBIRzewnPublClient client = new UslugaBIRzewnPublClient();
+            // RegonServiceHelper serviceHelper = new RegonServiceHelper(_configuration);
+            // serviceHelper.SetupBinding(ref client);
+
+            // string apiKey = _configuration.GetSection("API_REGON:ApiKey").Value;
+            // var isLogin = await client.ZalogujAsync(apiKey);
+            // var sessionId = isLogin.ZalogujResult;
+
+            // OperationContextScope scope = new OperationContextScope(client.InnerChannel);
+
+            // HttpRequestMessageProperty requestProperties = new HttpRequestMessageProperty();
+            // requestProperties.Headers.Add("sid", sessionId);
+            // OperationContext.Current.OutgoingMessageProperties[HttpRequestMessageProperty.Name] = requestProperties;
+
+            // var regonData = await client.DaneSzukajPodmiotyAsync(new ParametryWyszukiwania() { Nip = nip });
+            // try
+            // {
+            //     XmlDocument doc = new XmlDocument();
+            //     doc.LoadXml(regonData.DaneSzukajPodmiotyResult);
+            //     string jsonText = JsonConvert.SerializeXmlNode(doc);
+            //     var result2 = serviceHelper.ParseDataToFirmaEntity(jsonText); // tutaj mamy nasz objekt
+            //     await client.WylogujAsync(sessionId);
+
+            //     var result = new JsonResult(result2);
+            //     return result;
+            // }
+            // catch (Exception ex)
+            // {
+            //     _logger.LogInformation(ex.Message);
+            // }
+            // return null;
+
         }
 
         [Authorize]

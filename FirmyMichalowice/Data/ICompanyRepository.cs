@@ -10,8 +10,9 @@ namespace FirmyMichalowice.Repositories
     public interface ICompanyRepository
     {
         Task<PageList<User>> GetCompanies(UserParams userParams);
-        Task<User> GetCompany(int id, bool isForEdit);
+        Task<User> GetCompany(int id);
         Task<bool> SaveAll();
+        Task<bool> UpdateUser(User user);
         Task<IList<string>> GetCompanyTypes();
         Task<IList<string>> GetMunicipalieties();
         Task<List<User>> GetCompaniesForAdmin();

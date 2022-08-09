@@ -23,5 +23,6 @@ namespace FirmyMichalowice.Model
         public string SilosID { get; set; }
         public string DataZakonczeniaDzialalnosci { get; set; }
         public string MiejscowoscPoczty { get; set; }
+
     }
 }

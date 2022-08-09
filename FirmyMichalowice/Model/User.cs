@@ -7,6 +7,7 @@ namespace FirmyMichalowice.Model
 {
     public class User
     {
+
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
@@ -32,8 +33,10 @@ namespace FirmyMichalowice.Model
         public string Rodo { get; set; }
         public DateTime Created { get; set; }
         public DateTime Modify { get; set; }
+   
 
         public Photo Photo { get; set; }
+        public IList<UserSettings> UserSettings { get;set;}
 
         public string CompanyType { get; set; }
 
@@ -45,7 +48,7 @@ namespace FirmyMichalowice.Model
         public PKD MainPKD { get; set; }
         [NotMapped]
         public IList<PKD> PKDS { get; set; }
-        [NotMapped]
+       
         public string GeolocationUrl { get; set; }
         public bool IsAdmin { get; set; }
         public bool IsActive { get; set; }
@@ -58,12 +61,30 @@ namespace FirmyMichalowice.Model
         [NotMapped]
         public string StatusFromCeidg { get; set; }
 
-        [NotMapped]
+       
         public string Geolocation2Url { get; set; }
 
         public IList<Offer> Offers { get; set; }
 
-     
+       
+        public IList<GoggleMapsGeometry> Geometries { get; set; }
 
+        
     }
+
+    public class GoggleMapsGeometry
+    {
+        public int Id { get; set; }
+        public int UserId { get; set; }
+        public User User { get; set; }
+        public MapType Type {get;set; }
+        public decimal? lat { get; set; }
+        public decimal? lng { get; set; }
+    }
+
+        public enum MapType 
+        {
+         Seat,
+         Office
+        } 
 }

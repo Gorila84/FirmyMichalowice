@@ -25,6 +25,7 @@ namespace FirmyMichalowice.Controllers
         private readonly CeidgService _ceidgService;
         private readonly IRegonService _regonService;
 
+
         public AuthController(IAuthRepository repository, IConfiguration config, CeidgService ceidgService,  IRegonService regonService)
         {
             _repository = repository;
@@ -41,7 +42,12 @@ namespace FirmyMichalowice.Controllers
             }
             //var firma = await _ceidgService.GetData(userRegisterDto.NIP);
             var firmaRs = await _regonService.GetData(userRegisterDto.NIP);
+
             userRegisterDto.UserName = userRegisterDto.UserName.ToLower();
+
+            userRegisterDto.UserName = userRegisterDto.UserName.ToLower();
+            
+
             var validationResult = await _repository.UserValidation(userRegisterDto.UserName, userRegisterDto.NIP, firmaRs.Gmina);
             if (validationResult.Item1)
                 return BadRequest(validationResult.Item2);
@@ -57,7 +63,7 @@ namespace FirmyMichalowice.Controllers
                 companyAddress = string.Format("{0} {1}", firmaRs.Ulica, firmaRs.NrNieruchomosci);
             }
 
-
+            
 
             var userToCreate = new User
             {
@@ -74,7 +80,8 @@ namespace FirmyMichalowice.Controllers
 
             };
 
-            await _repository.Register(userToCreate, userRegisterDto.Password);
+             await _repository.Register(userToCreate, userRegisterDto.Password);
+
 
             return StatusCode(201);
 

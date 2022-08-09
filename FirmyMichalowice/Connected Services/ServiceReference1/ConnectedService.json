@@ -10,7 +10,9 @@
     "namespaceMappings": [
       "*, ServiceReference1"
     ],
-    "targetFramework": "netcoreapp3.1",
+
+    "targetFramework": "net5.0",
+
     "typeReuseMode": "All"
   }
 }

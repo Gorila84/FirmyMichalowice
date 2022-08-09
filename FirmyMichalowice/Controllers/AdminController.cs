@@ -52,10 +52,10 @@ namespace FirmyMichalowice.Controllers
 
         }
 
-        [HttpGet("admin/getUser/{id}/{isForEdit}")]
-        public async Task<IActionResult> GetUserForAdmin(int id, bool isForEdit)
+        [HttpGet("admin/getUser/{id}")]
+        public async Task<IActionResult> GetUserForAdmin(int id)
         {
-            var user = await _companyRepository.GetCompany(id, isForEdit);
+            var user = await _companyRepository.GetCompany(id);
 
             var userToReturn = _mapper.Map<CompaniesForAdminDTO>(user);
             
@@ -68,7 +68,7 @@ namespace FirmyMichalowice.Controllers
         public async Task<IActionResult> UpdateCompanyForAdmin(int id, CompaniesForAdminDTO companiesForAdminDTO)
         {
 
-            var comapnyFromRepository = await _companyRepository.GetCompany(id, true);
+            var comapnyFromRepository = await _companyRepository.GetCompany(id);
 
             _mapper.Map(companiesForAdminDTO, comapnyFromRepository);
             comapnyFromRepository.Modify = DateTime.Now;

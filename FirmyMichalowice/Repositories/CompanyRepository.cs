@@ -24,22 +24,25 @@ namespace FirmyMichalowice.Repositories
         private readonly MapBoxService _mapBoxService;
         private readonly IConfiguration _configuration;
         private readonly ILoggerManager _logger;
+        private readonly IGoogleGeolocationService _gelocationService;
+      
 
-        public CompanyRepository(DataContext context, CeidgService ceidgService,  IConfiguration configuration, MapBoxService mapBoxService, ILoggerManager logger) : base(context)
+        public CompanyRepository(DataContext context, CeidgService ceidgService,  IConfiguration configuration, MapBoxService mapBoxService, ILoggerManager logger, IGoogleGeolocationService geolocationService) : base(context)
         {
             _context = context;
             _ceidgService = ceidgService;
             _configuration = configuration;
             _mapBoxService = mapBoxService;
             _logger = logger;
-
+            _gelocationService = geolocationService;
+         
         }
 
-        public async Task<User> GetCompany(int id, bool isForEdit)
+        public async Task<User> GetCompany(int id)
         {
             try
             {
-                var user = await _context.Users.Include(x => x.Photo).Include(x=>x.Offers).FirstOrDefaultAsync(u => u.Id == id);
+                var user = await _context.Users.Include(x => x.Photo).Include(x=>x.Offers).Include(x=>x.UserSettings).Include(x=>x.Geometries).FirstOrDefaultAsync(u => u.Id == id);
                 if (user != null)
                 {
                     var firma = await _ceidgService.GetData(user.NIP);
@@ -54,16 +57,7 @@ namespace FirmyMichalowice.Repositories
 
                     user.PKDS = _context.PKD.Where(x => pkds.Contains(x.Symbol)).ToList();
 
-                    if (!isForEdit)
-                    {
-                        string adress = string.Format("{0} {1}, {2} {3}", firma.adresDzialanosci.ulica, firma.adresDzialanosci.budynek, firma.adresDzialanosci.miasto, firma.adresDzialanosci.kod);
-                        user.GeolocationUrl = await _mapBoxService.GetGeolocationURL(adress, firma.adresDzialanosci.gmina, false);
-                        if (!string.IsNullOrEmpty(user.OfficeCity) && !string.IsNullOrEmpty(user.OfficeStreet) && !string.IsNullOrEmpty(user.OfficePostalCode))
-                        {
-                            string adress2 = ValidateOfficeAdress(user.OfficeCity, user.OfficeStreet, user.OfficePostalCode);  
-                            user.Geolocation2Url = await _mapBoxService.GetGeolocationURL(adress2, user.OfficeMunicipalitie, true);
-                        }
-                    }
+                    
                     user.StatusFromCeidg = firma.status;
                 
                 }
@@ -136,6 +130,7 @@ namespace FirmyMichalowice.Repositories
             return await _context.Municipalities.Select(x => x.Name).ToListAsync();
         }
 
+
         public async Task<List<User>> GetCompaniesForAdmin()
         {
             var users = _context.Users.ToList();
@@ -168,6 +163,32 @@ namespace FirmyMichalowice.Repositories
             return _context.Trade.OrderBy(x => x.Name).Select(x => x.Name).ToList();
         }
 
-      
+        public async Task<bool> UpdateUser(User user)
+        {
+            try
+            {
+                if (string.IsNullOrEmpty(user.GeolocationUrl))
+                {
+                    var firma = await _ceidgService.GetData(user.NIP);
+                    string adress = string.Format("{0} {1}, {2} {3}", firma.adresDzialanosci.ulica, firma.adresDzialanosci.budynek, firma.adresDzialanosci.miasto, firma.adresDzialanosci.kod);
+                    user.GeolocationUrl = await _mapBoxService.GetGeolocationURL(adress, firma.adresDzialanosci.gmina, false);
+                }
+                if (!string.IsNullOrEmpty(user.OfficeCity) && !string.IsNullOrEmpty(user.OfficeStreet) && !string.IsNullOrEmpty(user.OfficePostalCode))
+                {
+                    string adress2 = ValidateOfficeAdress(user.OfficeCity, user.OfficeStreet, user.OfficePostalCode);
+                    user.Geolocation2Url = await _mapBoxService.GetGeolocationURL(adress2, user.OfficeMunicipalitie, true);
+                }
+                _context.Update(user);
+                await _context.SaveChangesAsync();
+
+            }
+            catch(Exception ex)
+            {
+                _logger.LogInformation(ex.Message);
+                return false;
+            }
+            return true;
+
+        }
     }
 }

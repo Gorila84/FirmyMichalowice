@@ -69,6 +69,8 @@ namespace FirmyMichalowice
             services.AddScoped<IMunicipalitieRepository, MunicipalitieRepository>();
             services.AddScoped<ICategoryRepository, CategoryRepository>();
             services.AddScoped<IOfferRepository, OfferRepository>();
+            services.AddScoped<ISettingsTemplateRepository, SettingsTemplateRepository>();
+            services.AddScoped<IGoogleGeolocationService, GoogleGeolocationService>();
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
                 .AddJwtBearer(options =>
                 {

@@ -78,12 +78,13 @@ namespace FirmyMichalowice.Repositories
 
 
 
+
         public async Task<Tuple<bool, string, string>> UserValidation(string userName, string nip, string municipalitie)
+
         {
 
             bool isError = false;
             string errorMessage = string.Empty;
-
             try
             {
 
@@ -101,7 +102,9 @@ namespace FirmyMichalowice.Repositories
                     errorMessage = "Użytkownik o podanym NIPie juz istnieje! Sprawdź NIP";
 
                 }
+
                 if (isError == false && string.IsNullOrEmpty(errorMessage)) CheckMunicipalitie(ref isError, ref errorMessage, municipalitie );
+
 
             }
             catch (Exception ex)
@@ -114,12 +117,14 @@ namespace FirmyMichalowice.Repositories
             return Tuple.Create(isError, errorMessage, municipalitie);
         }
 
-        private void CheckMunicipalitie(ref bool isError, ref string errorMessage, string municipalitie )
+
+    
+        private void CheckMunicipalitie(ref bool isError, ref string errorMessage, string municipalitie)
         {
 
+     
             IQueryable<string> listOfAllowedMunicipalities = _context.Municipalities.Select(x => x.Name);
 
-           
 
             if (!listOfAllowedMunicipalities.Contains(municipalitie))
             {
@@ -131,6 +136,7 @@ namespace FirmyMichalowice.Repositories
         }
         #endregion
         #region method private
+        
         private void CreatePasswordHashSalt(string password, out byte[] passwordHash, out byte[] passwordSalt)
         {
             using (var hmac = new System.Security.Cryptography.HMACSHA512())

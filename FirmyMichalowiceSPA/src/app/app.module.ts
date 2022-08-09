@@ -62,6 +62,17 @@ import { AdminComponent } from './admin/admin.component';
 import { AdminMenuComponent } from './admin/admin-menu/admin-menu.component';
 import { AdminUsersComponent } from './admin/admin-users/admin-users/admin-users.component';
 import { AdminEditUserComponent } from './admin/admin-edit-user/admin-edit-user/admin-edit-user.component'; // <-- import the module
+import { GoogleMapComponent } from './google-map/google-map.component';
+import { GoogleMapsModule } from '@angular/google-maps';
+import { HttpClientJsonpModule } from '@angular/common/http';
+import { ShopComponent } from './shop/shop.component'; // <-- import the module
+import { MatGridListModule } from '@angular/material/grid-list';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { SnackbarComponent } from './snackbar/snackbar.component';
+import { MatIconModule } from '@angular/material/icon';
+import { MatDividerModule } from '@angular/material/divider';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { MatListModule } from '@angular/material/list';
 
 const cookieConfig: NgcCookieConsentConfig = {
   cookie: {
@@ -126,10 +137,13 @@ const cookieConfig: NgcCookieConsentConfig = {
     EditOfferDialogComponent,
     StatuteComponent,
     AboutComponent,
+    GoogleMapComponent,
     AdminComponent,
     AdminMenuComponent,
     AdminUsersComponent,
     AdminEditUserComponent,
+    ShopComponent,
+    SnackbarComponent,
   ],
   imports: [
     BrowserModule,
@@ -170,7 +184,16 @@ const cookieConfig: NgcCookieConsentConfig = {
     RecaptchaV3Module,
     NgcCookieConsentModule.forRoot(cookieConfig),
     NgxPaginationModule,
+    GoogleMapsModule,
+    HttpClientJsonpModule,
+    MatGridListModule,
+    MatSnackBarModule,
+    MatIconModule,
+    MatDividerModule,
+    MatProgressBarModule,
+    MatListModule,
   ],
+  exports: [GoogleMapComponent],
   providers: [
     CompanyListResolver,
     CompanyDetailResolver,

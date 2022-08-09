@@ -28,6 +28,12 @@ import { MatPaginator } from '@angular/material/paginator';
 import { EditOfferDialogComponent } from '../edit-offer-dialog/edit-offer-dialog.component';
 import { MatDialog } from '@angular/material/dialog';
 import { MatTableDataSource } from '@angular/material/table';
+import {
+  MatSnackBar,
+  MatSnackBarHorizontalPosition,
+  MatSnackBarVerticalPosition,
+} from '@angular/material/snack-bar';
+import { SnackbarComponent } from '../snackbar/snackbar.component';
 
 interface Item {
   value: string;
@@ -61,6 +67,9 @@ export class CompanyEditComponent implements OnInit {
   trade: FormControl;
   myControl2 = new FormControl();
 
+  horizontalPosition: MatSnackBarHorizontalPosition = 'center';
+  verticalPosition: MatSnackBarVerticalPosition = 'top';
+
   @ViewChild('editForm') editForm: NgForm;
 
   constructor(
@@ -73,7 +82,8 @@ export class CompanyEditComponent implements OnInit {
     private logger: NGXLogger,
     private companyTypeService: CompanyTypeService,
     public dialog: MatDialog,
-    private http: HttpClient
+    private http: HttpClient,
+    private _snackBar: MatSnackBar
   ) {}
 
   // tslint:disable-next-line:typedef
@@ -98,6 +108,7 @@ export class CompanyEditComponent implements OnInit {
     // this.dataSource = new MatTableDataSource (this.getOffers().subscribe(data =>
     //                                           this.dataSource = data));
     this.dataSource.paginator = this.paginator;
+    this.openSnackBar();
   }
 
   offerNameFormControl = new FormControl('', [Validators.required]);
@@ -231,7 +242,6 @@ export class CompanyEditComponent implements OnInit {
   addOffer() {
     this.model.userId = this.authService.decotedToken.nameid;
     this.companyService.addOffer(this.model).subscribe((data) => {
-      debugger;
       this.refreshTable();
       this.getCompanyTypes();
 
@@ -242,7 +252,6 @@ export class CompanyEditComponent implements OnInit {
 
   removeOffer(id: number) {
     this.companyService.removeOffer(id).subscribe((data) => {
-      debugger;
       this.refreshTable();
     });
   }
@@ -258,7 +267,7 @@ export class CompanyEditComponent implements OnInit {
   }
   refreshTable() {
     this.companyService
-      .getUser(this.authService.decotedToken.nameid, true)
+      .getUser(this.authService.decotedToken.nameid)
       .subscribe((data) => {
         this.company = data;
       });
@@ -279,5 +288,23 @@ export class CompanyEditComponent implements OnInit {
           this.company.officeMunicipalitie = data[0].gmina;
         });
     }
+  }
+  openSnackBar() {
+    this._snackBar.openFromComponent(
+      SnackbarComponent,
+
+      {
+        data: {
+          html:
+            ' <b>Informacja:</b> Pobranie danych z CEIDG spowoduje, że użytkownicy będą mieli do dyspozycji mapę z siedzibą Twojej firmy. <br / + ' +
+            '>' +
+            ' <small>W związku z ograniczeniami darmowego serwisu geolokacyjnego niektóre lokalizacje mogą nie działać</small >',
+        },
+        horizontalPosition: this.horizontalPosition,
+        verticalPosition: this.verticalPosition,
+        duration: 8000,
+        panelClass: ['my-snackbar'],
+      }
+    );
   }
 }

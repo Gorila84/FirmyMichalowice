@@ -2,6 +2,7 @@ export const environment = {
   production: true,
   apiUrl: 'https://fpkrkprodapi.berg-dev.eu/api/',
   showArms: false,
+  useGoggleMaps: true,
   recaptcha: {
     siteKey: '6LcCILYdAAAAAEJ9aoyjK0_2Jkc20hGkb2QgOUgA',
   },

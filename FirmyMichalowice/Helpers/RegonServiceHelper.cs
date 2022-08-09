@@ -4,10 +4,13 @@ using Newtonsoft.Json.Linq;
 using ServiceReference1;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.ServiceModel;
 using System.ServiceModel.Channels;
 using System.Text.Json;
 using System.Threading.Tasks;
+using System.Xml.Serialization;
 using WcfCoreMtomEncoder;
 
 namespace FirmyMichalowice.Helpers
@@ -49,5 +52,9 @@ namespace FirmyMichalowice.Helpers
                 return null;
             }
         }
+
+    
+
+
     }
 }

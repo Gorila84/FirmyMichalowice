@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace FirmyMichalowice.Repositories
 {
-    public interface IAuthRepository
+    public interface     IAuthRepository
     {
         Task<User> Login(string nuserName, string pasword);
         Task<User> Register(User user, string password);
