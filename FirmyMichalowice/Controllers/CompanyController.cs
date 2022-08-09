@@ -62,6 +62,7 @@ namespace FirmyMichalowice.Controllers
         {
             try
             {
+                var rnd = new Random();
 
                 var rnd = new Random();
 

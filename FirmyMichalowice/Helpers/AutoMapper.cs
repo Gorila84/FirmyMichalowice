@@ -21,6 +21,8 @@ namespace FirmyMichalowice.Helpers
             CreateMap<CookieConsentDTO, CookieConsent>();
             CreateMap<OfferDTO, Offer>();
             CreateMap<OfferForEditDTO, Offer>();
+            CreateMap<CompaniesForAdminDTO, User>();
+            CreateMap<User, CompaniesForAdminDTO>();
          
         }
     }

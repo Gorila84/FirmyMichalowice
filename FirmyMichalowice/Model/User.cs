@@ -47,7 +47,7 @@ namespace FirmyMichalowice.Model
         public IList<PKD> PKDS { get; set; }
         [NotMapped]
         public string GeolocationUrl { get; set; }
-        
+        public bool IsAdmin { get; set; }
         public bool IsActive { get; set; }
         public bool AdditionalAddress { get; set; }
         public string OfficeCity { get; set; }

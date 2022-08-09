@@ -15,7 +15,7 @@ import { CommonModule } from '@angular/common';
 import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatDialogModule } from '@angular/material/dialog';
-
+import { MatSidenavModule } from '@angular/material/sidenav';
 import { AppComponent } from './app.component';
 import { NavComponent } from './nav/nav.component';
 import { LoginComponent } from './login/login.component';
@@ -58,6 +58,10 @@ import { StatuteComponent } from './statute/statute.component';
 import { AboutComponent } from './about/about.component';
 import { NgxPaginationModule } from 'ngx-pagination'; // <-- import the module
 import { MunicipalitieResolver } from './_resolvers/municipality_list_resolver';
+import { AdminComponent } from './admin/admin.component';
+import { AdminMenuComponent } from './admin/admin-menu/admin-menu.component';
+import { AdminUsersComponent } from './admin/admin-users/admin-users/admin-users.component';
+import { AdminEditUserComponent } from './admin/admin-edit-user/admin-edit-user/admin-edit-user.component'; // <-- import the module
 
 const cookieConfig: NgcCookieConsentConfig = {
   cookie: {
@@ -122,6 +126,10 @@ const cookieConfig: NgcCookieConsentConfig = {
     EditOfferDialogComponent,
     StatuteComponent,
     AboutComponent,
+    AdminComponent,
+    AdminMenuComponent,
+    AdminUsersComponent,
+    AdminEditUserComponent,
   ],
   imports: [
     BrowserModule,
@@ -147,6 +155,7 @@ const cookieConfig: NgcCookieConsentConfig = {
     MatCardModule,
     MatCheckboxModule,
     MatDialogModule,
+    MatSidenavModule,
     AccordionModule.forRoot(),
     CommonModule,
     // tslint:disable-next-line:max-line-length

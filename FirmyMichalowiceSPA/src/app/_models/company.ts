@@ -29,7 +29,8 @@ export interface Company {
         officePostalCode: string;
         officeMunicipalitie: string;
         statusFromCeidg: string;
-       
+        isAdmin: boolean;
+        isActive: boolean;
         additionalAddress: boolean;
         created?:Date;
         modify?:Date;

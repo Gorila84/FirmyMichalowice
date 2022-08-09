@@ -1,0 +1,16 @@
+mat-sidenav-content{
+    padding: 10px 10px 10px;
+    border-bottom: 1px solid black;
+}
+mat-sidenav-container:first-child{
+   
+    border-top:  1px solid black;
+}
+mat-sidenav-content:hover{
+    background-color: lightslategrey;
+    cursor: pointer;
+}
+
+a{
+    text-decoration: none;
+}
