@@ -79,7 +79,7 @@ namespace FirmyMichalowice.Repositories
 
 
 
-        public async Task<Tuple<bool, string, string>> UserValidation(string userName, string nip, string municipalitie)
+        public async Task<Tuple<bool, string>> UserValidation(string userName, string nip, string municipalitie)
 
         {
 
@@ -103,18 +103,20 @@ namespace FirmyMichalowice.Repositories
 
                 }
 
-                if (isError == false && string.IsNullOrEmpty(errorMessage)) CheckMunicipalitie(ref isError, ref errorMessage, municipalitie );
+                if (isError == false && string.IsNullOrEmpty(errorMessage) && false) 
+                    CheckMunicipalitie(ref isError, ref errorMessage, municipalitie); // TODO validation to remove for app new version 
+
 
 
             }
             catch (Exception ex)
             {
                 _logger.LogInformation(ex.Message);
-                return Tuple.Create(true, ex.Message, municipalitie);
+                return Tuple.Create(true, ex.Message);
 
             }
 
-            return Tuple.Create(isError, errorMessage, municipalitie);
+            return Tuple.Create(isError, errorMessage);
         }
 
 

@@ -40,14 +40,11 @@ namespace FirmyMichalowice.Controllers
             {
                 return BadRequest("Logowanie możliwe tylko za pomocą adresu email");
             }
-            //var firma = await _ceidgService.GetData(userRegisterDto.NIP);
+            //var firma = await _ceidgService.GetData(userRegisterDto.NIP); // we start to use regon service 
             var firmaRs = await _regonService.GetData(userRegisterDto.NIP);
 
             userRegisterDto.UserName = userRegisterDto.UserName.ToLower();
-
-            userRegisterDto.UserName = userRegisterDto.UserName.ToLower();
             
-
             var validationResult = await _repository.UserValidation(userRegisterDto.UserName, userRegisterDto.NIP, firmaRs.Gmina);
             if (validationResult.Item1)
                 return BadRequest(validationResult.Item2);
@@ -71,7 +68,7 @@ namespace FirmyMichalowice.Controllers
                 NIP = userRegisterDto.NIP,
                 ShortDescription = userRegisterDto.ShortDescription,
                 Created = DateTime.Now,
-                Municipalitie = validationResult.Item3,
+                Municipalitie = firmaRs.Gmina,
                 CompanyName = firmaRs.Nazwa,
                 City = firmaRs.Miejscowosc,
                 Street = companyAddress,

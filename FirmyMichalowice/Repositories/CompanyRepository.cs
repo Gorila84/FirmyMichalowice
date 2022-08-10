@@ -46,6 +46,7 @@ namespace FirmyMichalowice.Repositories
                 if (user != null)
                 {
                     var firma = await _ceidgService.GetData(user.NIP);
+                    //TODO use regon serive
                     user.MainPKD = _context.PKD.Where(x => x.Symbol == Regex.Replace(firma.pkdGlowny, ".{2}", "$0.")).FirstOrDefault();
                     List<string> pkds = new List<string>();
                     firma.pkd.ToList().ForEach(x =>
@@ -172,6 +173,7 @@ namespace FirmyMichalowice.Repositories
                     var firma = await _ceidgService.GetData(user.NIP);
                     string adress = string.Format("{0} {1}, {2} {3}", firma.adresDzialanosci.ulica, firma.adresDzialanosci.budynek, firma.adresDzialanosci.miasto, firma.adresDzialanosci.kod);
                     user.GeolocationUrl = await _mapBoxService.GetGeolocationURL(adress, firma.adresDzialanosci.gmina, false);
+
                 }
                 if (!string.IsNullOrEmpty(user.OfficeCity) && !string.IsNullOrEmpty(user.OfficeStreet) && !string.IsNullOrEmpty(user.OfficePostalCode))
                 {
