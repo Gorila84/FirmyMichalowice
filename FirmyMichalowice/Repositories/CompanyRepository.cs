@@ -216,7 +216,7 @@ namespace FirmyMichalowice.Repositories
 
         public async Task<CompanySetting> GetCompanySettingsKeys(int userId)
         {
-            var settings = _context.CompanySettings.Where(x => x.Id == userId).FirstOrDefault();
+            var settings = _context.CompanySettings.Where(x => x.UserId == userId).FirstOrDefault();
             return settings;
         }
     }

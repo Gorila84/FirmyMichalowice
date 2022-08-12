@@ -11,6 +11,7 @@ import { identifierName } from '@angular/compiler';
 import { Offer } from '../_models/offer';
 import { Municipalitie } from '../_models/municipalitie';
 import { Category } from '../_models/category';
+import { CompanySetting } from '../_models/companySettings';
 
 @Injectable({
   providedIn: 'root',
@@ -103,5 +104,10 @@ export class CompanyService {
   }
   getCategories(): Observable<Category[]> {
     return this.http.get<Category[]>(this.baseUrl + 'company/categories/');
+}
+getCompanySettings(id:number){
+
+  
+  return this.http.get<CompanySetting>(this.baseUrl + 'company/companySettings/' + id);
 }
 }

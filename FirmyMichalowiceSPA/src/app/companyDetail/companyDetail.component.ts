@@ -13,6 +13,7 @@ import { Offer } from '../_models/offer';
 import { HttpClient } from '@angular/common/http';
 import { catchError, map } from 'rxjs/operators';
 import { Observable, of } from 'rxjs';
+import { CompanySetting } from '../_models/companySettings';
 
 declare var $: any;
 
@@ -26,6 +27,7 @@ export class CompanyDetailComponent implements OnInit, AfterViewInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
   company: Company;
+  companySetting: CompanySetting;
   isCompanyActive: boolean;
   isEnabledGeolocation2Url: boolean;
   id: number;
@@ -78,6 +80,7 @@ export class CompanyDetailComponent implements OnInit, AfterViewInit {
     this.useGoggleMaps =
       this.company.geometries != undefined && this.company.geometries != [];
     this.showMaps = this.company.city && this.company.street ? true : false;
+    this.linkVisibility();
   }
 
   ngAfterViewInit(): void {
@@ -136,6 +139,20 @@ export class CompanyDetailComponent implements OnInit, AfterViewInit {
   getOffers() {
     const rowoferItems = this.companyService.getOffers(this.company.id);
     return rowoferItems;
+  }
+
+  linkVisibility(){
+
+    
+    this.companyService.getCompanySettings(this.company.id).subscribe(
+      data => {
+        this.companySetting = data;
+      }
+
+    );
+    debugger
+
+
   }
 }
 // function searchAdr(idx: Number, company: Company) {

@@ -1,10 +1,6 @@
 ﻿using AutoMapper;
 using FirmyMichalowice.Dto_s;
 using FirmyMichalowice.Model;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace FirmyMichalowice.Helpers
 {
