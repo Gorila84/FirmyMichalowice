@@ -25,7 +25,9 @@ namespace FirmyMichalowice.Helpers
             CreateMap<SettingsTemplateDTO, SettingsTemplate>();
             CreateMap<CompaniesForAdminDTO, User>();
             CreateMap<User, CompaniesForAdminDTO>();
-         
+            CreateMap<UpdateCompanySettingDTO, CompanySetting>();
+            CreateMap<CompanySetting, UpdateCompanySettingDTO>();
+
         }
     }
 }

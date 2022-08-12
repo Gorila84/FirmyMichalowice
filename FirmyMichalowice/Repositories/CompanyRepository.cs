@@ -191,6 +191,33 @@ namespace FirmyMichalowice.Repositories
             }
             return true;
 
+
+        }
+
+        public async Task<IList<CompanySetting>> GetCompanySettingsKeys()
+        {
+            return _context.CompanySettings.ToList();
+        }
+
+        public async Task<bool> AddCompanyConfigurations(CompanySetting companySetting)
+        {
+            try
+            {
+                _context.CompanySettings.Add(companySetting);
+                await _context.SaveChangesAsync();
+                return true;
+            }
+            catch (Exception ex)
+            {
+                _logger.LogInformation(ex.Message);
+                return false;
+            }
+        }
+
+        public async Task<CompanySetting> GetCompanySettingsKeys(int userId)
+        {
+            var settings = _context.CompanySettings.Where(x => x.Id == userId).FirstOrDefault();
+            return settings;
         }
     }
 }

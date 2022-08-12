@@ -23,6 +23,7 @@ namespace FirmyMichalowice.Data
         public DbSet<Category> Categories { get; set; }
         public DbSet<Trade> Trade { get; set; }
 
+        public DbSet<CompanySetting> CompanySettings { get; set; }
         public DbSet<SettingsTemplate> SettingsTemplates { get; set; }
     }
 }

@@ -24,14 +24,20 @@ namespace FirmyMichalowice.Controllers
         private readonly IConfiguration _config;
         private readonly CeidgService _ceidgService;
         private readonly IRegonService _regonService;
+        private readonly ICompanyRepository _companyRepository;
 
-
-        public AuthController(IAuthRepository repository, IConfiguration config, CeidgService ceidgService,  IRegonService regonService)
+        public AuthController(IAuthRepository repository, 
+                              IConfiguration config, 
+                              CeidgService ceidgService,  
+                              IRegonService regonService,
+                              ICompanyRepository companyRepository
+                              )
         {
             _repository = repository;
             _config = config;
             _ceidgService = ceidgService;
             _regonService = regonService;
+            _companyRepository = companyRepository;
         }
         [HttpPost("register")]
         public async Task<IActionResult> Register(UserForRegisterDTO userRegisterDto)
@@ -78,6 +84,23 @@ namespace FirmyMichalowice.Controllers
             };
 
              await _repository.Register(userToCreate, userRegisterDto.Password);
+
+            var companySettingsCreate = new CompanySetting
+            {
+                UserId = userToCreate.Id,
+                LinkVisibility = false,
+                PKDVisibility = false,
+                OfferVisibility = false,
+                LinkVisibilityStart = DateTime.MinValue,
+                LinkVisibilityEnd = DateTime.MinValue,
+                PKDVisibilityStart = DateTime.MinValue,
+                PKDVisibilityEnd = DateTime.MinValue,
+                OfferVisibilityStart = DateTime.MinValue,
+                OfferVisibilityEnd = DateTime.MinValue
+
+            };
+
+            await _companyRepository.AddCompanyConfigurations(companySettingsCreate);
 
 
             return StatusCode(201);

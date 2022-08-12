@@ -34,6 +34,8 @@ import {
   MatSnackBarVerticalPosition,
 } from '@angular/material/snack-bar';
 import { SnackbarComponent } from '../snackbar/snackbar.component';
+import { SettingsTemplate } from '../_models/settingsTemplate';
+import { SettingsService } from '../_services/settings.service';
 
 interface Item {
   value: string;
@@ -66,6 +68,7 @@ export class CompanyEditComponent implements OnInit {
   dataSource: any;
   trade: FormControl;
   myControl2 = new FormControl();
+  
 
   horizontalPosition: MatSnackBarHorizontalPosition = 'center';
   verticalPosition: MatSnackBarVerticalPosition = 'top';
@@ -238,6 +241,7 @@ export class CompanyEditComponent implements OnInit {
     );
     return rowoferItems;
   }
+
 
   addOffer() {
     this.model.userId = this.authService.decotedToken.nameid;

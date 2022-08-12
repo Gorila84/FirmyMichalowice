@@ -16,5 +16,8 @@ namespace FirmyMichalowice.Repositories
         Task<IList<string>> GetCompanyTypes();
         Task<IList<string>> GetMunicipalieties();
         Task<List<User>> GetCompaniesForAdmin();
+        Task<List<User>> GetCompaniesForAdminForAdmin();
+        Task<bool> AddCompanyConfigurations(CompanySetting companySetting);
+        Task<CompanySetting> GetCompanySettingsKeys(int userId);
     }
 }
